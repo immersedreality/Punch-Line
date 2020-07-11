@@ -76,7 +76,7 @@ final class UserAuthorizationManager {
     private func initialize(adminUser: SyncUser, completion: @escaping (Bool, String?) -> Void) {
         RealmSyncManager.adminLoginSync { [weak self] syncWasSuccessful in
             if syncWasSuccessful {
-                self?.createLocalUser(with: adminUser)
+                self?.createLocalUserAndAppSession(with: adminUser)
                 completion(true, nil)
             } else {
                 completion(false, UserAuthorizationConstants.databaseIssue)
@@ -87,7 +87,7 @@ final class UserAuthorizationManager {
     private func initialize(user: SyncUser, completion: @escaping (Bool, String?) -> Void) {
         RealmSyncManager.loginSync { [weak self] syncWasSuccessful in
             if syncWasSuccessful {
-                self?.createLocalUser(with: user)
+                self?.createLocalUserAndAppSession(with: user)
                 completion(true, nil)
             } else {
                 completion(false, UserAuthorizationConstants.databaseIssue)
@@ -95,14 +95,17 @@ final class UserAuthorizationManager {
         }
     }
 
-    private func createLocalUser(with user: SyncUser) {
+    private func createLocalUserAndAppSession(with user: SyncUser) {
         let localUser = LocalUser()
         localUser.id = user.identity ?? UUID().uuidString
         localUser.username = self.username ?? ""
 
+        let appSession = AppSession()
+        appSession.loggedInUser = localUser
+        LocalRealmManager.addOrUpdateLocalUnmanaged(object: appSession)
+
         let accessPath = RealmSyncConstants.userIdentityPath + RealmSyncConstants.userPath
-        RealmAccessManager.addOrUpdate(object: localUser, inRealmAt: accessPath)
-        AppSessionManager.sharedInstance.set(loggedInUser: localUser)
+        RealmAccessManager.createCopyOf(object: localUser, inRealmAt: accessPath)
     }
 
     class func logOut() {

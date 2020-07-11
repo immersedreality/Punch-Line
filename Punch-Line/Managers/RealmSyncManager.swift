@@ -51,7 +51,7 @@ final class RealmSyncManager {
     }
 
     class func appLaunchBackgroundSync() {
-        let loggedInUser = AppSessionManager.sharedInstance.getLoggedInUser()
+        guard let loggedInUser = AppSession.sharedInstance.loggedInUser else { return }
 
         for realmPath in loggedInUser.publicPunchLinePaths {
             initialSync(withRealmAt: realmPath, completion: { _ in })
@@ -64,7 +64,7 @@ final class RealmSyncManager {
     }
 
     class func initialSync(withRealmAt accessPath: AccessPath, completion: @escaping (Bool) -> Void) {
-        guard let configuration = RealmAccessManager.configureRealm(withRealmAt: accessPath) else { completion(false); return }
+        guard let configuration = RealmAccessManager.configureSyncedRealm(withRealmAt: accessPath) else { completion(false); return }
         Realm.asyncOpen(configuration: configuration, callbackQueue: .main) { (realm, error) in
             completion(realm != nil && error == nil)
         }

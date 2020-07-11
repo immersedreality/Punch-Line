@@ -18,11 +18,13 @@ struct IgnoredProperties {
     static let nameWithoutSpaces = "nameWithoutSpaces"
     static let isOffensive = "isOffensive"
     static let realmPath = "realmPath"
+    static let sharedInstance = "sharedInstance"
     static let totalUpvoteCount = "totalUpvoteCount"
     static let totalVoteCount = "totalVoteCount"
 }
 
 struct PrimaryKeys {
+    static let appSessionKey = "PLAppSession"
     static let id = "id"
 }
 

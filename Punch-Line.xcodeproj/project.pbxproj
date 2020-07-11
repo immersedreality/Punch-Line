@@ -61,8 +61,9 @@
 		B8CDC13724BA3239000C8B64 /* PunchLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CDC13624BA3239000C8B64 /* PunchLine.swift */; };
 		B8CDC13924BA34F4000C8B64 /* PunchLineSyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CDC13824BA34F4000C8B64 /* PunchLineSyncManager.swift */; };
 		B8D8F8B224BA4F5600BBEBB1 /* FavoriteJoke.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D8F8B124BA4F5600BBEBB1 /* FavoriteJoke.swift */; };
-		B8D8F8B424BA518200BBEBB1 /* AppSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D8F8B324BA518200BBEBB1 /* AppSessionManager.swift */; };
+		B8D8F8B424BA518200BBEBB1 /* AppSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D8F8B324BA518200BBEBB1 /* AppSession.swift */; };
 		B8D8F8B624BA5BAE00BBEBB1 /* RealmSyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D8F8B524BA5BAE00BBEBB1 /* RealmSyncManager.swift */; };
+		B8D8F8B824BA649600BBEBB1 /* LocalRealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D8F8B724BA649600BBEBB1 /* LocalRealmManager.swift */; };
 		B8EABB8624B8278A00A46443 /* NavigationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EABB8524B8278A00A46443 /* NavigationManager.swift */; };
 		B8EABB8824B8427B00A46443 /* RealmAccessManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EABB8724B8427B00A46443 /* RealmAccessManager.swift */; };
 		B8EABB8A24B8477D00A46443 /* ActivityFeedManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EABB8924B8477D00A46443 /* ActivityFeedManager.swift */; };
@@ -139,8 +140,9 @@
 		B8CDC13624BA3239000C8B64 /* PunchLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PunchLine.swift; sourceTree = "<group>"; };
 		B8CDC13824BA34F4000C8B64 /* PunchLineSyncManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PunchLineSyncManager.swift; sourceTree = "<group>"; };
 		B8D8F8B124BA4F5600BBEBB1 /* FavoriteJoke.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteJoke.swift; sourceTree = "<group>"; };
-		B8D8F8B324BA518200BBEBB1 /* AppSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSessionManager.swift; sourceTree = "<group>"; };
+		B8D8F8B324BA518200BBEBB1 /* AppSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSession.swift; sourceTree = "<group>"; };
 		B8D8F8B524BA5BAE00BBEBB1 /* RealmSyncManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmSyncManager.swift; sourceTree = "<group>"; };
+		B8D8F8B724BA649600BBEBB1 /* LocalRealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalRealmManager.swift; sourceTree = "<group>"; };
 		B8EABB8524B8278A00A46443 /* NavigationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationManager.swift; sourceTree = "<group>"; };
 		B8EABB8724B8427B00A46443 /* RealmAccessManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmAccessManager.swift; sourceTree = "<group>"; };
 		B8EABB8924B8477D00A46443 /* ActivityFeedManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityFeedManager.swift; sourceTree = "<group>"; };
@@ -283,13 +285,14 @@
 			isa = PBXGroup;
 			children = (
 				B8EABB8924B8477D00A46443 /* ActivityFeedManager.swift */,
-				B8D8F8B324BA518200BBEBB1 /* AppSessionManager.swift */,
+				B8D8F8B324BA518200BBEBB1 /* AppSession.swift */,
 				B8EABB8524B8278A00A46443 /* NavigationManager.swift */,
 				B8CDC13824BA34F4000C8B64 /* PunchLineSyncManager.swift */,
 				B8EABB8724B8427B00A46443 /* RealmAccessManager.swift */,
 				B8D8F8B524BA5BAE00BBEBB1 /* RealmSyncManager.swift */,
 				B808CC3B24B94FA200B39432 /* StyleManager.swift */,
 				B89F6A1424B80CE500472067 /* UserAuthorizationManager.swift */,
+				B8D8F8B724BA649600BBEBB1 /* LocalRealmManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -472,7 +475,7 @@
 				B890F48324B962010017BA21 /* UIView+ConstrainToSuperview.swift in Sources */,
 				B8EABB8624B8278A00A46443 /* NavigationManager.swift in Sources */,
 				B8D8F8B224BA4F5600BBEBB1 /* FavoriteJoke.swift in Sources */,
-				B8D8F8B424BA518200BBEBB1 /* AppSessionManager.swift in Sources */,
+				B8D8F8B424BA518200BBEBB1 /* AppSession.swift in Sources */,
 				B8EABB8C24B847D900A46443 /* ActivityContainerViewController.swift in Sources */,
 				B850D8F924B988EC0011077D /* PunchLineList+TableViewDatasource.swift in Sources */,
 				B89CF24324B8E6DD0009A8CB /* UIActivityIndicatorView+Animations.swift in Sources */,
@@ -507,6 +510,7 @@
 				B89F69EB24B675AA00472067 /* ProfileViewController.swift in Sources */,
 				B808CC4324B9584500B39432 /* Setup+ActivityFeedViewController.swift in Sources */,
 				B808CC3C24B94FA200B39432 /* StyleManager.swift in Sources */,
+				B8D8F8B824BA649600BBEBB1 /* LocalRealmManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

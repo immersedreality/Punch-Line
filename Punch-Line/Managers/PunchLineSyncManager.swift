@@ -16,9 +16,10 @@ final class PunchLineSyncManager {
     }
 
     class func generateCustomPunchLine(with name: String) {
+        guard let loggedInUser = AppSession.sharedInstance.loggedInUser else { return }
         let newCustomPunchLine = CustomPunchLine()
         newCustomPunchLine.name = name
-        newCustomPunchLine.ownerID = AppSessionManager.sharedInstance.getLoggedInUser().id
+        newCustomPunchLine.ownerID = loggedInUser.id
         newCustomPunchLine.memberIDs.append(newCustomPunchLine.ownerID)
     }
 
