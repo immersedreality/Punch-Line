@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Qkb-uh-d79">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Profile View Controller-->
+        <scene sceneID="YdJ-Jl-G1Z">
+            <objects>
+                <viewController id="Qkb-uh-d79" customClass="ProfileViewController" customModule="Punch_Line" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="BMs-Kc-P2B">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iR9-A7-nLL" userLabel="Modal Swipe Indicator">
+                                <rect key="frame" x="187" y="56" width="40" height="6"/>
+                                <color key="backgroundColor" systemColor="systemGray3Color" red="0.78039215689999997" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="6" id="3qH-nC-UVm"/>
+                                    <constraint firstAttribute="width" constant="40" id="n67-Uq-DyG"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="3"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jfg-vE-484">
+                                <rect key="frame" x="24" y="766" width="366" height="48"/>
+                                <color key="backgroundColor" red="0.85098039219999999" green="0.47058823529999999" blue="0.49803921569999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="QQD-nT-p4s"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <state key="normal" title="Sign Out">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="signOutButtonPressed:" destination="Qkb-uh-d79" eventType="touchUpInside" id="wX2-2h-gzf"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="iR9-A7-nLL" firstAttribute="top" secondItem="2hY-Q7-KK9" secondAttribute="top" constant="12" id="0Q8-OW-Y8N"/>
+                            <constraint firstItem="2hY-Q7-KK9" firstAttribute="trailing" secondItem="Jfg-vE-484" secondAttribute="trailing" constant="24" id="hjQ-zU-iPL"/>
+                            <constraint firstItem="2hY-Q7-KK9" firstAttribute="bottom" secondItem="Jfg-vE-484" secondAttribute="bottom" constant="48" id="ijJ-Zt-0AG"/>
+                            <constraint firstItem="iR9-A7-nLL" firstAttribute="centerX" secondItem="2hY-Q7-KK9" secondAttribute="centerX" id="l5V-1F-9c6"/>
+                            <constraint firstItem="Jfg-vE-484" firstAttribute="leading" secondItem="2hY-Q7-KK9" secondAttribute="leading" constant="24" id="uXA-A6-Mvs"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="2hY-Q7-KK9"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yLS-ME-T8X" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="130" y="155"/>
+        </scene>
+    </scenes>
+</document>
