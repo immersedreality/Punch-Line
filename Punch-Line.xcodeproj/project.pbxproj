@@ -25,13 +25,13 @@
 		B89F69D524B6687100472067 /* Punchline.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B89F69D424B6687100472067 /* Punchline.storyboard */; };
 		B89F69D724B668A800472067 /* Vote.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B89F69D624B668A800472067 /* Vote.storyboard */; };
 		B89F69D924B6694900472067 /* JokeList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B89F69D824B6694900472067 /* JokeList.storyboard */; };
-		B89F69DB24B66A7E00472067 /* TopJoke.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B89F69DA24B66A7E00472067 /* TopJoke.storyboard */; };
+		B89F69DB24B66A7E00472067 /* JokeDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B89F69DA24B66A7E00472067 /* JokeDetail.storyboard */; };
 		B89F69DD24B674D600472067 /* VoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89F69DC24B674D600472067 /* VoteViewController.swift */; };
 		B89F69DF24B6750000472067 /* UsernameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89F69DE24B6750000472067 /* UsernameViewController.swift */; };
 		B89F69E124B6752400472067 /* PunchlineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89F69E024B6752400472067 /* PunchlineViewController.swift */; };
 		B89F69E324B6753600472067 /* SetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89F69E224B6753600472067 /* SetupViewController.swift */; };
 		B89F69E524B6755900472067 /* JokeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89F69E424B6755900472067 /* JokeListViewController.swift */; };
-		B89F69E724B6757000472067 /* TopJokeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89F69E624B6757000472067 /* TopJokeViewController.swift */; };
+		B89F69E724B6757000472067 /* JokeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89F69E624B6757000472067 /* JokeDetailViewController.swift */; };
 		B89F69E924B6759A00472067 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B89F69E824B6759A00472067 /* Profile.storyboard */; };
 		B89F69EB24B675AA00472067 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89F69EA24B675AA00472067 /* ProfileViewController.swift */; };
 		B89F69EE24B675DA00472067 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89F69ED24B675DA00472067 /* MainTabBarController.swift */; };
@@ -49,6 +49,8 @@
 		B89F6A1C24B824C700472067 /* Realm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B89F6A1924B824C700472067 /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B89F6A1D24B824C700472067 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B89F6A1A24B824C700472067 /* RealmSwift.framework */; };
 		B89F6A1E24B824C700472067 /* RealmSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B89F6A1A24B824C700472067 /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B8A58FF124B982360007B744 /* PunchLineListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8A58FF024B982360007B744 /* PunchLineListViewController.swift */; };
+		B8A58FF524B983AA0007B744 /* Activity.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8A58FF424B983AA0007B744 /* Activity.storyboard */; };
 		B8EABB8624B8278A00A46443 /* NavigationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EABB8524B8278A00A46443 /* NavigationManager.swift */; };
 		B8EABB8824B8427B00A46443 /* RealmAccessManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EABB8724B8427B00A46443 /* RealmAccessManager.swift */; };
 		B8EABB8A24B8477D00A46443 /* ActivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EABB8924B8477D00A46443 /* ActivityManager.swift */; };
@@ -91,13 +93,13 @@
 		B89F69D424B6687100472067 /* Punchline.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Punchline.storyboard; sourceTree = "<group>"; };
 		B89F69D624B668A800472067 /* Vote.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Vote.storyboard; sourceTree = "<group>"; };
 		B89F69D824B6694900472067 /* JokeList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = JokeList.storyboard; sourceTree = "<group>"; };
-		B89F69DA24B66A7E00472067 /* TopJoke.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TopJoke.storyboard; sourceTree = "<group>"; };
+		B89F69DA24B66A7E00472067 /* JokeDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = JokeDetail.storyboard; sourceTree = "<group>"; };
 		B89F69DC24B674D600472067 /* VoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteViewController.swift; sourceTree = "<group>"; };
 		B89F69DE24B6750000472067 /* UsernameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsernameViewController.swift; sourceTree = "<group>"; };
 		B89F69E024B6752400472067 /* PunchlineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PunchlineViewController.swift; sourceTree = "<group>"; };
 		B89F69E224B6753600472067 /* SetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupViewController.swift; sourceTree = "<group>"; };
 		B89F69E424B6755900472067 /* JokeListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JokeListViewController.swift; sourceTree = "<group>"; };
-		B89F69E624B6757000472067 /* TopJokeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopJokeViewController.swift; sourceTree = "<group>"; };
+		B89F69E624B6757000472067 /* JokeDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JokeDetailViewController.swift; sourceTree = "<group>"; };
 		B89F69E824B6759A00472067 /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		B89F69EA24B675AA00472067 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		B89F69ED24B675DA00472067 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
@@ -113,6 +115,8 @@
 		B89F6A1624B8240400472067 /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
 		B89F6A1924B824C700472067 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
 		B89F6A1A24B824C700472067 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/iOS/RealmSwift.framework; sourceTree = "<group>"; };
+		B8A58FF024B982360007B744 /* PunchLineListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PunchLineListViewController.swift; sourceTree = "<group>"; };
+		B8A58FF424B983AA0007B744 /* Activity.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Activity.storyboard; sourceTree = "<group>"; };
 		B8EABB8524B8278A00A46443 /* NavigationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationManager.swift; sourceTree = "<group>"; };
 		B8EABB8724B8427B00A46443 /* RealmAccessManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmAccessManager.swift; sourceTree = "<group>"; };
 		B8EABB8924B8477D00A46443 /* ActivityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityManager.swift; sourceTree = "<group>"; };
@@ -196,15 +200,16 @@
 			children = (
 				B89F69FE24B7ED0800472067 /* GetStarted.storyboard */,
 				B89F69D824B6694900472067 /* JokeList.storyboard */,
-				B89F69D624B668A800472067 /* Vote.storyboard */,
 				B89F69C224B6663A00472067 /* LaunchScreen.storyboard */,
 				B89F69BD24B6663800472067 /* Main.storyboard */,
 				B89F6A0624B803A900472067 /* Password.storyboard */,
 				B89F69E824B6759A00472067 /* Profile.storyboard */,
 				B89F69D424B6687100472067 /* Punchline.storyboard */,
 				B89F69D224B6682E00472067 /* Setup.storyboard */,
-				B89F69DA24B66A7E00472067 /* TopJoke.storyboard */,
+				B89F69DA24B66A7E00472067 /* JokeDetail.storyboard */,
 				B89F69CC24B666D500472067 /* Username.storyboard */,
+				B89F69D624B668A800472067 /* Vote.storyboard */,
+				B8A58FF424B983AA0007B744 /* Activity.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -215,14 +220,15 @@
 				B8EABB8B24B847D900A46443 /* ActivityContainerViewController.swift */,
 				B89F6A0024B7ED1C00472067 /* GetStartedViewController.swift */,
 				B89F69F924B68D2800472067 /* JokeList */,
-				B808CC3D24B9581200B39432 /* Vote */,
 				B89F69ED24B675DA00472067 /* MainTabBarController.swift */,
 				B89F6A0924B805E900472067 /* Password */,
 				B89F69EA24B675AA00472067 /* ProfileViewController.swift */,
 				B808CC3F24B9582400B39432 /* Punchline */,
+				B8A58FF024B982360007B744 /* PunchLineListViewController.swift */,
 				B808CC3E24B9581F00B39432 /* Setup */,
-				B89F69E624B6757000472067 /* TopJokeViewController.swift */,
+				B89F69E624B6757000472067 /* JokeDetailViewController.swift */,
 				B89F6A0824B805E500472067 /* Username */,
+				B808CC3D24B9581200B39432 /* Vote */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -386,7 +392,8 @@
 				B89F69BF24B6663800472067 /* Main.storyboard in Resources */,
 				B89F69D524B6687100472067 /* Punchline.storyboard in Resources */,
 				B89F69D724B668A800472067 /* Vote.storyboard in Resources */,
-				B89F69DB24B66A7E00472067 /* TopJoke.storyboard in Resources */,
+				B8A58FF524B983AA0007B744 /* Activity.storyboard in Resources */,
+				B89F69DB24B66A7E00472067 /* JokeDetail.storyboard in Resources */,
 				B89F69E924B6759A00472067 /* Profile.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -415,12 +422,13 @@
 				B808CC4124B9583F00B39432 /* Punchline+ActivityFeedViewController.swift in Sources */,
 				B89F69F824B68BFB00472067 /* PasswordViewController.swift in Sources */,
 				B89F69DD24B674D600472067 /* VoteViewController.swift in Sources */,
-				B89F69E724B6757000472067 /* TopJokeViewController.swift in Sources */,
+				B89F69E724B6757000472067 /* JokeDetailViewController.swift in Sources */,
 				B808CC3824B912EB00B39432 /* Joke.swift in Sources */,
 				B89F69DF24B6750000472067 /* UsernameViewController.swift in Sources */,
 				B89F69FD24B7EA9F00472067 /* Constants.swift in Sources */,
 				B8EABB8824B8427B00A46443 /* RealmAccessManager.swift in Sources */,
 				B89F6A1524B80CE500472067 /* UserAuthorizationManager.swift in Sources */,
+				B8A58FF124B982360007B744 /* PunchLineListViewController.swift in Sources */,
 				B89F69E524B6755900472067 /* JokeListViewController.swift in Sources */,
 				B89F69E324B6753600472067 /* SetupViewController.swift in Sources */,
 				B89F6A0D24B8063D00472067 /* Username+UITextFieldDelegate.swift in Sources */,

@@ -1,5 +1,5 @@
 //
-//  TopJokeViewController.swift
+//  JokeDetailViewController.swift
 //  Punch-Line
 //
 //  Created by Jeffrey Eugene Hoch on 7/8/20.
@@ -8,6 +8,6 @@
 
 import UIKit
 
-class TopJokeViewController: UIViewController {
+class JokeDetailViewController: UIViewController {
 
 }
