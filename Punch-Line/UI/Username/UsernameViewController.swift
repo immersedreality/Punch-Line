@@ -59,7 +59,7 @@ class UsernameViewController: UIViewController {
     }
 
     private func configureTextFieldStyle() {
-        usernameTextField.addBottomBorder(of: ColorConstants.punchlinePink)
+        usernameTextField.addBottomBorderOf(color: .punchlinePink)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

@@ -76,7 +76,7 @@ final class UserAuthorizationManager {
     private func initialize(adminUser: SyncUser, completion: @escaping (Bool, String?) -> Void) {
         RealmAccessManager.initialAdminSync { [weak self] syncWasSuccessful in
             if syncWasSuccessful {
-                self?.createLoggedInUserInformation(with: adminUser, completion: { (creationWasSuccessful) in
+                self?.createLocalUser(with: adminUser, completion: { (creationWasSuccessful) in
                     if creationWasSuccessful {
                         completion(true, nil)
                     } else {
@@ -92,24 +92,26 @@ final class UserAuthorizationManager {
     private func initialize(user: SyncUser, completion: @escaping (Bool, String?) -> Void) {
         RealmAccessManager.initialSync { [weak self] syncWasSuccessful in
             if syncWasSuccessful {
-                self?.createLoggedInUserInformation(with: user, completion: { (creationWasSuccessful) in
+                self?.createLocalUser(with: user, completion: { (creationWasSuccessful) in
                     if creationWasSuccessful {
                         completion(true, nil)
                     } else {
                         completion(false, UserAuthorizationConstants.databaseIssue)
                     }
                 })
-                completion(true, nil)
             } else {
                 completion(false, UserAuthorizationConstants.databaseIssue)
             }
         }
     }
 
-    private func createLoggedInUserInformation(with user: SyncUser, completion: @escaping (Bool) -> Void) {
-        let loggedInUserInformation = LoggedInUserInformation()
-        loggedInUserInformation.username = self.username ?? ""
-        RealmAccessManager.addOrUpdate(object: loggedInUserInformation, inRealmAt: .user) { (updateWasSuccessful) in
+    private func createLocalUser(with user: SyncUser, completion: @escaping (Bool) -> Void) {
+        let localUser = LocalUser()
+        localUser.id = user.identity ?? UUID().uuidString
+        localUser.username = self.username ?? ""
+
+        let accessPath = RealmSyncConstants.userIdentityPath + RealmSyncConstants.userPath
+        RealmAccessManager.addOrUpdate(object: localUser, inRealmAt: accessPath) { (updateWasSuccessful) in
             completion(updateWasSuccessful)
         }
     }

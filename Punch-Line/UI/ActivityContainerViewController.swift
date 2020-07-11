@@ -23,7 +23,7 @@ class ActivityContainerViewController: UIViewController {
     }
 
     private func configureChildViewController() {
-        let nextActivityFeedViewController = ActivityManager.generateActivityFeedViewController()
+        let nextActivityFeedViewController = ActivityFeedManager.generateActivityFeedViewController()
         self.addChild(nextActivityFeedViewController)
         self.view.addSubview(nextActivityFeedViewController.view)
         nextActivityFeedViewController.didMove(toParent: self)

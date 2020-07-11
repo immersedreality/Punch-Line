@@ -9,4 +9,12 @@
 import UIKit
 
 class PunchLineTableViewCell: UITableViewCell {
+
+    @IBOutlet weak var contentContainerView: UIView!
+    @IBOutlet weak var punchLineTitleLabel: UILabel!
+
+    func configure() {
+        contentContainerView.backgroundColor = StyleManager.generateRandomBackgroundColor()
+    }
+
 }

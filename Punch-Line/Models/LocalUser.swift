@@ -1,5 +1,5 @@
 //
-//  UserInformation.swift
+//  LocalUser.swift
 //  Punch-Line
 //
 //  Created by Jeffrey Eugene Hoch on 7/10/20.
@@ -9,16 +9,19 @@
 import Foundation
 import RealmSwift
 
-class LoggedInUserInformation: Object {
+class LocalUser: Object {
+
+    @objc dynamic var id: String = ""
 
     @objc dynamic var username: String = ""
     @objc dynamic var shouldSeeOffensiveContent: Bool = true
 
-    let survivingJokes = List<Joke>()
-    let favoritedJokes = List<Joke>()
+    let publicPunchLineIDs = List<String>()
+    let customPunchLineIDs = List<String>()
+    let favoritedJokes = List<FavoriteJoke>()
 
     override class func primaryKey() -> String? {
-        return PrimaryKeys.username
+        return PrimaryKeys.id
     }
 
 }

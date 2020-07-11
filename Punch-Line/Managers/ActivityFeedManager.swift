@@ -1,5 +1,5 @@
 //
-//  ActivityManager.swift
+//  ActivityFeedManager.swift
 //  Punch-Line
 //
 //  Created by Jeffrey Eugene Hoch on 7/10/20.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class ActivityManager {
+final class ActivityFeedManager {
 
     class func generateActivityFeedViewController() -> ActivityFeedViewController {
         return instantiateSetupViewController()

@@ -26,15 +26,24 @@ extension PunchLineListViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell: UITableViewCell
 
         if indexPath.section == 1 && indexPath.row == 0 {
-            cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.newPunchLineCell) as? NewPunchLineTableViewCell ?? UITableViewCell()
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.newPunchLineCell) as? NewPunchLineTableViewCell else {
+                return UITableViewCell()
+            }
+
+            return cell
+
         } else {
-            cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.punchLineCell) as? PunchLineTableViewCell ?? UITableViewCell()
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.punchLineCell) as? PunchLineTableViewCell else {
+                return UITableViewCell()
+            }
+
+            cell.configure()
+            return cell
+
         }
 
-        return cell
     }
 
 }

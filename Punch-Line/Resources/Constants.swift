@@ -13,30 +13,27 @@ struct CellIdentifiers {
     static let punchLineCell = "PunchLineCell"
 }
 
-struct ColorConstants {
-    static let punchlinePink = UIColor(red: 217/255, green: 120/255, blue: 127/255, alpha: 1.0)
-}
-
 struct IgnoredProperties {
     static let baseRankingScore = "baseRankingScore"
+    static let nameWithoutSpaces = "nameWithoutSpaces"
     static let isOffensive = "isOffensive"
+    static let realmPath = "realmPath"
     static let totalUpvoteCount = "totalUpvoteCount"
     static let totalVoteCount = "totalVoteCount"
 }
 
 struct PrimaryKeys {
     static let id = "id"
-    static let username = "username"
 }
 
 struct RealmSyncConstants {
-    static let activityPath = "/activity"
     static let all = "*"
-    static let historyPath = "/history"
+    static let defaultRealmPath = "/TheWorld"
     static let httpsPrefix = "https://"
     static let realmInstanceLink = "stinky-wiener-wagon.us2a.cloud.realm.io"
     static let realmsPrefix = "realms://"
-    static let userPath = "/~/user"
+    static let userIdentityPath = "/~"
+    static let userPath = "/User"
 }
 
 struct SegueIdentifiers {
@@ -55,7 +52,7 @@ struct StoryboardNames {
 }
 
 struct TableViewSectionTitles {
-    static let theWorld = "The World"
+    static let thePublic = "The Public"
     static let yourGroups = "Your Groups"
 }
 

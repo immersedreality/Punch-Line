@@ -11,11 +11,10 @@ import RealmSwift
 
 final class RealmAccessManager {
 
-    private static let permissionsSyncDispatchGroup = DispatchGroup()
     private static let initialSyncDispatchGroup = DispatchGroup()
 
     class func initialAdminSync(completion: @escaping (Bool) -> Void) {
-        applyPublicPermissions { (permissionsWereGranted) in
+        applyDefaultPermissions { (permissionsWereGranted) in
             if permissionsWereGranted {
                 initialSync(completion: completion)
             } else {
@@ -24,51 +23,31 @@ final class RealmAccessManager {
         }
     }
     
-    private class func applyPublicPermissions(completion: @escaping (Bool) -> Void) {
+    private class func applyDefaultPermissions(completion: @escaping (Bool) -> Void) {
         guard let user = SyncUser.current else { completion(false); return }
 
-        let activityPermission = SyncPermission(realmPath: RealmSyncConstants.activityPath, identity: RealmSyncConstants.all, accessLevel: .write)
-        let historyPermission = SyncPermission(realmPath: RealmSyncConstants.historyPath, identity: RealmSyncConstants.all, accessLevel: .write)
+        let defaultPunchLinePermission = SyncPermission(realmPath: RealmSyncConstants.defaultRealmPath, identity: RealmSyncConstants.all, accessLevel: .write)
 
-        var activityPermissionsAppliedSuccessfully = false
-        var historyPermissionsAppliedSuccessfully = false
-
-        permissionsSyncDispatchGroup.enter()
-        user.apply(activityPermission) { (error) in
-            activityPermissionsAppliedSuccessfully = error == nil
-            permissionsSyncDispatchGroup.leave()
-        }
-
-        permissionsSyncDispatchGroup.enter()
-        user.apply(historyPermission) { (error) in
-            historyPermissionsAppliedSuccessfully = error == nil
-            permissionsSyncDispatchGroup.leave()
-        }
-
-        permissionsSyncDispatchGroup.notify(queue: .main) {
-            completion(activityPermissionsAppliedSuccessfully && historyPermissionsAppliedSuccessfully)
+        user.apply(defaultPunchLinePermission) { (error) in
+            let permissionsAppliedSuccessfully = error == nil
+            completion(permissionsAppliedSuccessfully)
         }
 
     }
 
     class func initialSync(completion: @escaping (Bool) -> Void) {
-        guard let activityConfiguration = configureRealm(with: .activity) else { completion(false); return }
-        guard let historyConfiguration = configureRealm(with: .history) else { completion(false); return }
-        guard let userConfiguration = configureRealm(with: .user) else { completion(false); return }
+        let defaultPunchLinePath = RealmSyncConstants.defaultRealmPath
+        let userPath = RealmSyncConstants.userIdentityPath + RealmSyncConstants.userPath
 
-        var activityRealmSyncedSuccessfully = false
-        var historyRealmSyncedSuccessfully = false
+        guard let defaultConfiguration = configureRealm(with: defaultPunchLinePath) else { completion(false); return }
+        guard let userConfiguration = configureRealm(with: userPath) else { completion(false); return }
+
+        var defaultPunchLineSyncedSuccessfully = false
         var userRealmSyncedSuccessfully = false
 
         initialSyncDispatchGroup.enter()
-        Realm.asyncOpen(configuration: activityConfiguration) { (realm, error) in
-            activityRealmSyncedSuccessfully = realm != nil && error == nil
-            initialSyncDispatchGroup.leave()
-        }
-
-        initialSyncDispatchGroup.enter()
-        Realm.asyncOpen(configuration: historyConfiguration) { (realm, error) in
-            historyRealmSyncedSuccessfully = realm != nil && error == nil
+        Realm.asyncOpen(configuration: defaultConfiguration) { (realm, error) in
+            defaultPunchLineSyncedSuccessfully = realm != nil && error == nil
             initialSyncDispatchGroup.leave()
         }
 
@@ -79,14 +58,14 @@ final class RealmAccessManager {
         }
 
         initialSyncDispatchGroup.notify(queue: .main) {
-            completion(activityRealmSyncedSuccessfully && historyRealmSyncedSuccessfully && userRealmSyncedSuccessfully)
+            completion(defaultPunchLineSyncedSuccessfully && userRealmSyncedSuccessfully)
         }
 
     }
 
     class func getObject<T: Object>(of type: T,
              with primaryKey: String,
-             fromRealmAt accessPath: RealmAccessPath,
+             fromRealmAt accessPath: String,
              completion: @escaping (Bool, T?) -> Void) {
         guard let configuration = configureRealm(with: accessPath) else { return }
 
@@ -99,7 +78,7 @@ final class RealmAccessManager {
     }
 
     class func getObjects<T: Object>(of type: T,
-             fromRealmAt accessPath: RealmAccessPath,
+             fromRealmAt accessPath: String,
              completion: @escaping (Bool, Results<T>?) -> Void) {
         guard let configuration = configureRealm(with: accessPath) else { return }
 
@@ -111,7 +90,7 @@ final class RealmAccessManager {
     }
 
     class func addOrUpdate(object: Object,
-                     inRealmAt accessPath: RealmAccessPath,
+                     inRealmAt accessPath: String,
                      completion: @escaping (Bool) -> Void) {
         guard let configuration = configureRealm(with: accessPath) else { return }
 
@@ -120,12 +99,13 @@ final class RealmAccessManager {
             try! realm.write {
                 realm.add(object, update: .modified)
             }
+            completion(true)
         }
 
     }
 
     class func addOrUpdate(objects: [Object],
-                     inRealmAt accessPath: RealmAccessPath,
+                     inRealmAt accessPath: String,
                      completion: @escaping (Bool) -> Void) {
         guard let configuration = configureRealm(with: accessPath) else { return }
 
@@ -134,12 +114,13 @@ final class RealmAccessManager {
             try! realm.write {
                 realm.add(objects, update: .modified)
             }
+            completion(true)
         }
 
     }
 
     class func addOrUpdate(objects: List<Object>,
-                     inRealmAt accessPath: RealmAccessPath,
+                     inRealmAt accessPath: String,
                      completion: @escaping (Bool) -> Void) {
         guard let configuration = configureRealm(with: accessPath) else { return }
 
@@ -148,12 +129,13 @@ final class RealmAccessManager {
             try! realm.write {
                 realm.add(objects, update: .modified)
             }
+            completion(true)
         }
 
     }
 
     class func delete(object: Object,
-                inRealmAt accessPath: RealmAccessPath,
+                inRealmAt accessPath: String,
                 completion: @escaping (Bool) -> Void) {
         guard let configuration = configureRealm(with: accessPath) else { return }
 
@@ -162,12 +144,13 @@ final class RealmAccessManager {
             try! realm.write {
                 realm.delete(object)
             }
+            completion(true)
         }
 
     }
 
     class func delete(objects: [Object],
-                inRealmAt accessPath: RealmAccessPath,
+                inRealmAt accessPath: String,
                 completion: @escaping (Bool) -> Void) {
         guard let configuration = configureRealm(with: accessPath) else { return }
 
@@ -176,12 +159,13 @@ final class RealmAccessManager {
             try! realm.write {
                 realm.delete(objects)
             }
+            completion(true)
         }
 
     }
 
     class func delete(objects: List<Object>,
-                inRealmAt accessPath: RealmAccessPath,
+                inRealmAt accessPath: String,
                 completion: @escaping (Bool) -> Void) {
         guard let configuration = configureRealm(with: accessPath) else { return }
 
@@ -190,30 +174,18 @@ final class RealmAccessManager {
             try! realm.write {
                 realm.delete(objects)
             }
+            completion(true)
         }
         
     }
 
-    private class func configureRealm(with accessPath: RealmAccessPath) -> Realm.Configuration? {
-        var urlString = RealmSyncConstants.realmsPrefix + RealmSyncConstants.realmInstanceLink
-
-        switch accessPath {
-        case .activity:
-            urlString.append(RealmSyncConstants.activityPath)
-        case .history:
-            urlString.append(RealmSyncConstants.historyPath)
-        case .user:
-            urlString.append(RealmSyncConstants.userPath)
-        }
-
+    private class func configureRealm(with accessPath: String) -> Realm.Configuration? {
+        let urlString = RealmSyncConstants.realmsPrefix + RealmSyncConstants.realmInstanceLink + accessPath
         guard let url = URL(string: urlString) else { return nil }
         guard let user = SyncUser.current else { return nil }
+
         let configuration = user.configuration(realmURL: url, fullSynchronization: true)
         return configuration
     }
 
-}
-
-enum RealmAccessPath {
-    case activity, history, user
 }

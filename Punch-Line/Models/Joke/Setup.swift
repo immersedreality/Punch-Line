@@ -15,7 +15,7 @@ class Setup: Object {
     @objc dynamic var dateCreated: Date = Date()
 
     @objc dynamic var text: String = ""
-    @objc dynamic var author: String = ""
+    @objc dynamic var authorID: String = ""
 
     @objc dynamic var isOffensiveCount: Int = 0
     @objc dynamic var isUnfunnyCount: Int = 0

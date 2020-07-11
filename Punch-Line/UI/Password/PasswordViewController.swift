@@ -60,7 +60,7 @@ class PasswordViewController: UIViewController {
     private func configureActivityIndicatorView() {
         activityIndicatorView.alpha = 0.0
         activityIndicatorView.style = .large
-        activityIndicatorView.color = ColorConstants.punchlinePink
+        activityIndicatorView.color = .punchlinePink
         activityIndicatorView.center = view.center
         view.addSubview(activityIndicatorView)
     }
@@ -79,7 +79,7 @@ class PasswordViewController: UIViewController {
     }
 
     private func configureTextFieldStyle() {
-        passwordTextField.addBottomBorder(of: ColorConstants.punchlinePink)
+        passwordTextField.addBottomBorderOf(color: .punchlinePink)
     }
     
 }

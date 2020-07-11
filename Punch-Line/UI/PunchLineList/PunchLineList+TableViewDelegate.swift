@@ -10,33 +10,26 @@ import UIKit
 
 extension PunchLineListViewController: UITableViewDelegate {
 
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 36
-    }
-
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: 36))
-        headerView.backgroundColor = UIColor.white
-
-        let titleLabel = UILabel()
-        titleLabel.font = UIFont.systemFont(ofSize: 24.0, weight: .light)
-        titleLabel.textColor = ColorConstants.punchlinePink
-        headerView.addSubview(titleLabel)
-
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 16.0).isActive = true
-        titleLabel.centerYAnchor.constraint(equalTo: headerView.centerYAnchor).isActive = true
-
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
         case 0:
-            titleLabel.text = TableViewSectionTitles.theWorld
+            return TableViewSectionTitles.thePublic
         case 1:
-            titleLabel.text = TableViewSectionTitles.yourGroups
+            return TableViewSectionTitles.yourGroups
         default:
             return nil
         }
+    }
 
-        return headerView
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 36
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        guard let headerView = view as? UITableViewHeaderFooterView else { return }
+        headerView.tintColor = .white
+        headerView.textLabel?.font = UIFont.systemFont(ofSize: 24.0, weight: .light)
+        headerView.textLabel?.textColor = .punchlinePink
     }
 
 }

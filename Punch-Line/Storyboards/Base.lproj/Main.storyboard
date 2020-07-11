@@ -48,7 +48,27 @@
                                             <subviews>
                                                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YCK-2F-gcZ">
                                                     <rect key="frame" x="16" y="8" width="382" height="144"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Punch-Line Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OZq-6P-f62">
+                                                            <rect key="frame" x="99" y="43" width="184.5" height="29"/>
+                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                                                            <color key="textColor" red="0.85098039219999999" green="0.47058823529999999" blue="0.49803921569999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Get in the Punch-Line ---&gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f3P-tp-veY">
+                                                            <rect key="frame" x="54.5" y="72" width="273" height="29"/>
+                                                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="24"/>
+                                                            <color key="textColor" red="0.85098039219999999" green="0.47058823529999999" blue="0.49803921569999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
                                                     <color key="backgroundColor" systemColor="systemGray6Color" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="centerY" secondItem="OZq-6P-f62" secondAttribute="bottom" id="0un-3L-12g"/>
+                                                        <constraint firstItem="OZq-6P-f62" firstAttribute="centerX" secondItem="YCK-2F-gcZ" secondAttribute="centerX" id="Mgj-ch-feu"/>
+                                                        <constraint firstItem="f3P-tp-veY" firstAttribute="top" secondItem="OZq-6P-f62" secondAttribute="bottom" id="mz3-wT-BIY"/>
+                                                        <constraint firstItem="f3P-tp-veY" firstAttribute="centerX" secondItem="YCK-2F-gcZ" secondAttribute="centerX" id="zBO-xe-BD2"/>
+                                                    </constraints>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                             <integer key="value" value="16"/>
@@ -65,6 +85,10 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <connections>
+                                            <outlet property="contentContainerView" destination="YCK-2F-gcZ" id="bof-IB-qPf"/>
+                                            <outlet property="punchLineTitleLabel" destination="OZq-6P-f62" id="dAO-DF-sUv"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="NewPunchLineCell" id="WYN-xf-Asc" customClass="NewPunchLineTableViewCell" customModule="Punch_Line" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="188" width="414" height="160"/>

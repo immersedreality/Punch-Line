@@ -15,16 +15,17 @@ class Joke: Object {
     @objc dynamic var dateCreated: Date = Date()
 
     @objc dynamic var setup: String = ""
-    @objc dynamic var setupAuthor: String = ""
+    @objc dynamic var setupAuthorID: String = ""
 
     @objc dynamic var punchline: String = ""
-    @objc dynamic var punchlineAuthor: String = ""
+    @objc dynamic var punchlineAuthorID: String = ""
     
     @objc dynamic var haCount: Int = 0
     @objc dynamic var mehCount: Int = 0
     @objc dynamic var ughCount: Int = 0
     @objc dynamic var isTooFunnyCount: Int = 0
     @objc dynamic var isOffensiveCount: Int = 0
+    @objc dynamic var favoritedCount: Int = 0
 
     var totalVoteCount: Double {
         return Double(haCount + mehCount + ughCount + (isTooFunnyCount * 2))
