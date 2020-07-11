@@ -59,8 +59,10 @@
 		B8CDC13224BA283E000C8B64 /* UIColor+CustomColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CDC13124BA283E000C8B64 /* UIColor+CustomColors.swift */; };
 		B8CDC13424BA3224000C8B64 /* PublicPunchLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CDC13324BA3224000C8B64 /* PublicPunchLine.swift */; };
 		B8CDC13724BA3239000C8B64 /* PunchLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CDC13624BA3239000C8B64 /* PunchLine.swift */; };
-		B8CDC13924BA34F4000C8B64 /* PunchLineCreationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CDC13824BA34F4000C8B64 /* PunchLineCreationManager.swift */; };
+		B8CDC13924BA34F4000C8B64 /* PunchLineSyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CDC13824BA34F4000C8B64 /* PunchLineSyncManager.swift */; };
 		B8D8F8B224BA4F5600BBEBB1 /* FavoriteJoke.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D8F8B124BA4F5600BBEBB1 /* FavoriteJoke.swift */; };
+		B8D8F8B424BA518200BBEBB1 /* AppSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D8F8B324BA518200BBEBB1 /* AppSessionManager.swift */; };
+		B8D8F8B624BA5BAE00BBEBB1 /* RealmSyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D8F8B524BA5BAE00BBEBB1 /* RealmSyncManager.swift */; };
 		B8EABB8624B8278A00A46443 /* NavigationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EABB8524B8278A00A46443 /* NavigationManager.swift */; };
 		B8EABB8824B8427B00A46443 /* RealmAccessManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EABB8724B8427B00A46443 /* RealmAccessManager.swift */; };
 		B8EABB8A24B8477D00A46443 /* ActivityFeedManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EABB8924B8477D00A46443 /* ActivityFeedManager.swift */; };
@@ -135,8 +137,10 @@
 		B8CDC13124BA283E000C8B64 /* UIColor+CustomColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+CustomColors.swift"; sourceTree = "<group>"; };
 		B8CDC13324BA3224000C8B64 /* PublicPunchLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicPunchLine.swift; sourceTree = "<group>"; };
 		B8CDC13624BA3239000C8B64 /* PunchLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PunchLine.swift; sourceTree = "<group>"; };
-		B8CDC13824BA34F4000C8B64 /* PunchLineCreationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PunchLineCreationManager.swift; sourceTree = "<group>"; };
+		B8CDC13824BA34F4000C8B64 /* PunchLineSyncManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PunchLineSyncManager.swift; sourceTree = "<group>"; };
 		B8D8F8B124BA4F5600BBEBB1 /* FavoriteJoke.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteJoke.swift; sourceTree = "<group>"; };
+		B8D8F8B324BA518200BBEBB1 /* AppSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSessionManager.swift; sourceTree = "<group>"; };
+		B8D8F8B524BA5BAE00BBEBB1 /* RealmSyncManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmSyncManager.swift; sourceTree = "<group>"; };
 		B8EABB8524B8278A00A46443 /* NavigationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationManager.swift; sourceTree = "<group>"; };
 		B8EABB8724B8427B00A46443 /* RealmAccessManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmAccessManager.swift; sourceTree = "<group>"; };
 		B8EABB8924B8477D00A46443 /* ActivityFeedManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityFeedManager.swift; sourceTree = "<group>"; };
@@ -278,12 +282,14 @@
 		B89F69D024B6670C00472067 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
-				B89F6A1424B80CE500472067 /* UserAuthorizationManager.swift */,
-				B8EABB8524B8278A00A46443 /* NavigationManager.swift */,
-				B8EABB8724B8427B00A46443 /* RealmAccessManager.swift */,
 				B8EABB8924B8477D00A46443 /* ActivityFeedManager.swift */,
+				B8D8F8B324BA518200BBEBB1 /* AppSessionManager.swift */,
+				B8EABB8524B8278A00A46443 /* NavigationManager.swift */,
+				B8CDC13824BA34F4000C8B64 /* PunchLineSyncManager.swift */,
+				B8EABB8724B8427B00A46443 /* RealmAccessManager.swift */,
+				B8D8F8B524BA5BAE00BBEBB1 /* RealmSyncManager.swift */,
 				B808CC3B24B94FA200B39432 /* StyleManager.swift */,
-				B8CDC13824BA34F4000C8B64 /* PunchLineCreationManager.swift */,
+				B89F6A1424B80CE500472067 /* UserAuthorizationManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -466,6 +472,7 @@
 				B890F48324B962010017BA21 /* UIView+ConstrainToSuperview.swift in Sources */,
 				B8EABB8624B8278A00A46443 /* NavigationManager.swift in Sources */,
 				B8D8F8B224BA4F5600BBEBB1 /* FavoriteJoke.swift in Sources */,
+				B8D8F8B424BA518200BBEBB1 /* AppSessionManager.swift in Sources */,
 				B8EABB8C24B847D900A46443 /* ActivityContainerViewController.swift in Sources */,
 				B850D8F924B988EC0011077D /* PunchLineList+TableViewDatasource.swift in Sources */,
 				B89CF24324B8E6DD0009A8CB /* UIActivityIndicatorView+Animations.swift in Sources */,
@@ -477,9 +484,10 @@
 				B8A58FF824B986C90007B744 /* CustomPunchLine.swift in Sources */,
 				B89F6A0124B7ED1C00472067 /* GetStartedViewController.swift in Sources */,
 				B8CDC13024B9904D000C8B64 /* NewPunchLineTableViewCell.swift in Sources */,
-				B8CDC13924BA34F4000C8B64 /* PunchLineCreationManager.swift in Sources */,
+				B8CDC13924BA34F4000C8B64 /* PunchLineSyncManager.swift in Sources */,
 				B89F69E124B6752400472067 /* PunchlineViewController.swift in Sources */,
 				B8CDC13724BA3239000C8B64 /* PunchLine.swift in Sources */,
+				B8D8F8B624BA5BAE00BBEBB1 /* RealmSyncManager.swift in Sources */,
 				B89F69EE24B675DA00472067 /* MainTabBarController.swift in Sources */,
 				B808CC4124B9583F00B39432 /* Punchline+ActivityFeedViewController.swift in Sources */,
 				B89F69F824B68BFB00472067 /* PasswordViewController.swift in Sources */,

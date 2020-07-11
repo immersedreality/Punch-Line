@@ -74,15 +74,10 @@ final class UserAuthorizationManager {
     }
 
     private func initialize(adminUser: SyncUser, completion: @escaping (Bool, String?) -> Void) {
-        RealmAccessManager.initialAdminSync { [weak self] syncWasSuccessful in
+        RealmSyncManager.adminLoginSync { [weak self] syncWasSuccessful in
             if syncWasSuccessful {
-                self?.createLocalUser(with: adminUser, completion: { (creationWasSuccessful) in
-                    if creationWasSuccessful {
-                        completion(true, nil)
-                    } else {
-                        completion(false, UserAuthorizationConstants.databaseIssue)
-                    }
-                })
+                self?.createLocalUser(with: adminUser)
+                completion(true, nil)
             } else {
                 completion(false, UserAuthorizationConstants.databaseIssue)
             }
@@ -90,30 +85,24 @@ final class UserAuthorizationManager {
     }
 
     private func initialize(user: SyncUser, completion: @escaping (Bool, String?) -> Void) {
-        RealmAccessManager.initialSync { [weak self] syncWasSuccessful in
+        RealmSyncManager.loginSync { [weak self] syncWasSuccessful in
             if syncWasSuccessful {
-                self?.createLocalUser(with: user, completion: { (creationWasSuccessful) in
-                    if creationWasSuccessful {
-                        completion(true, nil)
-                    } else {
-                        completion(false, UserAuthorizationConstants.databaseIssue)
-                    }
-                })
+                self?.createLocalUser(with: user)
+                completion(true, nil)
             } else {
                 completion(false, UserAuthorizationConstants.databaseIssue)
             }
         }
     }
 
-    private func createLocalUser(with user: SyncUser, completion: @escaping (Bool) -> Void) {
+    private func createLocalUser(with user: SyncUser) {
         let localUser = LocalUser()
         localUser.id = user.identity ?? UUID().uuidString
         localUser.username = self.username ?? ""
 
         let accessPath = RealmSyncConstants.userIdentityPath + RealmSyncConstants.userPath
-        RealmAccessManager.addOrUpdate(object: localUser, inRealmAt: accessPath) { (updateWasSuccessful) in
-            completion(updateWasSuccessful)
-        }
+        RealmAccessManager.addOrUpdate(object: localUser, inRealmAt: accessPath)
+        AppSessionManager.sharedInstance.set(loggedInUser: localUser)
     }
 
     class func logOut() {
