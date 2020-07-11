@@ -1,5 +1,5 @@
 //
-//  LocalUser.swift
+//  AppUser.swift
 //  Punch-Line
 //
 //  Created by Jeffrey Eugene Hoch on 7/10/20.
@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 
-class LocalUser: Object {
+class AppUser: Object {
 
     @objc dynamic var id: String = ""
 

@@ -14,7 +14,7 @@ class AppSession: Object {
     static let sharedInstance = LocalRealmManager.getLocalObject(of: AppSession.self, with: PrimaryKeys.appSessionKey) ?? AppSession()
 
     @objc dynamic var id = PrimaryKeys.appSessionKey
-    @objc dynamic var loggedInUser: LocalUser?
+    @objc dynamic var loggedInUser: AppUser?
 
     override class func primaryKey() -> String? {
         return PrimaryKeys.id

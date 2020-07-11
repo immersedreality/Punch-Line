@@ -17,7 +17,7 @@
 		B850D8F924B988EC0011077D /* PunchLineList+TableViewDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B850D8F824B988EC0011077D /* PunchLineList+TableViewDatasource.swift */; };
 		B850D8FB24B9897A0011077D /* PunchLineTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B850D8FA24B9897A0011077D /* PunchLineTableViewCell.swift */; };
 		B890F48324B962010017BA21 /* UIView+ConstrainToSuperview.swift in Sources */ = {isa = PBXBuildFile; fileRef = B890F48224B962010017BA21 /* UIView+ConstrainToSuperview.swift */; };
-		B89CF24124B8BBC70009A8CB /* LocalUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89CF24024B8BBC70009A8CB /* LocalUser.swift */; };
+		B89CF24124B8BBC70009A8CB /* AppUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89CF24024B8BBC70009A8CB /* AppUser.swift */; };
 		B89CF24324B8E6DD0009A8CB /* UIActivityIndicatorView+Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89CF24224B8E6DD0009A8CB /* UIActivityIndicatorView+Animations.swift */; };
 		B89F69B624B6663800472067 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89F69B524B6663800472067 /* AppDelegate.swift */; };
 		B89F69BF24B6663800472067 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B89F69BD24B6663800472067 /* Main.storyboard */; };
@@ -96,7 +96,7 @@
 		B850D8F824B988EC0011077D /* PunchLineList+TableViewDatasource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PunchLineList+TableViewDatasource.swift"; sourceTree = "<group>"; };
 		B850D8FA24B9897A0011077D /* PunchLineTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PunchLineTableViewCell.swift; sourceTree = "<group>"; };
 		B890F48224B962010017BA21 /* UIView+ConstrainToSuperview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+ConstrainToSuperview.swift"; sourceTree = "<group>"; };
-		B89CF24024B8BBC70009A8CB /* LocalUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalUser.swift; sourceTree = "<group>"; };
+		B89CF24024B8BBC70009A8CB /* AppUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUser.swift; sourceTree = "<group>"; };
 		B89CF24224B8E6DD0009A8CB /* UIActivityIndicatorView+Animations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIActivityIndicatorView+Animations.swift"; sourceTree = "<group>"; };
 		B89F69B224B6663800472067 /* Punch-Line.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Punch-Line.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B89F69B524B6663800472067 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -285,7 +285,6 @@
 			isa = PBXGroup;
 			children = (
 				B8EABB8924B8477D00A46443 /* ActivityFeedManager.swift */,
-				B8D8F8B324BA518200BBEBB1 /* AppSession.swift */,
 				B8EABB8524B8278A00A46443 /* NavigationManager.swift */,
 				B8CDC13824BA34F4000C8B64 /* PunchLineSyncManager.swift */,
 				B8EABB8724B8427B00A46443 /* RealmAccessManager.swift */,
@@ -300,9 +299,10 @@
 		B89F69D124B6671100472067 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				B8D8F8B324BA518200BBEBB1 /* AppSession.swift */,
 				B8D8F8B024BA4EE500BBEBB1 /* Joke */,
 				B8CDC13524BA3227000C8B64 /* PunchLine */,
-				B89CF24024B8BBC70009A8CB /* LocalUser.swift */,
+				B89CF24024B8BBC70009A8CB /* AppUser.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -479,7 +479,7 @@
 				B8EABB8C24B847D900A46443 /* ActivityContainerViewController.swift in Sources */,
 				B850D8F924B988EC0011077D /* PunchLineList+TableViewDatasource.swift in Sources */,
 				B89CF24324B8E6DD0009A8CB /* UIActivityIndicatorView+Animations.swift in Sources */,
-				B89CF24124B8BBC70009A8CB /* LocalUser.swift in Sources */,
+				B89CF24124B8BBC70009A8CB /* AppUser.swift in Sources */,
 				B89F6A0B24B8062B00472067 /* Password+UITextFieldDelegate.swift in Sources */,
 				B808CC3A24B948E200B39432 /* Setup.swift in Sources */,
 				B850D8FB24B9897A0011077D /* PunchLineTableViewCell.swift in Sources */,

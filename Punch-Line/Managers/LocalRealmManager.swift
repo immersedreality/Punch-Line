@@ -27,12 +27,17 @@ final class LocalRealmManager {
         }
     }
 
-    class func createLocalCopyOf<T: Object>(object: T) {
+    @discardableResult
+    class func createLocalCopyOf<T: Object>(object: T) -> T? {
         let configuration = Realm.Configuration()
-        guard let realm = try? Realm(configuration: configuration) else { return }
+        guard let realm = try? Realm(configuration: configuration) else { return nil }
+
+        var localCopyOfObject: T?
         try? realm.write {
-            let _ = realm.create(T.self, value: object, update: .modified)
+            localCopyOfObject = realm.create(T.self, value: object, update: .modified)
         }
+
+        return localCopyOfObject
     }
 
 }
