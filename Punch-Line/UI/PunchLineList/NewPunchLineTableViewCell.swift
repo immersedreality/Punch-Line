@@ -1,5 +1,5 @@
 //
-//  PunchLineListViewController.swift
+//  NewPunchLineTableViewCell.swift
 //  Punch-Line
 //
 //  Created by Jeffrey Eugene Hoch on 7/11/20.
@@ -8,6 +8,5 @@
 
 import UIKit
 
-class PunchLineListViewController: UIViewController {
-
+class NewPunchLineTableViewCell: UITableViewCell {
 }

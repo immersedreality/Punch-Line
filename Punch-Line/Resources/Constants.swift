@@ -8,6 +8,11 @@
 
 import UIKit
 
+struct CellIdentifiers {
+    static let newPunchLineCell = "NewPunchLineCell"
+    static let punchLineCell = "PunchLineCell"
+}
+
 struct ColorConstants {
     static let punchlinePink = UIColor(red: 217/255, green: 120/255, blue: 127/255, alpha: 1.0)
 }
@@ -47,6 +52,11 @@ struct StoryboardNames {
     static let punchline = "Punchline"
     static let setup = "Setup"
     static let vote = "Vote"
+}
+
+struct TableViewSectionTitles {
+    static let theWorld = "The World"
+    static let yourGroups = "Your Groups"
 }
 
 struct UserAuthorizationConstants {

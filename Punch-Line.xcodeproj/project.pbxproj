@@ -13,6 +13,9 @@
 		B808CC4124B9583F00B39432 /* Punchline+ActivityFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B808CC4024B9583F00B39432 /* Punchline+ActivityFeedViewController.swift */; };
 		B808CC4324B9584500B39432 /* Setup+ActivityFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B808CC4224B9584500B39432 /* Setup+ActivityFeedViewController.swift */; };
 		B808CC4524B9584800B39432 /* Vote+ActivityFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B808CC4424B9584800B39432 /* Vote+ActivityFeedViewController.swift */; };
+		B850D8F724B988DB0011077D /* PunchLineList+TableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B850D8F624B988DB0011077D /* PunchLineList+TableViewDelegate.swift */; };
+		B850D8F924B988EC0011077D /* PunchLineList+TableViewDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B850D8F824B988EC0011077D /* PunchLineList+TableViewDatasource.swift */; };
+		B850D8FB24B9897A0011077D /* PunchLineTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B850D8FA24B9897A0011077D /* PunchLineTableViewCell.swift */; };
 		B890F48324B962010017BA21 /* UIView+ConstrainToSuperview.swift in Sources */ = {isa = PBXBuildFile; fileRef = B890F48224B962010017BA21 /* UIView+ConstrainToSuperview.swift */; };
 		B89CF24124B8BBC70009A8CB /* UserInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89CF24024B8BBC70009A8CB /* UserInformation.swift */; };
 		B89CF24324B8E6DD0009A8CB /* UIActivityIndicatorView+Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89CF24224B8E6DD0009A8CB /* UIActivityIndicatorView+Animations.swift */; };
@@ -51,6 +54,8 @@
 		B89F6A1E24B824C700472067 /* RealmSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B89F6A1A24B824C700472067 /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B8A58FF124B982360007B744 /* PunchLineListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8A58FF024B982360007B744 /* PunchLineListViewController.swift */; };
 		B8A58FF524B983AA0007B744 /* Activity.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8A58FF424B983AA0007B744 /* Activity.storyboard */; };
+		B8A58FF824B986C90007B744 /* PunchLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8A58FF724B986C90007B744 /* PunchLine.swift */; };
+		B8CDC13024B9904D000C8B64 /* NewPunchLineTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CDC12F24B9904D000C8B64 /* NewPunchLineTableViewCell.swift */; };
 		B8EABB8624B8278A00A46443 /* NavigationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EABB8524B8278A00A46443 /* NavigationManager.swift */; };
 		B8EABB8824B8427B00A46443 /* RealmAccessManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EABB8724B8427B00A46443 /* RealmAccessManager.swift */; };
 		B8EABB8A24B8477D00A46443 /* ActivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EABB8924B8477D00A46443 /* ActivityManager.swift */; };
@@ -79,6 +84,9 @@
 		B808CC4024B9583F00B39432 /* Punchline+ActivityFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Punchline+ActivityFeedViewController.swift"; sourceTree = "<group>"; };
 		B808CC4224B9584500B39432 /* Setup+ActivityFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Setup+ActivityFeedViewController.swift"; sourceTree = "<group>"; };
 		B808CC4424B9584800B39432 /* Vote+ActivityFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Vote+ActivityFeedViewController.swift"; sourceTree = "<group>"; };
+		B850D8F624B988DB0011077D /* PunchLineList+TableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PunchLineList+TableViewDelegate.swift"; sourceTree = "<group>"; };
+		B850D8F824B988EC0011077D /* PunchLineList+TableViewDatasource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PunchLineList+TableViewDatasource.swift"; sourceTree = "<group>"; };
+		B850D8FA24B9897A0011077D /* PunchLineTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PunchLineTableViewCell.swift; sourceTree = "<group>"; };
 		B890F48224B962010017BA21 /* UIView+ConstrainToSuperview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+ConstrainToSuperview.swift"; sourceTree = "<group>"; };
 		B89CF24024B8BBC70009A8CB /* UserInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInformation.swift; sourceTree = "<group>"; };
 		B89CF24224B8E6DD0009A8CB /* UIActivityIndicatorView+Animations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIActivityIndicatorView+Animations.swift"; sourceTree = "<group>"; };
@@ -117,6 +125,8 @@
 		B89F6A1A24B824C700472067 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/iOS/RealmSwift.framework; sourceTree = "<group>"; };
 		B8A58FF024B982360007B744 /* PunchLineListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PunchLineListViewController.swift; sourceTree = "<group>"; };
 		B8A58FF424B983AA0007B744 /* Activity.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Activity.storyboard; sourceTree = "<group>"; };
+		B8A58FF724B986C90007B744 /* PunchLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PunchLine.swift; sourceTree = "<group>"; };
+		B8CDC12F24B9904D000C8B64 /* NewPunchLineTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPunchLineTableViewCell.swift; sourceTree = "<group>"; };
 		B8EABB8524B8278A00A46443 /* NavigationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationManager.swift; sourceTree = "<group>"; };
 		B8EABB8724B8427B00A46443 /* RealmAccessManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmAccessManager.swift; sourceTree = "<group>"; };
 		B8EABB8924B8477D00A46443 /* ActivityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityManager.swift; sourceTree = "<group>"; };
@@ -161,6 +171,18 @@
 				B808CC4024B9583F00B39432 /* Punchline+ActivityFeedViewController.swift */,
 			);
 			path = Punchline;
+			sourceTree = "<group>";
+		};
+		B850D8F524B988C30011077D /* PunchLineList */ = {
+			isa = PBXGroup;
+			children = (
+				B8A58FF024B982360007B744 /* PunchLineListViewController.swift */,
+				B850D8F624B988DB0011077D /* PunchLineList+TableViewDelegate.swift */,
+				B850D8F824B988EC0011077D /* PunchLineList+TableViewDatasource.swift */,
+				B850D8FA24B9897A0011077D /* PunchLineTableViewCell.swift */,
+				B8CDC12F24B9904D000C8B64 /* NewPunchLineTableViewCell.swift */,
+			);
+			path = PunchLineList;
 			sourceTree = "<group>";
 		};
 		B89F69A924B6663800472067 = {
@@ -217,6 +239,7 @@
 		B89F69CE24B666E000472067 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				B850D8F524B988C30011077D /* PunchLineList */,
 				B8EABB8B24B847D900A46443 /* ActivityContainerViewController.swift */,
 				B89F6A0024B7ED1C00472067 /* GetStartedViewController.swift */,
 				B89F69F924B68D2800472067 /* JokeList */,
@@ -224,7 +247,6 @@
 				B89F6A0924B805E900472067 /* Password */,
 				B89F69EA24B675AA00472067 /* ProfileViewController.swift */,
 				B808CC3F24B9582400B39432 /* Punchline */,
-				B8A58FF024B982360007B744 /* PunchLineListViewController.swift */,
 				B808CC3E24B9581F00B39432 /* Setup */,
 				B89F69E624B6757000472067 /* JokeDetailViewController.swift */,
 				B89F6A0824B805E500472067 /* Username */,
@@ -258,9 +280,10 @@
 		B89F69D124B6671100472067 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				B89CF24024B8BBC70009A8CB /* UserInformation.swift */,
 				B808CC3724B912EB00B39432 /* Joke.swift */,
+				B8A58FF724B986C90007B744 /* PunchLine.swift */,
 				B808CC3924B948E200B39432 /* Setup.swift */,
+				B89CF24024B8BBC70009A8CB /* UserInformation.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -412,11 +435,16 @@
 				B890F48324B962010017BA21 /* UIView+ConstrainToSuperview.swift in Sources */,
 				B8EABB8624B8278A00A46443 /* NavigationManager.swift in Sources */,
 				B8EABB8C24B847D900A46443 /* ActivityContainerViewController.swift in Sources */,
+				B850D8F924B988EC0011077D /* PunchLineList+TableViewDatasource.swift in Sources */,
 				B89CF24324B8E6DD0009A8CB /* UIActivityIndicatorView+Animations.swift in Sources */,
 				B89CF24124B8BBC70009A8CB /* UserInformation.swift in Sources */,
 				B89F6A0B24B8062B00472067 /* Password+UITextFieldDelegate.swift in Sources */,
 				B808CC3A24B948E200B39432 /* Setup.swift in Sources */,
+				B850D8FB24B9897A0011077D /* PunchLineTableViewCell.swift in Sources */,
+				B850D8F724B988DB0011077D /* PunchLineList+TableViewDelegate.swift in Sources */,
+				B8A58FF824B986C90007B744 /* PunchLine.swift in Sources */,
 				B89F6A0124B7ED1C00472067 /* GetStartedViewController.swift in Sources */,
+				B8CDC13024B9904D000C8B64 /* NewPunchLineTableViewCell.swift in Sources */,
 				B89F69E124B6752400472067 /* PunchlineViewController.swift in Sources */,
 				B89F69EE24B675DA00472067 /* MainTabBarController.swift in Sources */,
 				B808CC4124B9583F00B39432 /* Punchline+ActivityFeedViewController.swift in Sources */,
