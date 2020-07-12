@@ -99,21 +99,18 @@ final class UserAuthorizationManager {
 
     private func createAppUserAndAppSession(with syncUser: SyncUser) {
         guard let userIdentity = syncUser.identity else { return }
-        let accessPath = RealmSyncConstants.userIdentityPath + RealmSyncConstants.userPath
         let appSession = AppSession()
 
-        if let appUser = RealmAccessManager.getObject(of: AppUser.self, with: userIdentity, fromRealmAt: accessPath) {
-            let localUser = LocalRealmManager.createLocalCopyOf(object: appUser)
-            appSession.loggedInUser = localUser
+        if let appUser = RealmAccessManager.getObject(of: AppUser.self, with: userIdentity, fromRealmAt: RealmSyncConstants.userPath) {
+            appSession.loggedInUser = appUser
         } else {
             let newAppUser = AppUser()
             newAppUser.id = syncUser.identity ?? UUID().uuidString
             newAppUser.username = self.username ?? ""
             appSession.loggedInUser = newAppUser
-            RealmAccessManager.createCopyOf(object: newAppUser, inRealmAt: accessPath)
         }
 
-        LocalRealmManager.addOrUpdateLocalUnmanaged(object: appSession)
+        RealmAccessManager.addOrUpdate(object: appSession, inRealmAt: RealmSyncConstants.userPath)
     }
 
     class func logOut() {

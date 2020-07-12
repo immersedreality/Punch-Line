@@ -17,9 +17,9 @@ extension PunchLineListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
-            return 1
+            return viewModel.publicPunchLineLaunchers.count
         case 1:
-            return 1
+            return viewModel.customPunchLineLaunchers.count + 1
         default:
             return 0
         }
@@ -27,21 +27,28 @@ extension PunchLineListViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        if indexPath.section == 1 && indexPath.row == 0 {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.newPunchLineCell) as? NewPunchLineTableViewCell else {
-                return UITableViewCell()
-            }
-
-            return cell
-
-        } else {
+        switch indexPath.section {
+        case 0:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.punchLineCell) as? PunchLineTableViewCell else {
                 return UITableViewCell()
             }
-
-            cell.configure()
+            cell.punchLineLauncher = viewModel.publicPunchLineLaunchers[indexPath.row]
             return cell
-
+        case 1:
+            if indexPath.row == viewModel.customPunchLineLaunchers.count {
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.newPunchLineCell) as? NewPunchLineTableViewCell else {
+                    return UITableViewCell()
+                }
+                return cell
+            } else {
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.punchLineCell) as? PunchLineTableViewCell else {
+                    return UITableViewCell()
+                }
+                cell.punchLineLauncher = viewModel.customPunchLineLaunchers[indexPath.row]
+                return cell
+            }
+        default:
+            return UITableViewCell()
         }
 
     }

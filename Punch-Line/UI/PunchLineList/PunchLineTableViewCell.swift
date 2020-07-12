@@ -13,8 +13,15 @@ class PunchLineTableViewCell: UITableViewCell {
     @IBOutlet weak var contentContainerView: UIView!
     @IBOutlet weak var punchLineTitleLabel: UILabel!
 
-    func configure() {
+    var punchLineLauncher: PunchLineLauncher! {
+        didSet {
+            configure()
+        }
+    }
+
+    private func configure() {
         contentContainerView.backgroundColor = StyleManager.generateRandomBackgroundColor()
+        punchLineTitleLabel.text = punchLineLauncher.name
     }
 
 }

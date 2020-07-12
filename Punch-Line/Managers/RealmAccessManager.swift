@@ -35,7 +35,7 @@ final class RealmAccessManager {
         return realm.objects(T.self)
     }
 
-    class func addOrUpdateUnmanaged(object: Object, inRealmAt accessPath: AccessPath) {
+    class func addOrUpdate(object: Object, inRealmAt accessPath: AccessPath) {
         guard let configuration = configureSyncedRealm(withRealmAt: accessPath) else { return }
         guard let realm = try? Realm(configuration: configuration) else { return }
         try? realm.write {
@@ -43,7 +43,7 @@ final class RealmAccessManager {
         }
     }
 
-    class func addOrUpdateUnmanaged(objects: [Object], inRealmAt accessPath: AccessPath) {
+    class func addOrUpdate(objects: [Object], inRealmAt accessPath: AccessPath) {
         guard let configuration = configureSyncedRealm(withRealmAt: accessPath) else { return }
         guard let realm = try? Realm(configuration: configuration) else { return }
         try? realm.write {
@@ -51,7 +51,7 @@ final class RealmAccessManager {
         }
     }
 
-    class func addOrUpdateUnmanaged(objects: List<Object>, inRealmAt accessPath: AccessPath) {
+    class func addOrUpdate(objects: List<Object>, inRealmAt accessPath: AccessPath) {
         guard let configuration = configureSyncedRealm(withRealmAt: accessPath) else { return }
         guard let realm = try? Realm(configuration: configuration) else { return }
         try? realm.write {
@@ -59,31 +59,11 @@ final class RealmAccessManager {
         }
     }
 
-    class func createCopyOf<T: Object>(object: T, inRealmAt accessPath: AccessPath) {
+    class func executeUpdates(inRealmAt accessPath: AccessPath, updatesBlock: () -> Void) {
         guard let configuration = configureSyncedRealm(withRealmAt: accessPath) else { return }
         guard let realm = try? Realm(configuration: configuration) else { return }
         try? realm.write {
-            let _ = realm.create(T.self, value: object, update: .modified)
-        }
-    }
-
-    class func createCopiesOf<T: Object>(objects: [T], inRealmAt accessPath: AccessPath) {
-        guard let configuration = configureSyncedRealm(withRealmAt: accessPath) else { return }
-        guard let realm = try? Realm(configuration: configuration) else { return }
-        try? realm.write {
-            for object in objects {
-                let _ = realm.create(T.self, value: object, update: .modified)
-            }
-        }
-    }
-
-    class func createCopiesOf<T: Object>(objects: List<T>, inRealmAt accessPath: AccessPath) {
-        guard let configuration = configureSyncedRealm(withRealmAt: accessPath) else { return }
-        guard let realm = try? Realm(configuration: configuration) else { return }
-        try? realm.write {
-            for object in objects {
-                let _ = realm.create(T.self, value: object, update: .modified)
-            }
+            updatesBlock()
         }
     }
 

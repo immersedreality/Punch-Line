@@ -21,6 +21,7 @@ struct IgnoredProperties {
     static let sharedInstance = "sharedInstance"
     static let totalUpvoteCount = "totalUpvoteCount"
     static let totalVoteCount = "totalVoteCount"
+    static let userAccessPath = "userAccessPath"
 }
 
 struct InfoDictionaryKeys {
@@ -37,8 +38,7 @@ struct RealmSyncConstants {
     static let httpsPrefix = "https://"
     static let realmInstanceLink = "stinky-wiener-wagon.us2a.cloud.realm.io"
     static let realmsPrefix = "realms://"
-    static let userIdentityPath = "/~"
-    static let userPath = "/User"
+    static let userPath = "/~/User"
 }
 
 struct RegionCodes {

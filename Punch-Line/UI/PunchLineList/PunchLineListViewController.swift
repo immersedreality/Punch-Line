@@ -12,6 +12,8 @@ class PunchLineListViewController: UIViewController {
 
     @IBOutlet weak var punchLineListTableView: UITableView!
 
+    let viewModel = PunchLineListViewModel()
+
     override func viewDidLoad() {
         configurePunchLineListTableView()
     }

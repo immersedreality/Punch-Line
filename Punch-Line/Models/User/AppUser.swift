@@ -16,8 +16,8 @@ class AppUser: Object {
     @objc dynamic var username: String = ""
     @objc dynamic var shouldSeeOffensiveContent: Bool = true
 
-    let publicPunchLinePaths = List<String>()
-    let customPunchLinePaths = List<String>()
+    let publicPunchLineLaunchers = List<PunchLineLauncher>()
+    let customPunchLineLaunchers = List<PunchLineLauncher>()
     let favoritedJokes = List<FavoriteJoke>()
 
     override class func primaryKey() -> String? {

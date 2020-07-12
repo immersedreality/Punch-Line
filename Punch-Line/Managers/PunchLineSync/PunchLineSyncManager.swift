@@ -10,6 +10,8 @@ import Foundation
 
 final class PunchLineSyncManager: NSObject {
 
+    typealias AccessPath = String
+
     class func generatePublicPunchLinesForNewCloudInstance() -> [PublicPunchLine] {
 
         var publicPunchLinesForNewCloudInstance: [PublicPunchLine] = []
@@ -58,16 +60,42 @@ final class PunchLineSyncManager: NSObject {
             matchedPublicPunchLineNames.append(matchedLocalRegionName)
         }
 
-        RealmSyncManager.sync(with: matchedPublicPunchLineNames) { (_) in }
+        let matchedRealmAccessPaths = matchedPublicPunchLineNames.map { $0.removingSpaces() }
+
+        RealmSyncManager.sync(withRealmsAt: matchedRealmAccessPaths) { (_) in }
         
     }
     
-    class func generateCustomPunchLine(with name: String) {
-        guard let loggedInUser = AppSession.sharedInstance.loggedInUser else { return }
+    class func generateCustomPunchLine(with name: String) -> CustomPunchLine? {
+        guard let loggedInUser = AppSession.sharedInstance.loggedInUser else { return nil }
         let newCustomPunchLine = CustomPunchLine()
         newCustomPunchLine.name = name
         newCustomPunchLine.ownerID = loggedInUser.id
         newCustomPunchLine.memberIDs.append(newCustomPunchLine.ownerID)
+        return newCustomPunchLine
+    }
+
+    class func generateLauncher(from punchLine: PunchLine) -> PunchLineLauncher {
+        let newPunchLineLauncher = PunchLineLauncher()
+        newPunchLineLauncher.id = punchLine.id
+        newPunchLineLauncher.name = punchLine.name
+        return newPunchLineLauncher
+    }
+
+    class func generateLauncherIfNeededFromPunchLine(at accessPath: AccessPath) {
+        if let punchLine = RealmAccessManager.getObjects(of: PublicPunchLine.self, fromRealmAt: accessPath)?.first {
+            let launcher = generateLauncher(from: punchLine)
+            RealmAccessManager.addOrUpdate(object: launcher, inRealmAt: RealmSyncConstants.userPath)
+            RealmAccessManager.executeUpdates(inRealmAt: RealmSyncConstants.userPath) {
+                AppSession.sharedInstance.loggedInUser?.publicPunchLineLaunchers.append(launcher)
+            }
+        } else if let punchLine = RealmAccessManager.getObjects(of: CustomPunchLine.self, fromRealmAt: accessPath)?.first {
+            let launcher = generateLauncher(from: punchLine)
+            RealmAccessManager.addOrUpdate(object: launcher, inRealmAt: RealmSyncConstants.userPath)
+            RealmAccessManager.executeUpdates(inRealmAt: RealmSyncConstants.userPath) {
+                AppSession.sharedInstance.loggedInUser?.customPunchLineLaunchers.append(launcher)
+            }
+        }
     }
 
 }

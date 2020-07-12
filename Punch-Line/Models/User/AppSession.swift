@@ -11,7 +11,10 @@ import RealmSwift
 
 class AppSession: Object {
 
-    static let sharedInstance = LocalRealmManager.getLocalObject(of: AppSession.self, with: PrimaryKeys.appSessionKey) ?? AppSession()
+    static let sharedInstance = RealmAccessManager.getObject(
+        of: AppSession.self,
+        with: PrimaryKeys.appSessionKey,
+        fromRealmAt: RealmSyncConstants.userPath) ?? AppSession()
 
     @objc dynamic var id = PrimaryKeys.appSessionKey
     @objc dynamic var loggedInUser: AppUser?
@@ -22,6 +25,7 @@ class AppSession: Object {
 
     override class func ignoredProperties() -> [String] {
         return [
+            IgnoredProperties.userAccessPath,
             IgnoredProperties.sharedInstance
         ]
     }

@@ -24,7 +24,9 @@ final class RealmSyncManager {
                 guard realmSyncedSuccessfully else { completion(false); return }
                 applyPublicPermissions(forRealmAt: punchLine.realmPath) { (permissionsAppliedSuccessfully) in
                     guard permissionsAppliedSuccessfully else { completion(false); return }
-                    RealmAccessManager.addOrUpdateUnmanaged(object: punchLine, inRealmAt: punchLine.realmPath)
+                    RealmAccessManager.addOrUpdate(object: punchLine, inRealmAt: punchLine.realmPath)
+                    let launcher = PunchLineSyncManager.generateLauncher(from: punchLine)
+                    RealmAccessManager.addOrUpdate(object: launcher, inRealmAt: RealmSyncConstants.userPath)
                     realmSyncDispatchGroup.leave()
                 }
             }
@@ -38,11 +40,10 @@ final class RealmSyncManager {
 
     class func loginSync(completion: @escaping (Bool) -> Void) {
 
-        let userPath = RealmSyncConstants.userIdentityPath + RealmSyncConstants.userPath
         var allRealmsSyncedSuccessfully = false
 
         realmSyncDispatchGroup.enter()
-        initialSync(withRealmAt: userPath) { (realmSyncedSuccessfully) in
+        initialSync(withRealmAt: RealmSyncConstants.userPath) { (realmSyncedSuccessfully) in
             allRealmsSyncedSuccessfully = realmSyncedSuccessfully
             realmSyncDispatchGroup.leave()
         }
@@ -70,12 +71,12 @@ final class RealmSyncManager {
     class func appLaunchBackgroundSync() {
         guard let loggedInUser = AppSession.sharedInstance.loggedInUser else { return }
 
-        for realmPath in loggedInUser.publicPunchLinePaths {
-            initialSync(withRealmAt: realmPath, completion: { _ in })
+        for launcher in loggedInUser.publicPunchLineLaunchers {
+            initialSync(withRealmAt: launcher.realmPath, completion: { _ in })
         }
 
-        for realmPath in loggedInUser.customPunchLinePaths {
-            initialSync(withRealmAt: realmPath, completion: { _ in })
+        for launcher in loggedInUser.customPunchLineLaunchers {
+            initialSync(withRealmAt: launcher.realmPath, completion: { _ in })
         }
 
     }
@@ -83,14 +84,15 @@ final class RealmSyncManager {
     class func initialSync(withRealmAt accessPath: AccessPath, completion: @escaping (Bool) -> Void) {
         guard let configuration = RealmAccessManager.configureSyncedRealm(withRealmAt: accessPath) else { completion(false); return }
         Realm.asyncOpen(configuration: configuration, callbackQueue: .main) { (realm, error) in
+            PunchLineSyncManager.generateLauncherIfNeededFromPunchLine(at: accessPath)
             completion(realm != nil && error == nil)
         }
     }
 
-    class func sync(with punchLineNames: [String], completion: @escaping (Bool) -> Void) {
-        for name in punchLineNames {
+    class func sync(withRealmsAt accessPaths: [String], completion: @escaping (Bool) -> Void) {
+        for accessPath in accessPaths {
             realmSyncDispatchGroup.enter()
-            initialSync(withRealmAt: name.removingSpaces()) { (_) in
+            initialSync(withRealmAt: accessPath) { (_) in
                 realmSyncDispatchGroup.leave()
             }
         }
