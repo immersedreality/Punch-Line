@@ -8,7 +8,7 @@
 
 import Foundation
 
-final class PunchLineSyncManager {
+final class PunchLineSyncManager: NSObject {
 
     class func generatePublicPunchLinesForNewCloudInstance() -> [PublicPunchLine] {
 
@@ -39,9 +39,27 @@ final class PunchLineSyncManager {
         return newPublicPunchLine
     }
 
-    class func matchedPublicPunchLineNames() -> [String] {
-        let matchedPublicPunchLineNames: [String] = []
-        return matchedPublicPunchLineNames
+    class func matchPublicPunchLineNames(to locationMap: PublicPunchLineLocationMap) {
+        var matchedPublicPunchLineNames: [String] = []
+
+        if let matchedMidSizeRegionName = PublicPunchLineNames.MidSizedRegions.regionNamesForNewCloudInstance
+            .first(where: { (regionName) -> Bool in
+                guard let midSizeRegionName = locationMap.administrativeArea else { return false }
+                return regionName == midSizeRegionName
+        }) {
+            matchedPublicPunchLineNames.append(matchedMidSizeRegionName)
+        }
+
+        if let matchedLocalRegionName = PublicPunchLineNames.LocalRegions.regionNamesForNewCloudInstance
+            .first(where: { (regionName) -> Bool in
+                guard let localRegionName = locationMap.administrativeArea else { return false }
+                return regionName == localRegionName
+        }) {
+            matchedPublicPunchLineNames.append(matchedLocalRegionName)
+        }
+
+        RealmSyncManager.sync(with: matchedPublicPunchLineNames) { (_) in }
+        
     }
     
     class func generateCustomPunchLine(with name: String) {

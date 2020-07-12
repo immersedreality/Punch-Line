@@ -87,6 +87,20 @@ final class RealmSyncManager {
         }
     }
 
+    class func sync(with punchLineNames: [String], completion: @escaping (Bool) -> Void) {
+        for name in punchLineNames {
+            realmSyncDispatchGroup.enter()
+            initialSync(withRealmAt: name.removingSpaces()) { (_) in
+                realmSyncDispatchGroup.leave()
+            }
+        }
+
+        realmSyncDispatchGroup.notify(queue: .main) {
+            completion(true)
+        }
+
+    }
+
     private class func applyPublicPermissions(forRealmAt accessPath: AccessPath, completion: @escaping (Bool) -> Void) {
         guard let user = SyncUser.current else { completion(false); return }
 

@@ -9,5 +9,12 @@
 import UIKit
 
 class MainTabBarController: UITabBarController {
-    
+
+    let punchLineSyncManager = PunchLineSyncManager()
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        CoreLocationManager.handleLocationServicesAuthorizationStatus(for: punchLineSyncManager)
+    }
+
 }

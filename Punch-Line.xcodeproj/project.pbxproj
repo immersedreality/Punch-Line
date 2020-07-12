@@ -19,6 +19,7 @@
 		B854589024BA78BD00723E26 /* PublicPunchLinePaths.swift in Sources */ = {isa = PBXBuildFile; fileRef = B854588F24BA78BD00723E26 /* PublicPunchLinePaths.swift */; };
 		B854589224BA97F900723E26 /* CoreLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B854589124BA97F900723E26 /* CoreLocationManager.swift */; };
 		B854589424BAA12C00723E26 /* String+RemovingSpaces.swift in Sources */ = {isa = PBXBuildFile; fileRef = B854589324BAA12C00723E26 /* String+RemovingSpaces.swift */; };
+		B854589624BAA6D400723E26 /* PunchLineSync+CLLocationManagerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B854589524BAA6D400723E26 /* PunchLineSync+CLLocationManagerDelegate.swift */; };
 		B890F48324B962010017BA21 /* UIView+ConstrainToSuperview.swift in Sources */ = {isa = PBXBuildFile; fileRef = B890F48224B962010017BA21 /* UIView+ConstrainToSuperview.swift */; };
 		B89CF24124B8BBC70009A8CB /* AppUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89CF24024B8BBC70009A8CB /* AppUser.swift */; };
 		B89CF24324B8E6DD0009A8CB /* UIActivityIndicatorView+Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89CF24224B8E6DD0009A8CB /* UIActivityIndicatorView+Animations.swift */; };
@@ -101,6 +102,7 @@
 		B854588F24BA78BD00723E26 /* PublicPunchLinePaths.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicPunchLinePaths.swift; sourceTree = "<group>"; };
 		B854589124BA97F900723E26 /* CoreLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreLocationManager.swift; sourceTree = "<group>"; };
 		B854589324BAA12C00723E26 /* String+RemovingSpaces.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+RemovingSpaces.swift"; sourceTree = "<group>"; };
+		B854589524BAA6D400723E26 /* PunchLineSync+CLLocationManagerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PunchLineSync+CLLocationManagerDelegate.swift"; sourceTree = "<group>"; };
 		B890F48224B962010017BA21 /* UIView+ConstrainToSuperview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+ConstrainToSuperview.swift"; sourceTree = "<group>"; };
 		B89CF24024B8BBC70009A8CB /* AppUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUser.swift; sourceTree = "<group>"; };
 		B89CF24224B8E6DD0009A8CB /* UIActivityIndicatorView+Animations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIActivityIndicatorView+Animations.swift"; sourceTree = "<group>"; };
@@ -207,6 +209,15 @@
 			path = PunchLineList;
 			sourceTree = "<group>";
 		};
+		B854589724BAA6D700723E26 /* PunchLineSync */ = {
+			isa = PBXGroup;
+			children = (
+				B8CDC13824BA34F4000C8B64 /* PunchLineSyncManager.swift */,
+				B854589524BAA6D400723E26 /* PunchLineSync+CLLocationManagerDelegate.swift */,
+			);
+			path = PunchLineSync;
+			sourceTree = "<group>";
+		};
 		B89F69A924B6663800472067 = {
 			isa = PBXGroup;
 			children = (
@@ -291,9 +302,9 @@
 		B89F69D024B6670C00472067 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				B854589724BAA6D700723E26 /* PunchLineSync */,
 				B8EABB8924B8477D00A46443 /* ActivityFeedManager.swift */,
 				B8EABB8524B8278A00A46443 /* NavigationManager.swift */,
-				B8CDC13824BA34F4000C8B64 /* PunchLineSyncManager.swift */,
 				B8EABB8724B8427B00A46443 /* RealmAccessManager.swift */,
 				B8D8F8B524BA5BAE00BBEBB1 /* RealmSyncManager.swift */,
 				B808CC3B24B94FA200B39432 /* StyleManager.swift */,
@@ -481,6 +492,7 @@
 				B808CC4524B9584800B39432 /* Vote+ActivityFeedViewController.swift in Sources */,
 				B854589224BA97F900723E26 /* CoreLocationManager.swift in Sources */,
 				B89F6A1124B80AEE00472067 /* UITextField+AddBottomBorder.swift in Sources */,
+				B854589624BAA6D400723E26 /* PunchLineSync+CLLocationManagerDelegate.swift in Sources */,
 				B89F69B624B6663800472067 /* AppDelegate.swift in Sources */,
 				B890F48324B962010017BA21 /* UIView+ConstrainToSuperview.swift in Sources */,
 				B8EABB8624B8278A00A46443 /* NavigationManager.swift in Sources */,

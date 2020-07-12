@@ -14,8 +14,12 @@ final class CoreLocationManager {
     private static let locationManager = CLLocationManager()
     private static let geocoder = CLGeocoder()
 
-    class func requestAuthorization() {
-        locationManager.requestWhenInUseAuthorization()
+    class func handleLocationServicesAuthorizationStatus(for delegate: CLLocationManagerDelegate) {
+        if CLLocationManager.authorizationStatus() == .notDetermined {
+            locationManager.requestWhenInUseAuthorization()
+        } else {
+            return
+        }
     }
 
     class func startUpdatingUsersLocation(for delegate: CLLocationManagerDelegate) {
@@ -35,9 +39,9 @@ final class CoreLocationManager {
             guard error == nil else { completion(PublicPunchLineLocationMap()); return }
             guard let placemark = placemarks?.first else { completion(PublicPunchLineLocationMap()); return }
             let country = placemark.country
-            let state = placemark.administrativeArea
-            let city = placemark.locality
-            let locationMap = PublicPunchLineLocationMap(country: country, state: state, city: city)
+            let administrativeArea = placemark.administrativeArea
+            let locality = placemark.locality
+            let locationMap = PublicPunchLineLocationMap(country: country, administrativeArea: administrativeArea, locality: locality)
             completion(locationMap)
         }
     }
@@ -46,6 +50,6 @@ final class CoreLocationManager {
 
 struct PublicPunchLineLocationMap {
     var country: String?
-    var state: String?
-    var city: String?
+    var administrativeArea: String?
+    var locality: String?
 }
