@@ -15,6 +15,7 @@ final class CoreLocationManager {
     private static let geocoder = CLGeocoder()
 
     class func handleLocationServicesAuthorizationStatus(for delegate: CLLocationManagerDelegate) {
+        locationManager.delegate = delegate
         if CLLocationManager.authorizationStatus() == .notDetermined {
             locationManager.requestWhenInUseAuthorization()
         } else {

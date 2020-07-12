@@ -42,7 +42,7 @@ final class UserAuthorizationManager {
             server: authorizationURL) { [weak self] (syncUser, error) in
                 if let user = syncUser {
                     if user.isAdmin && newCloudInstanceNeedsInitialization {
-                        self?.initialize(adminUser: user, completion: completion)
+                        self?.initializeServerInstance(with: user, completion: completion)
                     } else {
                         self?.initialize(user: user, completion: completion)
                     }
@@ -64,7 +64,7 @@ final class UserAuthorizationManager {
             server: authorizationURL) { [weak self] (syncUser, error) in
                 if let user = syncUser {
                     if user.isAdmin && newCloudInstanceNeedsInitialization {
-                        self?.initialize(adminUser: user, completion: completion)
+                        self?.initializeServerInstance(with: user, completion: completion)
                     } else {
                         self?.initialize(user: user, completion: completion)
                     }
@@ -75,7 +75,7 @@ final class UserAuthorizationManager {
 
     }
 
-    private func initialize(adminUser: SyncUser, completion: @escaping (Bool, String?) -> Void) {
+    private func initializeServerInstance(with adminUser: SyncUser, completion: @escaping (Bool, String?) -> Void) {
         RealmSyncManager.adminLoginSync { [weak self] syncWasSuccessful in
             if syncWasSuccessful {
                 self?.createAppUserAndAppSession(with: adminUser)
@@ -104,18 +104,33 @@ final class UserAuthorizationManager {
         if let appUser = RealmAccessManager.getObject(of: AppUser.self, with: userIdentity, fromRealmAt: RealmSyncConstants.userPath) {
             appSession.loggedInUser = appUser
         } else {
+
             let newAppUser = AppUser()
             newAppUser.id = syncUser.identity ?? UUID().uuidString
             newAppUser.username = self.username ?? ""
+
+            if let launchers = RealmAccessManager.getObjects(of: PunchLineLauncher.self, fromRealmAt: RealmSyncConstants.userPath) {
+                for launcher in launchers {
+                    switch launcher.getType() {
+                    case .publicLauncher:
+                        newAppUser.publicPunchLineLaunchers.append(launcher)
+                    case .customLauncher:
+                        newAppUser.customPunchLineLaunchers.append(launcher)
+                    }
+                }
+            }
+
             appSession.loggedInUser = newAppUser
         }
 
+        AppSession.sharedInstance = appSession
         RealmAccessManager.addOrUpdate(object: appSession, inRealmAt: RealmSyncConstants.userPath)
     }
 
     class func logOut() {
         guard let user = SyncUser.current else { return }
         user.logOut()
+        AppSession.sharedInstance = AppSession()
         NavigationManager.setRootViewControllerToGetStarted()
     }
     

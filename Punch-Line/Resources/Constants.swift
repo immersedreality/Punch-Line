@@ -15,8 +15,10 @@ struct CellIdentifiers {
 
 struct IgnoredProperties {
     static let baseRankingScore = "baseRankingScore"
+    static let customPunchLineLaunchers = "customPunchLineLaunchers"
     static let nameWithoutSpaces = "nameWithoutSpaces"
     static let isOffensive = "isOffensive"
+    static let publicPunchLineLaunchers = "publicPunchLineLaunchers"
     static let realmPath = "realmPath"
     static let sharedInstance = "sharedInstance"
     static let totalUpvoteCount = "totalUpvoteCount"

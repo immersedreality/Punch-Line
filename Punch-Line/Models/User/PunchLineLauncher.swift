@@ -13,6 +13,7 @@ class PunchLineLauncher: Object {
 
     @objc dynamic var id: String = ""
     @objc dynamic var name: String = ""
+    @objc private dynamic var type: String = ""
 
     var nameWithoutSpaces: String {
         return name.removingSpaces()
@@ -20,6 +21,14 @@ class PunchLineLauncher: Object {
 
     var realmPath: String {
         return "/" + nameWithoutSpaces
+    }
+
+    func setType(to type: PunchLineLauncherType) {
+        self.type = type.rawValue
+    }
+
+    func getType() -> PunchLineLauncherType {
+        return PunchLineLauncherType(rawValue: type) ?? .publicLauncher
     }
     
     override class func primaryKey() -> String? {
@@ -33,4 +42,8 @@ class PunchLineLauncher: Object {
         ]
     }
     
+}
+
+enum PunchLineLauncherType: String {
+    case publicLauncher, customLauncher
 }

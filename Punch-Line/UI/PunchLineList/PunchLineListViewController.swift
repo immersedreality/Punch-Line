@@ -15,7 +15,13 @@ class PunchLineListViewController: UIViewController {
     let viewModel = PunchLineListViewModel()
 
     override func viewDidLoad() {
+        super.viewDidLoad()
         configurePunchLineListTableView()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        refreshTableView()
     }
 
     private func configurePunchLineListTableView() {
@@ -23,4 +29,7 @@ class PunchLineListViewController: UIViewController {
         punchLineListTableView.delegate = self
     }
 
+    private func refreshTableView() {
+        punchLineListTableView.reloadData()
+    }
 }

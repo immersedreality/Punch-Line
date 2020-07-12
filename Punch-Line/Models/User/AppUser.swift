@@ -16,7 +16,7 @@ class AppUser: Object {
     @objc dynamic var username: String = ""
     @objc dynamic var shouldSeeOffensiveContent: Bool = true
 
-    let publicPunchLineLaunchers = List<PunchLineLauncher>()
+    var publicPunchLineLaunchers = List<PunchLineLauncher>()
     let customPunchLineLaunchers = List<PunchLineLauncher>()
     let favoritedJokes = List<FavoriteJoke>()
 

@@ -11,14 +11,14 @@ import RealmSwift
 
 class AppSession: Object {
 
-    static let sharedInstance = RealmAccessManager.getObject(
+    static var sharedInstance = RealmAccessManager.getObject(
         of: AppSession.self,
         with: PrimaryKeys.appSessionKey,
         fromRealmAt: RealmSyncConstants.userPath) ?? AppSession()
 
     @objc dynamic var id = PrimaryKeys.appSessionKey
     @objc dynamic var loggedInUser: AppUser?
-
+    
     override class func primaryKey() -> String? {
         return PrimaryKeys.id
     }

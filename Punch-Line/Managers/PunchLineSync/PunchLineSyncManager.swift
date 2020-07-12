@@ -85,16 +85,12 @@ final class PunchLineSyncManager: NSObject {
     class func generateLauncherIfNeededFromPunchLine(at accessPath: AccessPath) {
         if let punchLine = RealmAccessManager.getObjects(of: PublicPunchLine.self, fromRealmAt: accessPath)?.first {
             let launcher = generateLauncher(from: punchLine)
+            launcher.setType(to: .publicLauncher)
             RealmAccessManager.addOrUpdate(object: launcher, inRealmAt: RealmSyncConstants.userPath)
-            RealmAccessManager.executeUpdates(inRealmAt: RealmSyncConstants.userPath) {
-                AppSession.sharedInstance.loggedInUser?.publicPunchLineLaunchers.append(launcher)
-            }
         } else if let punchLine = RealmAccessManager.getObjects(of: CustomPunchLine.self, fromRealmAt: accessPath)?.first {
             let launcher = generateLauncher(from: punchLine)
+            launcher.setType(to: .customLauncher)
             RealmAccessManager.addOrUpdate(object: launcher, inRealmAt: RealmSyncConstants.userPath)
-            RealmAccessManager.executeUpdates(inRealmAt: RealmSyncConstants.userPath) {
-                AppSession.sharedInstance.loggedInUser?.customPunchLineLaunchers.append(launcher)
-            }
         }
     }
 
