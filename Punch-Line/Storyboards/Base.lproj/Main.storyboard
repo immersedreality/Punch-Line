@@ -19,7 +19,7 @@
                         <color key="selectedImageTintColor" red="0.85098039219999999" green="0.47058823529999999" blue="0.49803921569999998" alpha="1" colorSpace="calibratedRGB"/>
                     </tabBar>
                     <connections>
-                        <segue destination="xwB-0G-rPG" kind="relationship" relationship="viewControllers" id="Q72-7n-wIy"/>
+                        <segue destination="hN9-1z-TiL" kind="relationship" relationship="viewControllers" id="Q72-7n-wIy"/>
                         <segue destination="23d-CA-ccS" kind="relationship" relationship="viewControllers" id="lwI-uK-83g"/>
                     </connections>
                 </tabBarController>
@@ -27,7 +27,7 @@
             </objects>
             <point key="canvasLocation" x="0.0" y="0.0"/>
         </scene>
-        <!--Item-->
+        <!--Punch Line List View Controller-->
         <scene sceneID="ba8-kG-qxz">
             <objects>
                 <viewController id="xwB-0G-rPG" customClass="PunchLineListViewController" customModule="Punch_Line" customModuleProvider="target" sceneMemberID="viewController">
@@ -36,7 +36,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="160" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="5Bo-56-TP1">
-                                <rect key="frame" x="0.0" y="44" width="414" height="769"/>
+                                <rect key="frame" x="0.0" y="96" width="414" height="717"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PunchLineCell" id="H9Z-9t-xpY" customClass="PunchLineTableViewCell" customModule="Punch_Line" customModuleProvider="target">
@@ -143,11 +143,11 @@
                             <constraint firstItem="kla-I9-nOS" firstAttribute="bottom" secondItem="5Bo-56-TP1" secondAttribute="bottom" id="Ant-mi-Koh"/>
                             <constraint firstItem="5Bo-56-TP1" firstAttribute="leading" secondItem="kla-I9-nOS" secondAttribute="leading" id="fJV-UK-fjb"/>
                             <constraint firstItem="kla-I9-nOS" firstAttribute="trailing" secondItem="5Bo-56-TP1" secondAttribute="trailing" id="iby-BT-OhD"/>
-                            <constraint firstItem="5Bo-56-TP1" firstAttribute="top" secondItem="kla-I9-nOS" secondAttribute="top" id="set-lV-ULi"/>
+                            <constraint firstItem="5Bo-56-TP1" firstAttribute="top" secondItem="kla-I9-nOS" secondAttribute="top" constant="8" id="set-lV-ULi"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="kla-I9-nOS"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" image="pencil.circle" catalog="system" selectedImage="pencil.circle.fill" id="eME-wA-jao"/>
+                    <navigationItem key="navigationItem" id="fnc-Ho-olw"/>
                     <connections>
                         <outlet property="punchLineListTableView" destination="5Bo-56-TP1" id="HOZ-9k-QHb"/>
                         <segue destination="Xwt-4V-HkN" kind="presentation" identifier="PresentActivityFeedViewController" id="mdT-q9-vlf"/>
@@ -156,7 +156,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qfm-Wp-nNG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="877" y="-339"/>
+            <point key="canvasLocation" x="1658" y="-340"/>
         </scene>
         <!--Activity-->
         <scene sceneID="KEc-Hb-zr9">
@@ -164,7 +164,7 @@
                 <viewControllerPlaceholder storyboardName="Activity" id="Xwt-4V-HkN" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9n7-YH-oXe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1463" y="-368"/>
+            <point key="canvasLocation" x="2249" y="-360"/>
         </scene>
         <!--PunchLineEditor-->
         <scene sceneID="q5C-VL-8Z5">
@@ -172,19 +172,122 @@
                 <viewControllerPlaceholder storyboardIdentifier="PresentPunchLineEditorViewController" storyboardName="PunchLineEditor" id="BbB-vh-hkd" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fJL-SC-Zal" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1501" y="-315"/>
+            <point key="canvasLocation" x="2288" y="-320"/>
         </scene>
-        <!--Top Ten-->
+        <!--The Joke Vault-->
         <scene sceneID="yCN-qN-vVT">
             <objects>
-                <viewController id="9ST-Ii-Uxr" customClass="JokeListViewController" customModule="Punch_Line" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="9ST-Ii-Uxr" customClass="JokeLookupViewController" customModule="Punch_Line" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Z6C-bE-1ui">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="Q3F-81-uel">
+                                <rect key="frame" x="0.0" y="88" width="414" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="kL7-de-pJE"/>
+                                </constraints>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Frw-e8-cUG">
+                                <rect key="frame" x="0.0" y="272" width="414" height="541"/>
+                                <connections>
+                                    <segue destination="yJ7-XV-Z1h" kind="embed" identifier="EmbedJokeListViewControllerInContainerView" id="xYD-b5-1cW"/>
+                                </connections>
+                            </containerView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tgz-dF-iMX">
+                                <rect key="frame" x="0.0" y="136" width="414" height="136"/>
+                                <subviews>
+                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vXR-Mg-Yow">
+                                        <rect key="frame" x="24" y="16" width="366" height="48"/>
+                                        <color key="backgroundColor" red="0.85098039219999999" green="0.47058823529999999" blue="0.49803921569999998" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="48" id="cap-Qn-YYh"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <state key="normal" title="US And Canada">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="8"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="selectPunchLineButtonTapped:" destination="9ST-Ii-Uxr" eventType="touchUpInside" id="Ytc-dF-gIf"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="52z-84-HsM">
+                                        <rect key="frame" x="24" y="72" width="179" height="48"/>
+                                        <color key="backgroundColor" red="0.85098039219999999" green="0.47058823529999999" blue="0.49803921569999998" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="48" id="YS5-AL-Pnt"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <state key="normal" title="Yesterday">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="8"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="selectTimescaleButtonTapped:" destination="9ST-Ii-Uxr" eventType="touchUpInside" id="SUm-DT-6n3"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U5p-JM-d23">
+                                        <rect key="frame" x="211" y="72" width="179" height="48"/>
+                                        <color key="backgroundColor" red="0.85098039219999999" green="0.47058823529999999" blue="0.49803921569999998" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="48" id="0tP-3a-Xfp"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <state key="normal" title="Sort by: Rank">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="8"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="selectSortButtonTapped:" destination="9ST-Ii-Uxr" eventType="touchUpInside" id="sDh-9x-Cr7"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstItem="52z-84-HsM" firstAttribute="leading" secondItem="Tgz-dF-iMX" secondAttribute="leading" constant="24" id="8nr-Ec-Ps7"/>
+                                    <constraint firstItem="U5p-JM-d23" firstAttribute="top" secondItem="vXR-Mg-Yow" secondAttribute="bottom" constant="8" id="FYq-EL-klB"/>
+                                    <constraint firstAttribute="trailing" secondItem="vXR-Mg-Yow" secondAttribute="trailing" constant="24" id="J2J-3C-TfQ"/>
+                                    <constraint firstItem="52z-84-HsM" firstAttribute="top" secondItem="vXR-Mg-Yow" secondAttribute="bottom" constant="8" id="Jwu-7v-Vbh"/>
+                                    <constraint firstAttribute="bottom" secondItem="U5p-JM-d23" secondAttribute="bottom" constant="16" id="Ypz-gJ-gwU"/>
+                                    <constraint firstItem="vXR-Mg-Yow" firstAttribute="leading" secondItem="Tgz-dF-iMX" secondAttribute="leading" constant="24" id="amH-0o-UaX"/>
+                                    <constraint firstAttribute="height" constant="136" id="dWR-QK-RR4"/>
+                                    <constraint firstItem="U5p-JM-d23" firstAttribute="leading" secondItem="Tgz-dF-iMX" secondAttribute="centerX" constant="4" id="g6Y-bn-Sd0"/>
+                                    <constraint firstAttribute="trailing" secondItem="U5p-JM-d23" secondAttribute="trailing" constant="24" id="mhr-Rx-iqM"/>
+                                    <constraint firstItem="vXR-Mg-Yow" firstAttribute="top" secondItem="Tgz-dF-iMX" secondAttribute="top" constant="16" id="tX1-S9-v3e"/>
+                                    <constraint firstAttribute="centerX" secondItem="52z-84-HsM" secondAttribute="trailing" constant="4" id="vlT-lt-KTa"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="rm5-nc-yS4" firstAttribute="trailing" secondItem="Frw-e8-cUG" secondAttribute="trailing" id="1UF-FY-eZR"/>
+                            <constraint firstItem="Frw-e8-cUG" firstAttribute="top" secondItem="Tgz-dF-iMX" secondAttribute="bottom" id="BzM-hA-zdi"/>
+                            <constraint firstItem="Tgz-dF-iMX" firstAttribute="leading" secondItem="rm5-nc-yS4" secondAttribute="leading" id="Cwv-qP-34j"/>
+                            <constraint firstItem="rm5-nc-yS4" firstAttribute="bottom" secondItem="Frw-e8-cUG" secondAttribute="bottom" id="Phh-9P-Hrc"/>
+                            <constraint firstItem="Q3F-81-uel" firstAttribute="trailing" secondItem="rm5-nc-yS4" secondAttribute="trailing" id="RFK-KH-Ep5"/>
+                            <constraint firstItem="rm5-nc-yS4" firstAttribute="trailing" secondItem="Tgz-dF-iMX" secondAttribute="trailing" id="aX9-EM-Udi"/>
+                            <constraint firstItem="Frw-e8-cUG" firstAttribute="leading" secondItem="rm5-nc-yS4" secondAttribute="leading" id="rod-cn-u5N"/>
+                            <constraint firstItem="Q3F-81-uel" firstAttribute="leading" secondItem="rm5-nc-yS4" secondAttribute="leading" id="rqp-Jz-dv5"/>
+                            <constraint firstItem="Q3F-81-uel" firstAttribute="top" secondItem="rm5-nc-yS4" secondAttribute="top" id="tWs-lr-I13"/>
+                            <constraint firstItem="Tgz-dF-iMX" firstAttribute="top" secondItem="Q3F-81-uel" secondAttribute="bottom" id="vHo-fH-K1J"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="rm5-nc-yS4"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Top Ten" id="daj-LS-Gso">
+                    <navigationItem key="navigationItem" title="The Joke Vault" id="daj-LS-Gso">
                         <barButtonItem key="rightBarButtonItem" image="gear" catalog="system" id="b6G-OB-12O">
                             <connections>
                                 <action selector="profileButtonTapped:" destination="9ST-Ii-Uxr" id="H8x-hT-IdL"/>
@@ -192,12 +295,16 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="jokeSearchBar" destination="Q3F-81-uel" id="XMh-Cd-V1g"/>
+                        <outlet property="selectPunchLineButton" destination="vXR-Mg-Yow" id="Ijz-lp-i47"/>
+                        <outlet property="selectSortButton" destination="U5p-JM-d23" id="2Fi-yZ-ODt"/>
+                        <outlet property="selectTimescaleButton" destination="52z-84-HsM" id="5Vb-vT-Nfg"/>
                         <segue destination="27Y-ar-7VW" kind="presentation" identifier="PresentProfileViewController" id="hEg-if-RRo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8QT-H3-H2G" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1659" y="346"/>
+            <point key="canvasLocation" x="1657.9710144927537" y="345.53571428571428"/>
         </scene>
         <!--Profile-->
         <scene sceneID="4JE-f7-vms">
@@ -205,7 +312,15 @@
                 <viewControllerPlaceholder storyboardName="Profile" id="27Y-ar-7VW" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tlw-bU-Gec" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2288" y="346"/>
+            <point key="canvasLocation" x="2206" y="326"/>
+        </scene>
+        <!--JokeList-->
+        <scene sceneID="6kj-SC-Ez1">
+            <objects>
+                <viewControllerPlaceholder storyboardName="JokeList" id="yJ7-XV-Z1h" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PTt-pd-tHZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2207" y="362"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Dm8-ty-q4V">
@@ -218,6 +333,10 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="0.85098039219999999" green="0.47058823529999999" blue="0.49803921569999998" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" type="system" weight="thin" pointSize="20"/>
+                            <color key="textColor" red="0.85098039219999999" green="0.47058823529999999" blue="0.49803921569999998" alpha="1" colorSpace="calibratedRGB"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -227,6 +346,26 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rgp-nn-Vsf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="877" y="346"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="2q8-Cn-a91">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="hN9-1z-TiL" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="" image="pencil.circle" catalog="system" selectedImage="pencil.circle.fill" id="eME-wA-jao"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="jBM-vl-WJh">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="0.85098039219999999" green="0.47058823529999999" blue="0.49803921569999998" alpha="1" colorSpace="calibratedRGB"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="xwB-0G-rPG" kind="relationship" relationship="rootViewController" id="Gmd-vC-wve"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oQG-yS-TWS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="876.81159420289862" y="-339.50892857142856"/>
         </scene>
     </scenes>
     <resources>

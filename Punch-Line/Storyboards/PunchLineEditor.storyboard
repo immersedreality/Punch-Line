@@ -14,7 +14,62 @@
                     <view key="view" contentMode="scaleToFill" id="Lvg-Mi-euM">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bcx-ey-dRK" userLabel="Modal Swipe Indicator">
+                                <rect key="frame" x="187" y="60" width="40" height="6"/>
+                                <color key="backgroundColor" systemColor="systemGray3Color" red="0.78039215689999997" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="6" id="JCV-QZ-QtJ"/>
+                                    <constraint firstAttribute="width" constant="40" id="KPd-f8-IAq"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="3"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name your Punch-Line!" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Elg-yZ-Utk">
+                                <rect key="frame" x="16" y="82" width="382" height="36"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="30"/>
+                                <color key="textColor" red="0.85098039219999999" green="0.47058823529999999" blue="0.49803921569999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9qS-1Y-Aol">
+                                <rect key="frame" x="16" y="134" width="382" height="30.5"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="24"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                            </textField>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yoc-Hk-eDy">
+                                <rect key="frame" x="24" y="766" width="366" height="48"/>
+                                <color key="backgroundColor" red="0.85098039219999999" green="0.47058823529999999" blue="0.49803921569999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="CCe-pm-MZd"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <state key="normal" title="Create">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="9qS-1Y-Aol" firstAttribute="leading" secondItem="WjG-XQ-biV" secondAttribute="leading" constant="16" id="83F-g3-qHZ"/>
+                            <constraint firstItem="Yoc-Hk-eDy" firstAttribute="leading" secondItem="WjG-XQ-biV" secondAttribute="leading" constant="24" id="ACb-aI-fUa"/>
+                            <constraint firstItem="WjG-XQ-biV" firstAttribute="trailing" secondItem="Elg-yZ-Utk" secondAttribute="trailing" constant="16" id="ASA-87-TzS"/>
+                            <constraint firstItem="bcx-ey-dRK" firstAttribute="centerX" secondItem="WjG-XQ-biV" secondAttribute="centerX" id="LGk-DS-zcc"/>
+                            <constraint firstItem="WjG-XQ-biV" firstAttribute="trailing" secondItem="9qS-1Y-Aol" secondAttribute="trailing" constant="16" id="R6H-0c-Voc"/>
+                            <constraint firstItem="bcx-ey-dRK" firstAttribute="top" secondItem="WjG-XQ-biV" secondAttribute="top" constant="16" id="beF-zF-aFd"/>
+                            <constraint firstItem="9qS-1Y-Aol" firstAttribute="top" secondItem="Elg-yZ-Utk" secondAttribute="bottom" constant="16" id="cl0-V5-h0g"/>
+                            <constraint firstItem="WjG-XQ-biV" firstAttribute="bottom" secondItem="Yoc-Hk-eDy" secondAttribute="bottom" constant="48" id="l9m-1S-4N4"/>
+                            <constraint firstItem="Elg-yZ-Utk" firstAttribute="leading" secondItem="WjG-XQ-biV" secondAttribute="leading" constant="16" id="pLW-9b-gAp"/>
+                            <constraint firstItem="Elg-yZ-Utk" firstAttribute="top" secondItem="bcx-ey-dRK" secondAttribute="bottom" constant="16" id="pVh-Va-us7"/>
+                            <constraint firstItem="WjG-XQ-biV" firstAttribute="trailing" secondItem="Yoc-Hk-eDy" secondAttribute="trailing" constant="24" id="rid-pc-eeO"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="WjG-XQ-biV"/>
                     </view>
                 </viewController>

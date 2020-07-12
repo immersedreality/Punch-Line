@@ -9,8 +9,12 @@
 import UIKit
 
 struct CellIdentifiers {
+    static let jokeCell = "JokeCell"
+    static let jokeHistoryCell = "JokeHistoryCell"
     static let newPunchLineCell = "NewPunchLineCell"
+    static let proTipCell = "ProTipCell"
     static let punchLineCell = "PunchLineCell"
+    static let toggleSettingCell = "ToggleSettingCell"
 }
 
 struct FlagActionTitles {
@@ -43,6 +47,12 @@ struct PrimaryKeys {
     static let id = "id"
 }
 
+struct ProfileTitles {
+    static let favoriteJokes = "Favorite Jokes"
+    static let showOffensiveContent = "Show Offensive Content"
+    static let yourSurvivingJokes = "Your Surviving Jokes"
+}
+
 struct RealmSyncConstants {
     static let all = "*"
     static let httpsPrefix = "https://"
@@ -63,6 +73,7 @@ struct RegionDisplayNames {
 }
 
 struct SegueIdentifiers {
+    static let embedJokeListViewControllerInContainerView = "EmbedJokeListViewControllerInContainerView"
     static let presentActivityFeedViewController = "PresentActivityFeedViewController"
     static let presentMainTabBarController = "PresentMainTabBarController"
     static let presentProfileViewController = "PresentProfileViewController"
@@ -79,8 +90,16 @@ struct StoryboardNames {
     static let vote = "Vote"
 }
 
+struct TableViewActionTitles {
+    static let delete = "Delete"
+    static let favorite = "Favorite"
+    static let leave = "Leave"
+    static let remove = "Remove"
+}
+
 struct TableViewSectionTitles {
     static let thePublic = "The Public"
+    static let whatMadeTheCut = "What Made The Cut?"
     static let yourGroups = "Your Groups"
 }
 

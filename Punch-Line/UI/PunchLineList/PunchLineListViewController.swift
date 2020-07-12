@@ -16,6 +16,7 @@ class PunchLineListViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureNavigationBar()
         configurePunchLineListTableView()
     }
 
@@ -27,6 +28,13 @@ class PunchLineListViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         CoreLocationManager.handleLocationServicesAuthorizationStatus(for: self)
+    }
+
+    private func configureNavigationBar() {
+        let imageView = UIImageView(image: #imageLiteral(resourceName: "Icon-NavigationTitle"))
+        imageView.contentMode = .scaleAspectFit
+        imageView.tintColor = .punchlinePink
+        self.navigationItem.titleView = imageView
     }
 
     private func configurePunchLineListTableView() {
@@ -59,5 +67,5 @@ class PunchLineListViewController: UIViewController {
         }
 
     }
-
+    
 }

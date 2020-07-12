@@ -19,7 +19,7 @@
 		B848503C24BB7077006EEE02 /* Setup+TextViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B848503B24BB7077006EEE02 /* Setup+TextViewDelegate.swift */; };
 		B848503E24BB7D70006EEE02 /* ActiviteFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B848503D24BB7D70006EEE02 /* ActiviteFeedViewController.swift */; };
 		B850D8F724B988DB0011077D /* PunchLineList+TableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B850D8F624B988DB0011077D /* PunchLineList+TableViewDelegate.swift */; };
-		B850D8F924B988EC0011077D /* PunchLineList+TableViewDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B850D8F824B988EC0011077D /* PunchLineList+TableViewDatasource.swift */; };
+		B850D8F924B988EC0011077D /* PunchLineList+TableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B850D8F824B988EC0011077D /* PunchLineList+TableViewDataSource.swift */; };
 		B850D8FB24B9897A0011077D /* PunchLineTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B850D8FA24B9897A0011077D /* PunchLineTableViewCell.swift */; };
 		B854589024BA78BD00723E26 /* MatchablePublicPunchLines.swift in Sources */ = {isa = PBXBuildFile; fileRef = B854588F24BA78BD00723E26 /* MatchablePublicPunchLines.swift */; };
 		B854589224BA97F900723E26 /* CoreLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B854589124BA97F900723E26 /* CoreLocationManager.swift */; };
@@ -44,7 +44,7 @@
 		B89F69DF24B6750000472067 /* UsernameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89F69DE24B6750000472067 /* UsernameViewController.swift */; };
 		B89F69E124B6752400472067 /* PunchlineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89F69E024B6752400472067 /* PunchlineViewController.swift */; };
 		B89F69E324B6753600472067 /* SetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89F69E224B6753600472067 /* SetupViewController.swift */; };
-		B89F69E524B6755900472067 /* JokeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89F69E424B6755900472067 /* JokeListViewController.swift */; };
+		B89F69E524B6755900472067 /* JokeLookupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89F69E424B6755900472067 /* JokeLookupViewController.swift */; };
 		B89F69E724B6757000472067 /* JokeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89F69E624B6757000472067 /* JokeDetailViewController.swift */; };
 		B89F69E924B6759A00472067 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B89F69E824B6759A00472067 /* Profile.storyboard */; };
 		B89F69EB24B675AA00472067 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89F69EA24B675AA00472067 /* ProfileViewController.swift */; };
@@ -74,10 +74,17 @@
 		B8D8F8B224BA4F5600BBEBB1 /* FavoriteJoke.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D8F8B124BA4F5600BBEBB1 /* FavoriteJoke.swift */; };
 		B8D8F8B424BA518200BBEBB1 /* AppSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D8F8B324BA518200BBEBB1 /* AppSession.swift */; };
 		B8D8F8B624BA5BAE00BBEBB1 /* RealmSyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D8F8B524BA5BAE00BBEBB1 /* RealmSyncManager.swift */; };
+		B8DDF34D24BB8ECA008E0328 /* ProfileJokeHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DDF34C24BB8ECA008E0328 /* ProfileJokeHistoryTableViewCell.swift */; };
+		B8DDF34F24BB8ED8008E0328 /* ProfileToggleSettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DDF34E24BB8ED8008E0328 /* ProfileToggleSettingTableViewCell.swift */; };
+		B8EA41DA24BBAE2700D52A1B /* JokeList+TableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EA41D924BBAE2700D52A1B /* JokeList+TableViewDelegate.swift */; };
+		B8EA41DC24BBAE3200D52A1B /* JokeList+TableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EA41DB24BBAE3200D52A1B /* JokeList+TableViewDataSource.swift */; };
 		B8EABB8624B8278A00A46443 /* NavigationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EABB8524B8278A00A46443 /* NavigationManager.swift */; };
 		B8EABB8824B8427B00A46443 /* RealmAccessManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EABB8724B8427B00A46443 /* RealmAccessManager.swift */; };
 		B8EABB8A24B8477D00A46443 /* ActivityFeedManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EABB8924B8477D00A46443 /* ActivityFeedManager.swift */; };
 		B8EABB8C24B847D900A46443 /* ActivityContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EABB8B24B847D900A46443 /* ActivityContainerViewController.swift */; };
+		B8F1EF4C24BB9133006E7264 /* Profile+TableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F1EF4B24BB9133006E7264 /* Profile+TableViewDelegate.swift */; };
+		B8F1EF4E24BB9142006E7264 /* Profile+TableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F1EF4D24BB9142006E7264 /* Profile+TableViewDataSource.swift */; };
+		B8F1EF5024BBA731006E7264 /* JokeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F1EF4F24BBA731006E7264 /* JokeListViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -108,7 +115,7 @@
 		B848503B24BB7077006EEE02 /* Setup+TextViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Setup+TextViewDelegate.swift"; sourceTree = "<group>"; };
 		B848503D24BB7D70006EEE02 /* ActiviteFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiviteFeedViewController.swift; sourceTree = "<group>"; };
 		B850D8F624B988DB0011077D /* PunchLineList+TableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PunchLineList+TableViewDelegate.swift"; sourceTree = "<group>"; };
-		B850D8F824B988EC0011077D /* PunchLineList+TableViewDatasource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PunchLineList+TableViewDatasource.swift"; sourceTree = "<group>"; };
+		B850D8F824B988EC0011077D /* PunchLineList+TableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PunchLineList+TableViewDataSource.swift"; sourceTree = "<group>"; };
 		B850D8FA24B9897A0011077D /* PunchLineTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PunchLineTableViewCell.swift; sourceTree = "<group>"; };
 		B854588F24BA78BD00723E26 /* MatchablePublicPunchLines.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchablePublicPunchLines.swift; sourceTree = "<group>"; };
 		B854589124BA97F900723E26 /* CoreLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreLocationManager.swift; sourceTree = "<group>"; };
@@ -135,7 +142,7 @@
 		B89F69DE24B6750000472067 /* UsernameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsernameViewController.swift; sourceTree = "<group>"; };
 		B89F69E024B6752400472067 /* PunchlineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PunchlineViewController.swift; sourceTree = "<group>"; };
 		B89F69E224B6753600472067 /* SetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupViewController.swift; sourceTree = "<group>"; };
-		B89F69E424B6755900472067 /* JokeListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JokeListViewController.swift; sourceTree = "<group>"; };
+		B89F69E424B6755900472067 /* JokeLookupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JokeLookupViewController.swift; sourceTree = "<group>"; };
 		B89F69E624B6757000472067 /* JokeDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JokeDetailViewController.swift; sourceTree = "<group>"; };
 		B89F69E824B6759A00472067 /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		B89F69EA24B675AA00472067 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -163,10 +170,17 @@
 		B8D8F8B124BA4F5600BBEBB1 /* FavoriteJoke.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteJoke.swift; sourceTree = "<group>"; };
 		B8D8F8B324BA518200BBEBB1 /* AppSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSession.swift; sourceTree = "<group>"; };
 		B8D8F8B524BA5BAE00BBEBB1 /* RealmSyncManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmSyncManager.swift; sourceTree = "<group>"; };
+		B8DDF34C24BB8ECA008E0328 /* ProfileJokeHistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileJokeHistoryTableViewCell.swift; sourceTree = "<group>"; };
+		B8DDF34E24BB8ED8008E0328 /* ProfileToggleSettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileToggleSettingTableViewCell.swift; sourceTree = "<group>"; };
+		B8EA41D924BBAE2700D52A1B /* JokeList+TableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JokeList+TableViewDelegate.swift"; sourceTree = "<group>"; };
+		B8EA41DB24BBAE3200D52A1B /* JokeList+TableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JokeList+TableViewDataSource.swift"; sourceTree = "<group>"; };
 		B8EABB8524B8278A00A46443 /* NavigationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationManager.swift; sourceTree = "<group>"; };
 		B8EABB8724B8427B00A46443 /* RealmAccessManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmAccessManager.swift; sourceTree = "<group>"; };
 		B8EABB8924B8477D00A46443 /* ActivityFeedManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityFeedManager.swift; sourceTree = "<group>"; };
 		B8EABB8B24B847D900A46443 /* ActivityContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityContainerViewController.swift; sourceTree = "<group>"; };
+		B8F1EF4B24BB9133006E7264 /* Profile+TableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Profile+TableViewDelegate.swift"; sourceTree = "<group>"; };
+		B8F1EF4D24BB9142006E7264 /* Profile+TableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Profile+TableViewDataSource.swift"; sourceTree = "<group>"; };
+		B8F1EF4F24BBA731006E7264 /* JokeListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JokeListViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -234,32 +248,13 @@
 			path = Login;
 			sourceTree = "<group>";
 		};
-		B848504024BB7DCB006EEE02 /* Main */ = {
-			isa = PBXGroup;
-			children = (
-				B850D8F524B988C30011077D /* PunchLineList */,
-				B89F69ED24B675DA00472067 /* MainTabBarController.swift */,
-			);
-			path = Main;
-			sourceTree = "<group>";
-		};
-		B848504124BB7E38006EEE02 /* History */ = {
-			isa = PBXGroup;
-			children = (
-				B89F69F924B68D2800472067 /* JokeList */,
-				B89F69EA24B675AA00472067 /* ProfileViewController.swift */,
-				B89F69E624B6757000472067 /* JokeDetailViewController.swift */,
-			);
-			path = History;
-			sourceTree = "<group>";
-		};
 		B850D8F524B988C30011077D /* PunchLineList */ = {
 			isa = PBXGroup;
 			children = (
 				B854589524BAA6D400723E26 /* PunchLineList+CLLocationManagerDelegate.swift */,
 				B8A58FF024B982360007B744 /* PunchLineListViewController.swift */,
 				B850D8F624B988DB0011077D /* PunchLineList+TableViewDelegate.swift */,
-				B850D8F824B988EC0011077D /* PunchLineList+TableViewDatasource.swift */,
+				B850D8F824B988EC0011077D /* PunchLineList+TableViewDataSource.swift */,
 				B850D8FA24B9897A0011077D /* PunchLineTableViewCell.swift */,
 				B8CDC12F24B9904D000C8B64 /* NewPunchLineTableViewCell.swift */,
 				B866553924BABEA900DD694F /* PunchLineListViewModel.swift */,
@@ -313,19 +308,19 @@
 		B89F69CB24B666A900472067 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
+				B8A58FF424B983AA0007B744 /* Activity.storyboard */,
 				B89F69FE24B7ED0800472067 /* GetStarted.storyboard */,
+				B89F69DA24B66A7E00472067 /* JokeDetail.storyboard */,
 				B89F69D824B6694900472067 /* JokeList.storyboard */,
 				B89F69C224B6663A00472067 /* LaunchScreen.storyboard */,
 				B89F69BD24B6663800472067 /* Main.storyboard */,
 				B89F6A0624B803A900472067 /* Password.storyboard */,
 				B89F69E824B6759A00472067 /* Profile.storyboard */,
 				B89F69D424B6687100472067 /* Punchline.storyboard */,
+				B848503224BB66B3006EEE02 /* PunchLineEditor.storyboard */,
 				B89F69D224B6682E00472067 /* Setup.storyboard */,
-				B89F69DA24B66A7E00472067 /* JokeDetail.storyboard */,
 				B89F69CC24B666D500472067 /* Username.storyboard */,
 				B89F69D624B668A800472067 /* Vote.storyboard */,
-				B8A58FF424B983AA0007B744 /* Activity.storyboard */,
-				B848503224BB66B3006EEE02 /* PunchLineEditor.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -333,10 +328,14 @@
 		B89F69CE24B666E000472067 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				B8EA41D824BBAE1400D52A1B /* JokeList */,
 				B848503624BB68A6006EEE02 /* Activity */,
-				B848504124BB7E38006EEE02 /* History */,
+				B89F69E624B6757000472067 /* JokeDetailViewController.swift */,
+				B89F69E424B6755900472067 /* JokeLookupViewController.swift */,
 				B848503F24BB7DA6006EEE02 /* Login */,
-				B848504024BB7DCB006EEE02 /* Main */,
+				B89F69ED24B675DA00472067 /* MainTabBarController.swift */,
+				B8DDF34B24BB8E38008E0328 /* Profile */,
+				B850D8F524B988C30011077D /* PunchLineList */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -375,14 +374,6 @@
 				B8CDC13524BA3227000C8B64 /* PunchLine */,
 			);
 			path = Models;
-			sourceTree = "<group>";
-		};
-		B89F69F924B68D2800472067 /* JokeList */ = {
-			isa = PBXGroup;
-			children = (
-				B89F69E424B6755900472067 /* JokeListViewController.swift */,
-			);
-			path = JokeList;
 			sourceTree = "<group>";
 		};
 		B89F6A0824B805E500472067 /* Username */ = {
@@ -441,6 +432,28 @@
 				B808CC3924B948E200B39432 /* Setup.swift */,
 			);
 			path = Joke;
+			sourceTree = "<group>";
+		};
+		B8DDF34B24BB8E38008E0328 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				B89F69EA24B675AA00472067 /* ProfileViewController.swift */,
+				B8DDF34C24BB8ECA008E0328 /* ProfileJokeHistoryTableViewCell.swift */,
+				B8DDF34E24BB8ED8008E0328 /* ProfileToggleSettingTableViewCell.swift */,
+				B8F1EF4B24BB9133006E7264 /* Profile+TableViewDelegate.swift */,
+				B8F1EF4D24BB9142006E7264 /* Profile+TableViewDataSource.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		B8EA41D824BBAE1400D52A1B /* JokeList */ = {
+			isa = PBXGroup;
+			children = (
+				B8F1EF4F24BBA731006E7264 /* JokeListViewController.swift */,
+				B8EA41D924BBAE2700D52A1B /* JokeList+TableViewDelegate.swift */,
+				B8EA41DB24BBAE3200D52A1B /* JokeList+TableViewDataSource.swift */,
+			);
+			path = JokeList;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -543,7 +556,8 @@
 				B8D8F8B424BA518200BBEBB1 /* AppSession.swift in Sources */,
 				B8EABB8C24B847D900A46443 /* ActivityContainerViewController.swift in Sources */,
 				B854589424BAA12C00723E26 /* String+RemovingSpaces.swift in Sources */,
-				B850D8F924B988EC0011077D /* PunchLineList+TableViewDatasource.swift in Sources */,
+				B8F1EF5024BBA731006E7264 /* JokeListViewController.swift in Sources */,
+				B850D8F924B988EC0011077D /* PunchLineList+TableViewDataSource.swift in Sources */,
 				B848503824BB691C006EEE02 /* ActivityFeedViewModel.swift in Sources */,
 				B848503E24BB7D70006EEE02 /* ActiviteFeedViewController.swift in Sources */,
 				B89CF24324B8E6DD0009A8CB /* UIActivityIndicatorView+Animations.swift in Sources */,
@@ -555,6 +569,7 @@
 				B850D8F724B988DB0011077D /* PunchLineList+TableViewDelegate.swift in Sources */,
 				B8A58FF824B986C90007B744 /* CustomPunchLine.swift in Sources */,
 				B89F6A0124B7ED1C00472067 /* GetStartedViewController.swift in Sources */,
+				B8F1EF4C24BB9133006E7264 /* Profile+TableViewDelegate.swift in Sources */,
 				B8CDC13024B9904D000C8B64 /* NewPunchLineTableViewCell.swift in Sources */,
 				B8CDC13924BA34F4000C8B64 /* PunchLineSyncManager.swift in Sources */,
 				B89F69E124B6752400472067 /* PunchlineViewController.swift in Sources */,
@@ -564,20 +579,25 @@
 				B89F69EE24B675DA00472067 /* MainTabBarController.swift in Sources */,
 				B808CC4124B9583F00B39432 /* Punchline+ActivityFeedViewController.swift in Sources */,
 				B89F69F824B68BFB00472067 /* PasswordViewController.swift in Sources */,
+				B8F1EF4E24BB9142006E7264 /* Profile+TableViewDataSource.swift in Sources */,
+				B8EA41DA24BBAE2700D52A1B /* JokeList+TableViewDelegate.swift in Sources */,
 				B89F69DD24B674D600472067 /* VoteViewController.swift in Sources */,
 				B8CDC13224BA283E000C8B64 /* UIColor+CustomColors.swift in Sources */,
 				B89F69E724B6757000472067 /* JokeDetailViewController.swift in Sources */,
 				B808CC3824B912EB00B39432 /* Joke.swift in Sources */,
 				B89F69DF24B6750000472067 /* UsernameViewController.swift in Sources */,
+				B8EA41DC24BBAE3200D52A1B /* JokeList+TableViewDataSource.swift in Sources */,
+				B8DDF34F24BB8ED8008E0328 /* ProfileToggleSettingTableViewCell.swift in Sources */,
 				B848503C24BB7077006EEE02 /* Setup+TextViewDelegate.swift in Sources */,
 				B89F69FD24B7EA9F00472067 /* Constants.swift in Sources */,
 				B8EABB8824B8427B00A46443 /* RealmAccessManager.swift in Sources */,
 				B866553A24BABEA900DD694F /* PunchLineListViewModel.swift in Sources */,
 				B89F6A1524B80CE500472067 /* UserAuthorizationManager.swift in Sources */,
 				B8A58FF124B982360007B744 /* PunchLineListViewController.swift in Sources */,
-				B89F69E524B6755900472067 /* JokeListViewController.swift in Sources */,
+				B89F69E524B6755900472067 /* JokeLookupViewController.swift in Sources */,
 				B89F69E324B6753600472067 /* SetupViewController.swift in Sources */,
 				B8CDC13424BA3224000C8B64 /* PublicPunchLine.swift in Sources */,
+				B8DDF34D24BB8ECA008E0328 /* ProfileJokeHistoryTableViewCell.swift in Sources */,
 				B854589024BA78BD00723E26 /* MatchablePublicPunchLines.swift in Sources */,
 				B89F6A0D24B8063D00472067 /* Username+UITextFieldDelegate.swift in Sources */,
 				B89F69EB24B675AA00472067 /* ProfileViewController.swift in Sources */,
