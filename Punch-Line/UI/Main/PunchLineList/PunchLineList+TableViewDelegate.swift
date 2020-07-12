@@ -32,4 +32,23 @@ extension PunchLineListViewController: UITableViewDelegate {
         headerView.textLabel?.textColor = .punchlinePink
     }
 
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
+        switch indexPath.section {
+        case 0:
+            viewModel.selectedPunchLineLauncher = viewModel.publicPunchLineLaunchers[indexPath.row]
+            performSegue(withIdentifier: SegueIdentifiers.presentActivityFeedViewController, sender: self)
+        case 1:
+            if indexPath.row == viewModel.customPunchLineLaunchers.count {
+                performSegue(withIdentifier: SegueIdentifiers.presentPunchLineEditorViewController, sender: self)
+            } else {
+                viewModel.selectedPunchLineLauncher = viewModel.customPunchLineLaunchers[indexPath.row]
+                performSegue(withIdentifier: SegueIdentifiers.presentActivityFeedViewController, sender: self)
+            }
+        default:
+            return
+        }
+        
+    }
+
 }

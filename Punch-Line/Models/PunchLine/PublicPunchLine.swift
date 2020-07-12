@@ -33,7 +33,7 @@ class PublicPunchLine: Object, PunchLine {
     }
 
     func getScope() -> PublicScope {
-        return PublicScope(rawValue: scope) ?? .major
+        return PublicScope(rawValue: scope) ?? .country
     }
 
     override class func primaryKey() -> String? {
@@ -50,5 +50,17 @@ class PublicPunchLine: Object, PunchLine {
 }
 
 enum PublicScope: Int {
-    case major, mid, local
+    case country, stateOrProvince, city
+
+    var displayName: String {
+        switch self {
+        case .country:
+            return RegionDisplayNames.country
+        case .stateOrProvince:
+            return RegionDisplayNames.stateOrProvince
+        case .city:
+            return RegionDisplayNames.city
+        }
+    }
+
 }

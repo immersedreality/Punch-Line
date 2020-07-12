@@ -12,7 +12,7 @@ class PunchLineListViewController: UIViewController {
 
     @IBOutlet weak var punchLineListTableView: UITableView!
 
-    let viewModel = PunchLineListViewModel()
+    var viewModel = PunchLineListViewModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,11 +35,29 @@ class PunchLineListViewController: UIViewController {
     }
 
     private func reloadTableView() {
+        viewModel = PunchLineListViewModel()
         punchLineListTableView.reloadData()
     }
 
     func reloadTableViewWithAnimation() {
+        viewModel = PunchLineListViewModel()
         punchLineListTableView.reloadSections([0, 1], with: .fade)
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+
+        switch segue.identifier {
+        case SegueIdentifiers.presentActivityFeedViewController:
+            guard let activityContainerViewController = segue.destination as? ActivityContainerViewController else { return }
+            guard let punchLineToLaunch = viewModel.generatePunchLineToLaunch() else { return }
+            let activityFeedViewModel = ActivityFeedViewModel(punchLine: punchLineToLaunch)
+            activityContainerViewController.viewModel = activityFeedViewModel
+        case SegueIdentifiers.presentPunchLineEditorViewController:
+            return
+        default:
+            return
+        }
+
     }
 
 }

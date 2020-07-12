@@ -17,18 +17,18 @@ final class PunchLineSyncManager {
 
         var publicPunchLinesForNewCloudInstance: [PublicPunchLine] = []
 
-        for punchLineName in PublicPunchLineNames.MajorRegions.regionNamesForNewCloudInstance {
-            let publicPunchLine = generatePublicPunchLine(with: punchLineName, scope: .major)
+        for punchLineName in MatchablePublicPunchLines.MajorRegions.regionNamesForNewCloudInstance {
+            let publicPunchLine = generatePublicPunchLine(with: punchLineName, scope: .country)
             publicPunchLinesForNewCloudInstance.append(publicPunchLine)
         }
 
-        for punchLineName in PublicPunchLineNames.MidSizedRegions.regionNamesForNewCloudInstance {
-            let publicPunchLine = generatePublicPunchLine(with: punchLineName, scope: .mid)
+        for punchLineName in MatchablePublicPunchLines.StatesAndProvinces.regionNamesForNewCloudInstance {
+            let publicPunchLine = generatePublicPunchLine(with: punchLineName, scope: .stateOrProvince)
             publicPunchLinesForNewCloudInstance.append(publicPunchLine)
         }
 
-        for punchLineName in PublicPunchLineNames.LocalRegions.regionNamesForNewCloudInstance {
-            let publicPunchLine = generatePublicPunchLine(with: punchLineName, scope: .local)
+        for punchLineName in MatchablePublicPunchLines.Cities.regionNamesForNewCloudInstance {
+            let publicPunchLine = generatePublicPunchLine(with: punchLineName, scope: .city)
             publicPunchLinesForNewCloudInstance.append(publicPunchLine)
         }
 
@@ -75,7 +75,7 @@ final class PunchLineSyncManager {
     class func matchPublicPunchLineNames(to locationMap: PublicPunchLineLocationMap, completion: @escaping (Bool) -> Void) {
         var matchedPublicPunchLineNames: [String] = []
 
-        if let matchedMidSizeRegionName = PublicPunchLineNames.MidSizedRegions.regionNamesForNewCloudInstance
+        if let matchedMidSizeRegionName = MatchablePublicPunchLines.StatesAndProvinces.regionNamesForNewCloudInstance
             .first(where: { (regionName) -> Bool in
                 guard let midSizeRegionName = locationMap.administrativeArea else { return false }
                 return regionName == midSizeRegionName
@@ -83,7 +83,7 @@ final class PunchLineSyncManager {
             matchedPublicPunchLineNames.append(matchedMidSizeRegionName)
         }
 
-        if let matchedLocalRegionName = PublicPunchLineNames.LocalRegions.regionNamesForNewCloudInstance
+        if let matchedLocalRegionName = MatchablePublicPunchLines.Cities.regionNamesForNewCloudInstance
             .first(where: { (regionName) -> Bool in
                 guard let localRegionName = locationMap.locality else { return false }
                 return regionName == localRegionName
@@ -104,7 +104,7 @@ final class PunchLineSyncManager {
         RealmSyncManager.sync(withRealmsAt: matchedRealmAccessPaths) {
             completion(true)
         }
-
+        
     }
 
 }

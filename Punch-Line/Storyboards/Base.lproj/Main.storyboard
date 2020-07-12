@@ -61,12 +61,21 @@
                                                             <color key="textColor" red="0.85098039219999999" green="0.47058823529999999" blue="0.49803921569999998" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GMO-qU-9Bv">
+                                                            <rect key="frame" x="191" y="136" width="183" height="0.0"/>
+                                                            <fontDescription key="fontDescription" type="system" weight="thin" pointSize="12"/>
+                                                            <color key="textColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
                                                     </subviews>
                                                     <color key="backgroundColor" systemColor="systemGray6Color" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="centerY" secondItem="OZq-6P-f62" secondAttribute="bottom" id="0un-3L-12g"/>
+                                                        <constraint firstAttribute="trailing" secondItem="GMO-qU-9Bv" secondAttribute="trailing" constant="8" id="JEo-hk-msF"/>
                                                         <constraint firstItem="OZq-6P-f62" firstAttribute="centerX" secondItem="YCK-2F-gcZ" secondAttribute="centerX" id="Mgj-ch-feu"/>
                                                         <constraint firstItem="f3P-tp-veY" firstAttribute="top" secondItem="OZq-6P-f62" secondAttribute="bottom" id="mz3-wT-BIY"/>
+                                                        <constraint firstItem="GMO-qU-9Bv" firstAttribute="leading" secondItem="YCK-2F-gcZ" secondAttribute="centerX" id="prZ-OJ-yPz"/>
+                                                        <constraint firstAttribute="bottom" secondItem="GMO-qU-9Bv" secondAttribute="bottom" constant="8" id="xn0-dk-DOy"/>
                                                         <constraint firstItem="f3P-tp-veY" firstAttribute="centerX" secondItem="YCK-2F-gcZ" secondAttribute="centerX" id="zBO-xe-BD2"/>
                                                     </constraints>
                                                     <userDefinedRuntimeAttributes>
@@ -88,6 +97,7 @@
                                         <connections>
                                             <outlet property="contentContainerView" destination="YCK-2F-gcZ" id="bof-IB-qPf"/>
                                             <outlet property="punchLineTitleLabel" destination="OZq-6P-f62" id="dAO-DF-sUv"/>
+                                            <outlet property="regionSizeLabel" destination="GMO-qU-9Bv" id="yX4-qx-3xF"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="NewPunchLineCell" id="WYN-xf-Asc" customClass="NewPunchLineTableViewCell" customModule="Punch_Line" customModuleProvider="target">
@@ -140,11 +150,29 @@
                     <tabBarItem key="tabBarItem" title="Item" image="pencil.circle" catalog="system" selectedImage="pencil.circle.fill" id="eME-wA-jao"/>
                     <connections>
                         <outlet property="punchLineListTableView" destination="5Bo-56-TP1" id="HOZ-9k-QHb"/>
+                        <segue destination="Xwt-4V-HkN" kind="presentation" identifier="PresentActivityFeedViewController" id="mdT-q9-vlf"/>
+                        <segue destination="BbB-vh-hkd" kind="presentation" identifier="PresentPunchLineEditorViewController" id="ocG-OF-mUy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qfm-Wp-nNG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="877" y="-339"/>
+        </scene>
+        <!--Activity-->
+        <scene sceneID="KEc-Hb-zr9">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Activity" id="Xwt-4V-HkN" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9n7-YH-oXe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1463" y="-368"/>
+        </scene>
+        <!--PunchLineEditor-->
+        <scene sceneID="q5C-VL-8Z5">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="PresentPunchLineEditorViewController" storyboardName="PunchLineEditor" id="BbB-vh-hkd" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fJL-SC-Zal" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1501" y="-315"/>
         </scene>
         <!--Top Ten-->
         <scene sceneID="yCN-qN-vVT">

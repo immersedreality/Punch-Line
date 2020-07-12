@@ -15,28 +15,91 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0al-hr-gj7" userLabel="Modal Swipe Indicator">
+                                <rect key="frame" x="187" y="56" width="40" height="6"/>
+                                <color key="backgroundColor" systemColor="systemGray3Color" red="0.78039215689999997" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="Hkc-sI-stW"/>
+                                    <constraint firstAttribute="height" constant="6" id="eNd-Bs-U3e"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="3"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Start a joke with a funny setup!" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HoC-XR-TWT">
-                                <rect key="frame" x="16" y="60" width="382" height="72"/>
+                                <rect key="frame" x="16" y="78" width="382" height="72"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="30"/>
                                 <color key="textColor" red="0.85098039219999999" green="0.47058823529999999" blue="0.49803921569999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="i86-Uf-mes">
+                                <rect key="frame" x="16" y="166" width="382" height="35.5"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="16"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Remember: setups must end with either a question mark (?) or an ellipsis (...)" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Or6-o8-BrB">
+                                <rect key="frame" x="16" y="273.5" width="382" height="38.5"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="16"/>
+                                <color key="textColor" red="0.85098039219999999" green="0.47058823529999999" blue="0.49803921569999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DH3-id-hva">
+                                <rect key="frame" x="24" y="217.5" width="366" height="48"/>
+                                <color key="backgroundColor" red="0.85098039219999999" green="0.47058823529999999" blue="0.49803921569999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="ouP-Zw-Phx"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <state key="normal" title="Submit Setup">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="submitSetupButtonTapped:" destination="5Ko-1d-th1" eventType="touchUpInside" id="ryt-rF-UyR"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="HoC-XR-TWT" firstAttribute="top" secondItem="nmC-Ap-qNR" secondAttribute="top" constant="16" id="Mgb-LH-yyh"/>
+                            <constraint firstItem="nmC-Ap-qNR" firstAttribute="trailing" secondItem="DH3-id-hva" secondAttribute="trailing" constant="24" id="0Ky-7q-PhW"/>
+                            <constraint firstItem="DH3-id-hva" firstAttribute="top" secondItem="i86-Uf-mes" secondAttribute="bottom" constant="16" id="2Aw-oM-dBe"/>
+                            <constraint firstItem="nmC-Ap-qNR" firstAttribute="trailing" secondItem="i86-Uf-mes" secondAttribute="trailing" constant="16" id="35G-Fn-yVd"/>
+                            <constraint firstItem="HoC-XR-TWT" firstAttribute="top" secondItem="0al-hr-gj7" secondAttribute="bottom" constant="16" id="CJg-U3-exa"/>
+                            <constraint firstItem="DH3-id-hva" firstAttribute="leading" secondItem="nmC-Ap-qNR" secondAttribute="leading" constant="24" id="Jpo-Ya-H5f"/>
                             <constraint firstItem="nmC-Ap-qNR" firstAttribute="trailing" secondItem="HoC-XR-TWT" secondAttribute="trailing" constant="16" id="UWM-8G-aIV"/>
+                            <constraint firstItem="i86-Uf-mes" firstAttribute="top" secondItem="HoC-XR-TWT" secondAttribute="bottom" constant="16" id="bRc-IH-Mva"/>
+                            <constraint firstItem="Or6-o8-BrB" firstAttribute="leading" secondItem="HoC-XR-TWT" secondAttribute="leading" id="eMV-CF-w5L"/>
+                            <constraint firstItem="i86-Uf-mes" firstAttribute="leading" secondItem="nmC-Ap-qNR" secondAttribute="leading" constant="16" id="ebQ-L0-wLg"/>
+                            <constraint firstItem="Or6-o8-BrB" firstAttribute="top" secondItem="DH3-id-hva" secondAttribute="bottom" constant="8" id="gRl-gV-5EQ"/>
+                            <constraint firstItem="0al-hr-gj7" firstAttribute="centerX" secondItem="nmC-Ap-qNR" secondAttribute="centerX" id="h9v-cb-pAP"/>
                             <constraint firstItem="HoC-XR-TWT" firstAttribute="leading" secondItem="nmC-Ap-qNR" secondAttribute="leading" constant="16" id="o6g-e1-Sml"/>
+                            <constraint firstItem="nmC-Ap-qNR" firstAttribute="trailing" secondItem="Or6-o8-BrB" secondAttribute="trailing" constant="16" id="uVy-4Y-mFz"/>
+                            <constraint firstItem="0al-hr-gj7" firstAttribute="top" secondItem="nmC-Ap-qNR" secondAttribute="top" constant="12" id="yIa-kR-aaj"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="nmC-Ap-qNR"/>
                     </view>
                     <connections>
+                        <outlet property="reminderLabel" destination="Or6-o8-BrB" id="bo1-8B-1nd"/>
+                        <outlet property="setupTextView" destination="i86-Uf-mes" id="XfP-oI-0cV"/>
                         <outlet property="startAJokeLabel" destination="HoC-XR-TWT" id="7fW-ec-sGF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xg3-to-bge" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="77" y="173"/>
+            <point key="canvasLocation" x="76.811594202898561" y="172.76785714285714"/>
         </scene>
     </scenes>
 </document>

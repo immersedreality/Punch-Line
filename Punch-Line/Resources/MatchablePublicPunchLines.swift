@@ -1,5 +1,5 @@
 //
-//  PublicPunchLinePaths.swift
+//  MatchablePublicPunchLines.swift
 //  Punch-Line
 //
 //  Created by Jeffrey Eugene Hoch on 7/11/20.
@@ -8,85 +8,86 @@
 
 import Foundation
 
-struct PublicPunchLineNames {
+struct MatchablePublicPunchLines {
 
     struct MajorRegions {
 
         static let regionNamesForNewCloudInstance = [usAndCanada]
 
         static let usAndCanada = "US And Canada"
+        
     }
 
-    struct MidSizedRegions {
+    struct StatesAndProvinces {
 
         static let regionNamesForNewCloudInstance = [newYork]
 
         //Canada
-        static let alberta = "Alberta"
-        static let britishColumbia = "British Columbia"
-        static let manitoba = "Manitoba"
-        static let newBrunswick = "New Brunswick"
-        static let newFoundlandAndLabrador = "NewFoundland And Labrador"
-        static let novaScotia = "Nova Scotia"
-        static let ontario = "Ontario"
-        static let princeEdwardIsland = "Prince Edward Island"
-        static let quebec = "Quebec"
-        static let saskatchewan = "Saskatchewan"
+        static let alberta = "AB"
+        static let britishColumbia = "BC"
+        static let manitoba = "MB"
+        static let newBrunswick = "NB"
+        static let newFoundlandAndLabrador = "NL"
+        static let novaScotia = "NS"
+        static let ontario = "ON"
+        static let princeEdwardIsland = "PE"
+        static let quebec = "QC"
+        static let saskatchewan = "SK"
 
         //United States
-        static let alabama = "Alabama"
-        static let alaska = "Alaska"
-        static let arizona = "Arizona"
-        static let arkansas = "Arkansas"
-        static let california = "California"
-        static let colorado = "Colorado"
-        static let connecticut = "Connecticut"
-        static let delaware = "Delaware"
-        static let florida = "Florida"
-        static let georgia = "Georgia"
-        static let hawaii = "Hawaii"
-        static let idaho = "Idaho"
-        static let illinois = "Illinois"
-        static let indiana = "Indiana"
-        static let iowa = "Iowa"
-        static let kansas = "Kansas"
-        static let kentucky = "Kentucky"
-        static let louisiana = "Louisiana"
-        static let maine = "Maine"
-        static let maryland = "Maryland"
-        static let massachusetts = "Massachusetts"
-        static let michigan = "Michigan"
-        static let minnesota = "Minnesota"
-        static let mississippi = "Mississippi"
-        static let missouri = "Missouri"
-        static let montana = "Montana"
-        static let nebraska = "Nebraska"
-        static let nevada = "Nevada"
-        static let newHampsire = "New Hampshire"
-        static let newJersey = "New Jersey"
-        static let newMexico = "New Mexico"
+        static let alabama = "AL"
+        static let alaska = "AK"
+        static let arizona = "AZ"
+        static let arkansas = "AR"
+        static let california = "CA"
+        static let colorado = "CO"
+        static let connecticut = "CT"
+        static let delaware = "DE"
+        static let florida = "FL"
+        static let georgia = "GA"
+        static let hawaii = "HI"
+        static let idaho = "ID"
+        static let illinois = "IL"
+        static let indiana = "IN"
+        static let iowa = "IA"
+        static let kansas = "KS"
+        static let kentucky = "KY"
+        static let louisiana = "LA"
+        static let maine = "ME"
+        static let maryland = "MD"
+        static let massachusetts = "MA"
+        static let michigan = "MI"
+        static let minnesota = "MN"
+        static let mississippi = "MS"
+        static let missouri = "MO"
+        static let montana = "MT"
+        static let nebraska = "NE"
+        static let nevada = "NV"
+        static let newHampsire = "NH"
+        static let newJersey = "NJ"
+        static let newMexico = "NM"
         static let newYork = "NY"
-        static let northCarolina = "North Carolina"
-        static let northDakota = "North Dakota"
-        static let ohio = "Ohio"
-        static let oklahoma = "Oklahoma"
-        static let oregon = "Oregon"
-        static let pennsylvania = "Pennsylvania"
-        static let rhodeIsland = "Rhode Island"
-        static let southCarolina = "South Carolina"
-        static let southDakota = "SouthDakota"
-        static let tennessee = "Tennessee"
-        static let texas = "Texas"
-        static let utah = "Utah"
-        static let vermont = "Vermont"
-        static let virginia = "Virginia"
-        static let washington = "Washington"
-        static let westVirginia = "West Virginia"
-        static let wisconsin = "Wisconsin"
-        static let wyoming = "Wyoming"
+        static let northCarolina = "NC"
+        static let northDakota = "ND"
+        static let ohio = "OH"
+        static let oklahoma = "OK"
+        static let oregon = "OR"
+        static let pennsylvania = "PA"
+        static let rhodeIsland = "RI"
+        static let southCarolina = "SC"
+        static let southDakota = "SD"
+        static let tennessee = "TN"
+        static let texas = "TX"
+        static let utah = "UT"
+        static let vermont = "VT"
+        static let virginia = "VA"
+        static let washington = "WA"
+        static let westVirginia = "WV"
+        static let wisconsin = "WI"
+        static let wyoming = "WY"
     }
 
-    struct LocalRegions {
+    struct Cities {
 
         static let regionNamesForNewCloudInstance = [newYork]
 

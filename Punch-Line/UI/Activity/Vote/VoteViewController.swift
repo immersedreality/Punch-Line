@@ -9,5 +9,10 @@
 import UIKit
 
 class VoteViewController: UIViewController {
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        configureBackgroundColor()
+    }
     
 }

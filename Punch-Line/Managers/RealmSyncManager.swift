@@ -52,7 +52,7 @@ final class RealmSyncManager {
         if regionCode == RegionCodes.unitedStates || regionCode == RegionCodes.canada {
 
             allRealmsSyncedSuccessfully = false
-            let publicRegionPath = "/" + PublicPunchLineNames.MajorRegions.usAndCanada.removingSpaces()
+            let publicRegionPath = "/" + MatchablePublicPunchLines.MajorRegions.usAndCanada.removingSpaces()
 
             realmSyncDispatchGroup.enter()
             initialSync(withRealmAt: publicRegionPath) { (realmSyncedSuccessfully) in

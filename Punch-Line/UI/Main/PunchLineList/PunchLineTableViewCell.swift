@@ -12,6 +12,7 @@ class PunchLineTableViewCell: UITableViewCell {
 
     @IBOutlet weak var contentContainerView: UIView!
     @IBOutlet weak var punchLineTitleLabel: UILabel!
+    @IBOutlet weak var regionSizeLabel: UILabel!
 
     var punchLineLauncher: PunchLineLauncher! {
         didSet {
@@ -22,6 +23,9 @@ class PunchLineTableViewCell: UITableViewCell {
     private func configure() {
         contentContainerView.backgroundColor = StyleManager.generateRandomBackgroundColor()
         punchLineTitleLabel.text = punchLineLauncher.name
+        if let regionSizeDisplayName = punchLineLauncher.getPublicScope()?.displayName {
+            regionSizeLabel.text = regionSizeDisplayName
+        }
     }
-
+    
 }

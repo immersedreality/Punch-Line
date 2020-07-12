@@ -42,6 +42,3 @@ final class ActivityFeedManager {
     }
     
 }
-
-protocol ActivityFeedViewController: UIViewController {
-}

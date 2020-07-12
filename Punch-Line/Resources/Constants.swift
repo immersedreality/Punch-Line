@@ -49,9 +49,17 @@ struct RegionCodes {
     static let unitedStates = "US"
 }
 
+struct RegionDisplayNames {
+    static let country = "Country"
+    static let stateOrProvince = "State/Province"
+    static let city = "City"
+}
+
 struct SegueIdentifiers {
+    static let presentActivityFeedViewController = "PresentActivityFeedViewController"
     static let presentMainTabBarController = "PresentMainTabBarController"
     static let presentProfileViewController = "PresentProfileViewController"
+    static let presentPunchLineEditorViewController = "PresentPunchLineEditorViewController"
     static let showActivityContainerViewController = "ShowActivityContainerViewController"
     static let showPasswordViewController = "ShowPasswordViewController"
     static let showUsernameViewController = "ShowUsernameViewController"

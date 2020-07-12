@@ -12,6 +12,8 @@ class ActivityContainerViewController: UIViewController {
     
     @IBOutlet weak var activityContainerView: UIView!
 
+    var viewModel: ActivityFeedViewModel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureChildViewController()

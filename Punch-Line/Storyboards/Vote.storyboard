@@ -14,7 +14,26 @@
                     <view key="view" contentMode="scaleToFill" id="8HG-8g-IMA">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Rc-uo-NW7" userLabel="Modal Swipe Indicator">
+                                <rect key="frame" x="187" y="56" width="40" height="6"/>
+                                <color key="backgroundColor" systemColor="systemGray3Color" red="0.78039215689999997" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="6" id="1FI-gl-AOl"/>
+                                    <constraint firstAttribute="width" constant="40" id="ev3-Oh-kfI"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="3"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="2Rc-uo-NW7" firstAttribute="top" secondItem="dMs-qe-Sig" secondAttribute="top" constant="12" id="f7o-Sx-gTs"/>
+                            <constraint firstItem="2Rc-uo-NW7" firstAttribute="centerX" secondItem="dMs-qe-Sig" secondAttribute="centerX" id="uLu-f3-5Fr"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="dMs-qe-Sig"/>
                     </view>
                 </viewController>
