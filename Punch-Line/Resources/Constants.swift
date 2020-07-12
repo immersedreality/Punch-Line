@@ -15,6 +15,7 @@ struct CellIdentifiers {
     static let proTipCell = "ProTipCell"
     static let punchLineCell = "PunchLineCell"
     static let toggleSettingCell = "ToggleSettingCell"
+    static let userCell = "UserCell"
 }
 
 struct FlagActionTitles {

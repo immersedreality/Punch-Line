@@ -52,7 +52,7 @@ extension PunchLineListViewController: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        guard indexPath.section == 1 else { return nil }
+        guard indexPath.section == 1 && indexPath.row < viewModel.customPunchLineLaunchers.count else { return nil }
         let leaveGroupAction = UIContextualAction(
             style: .normal,
             title: TableViewActionTitles.leave) { (_, _, _) in }

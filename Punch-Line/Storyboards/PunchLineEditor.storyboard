@@ -28,17 +28,47 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name your Punch-Line!" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Elg-yZ-Utk">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name your Punch-Line:" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Elg-yZ-Utk">
                                 <rect key="frame" x="16" y="82" width="382" height="36"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="30"/>
                                 <color key="textColor" red="0.85098039219999999" green="0.47058823529999999" blue="0.49803921569999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9qS-1Y-Aol">
-                                <rect key="frame" x="16" y="134" width="382" height="30.5"/>
+                                <rect key="frame" x="16" y="118" width="382" height="30.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="24"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="done"/>
                             </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add some friends!" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jof-aD-HOx">
+                                <rect key="frame" x="16" y="164.5" width="382" height="36"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="30"/>
+                                <color key="textColor" red="0.85098039219999999" green="0.47058823529999999" blue="0.49803921569999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(friends must be currently signed in, oh also swipe right to kick people out)" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nwH-BL-o5H">
+                                <rect key="frame" x="16" y="200.5" width="382" height="38.5"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="16"/>
+                                <color key="textColor" red="0.85098039219999999" green="0.47058823529999999" blue="0.49803921569999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="Hjz-RO-JZM">
+                                <rect key="frame" x="0.0" y="247" width="414" height="56"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cRX-4D-JWC">
+                                <rect key="frame" x="0.0" y="303" width="414" height="439"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="UserCell" id="IhP-pH-Mtg">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="IhP-pH-Mtg" id="MLv-XX-lO6">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yoc-Hk-eDy">
                                 <rect key="frame" x="24" y="766" width="366" height="48"/>
                                 <color key="backgroundColor" red="0.85098039219999999" green="0.47058823529999999" blue="0.49803921569999998" alpha="1" colorSpace="calibratedRGB"/>
@@ -54,24 +84,46 @@
                                         <integer key="value" value="8"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="createUpdateButtonTapped:" destination="sNg-zz-GEP" eventType="touchUpInside" id="lWA-pg-Kt3"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="Hjz-RO-JZM" firstAttribute="leading" secondItem="WjG-XQ-biV" secondAttribute="leading" id="2Z4-kM-rna"/>
+                            <constraint firstAttribute="trailing" secondItem="nwH-BL-o5H" secondAttribute="trailing" constant="16" id="38G-Q5-YTs"/>
+                            <constraint firstItem="nwH-BL-o5H" firstAttribute="leading" secondItem="WjG-XQ-biV" secondAttribute="leading" constant="16" id="7rB-XE-l7R"/>
                             <constraint firstItem="9qS-1Y-Aol" firstAttribute="leading" secondItem="WjG-XQ-biV" secondAttribute="leading" constant="16" id="83F-g3-qHZ"/>
                             <constraint firstItem="Yoc-Hk-eDy" firstAttribute="leading" secondItem="WjG-XQ-biV" secondAttribute="leading" constant="24" id="ACb-aI-fUa"/>
                             <constraint firstItem="WjG-XQ-biV" firstAttribute="trailing" secondItem="Elg-yZ-Utk" secondAttribute="trailing" constant="16" id="ASA-87-TzS"/>
+                            <constraint firstItem="jof-aD-HOx" firstAttribute="leading" secondItem="WjG-XQ-biV" secondAttribute="leading" constant="16" id="Hl5-cp-ja3"/>
                             <constraint firstItem="bcx-ey-dRK" firstAttribute="centerX" secondItem="WjG-XQ-biV" secondAttribute="centerX" id="LGk-DS-zcc"/>
+                            <constraint firstItem="cRX-4D-JWC" firstAttribute="top" secondItem="Hjz-RO-JZM" secondAttribute="bottom" id="Maa-2e-Ben"/>
                             <constraint firstItem="WjG-XQ-biV" firstAttribute="trailing" secondItem="9qS-1Y-Aol" secondAttribute="trailing" constant="16" id="R6H-0c-Voc"/>
+                            <constraint firstItem="Yoc-Hk-eDy" firstAttribute="top" secondItem="cRX-4D-JWC" secondAttribute="bottom" constant="24" id="VaG-rE-uC4"/>
+                            <constraint firstItem="WjG-XQ-biV" firstAttribute="trailing" secondItem="cRX-4D-JWC" secondAttribute="trailing" id="XcY-Uz-9TI"/>
                             <constraint firstItem="bcx-ey-dRK" firstAttribute="top" secondItem="WjG-XQ-biV" secondAttribute="top" constant="16" id="beF-zF-aFd"/>
-                            <constraint firstItem="9qS-1Y-Aol" firstAttribute="top" secondItem="Elg-yZ-Utk" secondAttribute="bottom" constant="16" id="cl0-V5-h0g"/>
+                            <constraint firstItem="9qS-1Y-Aol" firstAttribute="top" secondItem="Elg-yZ-Utk" secondAttribute="bottom" id="cl0-V5-h0g"/>
+                            <constraint firstItem="Hjz-RO-JZM" firstAttribute="trailing" secondItem="WjG-XQ-biV" secondAttribute="trailing" id="fli-jC-VIn"/>
                             <constraint firstItem="WjG-XQ-biV" firstAttribute="bottom" secondItem="Yoc-Hk-eDy" secondAttribute="bottom" constant="48" id="l9m-1S-4N4"/>
+                            <constraint firstItem="Hjz-RO-JZM" firstAttribute="top" secondItem="nwH-BL-o5H" secondAttribute="bottom" constant="8" id="oil-qg-n91"/>
                             <constraint firstItem="Elg-yZ-Utk" firstAttribute="leading" secondItem="WjG-XQ-biV" secondAttribute="leading" constant="16" id="pLW-9b-gAp"/>
                             <constraint firstItem="Elg-yZ-Utk" firstAttribute="top" secondItem="bcx-ey-dRK" secondAttribute="bottom" constant="16" id="pVh-Va-us7"/>
                             <constraint firstItem="WjG-XQ-biV" firstAttribute="trailing" secondItem="Yoc-Hk-eDy" secondAttribute="trailing" constant="24" id="rid-pc-eeO"/>
+                            <constraint firstItem="cRX-4D-JWC" firstAttribute="leading" secondItem="WjG-XQ-biV" secondAttribute="leading" id="u4T-I4-4Qu"/>
+                            <constraint firstItem="jof-aD-HOx" firstAttribute="top" secondItem="9qS-1Y-Aol" secondAttribute="bottom" constant="16" id="wOR-Jg-FlZ"/>
+                            <constraint firstItem="WjG-XQ-biV" firstAttribute="trailing" secondItem="jof-aD-HOx" secondAttribute="trailing" constant="16" id="xDS-Xw-qcm"/>
+                            <constraint firstItem="nwH-BL-o5H" firstAttribute="top" secondItem="jof-aD-HOx" secondAttribute="bottom" id="ze7-ZL-9t3"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="WjG-XQ-biV"/>
                     </view>
+                    <connections>
+                        <outlet property="createUpdateButton" destination="Yoc-Hk-eDy" id="vyB-5w-Ofa"/>
+                        <outlet property="punchLineNameTextField" destination="9qS-1Y-Aol" id="duf-uv-d6N"/>
+                        <outlet property="userSearchBar" destination="Hjz-RO-JZM" id="L30-uq-l3S"/>
+                        <outlet property="userTableView" destination="cRX-4D-JWC" id="B0c-LJ-Tfb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4C0-1G-2nk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
