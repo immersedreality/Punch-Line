@@ -13,6 +13,13 @@ struct CellIdentifiers {
     static let punchLineCell = "PunchLineCell"
 }
 
+struct FlagActionTitles {
+    static let flagJokeAsOffensive = "Flag joke as offensive"
+    static let flagJokeAsTooFunny = "Flag joke as too funny"
+    static let flagSetupAsOffensive = "Flag setup as offensive"
+    static let flagSetupAsUnfunny = "Flag setup as unfunny"
+}
+
 struct IgnoredProperties {
     static let baseRankingScore = "baseRankingScore"
     static let customPunchLineLaunchers = "customPunchLineLaunchers"

@@ -28,18 +28,133 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Quick Question: Is This Funny?" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ex8-sm-z67">
+                                <rect key="frame" x="16" y="78" width="382" height="72"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="30"/>
+                                <color key="textColor" red="0.85098039219999999" green="0.47058823529999999" blue="0.49803921569999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What do you call big ass titties that never go home and never fall down?" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0I5-sw-hZW">
+                                <rect key="frame" x="16" y="166" width="382" height="38.5"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="16"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dumb ass little bitches." textAlignment="right" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gDJ-FA-MN9">
+                                <rect key="frame" x="16" y="212.5" width="382" height="19.5"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aZk-eA-iEd">
+                                <rect key="frame" x="24" y="256" width="366" height="48"/>
+                                <color key="backgroundColor" red="0.85098039219999999" green="0.47058823529999999" blue="0.49803921569999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="3qH-dt-ZwK"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <state key="normal" title="Ha!">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="haButtonTapped:" destination="pZG-co-6Vb" eventType="touchUpInside" id="C6j-9v-HcK"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wzr-sU-Zm6">
+                                <rect key="frame" x="24" y="312" width="366" height="48"/>
+                                <color key="backgroundColor" red="0.85098039219999999" green="0.47058823529999999" blue="0.49803921569999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="qR0-Sk-WYb"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <state key="normal" title="Meh.">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="mehButtonTapped:" destination="pZG-co-6Vb" eventType="touchUpInside" id="Rj2-dp-71V"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pFl-rg-yMi">
+                                <rect key="frame" x="24" y="368" width="366" height="48"/>
+                                <color key="backgroundColor" red="0.85098039219999999" green="0.47058823529999999" blue="0.49803921569999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="qAx-34-jLb"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <state key="normal" title="Ugh...">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="ughButtonTapped:" destination="pZG-co-6Vb" eventType="touchUpInside" id="jhs-vV-ZaH"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MAu-0E-YAI">
+                                <rect key="frame" x="187" y="432" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="eAx-4k-oae"/>
+                                    <constraint firstAttribute="height" constant="40" id="wLM-HN-iyH"/>
+                                </constraints>
+                                <color key="tintColor" red="0.85098039219999999" green="0.47058823529999999" blue="0.49803921569999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" image="flag.fill" catalog="system"/>
+                                <connections>
+                                    <action selector="flagButtonTapped:" destination="pZG-co-6Vb" eventType="touchUpInside" id="rWV-fl-GVI"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="dMs-qe-Sig" firstAttribute="trailing" secondItem="gDJ-FA-MN9" secondAttribute="trailing" constant="16" id="41c-vB-7an"/>
+                            <constraint firstItem="0I5-sw-hZW" firstAttribute="top" secondItem="ex8-sm-z67" secondAttribute="bottom" constant="16" id="4Hr-MM-rVL"/>
+                            <constraint firstItem="ex8-sm-z67" firstAttribute="top" secondItem="2Rc-uo-NW7" secondAttribute="bottom" constant="16" id="6kM-Cd-osu"/>
+                            <constraint firstItem="gDJ-FA-MN9" firstAttribute="leading" secondItem="dMs-qe-Sig" secondAttribute="leading" constant="16" id="Erc-Uz-LVU"/>
+                            <constraint firstItem="pFl-rg-yMi" firstAttribute="top" secondItem="wzr-sU-Zm6" secondAttribute="bottom" constant="8" id="G6A-Ff-2tx"/>
+                            <constraint firstItem="0I5-sw-hZW" firstAttribute="leading" secondItem="dMs-qe-Sig" secondAttribute="leading" constant="16" id="H79-zf-b7y"/>
+                            <constraint firstItem="dMs-qe-Sig" firstAttribute="trailing" secondItem="pFl-rg-yMi" secondAttribute="trailing" constant="24" id="IL1-oA-vye"/>
+                            <constraint firstAttribute="trailing" secondItem="ex8-sm-z67" secondAttribute="trailing" constant="16" id="IeZ-V3-fEi"/>
+                            <constraint firstItem="wzr-sU-Zm6" firstAttribute="leading" secondItem="dMs-qe-Sig" secondAttribute="leading" constant="24" id="KJF-Qq-ivW"/>
+                            <constraint firstItem="aZk-eA-iEd" firstAttribute="top" secondItem="gDJ-FA-MN9" secondAttribute="bottom" constant="24" id="Knz-2N-IFz"/>
+                            <constraint firstItem="ex8-sm-z67" firstAttribute="leading" secondItem="dMs-qe-Sig" secondAttribute="leading" constant="16" id="N0j-Ze-vfT"/>
+                            <constraint firstItem="MAu-0E-YAI" firstAttribute="top" secondItem="pFl-rg-yMi" secondAttribute="bottom" constant="16" id="Th2-YH-zRk"/>
+                            <constraint firstItem="aZk-eA-iEd" firstAttribute="leading" secondItem="dMs-qe-Sig" secondAttribute="leading" constant="24" id="UGq-tU-0Za"/>
+                            <constraint firstItem="pFl-rg-yMi" firstAttribute="leading" secondItem="dMs-qe-Sig" secondAttribute="leading" constant="24" id="Voh-a7-NmA"/>
+                            <constraint firstItem="dMs-qe-Sig" firstAttribute="trailing" secondItem="0I5-sw-hZW" secondAttribute="trailing" constant="16" id="Wak-kc-IO2"/>
                             <constraint firstItem="2Rc-uo-NW7" firstAttribute="top" secondItem="dMs-qe-Sig" secondAttribute="top" constant="12" id="f7o-Sx-gTs"/>
+                            <constraint firstItem="dMs-qe-Sig" firstAttribute="trailing" secondItem="aZk-eA-iEd" secondAttribute="trailing" constant="24" id="fgL-qW-MKR"/>
+                            <constraint firstItem="MAu-0E-YAI" firstAttribute="centerX" secondItem="dMs-qe-Sig" secondAttribute="centerX" id="kKu-HJ-4bi"/>
+                            <constraint firstItem="gDJ-FA-MN9" firstAttribute="top" secondItem="0I5-sw-hZW" secondAttribute="bottom" constant="8" id="qSb-hq-81r"/>
                             <constraint firstItem="2Rc-uo-NW7" firstAttribute="centerX" secondItem="dMs-qe-Sig" secondAttribute="centerX" id="uLu-f3-5Fr"/>
+                            <constraint firstItem="dMs-qe-Sig" firstAttribute="trailing" secondItem="wzr-sU-Zm6" secondAttribute="trailing" constant="24" id="vah-xy-gSv"/>
+                            <constraint firstItem="wzr-sU-Zm6" firstAttribute="top" secondItem="aZk-eA-iEd" secondAttribute="bottom" constant="8" id="zG9-2H-clb"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="dMs-qe-Sig"/>
                     </view>
+                    <connections>
+                        <outlet property="isThisFunnyLabel" destination="ex8-sm-z67" id="HXg-uW-TSb"/>
+                        <outlet property="punchlineLabel" destination="gDJ-FA-MN9" id="KJZ-8H-zeH"/>
+                        <outlet property="setupLabel" destination="0I5-sw-hZW" id="UTR-NX-myc"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XVS-ee-tyB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="97" y="158"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="flag.fill" catalog="system" width="128" height="121"/>
+    </resources>
 </document>

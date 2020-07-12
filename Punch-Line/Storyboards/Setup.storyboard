@@ -46,7 +46,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </textView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Remember: setups must end with either a question mark (?) or an ellipsis (...)" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Or6-o8-BrB">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Setups must end with either a question mark (?) or an ellipsis (...)" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Or6-o8-BrB">
                                 <rect key="frame" x="16" y="273.5" width="382" height="38.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="16"/>
                                 <color key="textColor" red="0.85098039219999999" green="0.47058823529999999" blue="0.49803921569999998" alpha="1" colorSpace="calibratedRGB"/>
@@ -59,7 +59,7 @@
                                     <constraint firstAttribute="height" constant="48" id="ouP-Zw-Phx"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <state key="normal" title="Submit Setup">
+                                <state key="normal" title="Done">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
@@ -68,7 +68,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="submitSetupButtonTapped:" destination="5Ko-1d-th1" eventType="touchUpInside" id="ryt-rF-UyR"/>
+                                    <action selector="doneButtonTapped:" destination="5Ko-1d-th1" eventType="touchUpInside" id="ryt-rF-UyR"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -94,7 +94,7 @@
                     <connections>
                         <outlet property="reminderLabel" destination="Or6-o8-BrB" id="bo1-8B-1nd"/>
                         <outlet property="setupTextView" destination="i86-Uf-mes" id="XfP-oI-0cV"/>
-                        <outlet property="startAJokeLabel" destination="HoC-XR-TWT" id="7fW-ec-sGF"/>
+                        <outlet property="startAJokeLabel" destination="HoC-XR-TWT" id="Wcj-Ch-88B"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xg3-to-bge" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

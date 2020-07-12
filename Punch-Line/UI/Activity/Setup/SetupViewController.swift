@@ -42,7 +42,7 @@ class SetupViewController: UIViewController {
         reminderLabel.alpha = 0.0
     }
 
-    @IBAction func submitSetupButtonTapped(_ sender: Any) {
+    @IBAction func doneButtonTapped(_ sender: Any) {
         guard setupTextView.text.count >= 15 else { return }
         guard setupTextView.text.last == "?" || setupTextView.text.dropFirst(setupTextView.text.count - 3) == "..." else {
             animateReminderLabel()
