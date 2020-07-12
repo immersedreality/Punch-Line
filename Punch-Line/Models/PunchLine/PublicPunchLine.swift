@@ -20,7 +20,7 @@ class PublicPunchLine: Object, PunchLine {
     let survivingJokes = List<Joke>()
 
     var nameWithoutSpaces: String {
-        return name.replacingOccurrences(of: " ", with: "")
+        return name.removingSpaces()
     }
 
     var realmPath: String {

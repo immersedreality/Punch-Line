@@ -16,6 +16,9 @@
 		B850D8F724B988DB0011077D /* PunchLineList+TableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B850D8F624B988DB0011077D /* PunchLineList+TableViewDelegate.swift */; };
 		B850D8F924B988EC0011077D /* PunchLineList+TableViewDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B850D8F824B988EC0011077D /* PunchLineList+TableViewDatasource.swift */; };
 		B850D8FB24B9897A0011077D /* PunchLineTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B850D8FA24B9897A0011077D /* PunchLineTableViewCell.swift */; };
+		B854589024BA78BD00723E26 /* PublicPunchLinePaths.swift in Sources */ = {isa = PBXBuildFile; fileRef = B854588F24BA78BD00723E26 /* PublicPunchLinePaths.swift */; };
+		B854589224BA97F900723E26 /* CoreLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B854589124BA97F900723E26 /* CoreLocationManager.swift */; };
+		B854589424BAA12C00723E26 /* String+RemovingSpaces.swift in Sources */ = {isa = PBXBuildFile; fileRef = B854589324BAA12C00723E26 /* String+RemovingSpaces.swift */; };
 		B890F48324B962010017BA21 /* UIView+ConstrainToSuperview.swift in Sources */ = {isa = PBXBuildFile; fileRef = B890F48224B962010017BA21 /* UIView+ConstrainToSuperview.swift */; };
 		B89CF24124B8BBC70009A8CB /* AppUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89CF24024B8BBC70009A8CB /* AppUser.swift */; };
 		B89CF24324B8E6DD0009A8CB /* UIActivityIndicatorView+Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89CF24224B8E6DD0009A8CB /* UIActivityIndicatorView+Animations.swift */; };
@@ -95,6 +98,9 @@
 		B850D8F624B988DB0011077D /* PunchLineList+TableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PunchLineList+TableViewDelegate.swift"; sourceTree = "<group>"; };
 		B850D8F824B988EC0011077D /* PunchLineList+TableViewDatasource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PunchLineList+TableViewDatasource.swift"; sourceTree = "<group>"; };
 		B850D8FA24B9897A0011077D /* PunchLineTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PunchLineTableViewCell.swift; sourceTree = "<group>"; };
+		B854588F24BA78BD00723E26 /* PublicPunchLinePaths.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicPunchLinePaths.swift; sourceTree = "<group>"; };
+		B854589124BA97F900723E26 /* CoreLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreLocationManager.swift; sourceTree = "<group>"; };
+		B854589324BAA12C00723E26 /* String+RemovingSpaces.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+RemovingSpaces.swift"; sourceTree = "<group>"; };
 		B890F48224B962010017BA21 /* UIView+ConstrainToSuperview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+ConstrainToSuperview.swift"; sourceTree = "<group>"; };
 		B89CF24024B8BBC70009A8CB /* AppUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUser.swift; sourceTree = "<group>"; };
 		B89CF24224B8E6DD0009A8CB /* UIActivityIndicatorView+Animations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIActivityIndicatorView+Animations.swift"; sourceTree = "<group>"; };
@@ -277,6 +283,7 @@
 				B89F69C024B6663A00472067 /* Assets.xcassets */,
 				B89F69C524B6663A00472067 /* Info.plist */,
 				B89F69FC24B7EA9F00472067 /* Constants.swift */,
+				B854588F24BA78BD00723E26 /* PublicPunchLinePaths.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -292,6 +299,7 @@
 				B808CC3B24B94FA200B39432 /* StyleManager.swift */,
 				B89F6A1424B80CE500472067 /* UserAuthorizationManager.swift */,
 				B8D8F8B724BA649600BBEBB1 /* LocalRealmManager.swift */,
+				B854589124BA97F900723E26 /* CoreLocationManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -348,6 +356,7 @@
 				B89CF24224B8E6DD0009A8CB /* UIActivityIndicatorView+Animations.swift */,
 				B890F48224B962010017BA21 /* UIView+ConstrainToSuperview.swift */,
 				B8CDC13124BA283E000C8B64 /* UIColor+CustomColors.swift */,
+				B854589324BAA12C00723E26 /* String+RemovingSpaces.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -470,6 +479,7 @@
 			files = (
 				B8EABB8A24B8477D00A46443 /* ActivityFeedManager.swift in Sources */,
 				B808CC4524B9584800B39432 /* Vote+ActivityFeedViewController.swift in Sources */,
+				B854589224BA97F900723E26 /* CoreLocationManager.swift in Sources */,
 				B89F6A1124B80AEE00472067 /* UITextField+AddBottomBorder.swift in Sources */,
 				B89F69B624B6663800472067 /* AppDelegate.swift in Sources */,
 				B890F48324B962010017BA21 /* UIView+ConstrainToSuperview.swift in Sources */,
@@ -477,6 +487,7 @@
 				B8D8F8B224BA4F5600BBEBB1 /* FavoriteJoke.swift in Sources */,
 				B8D8F8B424BA518200BBEBB1 /* AppSession.swift in Sources */,
 				B8EABB8C24B847D900A46443 /* ActivityContainerViewController.swift in Sources */,
+				B854589424BAA12C00723E26 /* String+RemovingSpaces.swift in Sources */,
 				B850D8F924B988EC0011077D /* PunchLineList+TableViewDatasource.swift in Sources */,
 				B89CF24324B8E6DD0009A8CB /* UIActivityIndicatorView+Animations.swift in Sources */,
 				B89CF24124B8BBC70009A8CB /* AppUser.swift in Sources */,
@@ -506,6 +517,7 @@
 				B89F69E524B6755900472067 /* JokeListViewController.swift in Sources */,
 				B89F69E324B6753600472067 /* SetupViewController.swift in Sources */,
 				B8CDC13424BA3224000C8B64 /* PublicPunchLine.swift in Sources */,
+				B854589024BA78BD00723E26 /* PublicPunchLinePaths.swift in Sources */,
 				B89F6A0D24B8063D00472067 /* Username+UITextFieldDelegate.swift in Sources */,
 				B89F69EB24B675AA00472067 /* ProfileViewController.swift in Sources */,
 				B808CC4324B9584500B39432 /* Setup+ActivityFeedViewController.swift in Sources */,

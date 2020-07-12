@@ -16,36 +16,53 @@ final class RealmSyncManager {
     private static let realmSyncDispatchGroup = DispatchGroup()
 
     class func adminLoginSync(completion: @escaping (Bool) -> Void) {
-        applyPublicPermissions(forRealmAt: RealmSyncConstants.defaultRealmPath) { (permissionsWereGranted) in
-            if permissionsWereGranted {
-                loginSync(completion: completion)
-            } else {
-                completion(false)
+        let publicPunchLinesForNewCloudInstance = PunchLineSyncManager.generatePublicPunchLinesForNewCloudInstance()
+
+        for punchLine in publicPunchLinesForNewCloudInstance {
+            realmSyncDispatchGroup.enter()
+            initialSync(withRealmAt: punchLine.realmPath) { (realmSyncedSuccessfully) in
+                guard realmSyncedSuccessfully else { completion(false); return }
+                applyPublicPermissions(forRealmAt: punchLine.realmPath) { (permissionsAppliedSuccessfully) in
+                    guard permissionsAppliedSuccessfully else { completion(false); return }
+                    RealmAccessManager.addOrUpdateUnmanaged(object: punchLine, inRealmAt: punchLine.realmPath)
+                    realmSyncDispatchGroup.leave()
+                }
             }
-        }
-    }
-
-    class func loginSync(completion: @escaping (Bool) -> Void) {
-        let defaultPunchLinePath = RealmSyncConstants.defaultRealmPath
-        let userPath = RealmSyncConstants.userIdentityPath + RealmSyncConstants.userPath
-
-        var defaultPunchLineSyncedSuccessfully = false
-        var userRealmSyncedSuccessfully = false
-
-        realmSyncDispatchGroup.enter()
-        initialSync(withRealmAt: defaultPunchLinePath) { (realmSyncedSuccessfully) in
-            defaultPunchLineSyncedSuccessfully = realmSyncedSuccessfully
-            realmSyncDispatchGroup.leave()
-        }
-
-        realmSyncDispatchGroup.enter()
-        initialSync(withRealmAt: userPath) { (realmSyncedSuccessfully) in
-            userRealmSyncedSuccessfully = realmSyncedSuccessfully
-            realmSyncDispatchGroup.leave()
         }
 
         realmSyncDispatchGroup.notify(queue: .main) {
-            completion(defaultPunchLineSyncedSuccessfully && userRealmSyncedSuccessfully)
+            completion(true)
+        }
+
+    }
+
+    class func loginSync(completion: @escaping (Bool) -> Void) {
+
+        let userPath = RealmSyncConstants.userIdentityPath + RealmSyncConstants.userPath
+        var allRealmsSyncedSuccessfully = false
+
+        realmSyncDispatchGroup.enter()
+        initialSync(withRealmAt: userPath) { (realmSyncedSuccessfully) in
+            allRealmsSyncedSuccessfully = realmSyncedSuccessfully
+            realmSyncDispatchGroup.leave()
+        }
+
+        let regionCode = Locale.current.regionCode
+        if regionCode == RegionCodes.unitedStates || regionCode == RegionCodes.canada {
+
+            allRealmsSyncedSuccessfully = false
+            let publicRegionPath = "/" + PublicPunchLineNames.MajorRegions.usAndCanada.removingSpaces()
+
+            realmSyncDispatchGroup.enter()
+            initialSync(withRealmAt: publicRegionPath) { (realmSyncedSuccessfully) in
+                allRealmsSyncedSuccessfully = realmSyncedSuccessfully
+                realmSyncDispatchGroup.leave()
+            }
+
+        }
+
+        realmSyncDispatchGroup.notify(queue: .main) {
+            completion(allRealmsSyncedSuccessfully)
         }
 
     }
@@ -73,9 +90,9 @@ final class RealmSyncManager {
     private class func applyPublicPermissions(forRealmAt accessPath: AccessPath, completion: @escaping (Bool) -> Void) {
         guard let user = SyncUser.current else { completion(false); return }
 
-        let defaultPunchLinePermission = SyncPermission(realmPath: accessPath, identity: RealmSyncConstants.all, accessLevel: .write)
+        let permission = SyncPermission(realmPath: accessPath, identity: RealmSyncConstants.all, accessLevel: .write)
 
-        user.apply(defaultPunchLinePermission) { (error) in
+        user.apply(permission) { (error) in
             let permissionsAppliedSuccessfully = error == nil
             completion(permissionsAppliedSuccessfully)
         }

@@ -35,12 +35,13 @@ final class UserAuthorizationManager {
         guard let username = username, let password = password else { return }
         guard let authorizationURL = authorizationURL else { return }
         let credentials = SyncCredentials.usernamePassword(username: username, password: password, register: true)
+        let newCloudInstanceNeedsInitialization = Bundle.main.object(forInfoDictionaryKey: InfoDictionaryKeys.shouldInitializeNewCloudInstance) as? Bool ?? false
 
         SyncUser.logIn(
             with: credentials,
             server: authorizationURL) { [weak self] (syncUser, error) in
                 if let user = syncUser {
-                    if user.isAdmin {
+                    if user.isAdmin && newCloudInstanceNeedsInitialization {
                         self?.initialize(adminUser: user, completion: completion)
                     } else {
                         self?.initialize(user: user, completion: completion)
@@ -56,12 +57,13 @@ final class UserAuthorizationManager {
         guard let username = username, let password = password else { return }
         guard let authorizationURL = authorizationURL else { return }
         let credentials = SyncCredentials.usernamePassword(username: username, password: password, register: false)
+        let newCloudInstanceNeedsInitialization = Bundle.main.object(forInfoDictionaryKey: InfoDictionaryKeys.shouldInitializeNewCloudInstance) as? Bool ?? false
 
         SyncUser.logIn(
             with: credentials,
             server: authorizationURL) { [weak self] (syncUser, error) in
                 if let user = syncUser {
-                    if user.isAdmin {
+                    if user.isAdmin && newCloudInstanceNeedsInitialization {
                         self?.initialize(adminUser: user, completion: completion)
                     } else {
                         self?.initialize(user: user, completion: completion)

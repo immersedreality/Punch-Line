@@ -23,7 +23,7 @@ class CustomPunchLine: Object, PunchLine {
     let memberIDs = List<String>()
 
     var nameWithoutSpaces: String {
-        return name.replacingOccurrences(of: " ", with: "")
+        return name.removingSpaces()
     }
 
     var realmPath: String {

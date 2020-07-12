@@ -23,6 +23,10 @@ struct IgnoredProperties {
     static let totalVoteCount = "totalVoteCount"
 }
 
+struct InfoDictionaryKeys {
+    static let shouldInitializeNewCloudInstance = "shouldInitializeNewCloudInstance"
+}
+
 struct PrimaryKeys {
     static let appSessionKey = "PLAppSession"
     static let id = "id"
@@ -30,12 +34,16 @@ struct PrimaryKeys {
 
 struct RealmSyncConstants {
     static let all = "*"
-    static let defaultRealmPath = "/TheWorld"
     static let httpsPrefix = "https://"
     static let realmInstanceLink = "stinky-wiener-wagon.us2a.cloud.realm.io"
     static let realmsPrefix = "realms://"
     static let userIdentityPath = "/~"
     static let userPath = "/User"
+}
+
+struct RegionCodes {
+    static let canada = "CA"
+    static let unitedStates = "US"
 }
 
 struct SegueIdentifiers {
