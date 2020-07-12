@@ -21,6 +21,7 @@ struct IgnoredProperties {
     static let publicPunchLineLaunchers = "publicPunchLineLaunchers"
     static let realmPath = "realmPath"
     static let sharedInstance = "sharedInstance"
+    static let sortValue = "sortValue"
     static let totalUpvoteCount = "totalUpvoteCount"
     static let totalVoteCount = "totalVoteCount"
     static let userAccessPath = "userAccessPath"

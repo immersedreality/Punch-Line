@@ -1,5 +1,5 @@
 //
-//  PunchLineSync+CLLocationManagerDelegate.swift
+//  PunchLineList+CLLocationManagerDelegate.swift
 //  Punch-Line
 //
 //  Created by Jeffrey Eugene Hoch on 7/11/20.
@@ -9,7 +9,7 @@
 import Foundation
 import CoreLocation
 
-extension PunchLineSyncManager: CLLocationManagerDelegate {
+extension PunchLineListViewController: CLLocationManagerDelegate {
 
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         guard status == .authorizedAlways || status == .authorizedWhenInUse else { return }
@@ -19,7 +19,15 @@ extension PunchLineSyncManager: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.first else { return }
         CoreLocationManager.reverseGeocode(location: location) { (locationMap) in
-            PunchLineSyncManager.matchPublicPunchLineNames(to: locationMap)
+            guard locationMap.country != nil && locationMap.administrativeArea != nil && locationMap.locality != nil else { return }
+            CoreLocationManager.stopUpdatingUsersLocation()
+            PunchLineSyncManager.matchPublicPunchLineNames(to: locationMap, completion: { [weak self] thereAreNewPunchLines in
+                DispatchQueue.main.async {
+                    if thereAreNewPunchLines {
+                        self?.reloadTableViewWithAnimation()
+                    }
+                }
+            })
         }
     }
 

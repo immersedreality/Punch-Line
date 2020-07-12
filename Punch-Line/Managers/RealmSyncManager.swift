@@ -89,7 +89,8 @@ final class RealmSyncManager {
         }
     }
 
-    class func sync(withRealmsAt accessPaths: [String], completion: @escaping (Bool) -> Void) {
+    class func sync(withRealmsAt accessPaths: [String], completion: @escaping () -> Void) {
+
         for accessPath in accessPaths {
             realmSyncDispatchGroup.enter()
             initialSync(withRealmAt: accessPath) { (_) in
@@ -98,7 +99,31 @@ final class RealmSyncManager {
         }
 
         realmSyncDispatchGroup.notify(queue: .main) {
-            completion(true)
+
+            if let launchers = RealmAccessManager.getObjects(of: PunchLineLauncher.self, fromRealmAt: RealmSyncConstants.userPath) {
+                for launcher in launchers {
+                    switch launcher.getType() {
+                    case .publicLauncher:
+                        guard AppSession.sharedInstance.loggedInUser?.publicPunchLineLaunchers.contains(launcher) == false else {
+                            continue
+                        }
+
+                        RealmAccessManager.executeUpdates(inRealmAt: RealmSyncConstants.userPath) {
+                            AppSession.sharedInstance.loggedInUser?.publicPunchLineLaunchers.append(launcher)
+                        }
+                    case .customLauncher:
+                        guard AppSession.sharedInstance.loggedInUser?.customPunchLineLaunchers.contains(launcher) == false else {
+                            continue
+                        }
+
+                        RealmAccessManager.executeUpdates(inRealmAt: RealmSyncConstants.userPath) {
+                            AppSession.sharedInstance.loggedInUser?.customPunchLineLaunchers.append(launcher)
+                        }
+                    }
+                }
+            }
+
+            completion()
         }
 
     }

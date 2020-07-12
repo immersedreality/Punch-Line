@@ -65,7 +65,7 @@ struct PublicPunchLineNames {
         static let newHampsire = "New Hampshire"
         static let newJersey = "New Jersey"
         static let newMexico = "New Mexico"
-        static let newYork = "New York"
+        static let newYork = "NY"
         static let northCarolina = "North Carolina"
         static let northDakota = "North Dakota"
         static let ohio = "Ohio"
@@ -88,7 +88,7 @@ struct PublicPunchLineNames {
 
     struct LocalRegions {
 
-        static let regionNamesForNewCloudInstance = [newYorkCity]
+        static let regionNamesForNewCloudInstance = [newYork]
 
         //Canada
         static let toronto = "Toronto"
@@ -113,7 +113,7 @@ struct PublicPunchLineNames {
         static let longueuil = "Longueuil"
 
         //United States
-        static let newYorkCity = "New York City"
+        static let newYork = "New York"
         static let losAngeles = "Los Angeles"
         static let chicago = "Chicago"
         static let houston = "Houston"

@@ -21,7 +21,12 @@ class PunchLineListViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        refreshTableView()
+        reloadTableView()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        CoreLocationManager.handleLocationServicesAuthorizationStatus(for: self)
     }
 
     private func configurePunchLineListTableView() {
@@ -29,7 +34,12 @@ class PunchLineListViewController: UIViewController {
         punchLineListTableView.delegate = self
     }
 
-    private func refreshTableView() {
+    private func reloadTableView() {
         punchLineListTableView.reloadData()
     }
+
+    func reloadTableViewWithAnimation() {
+        punchLineListTableView.reloadSections([0, 1], with: .fade)
+    }
+
 }

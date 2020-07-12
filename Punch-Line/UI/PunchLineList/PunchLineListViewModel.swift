@@ -11,7 +11,10 @@ import RealmSwift
 
 class PunchLineListViewModel {
 
-    let publicPunchLineLaunchers = AppSession.sharedInstance.loggedInUser?.publicPunchLineLaunchers ?? List<PunchLineLauncher>()
-    let customPunchLineLaunchers = AppSession.sharedInstance.loggedInUser?.customPunchLineLaunchers ?? List<PunchLineLauncher>()
+    let publicPunchLineLaunchers = Array(AppSession.sharedInstance.loggedInUser?.publicPunchLineLaunchers ?? List<PunchLineLauncher>()).sorted {
+        $0.sortValue < $1.sortValue
+    }
+    
+    let customPunchLineLaunchers = Array(AppSession.sharedInstance.loggedInUser?.customPunchLineLaunchers ?? List<PunchLineLauncher>())
 
 }
