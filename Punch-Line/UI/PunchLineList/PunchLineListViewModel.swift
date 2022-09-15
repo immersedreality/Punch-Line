@@ -7,36 +7,23 @@
 //
 
 import Foundation
-import RealmSwift
 
 class PunchLineListViewModel {
 
-    let publicPunchLineLaunchers = Array(AppSession.sharedInstance.loggedInUser?.publicPunchLineLaunchers ?? List<PunchLineLauncher>()).sorted {
-        $0.sortValue < $1.sortValue
-    }
-    
-    let customPunchLineLaunchers = Array(AppSession.sharedInstance.loggedInUser?.customPunchLineLaunchers ?? List<PunchLineLauncher>()).sorted {
-        $0.name < $1.name
-    }
+    let publicPunchLineLaunchers: [PunchLineLauncher] = []
+    let customPunchLineLaunchers: [PunchLineLauncher] = []
 
     var selectedPunchLineLauncher: PunchLineLauncher?
 
     func generatePunchLineToLaunch() -> PunchLine? {
         guard let launcher = selectedPunchLineLauncher else { return nil }
 
-        switch launcher.getType() {
+        switch launcher.type {
+        #warning("TODO: Write logic to launch Punch-Lines")
         case .publicLauncher:
-            guard let punchLineToLaunch = RealmAccessManager.getObject(
-                of: PublicPunchLine.self,
-                with: launcher.id,
-                fromRealmAt: launcher.realmPath) else { return nil }
-            return punchLineToLaunch
+            return nil
         case .customLauncher:
-            guard let punchLineToLaunch = RealmAccessManager.getObject(
-                of: CustomPunchLine.self,
-                with: launcher.id,
-                fromRealmAt: launcher.realmPath) else { return nil }
-            return punchLineToLaunch
+            return nil
         }
 
     }

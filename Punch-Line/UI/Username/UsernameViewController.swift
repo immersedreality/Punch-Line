@@ -13,8 +13,6 @@ class UsernameViewController: UIViewController {
     @IBOutlet weak var enterUsernameLabel: UILabel!
     @IBOutlet weak var usernameTextField: UITextField!
 
-    var userAuthorizationManager: UserAuthorizationManager!
-
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTextField()
@@ -23,7 +21,6 @@ class UsernameViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         configureNavigationController()
-        configureEnterUsernameLabel()
     }
 
     override func viewDidLayoutSubviews() {
@@ -49,23 +46,8 @@ class UsernameViewController: UIViewController {
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
 
-    private func configureEnterUsernameLabel() {
-        switch userAuthorizationManager.authorizationMode {
-        case .newUser:
-            enterUsernameLabel.text = UserAuthorizationConstants.enterAUsername
-        case .returningUser:
-            enterUsernameLabel.text = UserAuthorizationConstants.enterYourUsername
-        }
-    }
-
     private func configureTextFieldStyle() {
         usernameTextField.addBottomBorderOf(color: .punchlinePink)
-    }
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard segue.identifier == SegueIdentifiers.showPasswordViewController else { return }
-        guard let passwordViewController = segue.destination as? PasswordViewController else { return }
-        passwordViewController.userAuthorizationManager = userAuthorizationManager
     }
 
 }

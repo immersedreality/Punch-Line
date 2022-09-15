@@ -7,25 +7,25 @@
 //
 
 import Foundation
-import RealmSwift
+import CloudKit
 
-class Joke: Object {
+struct Joke {
 
-    @objc dynamic var id: String = UUID().uuidString
-    @objc dynamic var dateCreated: Date = Date()
+    let id: String
+    let dateCreated: Date = Date()
 
-    @objc dynamic var setup: String = ""
-    @objc dynamic var setupAuthorID: String = ""
+    let setup: String
+    let setupAuthorID: String
 
-    @objc dynamic var punchline: String = ""
-    @objc dynamic var punchlineAuthorID: String = ""
+    let punchline: String
+    let punchlineAuthorID: String
     
-    @objc dynamic var haCount: Int = 0
-    @objc dynamic var mehCount: Int = 0
-    @objc dynamic var ughCount: Int = 0
-    @objc dynamic var isTooFunnyCount: Int = 0
-    @objc dynamic var isOffensiveCount: Int = 0
-    @objc dynamic var favoritedCount: Int = 0
+    let haCount: Int
+    let mehCount: Int
+    let ughCount: Int
+    let isTooFunnyCount: Int
+    let isOffensiveCount: Int
+    let favoritedCount: Int
 
     var totalVoteCount: Double {
         return Double(haCount + mehCount + ughCount + (isTooFunnyCount * 2))
@@ -47,17 +47,15 @@ class Joke: Object {
         return (isOffensiveCountDouble / totalPlusOffensiveFlagCount) > 0.10
     }
 
-    override class func primaryKey() -> String? {
-        return PrimaryKeys.id
-    }
+}
 
-    override class func ignoredProperties() -> [String] {
-        return [
-            IgnoredProperties.totalVoteCount,
-            IgnoredProperties.totalUpvoteCount,
-            IgnoredProperties.baseRankingScore,
-            IgnoredProperties.isOffensive
-        ]
-    }
+enum JokeRecordKeys: String {
+    case type = "Joke"
+}
 
+extension Joke {
+    var record: CKRecord {
+        let record = CKRecord(recordType: JokeRecordKeys.type.rawValue)
+        return record
+    }
 }

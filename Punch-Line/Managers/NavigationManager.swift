@@ -10,12 +10,12 @@ import UIKit
 
 final class NavigationManager {
 
-    class func setRootViewControllerToGetStarted() {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
-        let storyboard = UIStoryboard(name: StoryboardNames.getStarted, bundle: nil)
+    class func setRootViewControllerTo(storyboardName: String) {
+        guard let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate else { return }
+        let storyboard = UIStoryboard(name: storyboardName, bundle: nil)
         if let getStartedViewController = storyboard.instantiateInitialViewController() {
-            appDelegate.window?.rootViewController = getStartedViewController
+            sceneDelegate.window?.rootViewController = getStartedViewController
         }
     }
-
+    
 }

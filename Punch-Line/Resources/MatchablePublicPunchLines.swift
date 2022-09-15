@@ -12,7 +12,7 @@ struct MatchablePublicPunchLines {
 
     struct MajorRegions {
 
-        static let regionNamesForNewCloudInstance = [usAndCanada]
+        static let activeRegions = [usAndCanada]
 
         static let usAndCanada = "US And Canada"
         
@@ -20,7 +20,7 @@ struct MatchablePublicPunchLines {
 
     struct StatesAndProvinces {
 
-        static let regionNamesForNewCloudInstance = [newYork]
+        static let activeRegions = [newYork]
 
         //Canada
         static let alberta = "AB"
@@ -85,12 +85,13 @@ struct MatchablePublicPunchLines {
         static let westVirginia = "WV"
         static let wisconsin = "WI"
         static let wyoming = "WY"
+
     }
 
     struct Cities {
 
-        static let regionNamesForNewCloudInstance = [newYork]
-
+        static let activeRegions = [newYork]
+        
         //Canada
         static let toronto = "Toronto"
         static let montreal = "Montreal"
@@ -264,6 +265,7 @@ struct MatchablePublicPunchLines {
         static let oceanside = "Oceanside"
         static let elkGrove = "Elk Grove"
         static let salem = "Salem"
+
     }
 
 }

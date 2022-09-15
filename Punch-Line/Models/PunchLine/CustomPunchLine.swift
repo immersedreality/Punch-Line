@@ -7,38 +7,29 @@
 //
 
 import Foundation
-import RealmSwift
+import CloudKit
 
-class CustomPunchLine: Object, PunchLine {
+struct CustomPunchLine: PunchLine {
 
-    @objc dynamic var id: String = UUID().uuidString
-    @objc dynamic var ownerID: String = ""
+    let id: String
+    let owningUser: User
+    let name: String
 
-    @objc dynamic var name: String = ""
-
-    let activeSetups = List<Setup>()
-    let activeJokes = List<Joke>()
-    let survivingJokes = List<Joke>()
+    let activeSetups: [Setup] = []
+    let activeJokes: [Joke] = []
+    let survivingJokes: [Joke] = []
     
-    let memberIDs = List<String>()
+    let memberIDs: [String] = []
+    
+}
 
-    var nameWithoutSpaces: String {
-        return name.removingSpaces()
+enum CustomPunchLineRecordKeys: String {
+    case type = "CustomPunchLine"
+}
+
+extension CustomPunchLine {
+    var record: CKRecord {
+        let record = CKRecord(recordType: CustomPunchLineRecordKeys.type.rawValue)
+        return record
     }
-
-    var realmPath: String {
-        return "/" + ownerID + "/" + nameWithoutSpaces
-    }
-
-    override class func primaryKey() -> String? {
-        return PrimaryKeys.id
-    }
-
-    override class func ignoredProperties() -> [String] {
-        return [
-            IgnoredProperties.nameWithoutSpaces,
-            IgnoredProperties.realmPath
-        ]
-    }
-
 }

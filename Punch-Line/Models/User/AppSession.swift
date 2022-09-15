@@ -7,27 +7,18 @@
 //
 
 import Foundation
-import RealmSwift
 
-class AppSession: Object {
-
-    static var sharedInstance = RealmAccessManager.getObject(
-        of: AppSession.self,
-        with: PrimaryKeys.appSessionKey,
-        fromRealmAt: RealmSyncConstants.userPath) ?? AppSession()
-
-    @objc dynamic var id = PrimaryKeys.appSessionKey
-    @objc dynamic var loggedInUser: AppUser?
+final class AppSession {
     
-    override class func primaryKey() -> String? {
-        return PrimaryKeys.id
-    }
+    static var user: User?
+    static var currentPublicPunchlineLaunchers: [PunchLineLauncher] = []
 
-    override class func ignoredProperties() -> [String] {
-        return [
-            IgnoredProperties.userAccessPath,
-            IgnoredProperties.sharedInstance
-        ]
+    class func createNewUser(with username: String) {
+        let newUser = User(
+            username: username,
+            shouldSeeOffensiveContent: true
+        )
+        CloudKitManager.saveUserToPrivateDatabase(user: newUser)
     }
 
 }

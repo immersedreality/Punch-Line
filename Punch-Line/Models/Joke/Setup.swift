@@ -7,21 +7,28 @@
 //
 
 import Foundation
-import RealmSwift
+import CloudKit
 
-class Setup: Object {
+struct Setup {
 
-    @objc dynamic var id: String = UUID().uuidString
-    @objc dynamic var dateCreated: Date = Date()
+    let id: String
+    let dateCreated: Date = Date()
 
-    @objc dynamic var text: String = ""
-    @objc dynamic var authorID: String = ""
+    let text: String
+    let authorID: String
 
-    @objc dynamic var isOffensiveCount: Int = 0
-    @objc dynamic var isUnfunnyCount: Int = 0
+    let isOffensiveCount: Int
+    let isUnfunnyCount: Int
     
-    override class func primaryKey() -> String? {
-        return PrimaryKeys.id
+}
+
+enum SetupRecordKeys: String {
+    case type = "Setup"
+}
+
+extension Setup {
+    var record: CKRecord {
+        let record = CKRecord(recordType: SetupRecordKeys.type.rawValue)
+        return record
     }
-    
 }

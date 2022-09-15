@@ -17,7 +17,7 @@
 		B848503524BB66C5006EEE02 /* PunchLineEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B848503424BB66C5006EEE02 /* PunchLineEditorViewController.swift */; };
 		B848503824BB691C006EEE02 /* ActivityFeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B848503724BB691C006EEE02 /* ActivityFeedViewModel.swift */; };
 		B848503C24BB7077006EEE02 /* Setup+TextViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B848503B24BB7077006EEE02 /* Setup+TextViewDelegate.swift */; };
-		B848503E24BB7D70006EEE02 /* ActiviteFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B848503D24BB7D70006EEE02 /* ActiviteFeedViewController.swift */; };
+		B848503E24BB7D70006EEE02 /* ActivityFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B848503D24BB7D70006EEE02 /* ActivityFeedViewController.swift */; };
 		B850D8F724B988DB0011077D /* PunchLineList+TableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B850D8F624B988DB0011077D /* PunchLineList+TableViewDelegate.swift */; };
 		B850D8F924B988EC0011077D /* PunchLineList+TableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B850D8F824B988EC0011077D /* PunchLineList+TableViewDataSource.swift */; };
 		B850D8FB24B9897A0011077D /* PunchLineTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B850D8FA24B9897A0011077D /* PunchLineTableViewCell.swift */; };
@@ -27,21 +27,20 @@
 		B854589624BAA6D400723E26 /* PunchLineList+CLLocationManagerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B854589524BAA6D400723E26 /* PunchLineList+CLLocationManagerDelegate.swift */; };
 		B866553724BAAF0900DD694F /* PunchLineLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = B866553624BAAF0900DD694F /* PunchLineLauncher.swift */; };
 		B866553A24BABEA900DD694F /* PunchLineListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B866553924BABEA900DD694F /* PunchLineListViewModel.swift */; };
+		B8722DB9251A7EDA00B513E1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8722DB8251A7EDA00B513E1 /* SceneDelegate.swift */; };
 		B890F48324B962010017BA21 /* UIView+ConstrainToSuperview.swift in Sources */ = {isa = PBXBuildFile; fileRef = B890F48224B962010017BA21 /* UIView+ConstrainToSuperview.swift */; };
-		B89CF24124B8BBC70009A8CB /* AppUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89CF24024B8BBC70009A8CB /* AppUser.swift */; };
+		B89CF24124B8BBC70009A8CB /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89CF24024B8BBC70009A8CB /* User.swift */; };
 		B89CF24324B8E6DD0009A8CB /* UIActivityIndicatorView+Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89CF24224B8E6DD0009A8CB /* UIActivityIndicatorView+Animations.swift */; };
 		B89F69B624B6663800472067 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89F69B524B6663800472067 /* AppDelegate.swift */; };
 		B89F69BF24B6663800472067 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B89F69BD24B6663800472067 /* Main.storyboard */; };
 		B89F69C124B6663A00472067 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B89F69C024B6663A00472067 /* Assets.xcassets */; };
 		B89F69C424B6663A00472067 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B89F69C224B6663A00472067 /* LaunchScreen.storyboard */; };
-		B89F69CD24B666D500472067 /* Username.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B89F69CC24B666D500472067 /* Username.storyboard */; };
 		B89F69D324B6682E00472067 /* Setup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B89F69D224B6682E00472067 /* Setup.storyboard */; };
 		B89F69D524B6687100472067 /* Punchline.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B89F69D424B6687100472067 /* Punchline.storyboard */; };
 		B89F69D724B668A800472067 /* Vote.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B89F69D624B668A800472067 /* Vote.storyboard */; };
 		B89F69D924B6694900472067 /* JokeList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B89F69D824B6694900472067 /* JokeList.storyboard */; };
 		B89F69DB24B66A7E00472067 /* JokeDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B89F69DA24B66A7E00472067 /* JokeDetail.storyboard */; };
 		B89F69DD24B674D600472067 /* VoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89F69DC24B674D600472067 /* VoteViewController.swift */; };
-		B89F69DF24B6750000472067 /* UsernameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89F69DE24B6750000472067 /* UsernameViewController.swift */; };
 		B89F69E124B6752400472067 /* PunchlineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89F69E024B6752400472067 /* PunchlineViewController.swift */; };
 		B89F69E324B6753600472067 /* SetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89F69E224B6753600472067 /* SetupViewController.swift */; };
 		B89F69E524B6755900472067 /* JokeLookupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89F69E424B6755900472067 /* JokeLookupViewController.swift */; };
@@ -49,58 +48,36 @@
 		B89F69E924B6759A00472067 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B89F69E824B6759A00472067 /* Profile.storyboard */; };
 		B89F69EB24B675AA00472067 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89F69EA24B675AA00472067 /* ProfileViewController.swift */; };
 		B89F69EE24B675DA00472067 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89F69ED24B675DA00472067 /* MainTabBarController.swift */; };
-		B89F69F824B68BFB00472067 /* PasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89F69F724B68BFB00472067 /* PasswordViewController.swift */; };
 		B89F69FD24B7EA9F00472067 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89F69FC24B7EA9F00472067 /* Constants.swift */; };
 		B89F69FF24B7ED0800472067 /* GetStarted.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B89F69FE24B7ED0800472067 /* GetStarted.storyboard */; };
 		B89F6A0124B7ED1C00472067 /* GetStartedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89F6A0024B7ED1C00472067 /* GetStartedViewController.swift */; };
-		B89F6A0724B803A900472067 /* Password.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B89F6A0624B803A900472067 /* Password.storyboard */; };
-		B89F6A0B24B8062B00472067 /* Password+UITextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89F6A0A24B8062B00472067 /* Password+UITextFieldDelegate.swift */; };
-		B89F6A0D24B8063D00472067 /* Username+UITextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89F6A0C24B8063D00472067 /* Username+UITextFieldDelegate.swift */; };
 		B89F6A1124B80AEE00472067 /* UITextField+AddBottomBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89F6A1024B80AEE00472067 /* UITextField+AddBottomBorder.swift */; };
-		B89F6A1524B80CE500472067 /* UserAuthorizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89F6A1424B80CE500472067 /* UserAuthorizationManager.swift */; };
-		B89F6A1724B8240400472067 /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = B89F6A1624B8240400472067 /* Cartfile */; };
-		B89F6A1B24B824C700472067 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B89F6A1924B824C700472067 /* Realm.framework */; };
-		B89F6A1C24B824C700472067 /* Realm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B89F6A1924B824C700472067 /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B89F6A1D24B824C700472067 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B89F6A1A24B824C700472067 /* RealmSwift.framework */; };
-		B89F6A1E24B824C700472067 /* RealmSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B89F6A1A24B824C700472067 /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B89F6A1524B80CE500472067 /* CloudKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89F6A1424B80CE500472067 /* CloudKitManager.swift */; };
 		B8A58FF124B982360007B744 /* PunchLineListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8A58FF024B982360007B744 /* PunchLineListViewController.swift */; };
 		B8A58FF524B983AA0007B744 /* Activity.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8A58FF424B983AA0007B744 /* Activity.storyboard */; };
 		B8A58FF824B986C90007B744 /* CustomPunchLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8A58FF724B986C90007B744 /* CustomPunchLine.swift */; };
+		B8B6A9AF28D23C1E005C67EA /* PublicScope.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B6A9AE28D23C1E005C67EA /* PublicScope.swift */; };
+		B8B6A9B128D26FD1005C67EA /* UIViewController+Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B6A9B028D26FD1005C67EA /* UIViewController+Alerts.swift */; };
+		B8B6A9B628D289F9005C67EA /* UsernameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B6A9B328D289F9005C67EA /* UsernameViewController.swift */; };
+		B8B6A9B728D289F9005C67EA /* Username+UITextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B6A9B428D289F9005C67EA /* Username+UITextFieldDelegate.swift */; };
+		B8B6A9B828D289F9005C67EA /* Username.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8B6A9B528D289F9005C67EA /* Username.storyboard */; };
+		B8B6A9BA28D29E96005C67EA /* FavoriteJoke.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B6A9B928D29E96005C67EA /* FavoriteJoke.swift */; };
 		B8CDC13024B9904D000C8B64 /* NewPunchLineTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CDC12F24B9904D000C8B64 /* NewPunchLineTableViewCell.swift */; };
 		B8CDC13224BA283E000C8B64 /* UIColor+CustomColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CDC13124BA283E000C8B64 /* UIColor+CustomColors.swift */; };
 		B8CDC13424BA3224000C8B64 /* PublicPunchLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CDC13324BA3224000C8B64 /* PublicPunchLine.swift */; };
 		B8CDC13724BA3239000C8B64 /* PunchLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CDC13624BA3239000C8B64 /* PunchLine.swift */; };
-		B8CDC13924BA34F4000C8B64 /* PunchLineSyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CDC13824BA34F4000C8B64 /* PunchLineSyncManager.swift */; };
-		B8D8F8B224BA4F5600BBEBB1 /* FavoriteJoke.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D8F8B124BA4F5600BBEBB1 /* FavoriteJoke.swift */; };
 		B8D8F8B424BA518200BBEBB1 /* AppSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D8F8B324BA518200BBEBB1 /* AppSession.swift */; };
-		B8D8F8B624BA5BAE00BBEBB1 /* RealmSyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D8F8B524BA5BAE00BBEBB1 /* RealmSyncManager.swift */; };
 		B8DDF34D24BB8ECA008E0328 /* ProfileJokeHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DDF34C24BB8ECA008E0328 /* ProfileJokeHistoryTableViewCell.swift */; };
 		B8DDF34F24BB8ED8008E0328 /* ProfileToggleSettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DDF34E24BB8ED8008E0328 /* ProfileToggleSettingTableViewCell.swift */; };
 		B8EA41DA24BBAE2700D52A1B /* JokeList+TableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EA41D924BBAE2700D52A1B /* JokeList+TableViewDelegate.swift */; };
 		B8EA41DC24BBAE3200D52A1B /* JokeList+TableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EA41DB24BBAE3200D52A1B /* JokeList+TableViewDataSource.swift */; };
 		B8EABB8624B8278A00A46443 /* NavigationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EABB8524B8278A00A46443 /* NavigationManager.swift */; };
-		B8EABB8824B8427B00A46443 /* RealmAccessManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EABB8724B8427B00A46443 /* RealmAccessManager.swift */; };
 		B8EABB8A24B8477D00A46443 /* ActivityFeedManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EABB8924B8477D00A46443 /* ActivityFeedManager.swift */; };
 		B8EABB8C24B847D900A46443 /* ActivityContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EABB8B24B847D900A46443 /* ActivityContainerViewController.swift */; };
 		B8F1EF4C24BB9133006E7264 /* Profile+TableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F1EF4B24BB9133006E7264 /* Profile+TableViewDelegate.swift */; };
 		B8F1EF4E24BB9142006E7264 /* Profile+TableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F1EF4D24BB9142006E7264 /* Profile+TableViewDataSource.swift */; };
 		B8F1EF5024BBA731006E7264 /* JokeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F1EF4F24BBA731006E7264 /* JokeListViewController.swift */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		B89F6A1F24B824C700472067 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				B89F6A1E24B824C700472067 /* RealmSwift.framework in Embed Frameworks */,
-				B89F6A1C24B824C700472067 /* Realm.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		B808CC3724B912EB00B39432 /* Joke.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Joke.swift; sourceTree = "<group>"; };
@@ -113,7 +90,7 @@
 		B848503424BB66C5006EEE02 /* PunchLineEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PunchLineEditorViewController.swift; sourceTree = "<group>"; };
 		B848503724BB691C006EEE02 /* ActivityFeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityFeedViewModel.swift; sourceTree = "<group>"; };
 		B848503B24BB7077006EEE02 /* Setup+TextViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Setup+TextViewDelegate.swift"; sourceTree = "<group>"; };
-		B848503D24BB7D70006EEE02 /* ActiviteFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiviteFeedViewController.swift; sourceTree = "<group>"; };
+		B848503D24BB7D70006EEE02 /* ActivityFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityFeedViewController.swift; sourceTree = "<group>"; };
 		B850D8F624B988DB0011077D /* PunchLineList+TableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PunchLineList+TableViewDelegate.swift"; sourceTree = "<group>"; };
 		B850D8F824B988EC0011077D /* PunchLineList+TableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PunchLineList+TableViewDataSource.swift"; sourceTree = "<group>"; };
 		B850D8FA24B9897A0011077D /* PunchLineTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PunchLineTableViewCell.swift; sourceTree = "<group>"; };
@@ -123,8 +100,9 @@
 		B854589524BAA6D400723E26 /* PunchLineList+CLLocationManagerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PunchLineList+CLLocationManagerDelegate.swift"; sourceTree = "<group>"; };
 		B866553624BAAF0900DD694F /* PunchLineLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PunchLineLauncher.swift; sourceTree = "<group>"; };
 		B866553924BABEA900DD694F /* PunchLineListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PunchLineListViewModel.swift; sourceTree = "<group>"; };
+		B8722DB8251A7EDA00B513E1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		B890F48224B962010017BA21 /* UIView+ConstrainToSuperview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+ConstrainToSuperview.swift"; sourceTree = "<group>"; };
-		B89CF24024B8BBC70009A8CB /* AppUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUser.swift; sourceTree = "<group>"; };
+		B89CF24024B8BBC70009A8CB /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		B89CF24224B8E6DD0009A8CB /* UIActivityIndicatorView+Animations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIActivityIndicatorView+Animations.swift"; sourceTree = "<group>"; };
 		B89F69B224B6663800472067 /* Punch-Line.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Punch-Line.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B89F69B524B6663800472067 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -132,14 +110,12 @@
 		B89F69C024B6663A00472067 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B89F69C324B6663A00472067 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B89F69C524B6663A00472067 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B89F69CC24B666D500472067 /* Username.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Username.storyboard; sourceTree = "<group>"; };
 		B89F69D224B6682E00472067 /* Setup.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Setup.storyboard; sourceTree = "<group>"; };
 		B89F69D424B6687100472067 /* Punchline.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Punchline.storyboard; sourceTree = "<group>"; };
 		B89F69D624B668A800472067 /* Vote.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Vote.storyboard; sourceTree = "<group>"; };
 		B89F69D824B6694900472067 /* JokeList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = JokeList.storyboard; sourceTree = "<group>"; };
 		B89F69DA24B66A7E00472067 /* JokeDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = JokeDetail.storyboard; sourceTree = "<group>"; };
 		B89F69DC24B674D600472067 /* VoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteViewController.swift; sourceTree = "<group>"; };
-		B89F69DE24B6750000472067 /* UsernameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsernameViewController.swift; sourceTree = "<group>"; };
 		B89F69E024B6752400472067 /* PunchlineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PunchlineViewController.swift; sourceTree = "<group>"; };
 		B89F69E224B6753600472067 /* SetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupViewController.swift; sourceTree = "<group>"; };
 		B89F69E424B6755900472067 /* JokeLookupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JokeLookupViewController.swift; sourceTree = "<group>"; };
@@ -147,37 +123,33 @@
 		B89F69E824B6759A00472067 /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		B89F69EA24B675AA00472067 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		B89F69ED24B675DA00472067 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
-		B89F69F724B68BFB00472067 /* PasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewController.swift; sourceTree = "<group>"; };
 		B89F69FC24B7EA9F00472067 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		B89F69FE24B7ED0800472067 /* GetStarted.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = GetStarted.storyboard; sourceTree = "<group>"; };
 		B89F6A0024B7ED1C00472067 /* GetStartedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetStartedViewController.swift; sourceTree = "<group>"; };
-		B89F6A0624B803A900472067 /* Password.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Password.storyboard; sourceTree = "<group>"; };
-		B89F6A0A24B8062B00472067 /* Password+UITextFieldDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Password+UITextFieldDelegate.swift"; sourceTree = "<group>"; };
-		B89F6A0C24B8063D00472067 /* Username+UITextFieldDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Username+UITextFieldDelegate.swift"; sourceTree = "<group>"; };
 		B89F6A1024B80AEE00472067 /* UITextField+AddBottomBorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+AddBottomBorder.swift"; sourceTree = "<group>"; };
-		B89F6A1424B80CE500472067 /* UserAuthorizationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthorizationManager.swift; sourceTree = "<group>"; };
-		B89F6A1624B8240400472067 /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
-		B89F6A1924B824C700472067 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
-		B89F6A1A24B824C700472067 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/iOS/RealmSwift.framework; sourceTree = "<group>"; };
+		B89F6A1424B80CE500472067 /* CloudKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitManager.swift; sourceTree = "<group>"; };
 		B8A58FF024B982360007B744 /* PunchLineListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PunchLineListViewController.swift; sourceTree = "<group>"; };
 		B8A58FF424B983AA0007B744 /* Activity.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Activity.storyboard; sourceTree = "<group>"; };
 		B8A58FF724B986C90007B744 /* CustomPunchLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPunchLine.swift; sourceTree = "<group>"; };
+		B8B6A9AE28D23C1E005C67EA /* PublicScope.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicScope.swift; sourceTree = "<group>"; };
+		B8B6A9B028D26FD1005C67EA /* UIViewController+Alerts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Alerts.swift"; sourceTree = "<group>"; };
+		B8B6A9B328D289F9005C67EA /* UsernameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsernameViewController.swift; sourceTree = "<group>"; };
+		B8B6A9B428D289F9005C67EA /* Username+UITextFieldDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Username+UITextFieldDelegate.swift"; sourceTree = "<group>"; };
+		B8B6A9B528D289F9005C67EA /* Username.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Username.storyboard; sourceTree = "<group>"; };
+		B8B6A9B928D29E96005C67EA /* FavoriteJoke.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteJoke.swift; sourceTree = "<group>"; };
 		B8CDC12F24B9904D000C8B64 /* NewPunchLineTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPunchLineTableViewCell.swift; sourceTree = "<group>"; };
 		B8CDC13124BA283E000C8B64 /* UIColor+CustomColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+CustomColors.swift"; sourceTree = "<group>"; };
 		B8CDC13324BA3224000C8B64 /* PublicPunchLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicPunchLine.swift; sourceTree = "<group>"; };
 		B8CDC13624BA3239000C8B64 /* PunchLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PunchLine.swift; sourceTree = "<group>"; };
-		B8CDC13824BA34F4000C8B64 /* PunchLineSyncManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PunchLineSyncManager.swift; sourceTree = "<group>"; };
-		B8D8F8B124BA4F5600BBEBB1 /* FavoriteJoke.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteJoke.swift; sourceTree = "<group>"; };
 		B8D8F8B324BA518200BBEBB1 /* AppSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSession.swift; sourceTree = "<group>"; };
-		B8D8F8B524BA5BAE00BBEBB1 /* RealmSyncManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmSyncManager.swift; sourceTree = "<group>"; };
 		B8DDF34C24BB8ECA008E0328 /* ProfileJokeHistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileJokeHistoryTableViewCell.swift; sourceTree = "<group>"; };
 		B8DDF34E24BB8ED8008E0328 /* ProfileToggleSettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileToggleSettingTableViewCell.swift; sourceTree = "<group>"; };
 		B8EA41D924BBAE2700D52A1B /* JokeList+TableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JokeList+TableViewDelegate.swift"; sourceTree = "<group>"; };
 		B8EA41DB24BBAE3200D52A1B /* JokeList+TableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JokeList+TableViewDataSource.swift"; sourceTree = "<group>"; };
 		B8EABB8524B8278A00A46443 /* NavigationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationManager.swift; sourceTree = "<group>"; };
-		B8EABB8724B8427B00A46443 /* RealmAccessManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmAccessManager.swift; sourceTree = "<group>"; };
 		B8EABB8924B8477D00A46443 /* ActivityFeedManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityFeedManager.swift; sourceTree = "<group>"; };
 		B8EABB8B24B847D900A46443 /* ActivityContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityContainerViewController.swift; sourceTree = "<group>"; };
+		B8EB448A253F544200383DF9 /* Punch-Line.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Punch-Line.entitlements"; sourceTree = "<group>"; };
 		B8F1EF4B24BB9133006E7264 /* Profile+TableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Profile+TableViewDelegate.swift"; sourceTree = "<group>"; };
 		B8F1EF4D24BB9142006E7264 /* Profile+TableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Profile+TableViewDataSource.swift"; sourceTree = "<group>"; };
 		B8F1EF4F24BBA731006E7264 /* JokeListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JokeListViewController.swift; sourceTree = "<group>"; };
@@ -188,8 +160,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B89F6A1D24B824C700472067 /* RealmSwift.framework in Frameworks */,
-				B89F6A1B24B824C700472067 /* Realm.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -199,6 +169,7 @@
 		B808CC3D24B9581200B39432 /* Vote */ = {
 			isa = PBXGroup;
 			children = (
+				B89F69D624B668A800472067 /* Vote.storyboard */,
 				B89F69DC24B674D600472067 /* VoteViewController.swift */,
 				B808CC4424B9584800B39432 /* Vote+ActivityFeedViewController.swift */,
 			);
@@ -208,6 +179,7 @@
 		B808CC3E24B9581F00B39432 /* Setup */ = {
 			isa = PBXGroup;
 			children = (
+				B89F69D224B6682E00472067 /* Setup.storyboard */,
 				B89F69E224B6753600472067 /* SetupViewController.swift */,
 				B808CC4224B9584500B39432 /* Setup+ActivityFeedViewController.swift */,
 				B848503B24BB7077006EEE02 /* Setup+TextViewDelegate.swift */,
@@ -218,17 +190,57 @@
 		B808CC3F24B9582400B39432 /* Punchline */ = {
 			isa = PBXGroup;
 			children = (
+				B89F69D424B6687100472067 /* Punchline.storyboard */,
 				B89F69E024B6752400472067 /* PunchlineViewController.swift */,
 				B808CC4024B9583F00B39432 /* Punchline+ActivityFeedViewController.swift */,
 			);
 			path = Punchline;
 			sourceTree = "<group>";
 		};
+		B80D3E8E27AAEF4E0095D777 /* Get Started */ = {
+			isa = PBXGroup;
+			children = (
+				B89F6A0024B7ED1C00472067 /* GetStartedViewController.swift */,
+				B89F69FE24B7ED0800472067 /* GetStarted.storyboard */,
+			);
+			path = "Get Started";
+			sourceTree = "<group>";
+		};
+		B80D3E8F27AAEF600095D777 /* JokeDetail */ = {
+			isa = PBXGroup;
+			children = (
+				B89F69DA24B66A7E00472067 /* JokeDetail.storyboard */,
+				B89F69E624B6757000472067 /* JokeDetailViewController.swift */,
+			);
+			path = JokeDetail;
+			sourceTree = "<group>";
+		};
+		B80D3E9127AAEFA60095D777 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				B89F69E424B6755900472067 /* JokeLookupViewController.swift */,
+				B89F69ED24B675DA00472067 /* MainTabBarController.swift */,
+				B89F69BD24B6663800472067 /* Main.storyboard */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		B80D3E9327AAF0AE0095D777 /* Project Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				B89F69B524B6663800472067 /* AppDelegate.swift */,
+				B8722DB8251A7EDA00B513E1 /* SceneDelegate.swift */,
+			);
+			path = "Project Delegates";
+			sourceTree = "<group>";
+		};
 		B848503624BB68A6006EEE02 /* Activity */ = {
 			isa = PBXGroup;
 			children = (
+				B848503224BB66B3006EEE02 /* PunchLineEditor.storyboard */,
+				B8A58FF424B983AA0007B744 /* Activity.storyboard */,
 				B848503424BB66C5006EEE02 /* PunchLineEditorViewController.swift */,
-				B848503D24BB7D70006EEE02 /* ActiviteFeedViewController.swift */,
+				B848503D24BB7D70006EEE02 /* ActivityFeedViewController.swift */,
 				B8EABB8B24B847D900A46443 /* ActivityContainerViewController.swift */,
 				B848503724BB691C006EEE02 /* ActivityFeedViewModel.swift */,
 				B808CC3F24B9582400B39432 /* Punchline */,
@@ -236,16 +248,6 @@
 				B808CC3D24B9581200B39432 /* Vote */,
 			);
 			path = Activity;
-			sourceTree = "<group>";
-		};
-		B848503F24BB7DA6006EEE02 /* Login */ = {
-			isa = PBXGroup;
-			children = (
-				B89F6A0024B7ED1C00472067 /* GetStartedViewController.swift */,
-				B89F6A0924B805E900472067 /* Password */,
-				B89F6A0824B805E500472067 /* Username */,
-			);
-			path = Login;
 			sourceTree = "<group>";
 		};
 		B850D8F524B988C30011077D /* PunchLineList */ = {
@@ -265,10 +267,9 @@
 		B866553824BAAFCD00DD694F /* User */ = {
 			isa = PBXGroup;
 			children = (
-				B866553624BAAF0900DD694F /* PunchLineLauncher.swift */,
+				B8B6A9B928D29E96005C67EA /* FavoriteJoke.swift */,
 				B8D8F8B324BA518200BBEBB1 /* AppSession.swift */,
-				B8D8F8B124BA4F5600BBEBB1 /* FavoriteJoke.swift */,
-				B89CF24024B8BBC70009A8CB /* AppUser.swift */,
+				B89CF24024B8BBC70009A8CB /* User.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -276,10 +277,8 @@
 		B89F69A924B6663800472067 = {
 			isa = PBXGroup;
 			children = (
-				B89F6A1624B8240400472067 /* Cartfile */,
 				B89F69B424B6663800472067 /* Punch-Line */,
 				B89F69B324B6663800472067 /* Products */,
-				B89F6A1824B824C700472067 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -294,46 +293,24 @@
 		B89F69B424B6663800472067 /* Punch-Line */ = {
 			isa = PBXGroup;
 			children = (
-				B89F69B524B6663800472067 /* AppDelegate.swift */,
 				B89F69D024B6670C00472067 /* Managers */,
 				B89F69D124B6671100472067 /* Models */,
 				B89F69CF24B666F200472067 /* Resources */,
-				B89F69CB24B666A900472067 /* Storyboards */,
 				B89F69CE24B666E000472067 /* UI */,
 				B89F6A0E24B80ACD00472067 /* Extensions */,
 			);
 			path = "Punch-Line";
 			sourceTree = "<group>";
 		};
-		B89F69CB24B666A900472067 /* Storyboards */ = {
-			isa = PBXGroup;
-			children = (
-				B8A58FF424B983AA0007B744 /* Activity.storyboard */,
-				B89F69FE24B7ED0800472067 /* GetStarted.storyboard */,
-				B89F69DA24B66A7E00472067 /* JokeDetail.storyboard */,
-				B89F69D824B6694900472067 /* JokeList.storyboard */,
-				B89F69C224B6663A00472067 /* LaunchScreen.storyboard */,
-				B89F69BD24B6663800472067 /* Main.storyboard */,
-				B89F6A0624B803A900472067 /* Password.storyboard */,
-				B89F69E824B6759A00472067 /* Profile.storyboard */,
-				B89F69D424B6687100472067 /* Punchline.storyboard */,
-				B848503224BB66B3006EEE02 /* PunchLineEditor.storyboard */,
-				B89F69D224B6682E00472067 /* Setup.storyboard */,
-				B89F69CC24B666D500472067 /* Username.storyboard */,
-				B89F69D624B668A800472067 /* Vote.storyboard */,
-			);
-			path = Storyboards;
-			sourceTree = "<group>";
-		};
 		B89F69CE24B666E000472067 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				B8EA41D824BBAE1400D52A1B /* JokeList */,
+				B8B6A9B228D289E9005C67EA /* Username */,
 				B848503624BB68A6006EEE02 /* Activity */,
-				B89F69E624B6757000472067 /* JokeDetailViewController.swift */,
-				B89F69E424B6755900472067 /* JokeLookupViewController.swift */,
-				B848503F24BB7DA6006EEE02 /* Login */,
-				B89F69ED24B675DA00472067 /* MainTabBarController.swift */,
+				B80D3E8E27AAEF4E0095D777 /* Get Started */,
+				B80D3E8F27AAEF600095D777 /* JokeDetail */,
+				B8EA41D824BBAE1400D52A1B /* JokeList */,
+				B80D3E9127AAEFA60095D777 /* Main */,
 				B8DDF34B24BB8E38008E0328 /* Profile */,
 				B850D8F524B988C30011077D /* PunchLineList */,
 			);
@@ -343,7 +320,10 @@
 		B89F69CF24B666F200472067 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				B89F69C224B6663A00472067 /* LaunchScreen.storyboard */,
+				B80D3E9327AAF0AE0095D777 /* Project Delegates */,
 				B89F69C024B6663A00472067 /* Assets.xcassets */,
+				B8EB448A253F544200383DF9 /* Punch-Line.entitlements */,
 				B89F69C524B6663A00472067 /* Info.plist */,
 				B89F69FC24B7EA9F00472067 /* Constants.swift */,
 				B854588F24BA78BD00723E26 /* MatchablePublicPunchLines.swift */,
@@ -356,11 +336,8 @@
 			children = (
 				B8EABB8924B8477D00A46443 /* ActivityFeedManager.swift */,
 				B8EABB8524B8278A00A46443 /* NavigationManager.swift */,
-				B8EABB8724B8427B00A46443 /* RealmAccessManager.swift */,
-				B8CDC13824BA34F4000C8B64 /* PunchLineSyncManager.swift */,
-				B8D8F8B524BA5BAE00BBEBB1 /* RealmSyncManager.swift */,
 				B808CC3B24B94FA200B39432 /* StyleManager.swift */,
-				B89F6A1424B80CE500472067 /* UserAuthorizationManager.swift */,
+				B89F6A1424B80CE500472067 /* CloudKitManager.swift */,
 				B854589124BA97F900723E26 /* CoreLocationManager.swift */,
 			);
 			path = Managers;
@@ -376,24 +353,6 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		B89F6A0824B805E500472067 /* Username */ = {
-			isa = PBXGroup;
-			children = (
-				B89F69DE24B6750000472067 /* UsernameViewController.swift */,
-				B89F6A0C24B8063D00472067 /* Username+UITextFieldDelegate.swift */,
-			);
-			path = Username;
-			sourceTree = "<group>";
-		};
-		B89F6A0924B805E900472067 /* Password */ = {
-			isa = PBXGroup;
-			children = (
-				B89F69F724B68BFB00472067 /* PasswordViewController.swift */,
-				B89F6A0A24B8062B00472067 /* Password+UITextFieldDelegate.swift */,
-			);
-			path = Password;
-			sourceTree = "<group>";
-		};
 		B89F6A0E24B80ACD00472067 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -402,25 +361,29 @@
 				B8CDC13124BA283E000C8B64 /* UIColor+CustomColors.swift */,
 				B89F6A1024B80AEE00472067 /* UITextField+AddBottomBorder.swift */,
 				B890F48224B962010017BA21 /* UIView+ConstrainToSuperview.swift */,
+				B8B6A9B028D26FD1005C67EA /* UIViewController+Alerts.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		B89F6A1824B824C700472067 /* Frameworks */ = {
+		B8B6A9B228D289E9005C67EA /* Username */ = {
 			isa = PBXGroup;
 			children = (
-				B89F6A1924B824C700472067 /* Realm.framework */,
-				B89F6A1A24B824C700472067 /* RealmSwift.framework */,
+				B8B6A9B528D289F9005C67EA /* Username.storyboard */,
+				B8B6A9B428D289F9005C67EA /* Username+UITextFieldDelegate.swift */,
+				B8B6A9B328D289F9005C67EA /* UsernameViewController.swift */,
 			);
-			name = Frameworks;
+			path = Username;
 			sourceTree = "<group>";
 		};
 		B8CDC13524BA3227000C8B64 /* PunchLine */ = {
 			isa = PBXGroup;
 			children = (
+				B866553624BAAF0900DD694F /* PunchLineLauncher.swift */,
 				B8A58FF724B986C90007B744 /* CustomPunchLine.swift */,
 				B8CDC13324BA3224000C8B64 /* PublicPunchLine.swift */,
 				B8CDC13624BA3239000C8B64 /* PunchLine.swift */,
+				B8B6A9AE28D23C1E005C67EA /* PublicScope.swift */,
 			);
 			path = PunchLine;
 			sourceTree = "<group>";
@@ -437,6 +400,7 @@
 		B8DDF34B24BB8E38008E0328 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				B89F69E824B6759A00472067 /* Profile.storyboard */,
 				B89F69EA24B675AA00472067 /* ProfileViewController.swift */,
 				B8DDF34C24BB8ECA008E0328 /* ProfileJokeHistoryTableViewCell.swift */,
 				B8DDF34E24BB8ED8008E0328 /* ProfileToggleSettingTableViewCell.swift */,
@@ -449,6 +413,7 @@
 		B8EA41D824BBAE1400D52A1B /* JokeList */ = {
 			isa = PBXGroup;
 			children = (
+				B89F69D824B6694900472067 /* JokeList.storyboard */,
 				B8F1EF4F24BBA731006E7264 /* JokeListViewController.swift */,
 				B8EA41D924BBAE2700D52A1B /* JokeList+TableViewDelegate.swift */,
 				B8EA41DB24BBAE3200D52A1B /* JokeList+TableViewDataSource.swift */,
@@ -466,15 +431,12 @@
 				B89F69AE24B6663800472067 /* Sources */,
 				B89F69AF24B6663800472067 /* Frameworks */,
 				B89F69B024B6663800472067 /* Resources */,
-				B89F6A1F24B824C700472067 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = "Punch-Line";
-			packageProductDependencies = (
-			);
 			productName = "Punch-Line";
 			productReference = B89F69B224B6663800472067 /* Punch-Line.app */;
 			productType = "com.apple.product-type.application";
@@ -486,7 +448,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1150;
-				LastUpgradeCheck = 1150;
+				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = "Bozo Design Labs";
 				TargetAttributes = {
 					B89F69B124B6663800472067 = {
@@ -503,8 +465,6 @@
 				Base,
 			);
 			mainGroup = B89F69A924B6663800472067;
-			packageReferences = (
-			);
 			productRefGroup = B89F69B324B6663800472067 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -519,16 +479,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B89F69CD24B666D500472067 /* Username.storyboard in Resources */,
 				B89F69D924B6694900472067 /* JokeList.storyboard in Resources */,
 				B848503324BB66B3006EEE02 /* PunchLineEditor.storyboard in Resources */,
 				B89F69D324B6682E00472067 /* Setup.storyboard in Resources */,
 				B89F69FF24B7ED0800472067 /* GetStarted.storyboard in Resources */,
-				B89F6A1724B8240400472067 /* Cartfile in Resources */,
 				B89F69C424B6663A00472067 /* LaunchScreen.storyboard in Resources */,
-				B89F6A0724B803A900472067 /* Password.storyboard in Resources */,
 				B89F69C124B6663A00472067 /* Assets.xcassets in Resources */,
 				B89F69BF24B6663800472067 /* Main.storyboard in Resources */,
+				B8B6A9B828D289F9005C67EA /* Username.storyboard in Resources */,
 				B89F69D524B6687100472067 /* Punchline.storyboard in Resources */,
 				B89F69D724B668A800472067 /* Vote.storyboard in Resources */,
 				B8A58FF524B983AA0007B744 /* Activity.storyboard in Resources */,
@@ -552,18 +510,16 @@
 				B89F69B624B6663800472067 /* AppDelegate.swift in Sources */,
 				B890F48324B962010017BA21 /* UIView+ConstrainToSuperview.swift in Sources */,
 				B8EABB8624B8278A00A46443 /* NavigationManager.swift in Sources */,
-				B8D8F8B224BA4F5600BBEBB1 /* FavoriteJoke.swift in Sources */,
 				B8D8F8B424BA518200BBEBB1 /* AppSession.swift in Sources */,
 				B8EABB8C24B847D900A46443 /* ActivityContainerViewController.swift in Sources */,
 				B854589424BAA12C00723E26 /* String+RemovingSpaces.swift in Sources */,
 				B8F1EF5024BBA731006E7264 /* JokeListViewController.swift in Sources */,
 				B850D8F924B988EC0011077D /* PunchLineList+TableViewDataSource.swift in Sources */,
 				B848503824BB691C006EEE02 /* ActivityFeedViewModel.swift in Sources */,
-				B848503E24BB7D70006EEE02 /* ActiviteFeedViewController.swift in Sources */,
+				B848503E24BB7D70006EEE02 /* ActivityFeedViewController.swift in Sources */,
 				B89CF24324B8E6DD0009A8CB /* UIActivityIndicatorView+Animations.swift in Sources */,
-				B89CF24124B8BBC70009A8CB /* AppUser.swift in Sources */,
+				B89CF24124B8BBC70009A8CB /* User.swift in Sources */,
 				B866553724BAAF0900DD694F /* PunchLineLauncher.swift in Sources */,
-				B89F6A0B24B8062B00472067 /* Password+UITextFieldDelegate.swift in Sources */,
 				B808CC3A24B948E200B39432 /* Setup.swift in Sources */,
 				B850D8FB24B9897A0011077D /* PunchLineTableViewCell.swift in Sources */,
 				B850D8F724B988DB0011077D /* PunchLineList+TableViewDelegate.swift in Sources */,
@@ -571,35 +527,35 @@
 				B89F6A0124B7ED1C00472067 /* GetStartedViewController.swift in Sources */,
 				B8F1EF4C24BB9133006E7264 /* Profile+TableViewDelegate.swift in Sources */,
 				B8CDC13024B9904D000C8B64 /* NewPunchLineTableViewCell.swift in Sources */,
-				B8CDC13924BA34F4000C8B64 /* PunchLineSyncManager.swift in Sources */,
+				B8B6A9BA28D29E96005C67EA /* FavoriteJoke.swift in Sources */,
+				B8B6A9B128D26FD1005C67EA /* UIViewController+Alerts.swift in Sources */,
 				B89F69E124B6752400472067 /* PunchlineViewController.swift in Sources */,
 				B8CDC13724BA3239000C8B64 /* PunchLine.swift in Sources */,
-				B8D8F8B624BA5BAE00BBEBB1 /* RealmSyncManager.swift in Sources */,
 				B848503524BB66C5006EEE02 /* PunchLineEditorViewController.swift in Sources */,
 				B89F69EE24B675DA00472067 /* MainTabBarController.swift in Sources */,
+				B8B6A9B628D289F9005C67EA /* UsernameViewController.swift in Sources */,
 				B808CC4124B9583F00B39432 /* Punchline+ActivityFeedViewController.swift in Sources */,
-				B89F69F824B68BFB00472067 /* PasswordViewController.swift in Sources */,
+				B8722DB9251A7EDA00B513E1 /* SceneDelegate.swift in Sources */,
 				B8F1EF4E24BB9142006E7264 /* Profile+TableViewDataSource.swift in Sources */,
+				B8B6A9B728D289F9005C67EA /* Username+UITextFieldDelegate.swift in Sources */,
 				B8EA41DA24BBAE2700D52A1B /* JokeList+TableViewDelegate.swift in Sources */,
 				B89F69DD24B674D600472067 /* VoteViewController.swift in Sources */,
 				B8CDC13224BA283E000C8B64 /* UIColor+CustomColors.swift in Sources */,
 				B89F69E724B6757000472067 /* JokeDetailViewController.swift in Sources */,
 				B808CC3824B912EB00B39432 /* Joke.swift in Sources */,
-				B89F69DF24B6750000472067 /* UsernameViewController.swift in Sources */,
 				B8EA41DC24BBAE3200D52A1B /* JokeList+TableViewDataSource.swift in Sources */,
 				B8DDF34F24BB8ED8008E0328 /* ProfileToggleSettingTableViewCell.swift in Sources */,
 				B848503C24BB7077006EEE02 /* Setup+TextViewDelegate.swift in Sources */,
 				B89F69FD24B7EA9F00472067 /* Constants.swift in Sources */,
-				B8EABB8824B8427B00A46443 /* RealmAccessManager.swift in Sources */,
+				B8B6A9AF28D23C1E005C67EA /* PublicScope.swift in Sources */,
 				B866553A24BABEA900DD694F /* PunchLineListViewModel.swift in Sources */,
-				B89F6A1524B80CE500472067 /* UserAuthorizationManager.swift in Sources */,
+				B89F6A1524B80CE500472067 /* CloudKitManager.swift in Sources */,
 				B8A58FF124B982360007B744 /* PunchLineListViewController.swift in Sources */,
 				B89F69E524B6755900472067 /* JokeLookupViewController.swift in Sources */,
 				B89F69E324B6753600472067 /* SetupViewController.swift in Sources */,
 				B8CDC13424BA3224000C8B64 /* PublicPunchLine.swift in Sources */,
 				B8DDF34D24BB8ECA008E0328 /* ProfileJokeHistoryTableViewCell.swift in Sources */,
 				B854589024BA78BD00723E26 /* MatchablePublicPunchLines.swift in Sources */,
-				B89F6A0D24B8063D00472067 /* Username+UITextFieldDelegate.swift in Sources */,
 				B89F69EB24B675AA00472067 /* ProfileViewController.swift in Sources */,
 				B808CC4324B9584500B39432 /* Setup+ActivityFeedViewController.swift in Sources */,
 				B808CC3C24B94FA200B39432 /* StyleManager.swift in Sources */,
@@ -654,6 +610,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -678,7 +635,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -714,6 +671,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -732,7 +690,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -746,14 +704,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Punch-Line/Resources/Punch-Line.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = LNM9247SFR;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
 				INFOPLIST_FILE = "Punch-Line/Resources/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -769,14 +724,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Punch-Line/Resources/Punch-Line.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = LNM9247SFR;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
 				INFOPLIST_FILE = "Punch-Line/Resources/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

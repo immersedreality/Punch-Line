@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="xGw-aM-Vg7">
-    <device id="retina5_9" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="xGw-aM-Vg7">
+    <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -12,22 +13,23 @@
             <objects>
                 <viewController id="xGw-aM-Vg7" customClass="UsernameViewController" customModule="Punch_Line" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="tsT-bh-fNA">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter a username:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VDZ-En-j2N">
-                                <rect key="frame" x="15.999999999999986" y="60" width="244.66666666666663" height="36"/>
+                                <rect key="frame" x="16" y="63" width="244" height="36"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="30"/>
                                 <color key="textColor" red="0.85098039219999999" green="0.47058823529999999" blue="0.49803921569999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="username" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="39h-Jk-IKg">
-                                <rect key="frame" x="16" y="112" width="343" height="30.666666666666657"/>
+                                <rect key="frame" x="16" y="115.00000000000001" width="358" height="30.666666666666671"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="24"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="done"/>
                             </textField>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="kg7-TO-h7j"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="VDZ-En-j2N" firstAttribute="leading" secondItem="kg7-TO-h7j" secondAttribute="leading" constant="16" id="7gg-0f-Xeb"/>
                             <constraint firstItem="39h-Jk-IKg" firstAttribute="leading" secondItem="VDZ-En-j2N" secondAttribute="leading" id="9ef-U5-ur6"/>
@@ -35,28 +37,21 @@
                             <constraint firstItem="VDZ-En-j2N" firstAttribute="top" secondItem="kg7-TO-h7j" secondAttribute="top" constant="16" id="xqh-gd-vlB"/>
                             <constraint firstItem="39h-Jk-IKg" firstAttribute="top" secondItem="VDZ-En-j2N" secondAttribute="bottom" constant="16" id="xwF-B3-AjK"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="kg7-TO-h7j"/>
                     </view>
                     <navigationItem key="navigationItem" id="ufG-Zx-DMV"/>
                     <connections>
                         <outlet property="enterUsernameLabel" destination="VDZ-En-j2N" id="h2c-lp-AB8"/>
                         <outlet property="usernameTextField" destination="39h-Jk-IKg" id="Pao-Tg-7Vi"/>
-                        <segue destination="Bcl-D1-2qJ" kind="show" identifier="ShowPasswordViewController" id="Mpz-sZ-LDM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YSY-Wg-nYo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1286" y="179"/>
         </scene>
-        <!--Password-->
-        <scene sceneID="I5D-Hb-D8g">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Password" id="Bcl-D1-2qJ" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="fUw-W0-B4L"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="hKn-tq-s8H" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1903" y="179"/>
-        </scene>
     </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>

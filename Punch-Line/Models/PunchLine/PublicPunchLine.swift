@@ -7,60 +7,27 @@
 //
 
 import Foundation
-import RealmSwift
+import CloudKit
 
-class PublicPunchLine: Object, PunchLine {
+struct PublicPunchLine: PunchLine {
 
-    @objc dynamic var id: String = UUID().uuidString
+    let id: String
+    let scope: PublicScope
+    let name: String
 
-    @objc dynamic var name: String = ""
-    @objc private dynamic var scope: Int = 1
+    let activeSetups: [Setup] = []
+    let activeJokes: [Joke] = []
+    let survivingJokes: [Joke] = []
 
-    let activeSetups = List<Setup>()
-    let activeJokes = List<Joke>()
-    let survivingJokes = List<Joke>()
-
-    var nameWithoutSpaces: String {
-        return name.removingSpaces()
-    }
-
-    var realmPath: String {
-        return "/" + nameWithoutSpaces
-    }
-
-    func setScope(to scope: PublicScope) {
-        self.scope = scope.rawValue
-    }
-
-    func getScope() -> PublicScope {
-        return PublicScope(rawValue: scope) ?? .country
-    }
-
-    override class func primaryKey() -> String? {
-        return PrimaryKeys.id
-    }
-
-    override class func ignoredProperties() -> [String] {
-        return [
-            IgnoredProperties.nameWithoutSpaces,
-            IgnoredProperties.realmPath
-        ]
-    }
-    
 }
 
-enum PublicScope: Int {
-    case country, stateOrProvince, city
+enum PublicPunchLineRecordKeys: String {
+    case type = "PublicPunchLine"
+}
 
-    var displayName: String {
-        switch self {
-        case .country:
-            return RegionDisplayNames.country
-        case .stateOrProvince:
-            return RegionDisplayNames.stateOrProvince
-        case .city:
-            return RegionDisplayNames.city
-        }
+extension PublicPunchLine {
+    var record: CKRecord {
+        let record = CKRecord(recordType: PublicPunchLineRecordKeys.type.rawValue)
+        return record
     }
-
 }

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="vP0-Rz-Zub">
-    <device id="retina5_9" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="vP0-Rz-Zub">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -12,31 +13,31 @@
             <objects>
                 <viewController id="7Cp-fw-LY3" customClass="GetStartedViewController" customModule="Punch_Line" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="JGL-5c-Y30">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo-Transparent" translatesAutoresizingMaskIntoConstraints="NO" id="h4Z-Zy-5xV">
-                                <rect key="frame" x="87.666666666666686" y="108" width="200" height="200"/>
+                                <rect key="frame" x="96.666666666666686" y="123" width="200" height="200"/>
                                 <color key="tintColor" red="0.85098039219999999" green="0.47058823529999999" blue="0.49803921569999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="200" id="GdP-zJ-XMj"/>
                                     <constraint firstAttribute="width" constant="200" id="W7K-7j-hRE"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Punch-Line" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lfN-Zp-cdI">
-                                <rect key="frame" x="37.666666666666657" y="316" width="300" height="76.666666666666686"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Punch-Line" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lfN-Zp-cdI">
+                                <rect key="frame" x="32" y="331" width="329" height="76.666666666666686"/>
                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="64"/>
                                 <color key="textColor" red="0.85098039219999999" green="0.47058823529999999" blue="0.49803921569999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Laugh, and the world laughs with you." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MWy-Id-7bE">
-                                <rect key="frame" x="50.666666666666657" y="408.66666666666669" width="274" height="19.333333333333314"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Laugh, and the world laughs with you." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MWy-Id-7bE">
+                                <rect key="frame" x="48" y="423.66666666666669" width="297" height="19.333333333333314"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <color key="textColor" red="0.85098039219999999" green="0.47058823529999999" blue="0.49803921569999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fRO-ZG-QyQ">
-                                <rect key="frame" x="24" y="618" width="327" height="48"/>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fRO-ZG-QyQ">
+                                <rect key="frame" x="24" y="722" width="345" height="48"/>
                                 <color key="backgroundColor" red="0.85098039219999999" green="0.47058823529999999" blue="0.49803921569999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="hih-C1-U3a"/>
@@ -54,43 +55,23 @@
                                     <action selector="getStartedButtonTapped:" destination="7Cp-fw-LY3" eventType="touchUpInside" id="11v-Cw-0wA"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5r8-WH-fT3">
-                                <rect key="frame" x="24" y="682" width="327" height="48"/>
-                                <color key="backgroundColor" red="0.85098039219999999" green="0.47058823529999999" blue="0.49803921569999998" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="48" id="ccp-AQ-ifq"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <state key="normal" title="Sign Into An Existing Account">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="8"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="signIntoAnExistingAccountButtonTapped:" destination="7Cp-fw-LY3" eventType="touchUpInside" id="dtz-ZD-Juz"/>
-                                </connections>
-                            </button>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="FSr-X1-4tF"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="5r8-WH-fT3" firstAttribute="leading" secondItem="FSr-X1-4tF" secondAttribute="leading" constant="24" id="240-lT-Yty"/>
-                            <constraint firstItem="MWy-Id-7bE" firstAttribute="centerX" secondItem="FSr-X1-4tF" secondAttribute="centerX" id="4MJ-jN-auV"/>
                             <constraint firstItem="lfN-Zp-cdI" firstAttribute="top" secondItem="h4Z-Zy-5xV" secondAttribute="bottom" constant="8" id="9fS-0v-NFC"/>
                             <constraint firstItem="fRO-ZG-QyQ" firstAttribute="centerX" secondItem="FSr-X1-4tF" secondAttribute="centerX" id="F4j-gI-Vvt"/>
-                            <constraint firstItem="FSr-X1-4tF" firstAttribute="trailing" secondItem="5r8-WH-fT3" secondAttribute="trailing" constant="24" id="JsB-d9-rje"/>
-                            <constraint firstItem="FSr-X1-4tF" firstAttribute="bottom" secondItem="5r8-WH-fT3" secondAttribute="bottom" constant="48" id="MXC-fH-fnc"/>
-                            <constraint firstItem="lfN-Zp-cdI" firstAttribute="centerX" secondItem="FSr-X1-4tF" secondAttribute="centerX" id="MoD-PT-1eD"/>
                             <constraint firstItem="FSr-X1-4tF" firstAttribute="trailing" secondItem="fRO-ZG-QyQ" secondAttribute="trailing" constant="24" id="VBf-ef-tv0"/>
                             <constraint firstItem="h4Z-Zy-5xV" firstAttribute="top" secondItem="FSr-X1-4tF" secondAttribute="top" constant="64" id="Wh1-la-mA0"/>
-                            <constraint firstItem="5r8-WH-fT3" firstAttribute="top" secondItem="fRO-ZG-QyQ" secondAttribute="bottom" constant="16" id="cJL-hQ-1xT"/>
+                            <constraint firstItem="FSr-X1-4tF" firstAttribute="trailing" secondItem="MWy-Id-7bE" secondAttribute="trailing" constant="48" id="X8k-Fz-h8d"/>
+                            <constraint firstItem="MWy-Id-7bE" firstAttribute="leading" secondItem="FSr-X1-4tF" secondAttribute="leading" constant="48" id="bMm-4E-9fE"/>
+                            <constraint firstItem="FSr-X1-4tF" firstAttribute="bottom" secondItem="fRO-ZG-QyQ" secondAttribute="bottom" constant="48" id="fzs-cf-pkZ"/>
                             <constraint firstItem="fRO-ZG-QyQ" firstAttribute="leading" secondItem="FSr-X1-4tF" secondAttribute="leading" constant="24" id="iMX-n7-1pL"/>
                             <constraint firstItem="h4Z-Zy-5xV" firstAttribute="centerX" secondItem="FSr-X1-4tF" secondAttribute="centerX" id="ing-ni-yUy"/>
                             <constraint firstItem="MWy-Id-7bE" firstAttribute="top" secondItem="lfN-Zp-cdI" secondAttribute="bottom" constant="16" id="mEt-AY-nRu"/>
+                            <constraint firstItem="lfN-Zp-cdI" firstAttribute="leading" secondItem="FSr-X1-4tF" secondAttribute="leading" constant="32" id="r4N-OK-SGq"/>
+                            <constraint firstItem="FSr-X1-4tF" firstAttribute="trailing" secondItem="lfN-Zp-cdI" secondAttribute="trailing" constant="32" id="uZj-2T-SzA"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="FSr-X1-4tF"/>
                     </view>
                     <navigationItem key="navigationItem" id="ROG-NG-OU4"/>
                     <connections>
@@ -133,5 +114,8 @@
     </scenes>
     <resources>
         <image name="Logo-Transparent" width="925" height="873"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

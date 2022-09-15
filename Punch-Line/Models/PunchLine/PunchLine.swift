@@ -7,14 +7,11 @@
 //
 
 import Foundation
-import RealmSwift
 
 protocol PunchLine {
-    var id: String { get set }
-    var name: String { get set }
-    var activeSetups: List<Setup> { get }
-    var activeJokes: List<Joke> { get }
-    var survivingJokes: List<Joke> { get }
-    var nameWithoutSpaces: String { get }
-    var realmPath: String { get }
+    var id: String { get }
+    var name: String { get }
+    var activeSetups: [Setup] { get }
+    var activeJokes: [Joke] { get }
+    var survivingJokes: [Joke] { get }
 }

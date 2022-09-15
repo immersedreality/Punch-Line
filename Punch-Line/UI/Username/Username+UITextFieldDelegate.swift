@@ -21,9 +21,10 @@ extension UsernameViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         guard let username = usernameTextField.text else { return false }
         guard username.count > 0 else { return false }
-        
-        userAuthorizationManager.username = username
-        self.performSegue(withIdentifier: SegueIdentifiers.showPasswordViewController, sender: self)
+        presentConfirmOrCancelAlertWith(title: AlertConstants.confirmUsernameTitle, message: AlertConstants.confirmUsernameMessage) { _ in
+            AppSession.createNewUser(with: username)
+            NavigationManager.setRootViewControllerTo(storyboardName: StoryboardNames.main)
+        }
         return true
     }
 

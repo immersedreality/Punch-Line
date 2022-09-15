@@ -27,8 +27,8 @@ class ProfileViewController: UIViewController {
         view.backgroundColor = StyleManager.generateRandomBackgroundColor()
     }
 
-    @IBAction func signOutButtonPressed(_ sender: Any) {
-        UserAuthorizationManager.logOut()
+    @IBAction func deleteAppDataButtonPressed(_ sender: Any) {
+        #warning("TODO: Implement iCloud user data deletion")
     }
 
 }

@@ -23,7 +23,7 @@ class PunchLineTableViewCell: UITableViewCell {
     private func configure() {
         contentContainerView.backgroundColor = StyleManager.generateRandomBackgroundColor()
         punchLineTitleLabel.text = punchLineLauncher.name
-        if let regionSizeDisplayName = punchLineLauncher.getPublicScope()?.displayName {
+        if let regionSizeDisplayName = punchLineLauncher.publicScope?.displayName {
             regionSizeLabel.text = regionSizeDisplayName
         }
     }

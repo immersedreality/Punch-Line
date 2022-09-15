@@ -8,6 +8,13 @@
 
 import UIKit
 
+struct AlertConstants {
+    static let cantConnectToiCloudTitle = "Can't Connect to iCloud"
+    static let cantConnectToiCloudMessage = "Please make sure you are signed into iCloud on this device and that Punch-Line has access permission.  \nSettings > Apple ID > iCloud > Apps Using iCloud > Punch-Line"
+    static let confirmUsernameTitle = "Are you sure?"
+    static let confirmUsernameMessage = "This cannot be changed later unless you delete all of your Punch-Line data."
+}
+
 struct CellIdentifiers {
     static let jokeCell = "JokeCell"
     static let jokeHistoryCell = "JokeHistoryCell"
@@ -25,41 +32,10 @@ struct FlagActionTitles {
     static let flagSetupAsUnfunny = "Flag setup as unfunny"
 }
 
-struct IgnoredProperties {
-    static let baseRankingScore = "baseRankingScore"
-    static let customPunchLineLaunchers = "customPunchLineLaunchers"
-    static let nameWithoutSpaces = "nameWithoutSpaces"
-    static let isOffensive = "isOffensive"
-    static let publicPunchLineLaunchers = "publicPunchLineLaunchers"
-    static let realmPath = "realmPath"
-    static let sharedInstance = "sharedInstance"
-    static let sortValue = "sortValue"
-    static let totalUpvoteCount = "totalUpvoteCount"
-    static let totalVoteCount = "totalVoteCount"
-    static let userAccessPath = "userAccessPath"
-}
-
-struct InfoDictionaryKeys {
-    static let shouldInitializeNewCloudInstance = "shouldInitializeNewCloudInstance"
-}
-
-struct PrimaryKeys {
-    static let appSessionKey = "PLAppSession"
-    static let id = "id"
-}
-
 struct ProfileTitles {
     static let favoriteJokes = "Favorite Jokes"
     static let showOffensiveContent = "Show Offensive Content"
     static let yourSurvivingJokes = "Your Surviving Jokes"
-}
-
-struct RealmSyncConstants {
-    static let all = "*"
-    static let httpsPrefix = "https://"
-    static let realmInstanceLink = "stinky-wiener-wagon.us2a.cloud.realm.io"
-    static let realmsPrefix = "realms://"
-    static let userPath = "/~/User"
 }
 
 struct RegionCodes {
@@ -73,6 +49,10 @@ struct RegionDisplayNames {
     static let city = "City"
 }
 
+struct SceneConstants {
+    static let defaultConfiguration = "Default Configuration"
+}
+
 struct SegueIdentifiers {
     static let embedJokeListViewControllerInContainerView = "EmbedJokeListViewControllerInContainerView"
     static let presentActivityFeedViewController = "PresentActivityFeedViewController"
@@ -80,12 +60,12 @@ struct SegueIdentifiers {
     static let presentProfileViewController = "PresentProfileViewController"
     static let presentPunchLineEditorViewController = "PresentPunchLineEditorViewController"
     static let showActivityContainerViewController = "ShowActivityContainerViewController"
-    static let showPasswordViewController = "ShowPasswordViewController"
     static let showUsernameViewController = "ShowUsernameViewController"
 }
 
 struct StoryboardNames {
     static let getStarted = "GetStarted"
+    static let main = "Main"
     static let punchline = "Punchline"
     static let setup = "Setup"
     static let vote = "Vote"

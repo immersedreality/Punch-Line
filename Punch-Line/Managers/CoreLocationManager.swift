@@ -16,7 +16,7 @@ final class CoreLocationManager {
 
     class func handleLocationServicesAuthorizationStatus(for delegate: CLLocationManagerDelegate) {
         locationManager.delegate = delegate
-        if CLLocationManager.authorizationStatus() == .notDetermined {
+        if locationManager.authorizationStatus == .notDetermined {
             locationManager.requestWhenInUseAuthorization()
         } else {
             return
@@ -24,7 +24,6 @@ final class CoreLocationManager {
     }
 
     class func startUpdatingUsersLocation(for delegate: CLLocationManagerDelegate) {
-        guard CLLocationManager.locationServicesEnabled() else { return }
         locationManager.delegate = delegate
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.startUpdatingLocation()

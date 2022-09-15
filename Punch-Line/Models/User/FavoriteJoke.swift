@@ -7,20 +7,15 @@
 //
 
 import Foundation
-import RealmSwift
 
-class FavoriteJoke: Object {
+struct FavoriteJoke {
 
-    @objc dynamic var id: String = ""
+    let id: String
+    let owningUser: User
 
-    @objc dynamic var setup: String = ""
-    @objc dynamic var setupAuthorID: String = ""
-
-    @objc dynamic var punchline: String = ""
-    @objc dynamic var punchlineAuthorID: String = ""
-
-    override class func primaryKey() -> String? {
-        return PrimaryKeys.id
-    }
+    let setup: String
+    let setupAuthorUsername: String
+    let punchline: String
+    let punchlineAuthorUsername: String
 
 }

@@ -1,5 +1,5 @@
 //
-//  ActiviteFeedViewController.swift
+//  ActivityFeedViewController.swift
 //  Punch-Line
 //
 //  Created by Jeffrey Eugene Hoch on 7/12/20.
