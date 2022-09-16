@@ -33,7 +33,8 @@ extension ProfileViewController: UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.toggleSettingCell) as? ProfileToggleSettingTableViewCell else {
                 return UITableViewCell()
             }
-            cell.configure(with: ProfileTitles.showOffensiveContent)
+            cell.delegate = self
+            cell.configure(with: ProfileTitles.showOffensiveContent, switchType: .offensiveContent)
             return cell
         case 3:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.proTipCell) else {

@@ -75,6 +75,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="ROG-NG-OU4"/>
                     <connections>
+                        <outlet property="logoImageView" destination="h4Z-Zy-5xV" id="Uxm-hZ-1zG"/>
                         <segue destination="cfq-qZ-q8P" kind="show" identifier="ShowUsernameViewController" id="iao-Wl-dwm"/>
                     </connections>
                 </viewController>

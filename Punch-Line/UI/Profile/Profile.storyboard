@@ -59,7 +59,6 @@
                                                     <color key="backgroundColor" systemColor="systemGray6Color"/>
                                                     <constraints>
                                                         <constraint firstItem="OS5-AO-ckI" firstAttribute="centerY" secondItem="OHF-SD-OEw" secondAttribute="centerY" id="1ML-34-aZO"/>
-                                                        <constraint firstAttribute="height" constant="144" id="gz6-bx-gtW"/>
                                                         <constraint firstItem="OS5-AO-ckI" firstAttribute="leading" secondItem="OHF-SD-OEw" secondAttribute="leading" constant="16" id="pPo-8U-z99"/>
                                                     </constraints>
                                                     <userDefinedRuntimeAttributes>
@@ -101,13 +100,15 @@
                                                         </label>
                                                         <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="V12-kH-xhe">
                                                             <rect key="frame" x="317" y="20.5" width="51" height="31"/>
+                                                            <connections>
+                                                                <action selector="switchValueChanged:" destination="W3b-6o-HlN" eventType="valueChanged" id="nVc-bU-PXb"/>
+                                                            </connections>
                                                         </switch>
                                                     </subviews>
                                                     <color key="backgroundColor" systemColor="systemGray6Color"/>
                                                     <constraints>
                                                         <constraint firstItem="V12-kH-xhe" firstAttribute="centerY" secondItem="AOh-BM-Frl" secondAttribute="centerY" id="4f4-45-B6Y"/>
                                                         <constraint firstAttribute="trailing" secondItem="V12-kH-xhe" secondAttribute="trailing" constant="16" id="EU5-EW-A65"/>
-                                                        <constraint firstAttribute="height" constant="144" id="ZCX-Rp-Ql6"/>
                                                         <constraint firstItem="eim-WY-Vln" firstAttribute="centerY" secondItem="AOh-BM-Frl" secondAttribute="centerY" id="cKP-K5-RSg"/>
                                                         <constraint firstItem="eim-WY-Vln" firstAttribute="leading" secondItem="AOh-BM-Frl" secondAttribute="leading" constant="16" id="kpR-SK-RhG"/>
                                                     </constraints>

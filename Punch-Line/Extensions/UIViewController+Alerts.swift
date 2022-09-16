@@ -17,10 +17,10 @@ extension UIViewController {
         present(alertController, animated: true)
     }
 
-    func presentConfirmOrCancelAlertWith(title: String, message: String, confirmAction: @escaping (UIAlertAction) -> Void) {
+    func presentConfirmOrCancelAlertWith(title: String, message: String, confirmIsDestructive: Bool, confirmAction: @escaping (UIAlertAction) -> Void) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "Cancel", style: .default)
-        let confirmAction = UIAlertAction(title: "Confirm", style: .default, handler: confirmAction)
+        let confirmAction = UIAlertAction(title: "Confirm", style: confirmIsDestructive ? .destructive : .default, handler: confirmAction)
         alertController.addAction(cancelAction)
         alertController.addAction(confirmAction)
         present(alertController, animated: true)

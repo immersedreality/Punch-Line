@@ -10,21 +10,26 @@ import Foundation
 
 class PunchLineListViewModel {
 
-    let publicPunchLineLaunchers: [PunchLineLauncher] = []
+    var publicPunchLineLaunchers: [PunchLineLauncher] {
+        get {
+            return AppSessionManager.currentPublicPunchlineLaunchers
+        }
+    }
     let customPunchLineLaunchers: [PunchLineLauncher] = []
 
     var selectedPunchLineLauncher: PunchLineLauncher?
 
     func generatePunchLineToLaunch() -> PunchLine? {
-        guard let launcher = selectedPunchLineLauncher else { return nil }
+//        guard let launcher = selectedPunchLineLauncher else { return nil }
+//        switch launcher.type {
+//        #warning("TODO: Write logic to launch Punch-Lines")
+//        case .publicLauncher:
+//            return nil
+//        case .customLauncher:
+//            return nil
+//        }
 
-        switch launcher.type {
-        #warning("TODO: Write logic to launch Punch-Lines")
-        case .publicLauncher:
-            return nil
-        case .customLauncher:
-            return nil
-        }
+        return nil
 
     }
 

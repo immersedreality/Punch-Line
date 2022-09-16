@@ -21,7 +21,6 @@
 		B850D8F724B988DB0011077D /* PunchLineList+TableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B850D8F624B988DB0011077D /* PunchLineList+TableViewDelegate.swift */; };
 		B850D8F924B988EC0011077D /* PunchLineList+TableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B850D8F824B988EC0011077D /* PunchLineList+TableViewDataSource.swift */; };
 		B850D8FB24B9897A0011077D /* PunchLineTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B850D8FA24B9897A0011077D /* PunchLineTableViewCell.swift */; };
-		B854589024BA78BD00723E26 /* MatchablePublicPunchLines.swift in Sources */ = {isa = PBXBuildFile; fileRef = B854588F24BA78BD00723E26 /* MatchablePublicPunchLines.swift */; };
 		B854589224BA97F900723E26 /* CoreLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B854589124BA97F900723E26 /* CoreLocationManager.swift */; };
 		B854589424BAA12C00723E26 /* String+RemovingSpaces.swift in Sources */ = {isa = PBXBuildFile; fileRef = B854589324BAA12C00723E26 /* String+RemovingSpaces.swift */; };
 		B854589624BAA6D400723E26 /* PunchLineList+CLLocationManagerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B854589524BAA6D400723E26 /* PunchLineList+CLLocationManagerDelegate.swift */; };
@@ -29,7 +28,7 @@
 		B866553A24BABEA900DD694F /* PunchLineListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B866553924BABEA900DD694F /* PunchLineListViewModel.swift */; };
 		B8722DB9251A7EDA00B513E1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8722DB8251A7EDA00B513E1 /* SceneDelegate.swift */; };
 		B890F48324B962010017BA21 /* UIView+ConstrainToSuperview.swift in Sources */ = {isa = PBXBuildFile; fileRef = B890F48224B962010017BA21 /* UIView+ConstrainToSuperview.swift */; };
-		B89CF24124B8BBC70009A8CB /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89CF24024B8BBC70009A8CB /* User.swift */; };
+		B89CF24124B8BBC70009A8CB /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89CF24024B8BBC70009A8CB /* UserInfo.swift */; };
 		B89CF24324B8E6DD0009A8CB /* UIActivityIndicatorView+Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89CF24224B8E6DD0009A8CB /* UIActivityIndicatorView+Animations.swift */; };
 		B89F69B624B6663800472067 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89F69B524B6663800472067 /* AppDelegate.swift */; };
 		B89F69BF24B6663800472067 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B89F69BD24B6663800472067 /* Main.storyboard */; };
@@ -62,11 +61,13 @@
 		B8B6A9B728D289F9005C67EA /* Username+UITextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B6A9B428D289F9005C67EA /* Username+UITextFieldDelegate.swift */; };
 		B8B6A9B828D289F9005C67EA /* Username.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8B6A9B528D289F9005C67EA /* Username.storyboard */; };
 		B8B6A9BA28D29E96005C67EA /* FavoriteJoke.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B6A9B928D29E96005C67EA /* FavoriteJoke.swift */; };
+		B8B6A9BE28D51454005C67EA /* ProfileCellActionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B6A9BD28D51454005C67EA /* ProfileCellActionDelegate.swift */; };
+		B8B6A9C028D51564005C67EA /* Profile+CellActionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B6A9BF28D51564005C67EA /* Profile+CellActionDelegate.swift */; };
 		B8CDC13024B9904D000C8B64 /* NewPunchLineTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CDC12F24B9904D000C8B64 /* NewPunchLineTableViewCell.swift */; };
 		B8CDC13224BA283E000C8B64 /* UIColor+CustomColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CDC13124BA283E000C8B64 /* UIColor+CustomColors.swift */; };
 		B8CDC13424BA3224000C8B64 /* PublicPunchLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CDC13324BA3224000C8B64 /* PublicPunchLine.swift */; };
 		B8CDC13724BA3239000C8B64 /* PunchLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CDC13624BA3239000C8B64 /* PunchLine.swift */; };
-		B8D8F8B424BA518200BBEBB1 /* AppSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D8F8B324BA518200BBEBB1 /* AppSession.swift */; };
+		B8D8F8B424BA518200BBEBB1 /* AppSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D8F8B324BA518200BBEBB1 /* AppSessionManager.swift */; };
 		B8DDF34D24BB8ECA008E0328 /* ProfileJokeHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DDF34C24BB8ECA008E0328 /* ProfileJokeHistoryTableViewCell.swift */; };
 		B8DDF34F24BB8ED8008E0328 /* ProfileToggleSettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DDF34E24BB8ED8008E0328 /* ProfileToggleSettingTableViewCell.swift */; };
 		B8EA41DA24BBAE2700D52A1B /* JokeList+TableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EA41D924BBAE2700D52A1B /* JokeList+TableViewDelegate.swift */; };
@@ -94,7 +95,6 @@
 		B850D8F624B988DB0011077D /* PunchLineList+TableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PunchLineList+TableViewDelegate.swift"; sourceTree = "<group>"; };
 		B850D8F824B988EC0011077D /* PunchLineList+TableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PunchLineList+TableViewDataSource.swift"; sourceTree = "<group>"; };
 		B850D8FA24B9897A0011077D /* PunchLineTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PunchLineTableViewCell.swift; sourceTree = "<group>"; };
-		B854588F24BA78BD00723E26 /* MatchablePublicPunchLines.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchablePublicPunchLines.swift; sourceTree = "<group>"; };
 		B854589124BA97F900723E26 /* CoreLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreLocationManager.swift; sourceTree = "<group>"; };
 		B854589324BAA12C00723E26 /* String+RemovingSpaces.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+RemovingSpaces.swift"; sourceTree = "<group>"; };
 		B854589524BAA6D400723E26 /* PunchLineList+CLLocationManagerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PunchLineList+CLLocationManagerDelegate.swift"; sourceTree = "<group>"; };
@@ -102,7 +102,7 @@
 		B866553924BABEA900DD694F /* PunchLineListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PunchLineListViewModel.swift; sourceTree = "<group>"; };
 		B8722DB8251A7EDA00B513E1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		B890F48224B962010017BA21 /* UIView+ConstrainToSuperview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+ConstrainToSuperview.swift"; sourceTree = "<group>"; };
-		B89CF24024B8BBC70009A8CB /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		B89CF24024B8BBC70009A8CB /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		B89CF24224B8E6DD0009A8CB /* UIActivityIndicatorView+Animations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIActivityIndicatorView+Animations.swift"; sourceTree = "<group>"; };
 		B89F69B224B6663800472067 /* Punch-Line.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Punch-Line.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B89F69B524B6663800472067 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -137,11 +137,13 @@
 		B8B6A9B428D289F9005C67EA /* Username+UITextFieldDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Username+UITextFieldDelegate.swift"; sourceTree = "<group>"; };
 		B8B6A9B528D289F9005C67EA /* Username.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Username.storyboard; sourceTree = "<group>"; };
 		B8B6A9B928D29E96005C67EA /* FavoriteJoke.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteJoke.swift; sourceTree = "<group>"; };
+		B8B6A9BD28D51454005C67EA /* ProfileCellActionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCellActionDelegate.swift; sourceTree = "<group>"; };
+		B8B6A9BF28D51564005C67EA /* Profile+CellActionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Profile+CellActionDelegate.swift"; sourceTree = "<group>"; };
 		B8CDC12F24B9904D000C8B64 /* NewPunchLineTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPunchLineTableViewCell.swift; sourceTree = "<group>"; };
 		B8CDC13124BA283E000C8B64 /* UIColor+CustomColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+CustomColors.swift"; sourceTree = "<group>"; };
 		B8CDC13324BA3224000C8B64 /* PublicPunchLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicPunchLine.swift; sourceTree = "<group>"; };
 		B8CDC13624BA3239000C8B64 /* PunchLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PunchLine.swift; sourceTree = "<group>"; };
-		B8D8F8B324BA518200BBEBB1 /* AppSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSession.swift; sourceTree = "<group>"; };
+		B8D8F8B324BA518200BBEBB1 /* AppSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSessionManager.swift; sourceTree = "<group>"; };
 		B8DDF34C24BB8ECA008E0328 /* ProfileJokeHistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileJokeHistoryTableViewCell.swift; sourceTree = "<group>"; };
 		B8DDF34E24BB8ED8008E0328 /* ProfileToggleSettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileToggleSettingTableViewCell.swift; sourceTree = "<group>"; };
 		B8EA41D924BBAE2700D52A1B /* JokeList+TableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JokeList+TableViewDelegate.swift"; sourceTree = "<group>"; };
@@ -268,8 +270,7 @@
 			isa = PBXGroup;
 			children = (
 				B8B6A9B928D29E96005C67EA /* FavoriteJoke.swift */,
-				B8D8F8B324BA518200BBEBB1 /* AppSession.swift */,
-				B89CF24024B8BBC70009A8CB /* User.swift */,
+				B89CF24024B8BBC70009A8CB /* UserInfo.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -326,7 +327,6 @@
 				B8EB448A253F544200383DF9 /* Punch-Line.entitlements */,
 				B89F69C524B6663A00472067 /* Info.plist */,
 				B89F69FC24B7EA9F00472067 /* Constants.swift */,
-				B854588F24BA78BD00723E26 /* MatchablePublicPunchLines.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -335,10 +335,11 @@
 			isa = PBXGroup;
 			children = (
 				B8EABB8924B8477D00A46443 /* ActivityFeedManager.swift */,
-				B8EABB8524B8278A00A46443 /* NavigationManager.swift */,
-				B808CC3B24B94FA200B39432 /* StyleManager.swift */,
+				B8D8F8B324BA518200BBEBB1 /* AppSessionManager.swift */,
 				B89F6A1424B80CE500472067 /* CloudKitManager.swift */,
 				B854589124BA97F900723E26 /* CoreLocationManager.swift */,
+				B8EABB8524B8278A00A46443 /* NavigationManager.swift */,
+				B808CC3B24B94FA200B39432 /* StyleManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -401,11 +402,13 @@
 			isa = PBXGroup;
 			children = (
 				B89F69E824B6759A00472067 /* Profile.storyboard */,
-				B89F69EA24B675AA00472067 /* ProfileViewController.swift */,
+				B8B6A9BF28D51564005C67EA /* Profile+CellActionDelegate.swift */,
+				B8F1EF4D24BB9142006E7264 /* Profile+TableViewDataSource.swift */,
+				B8F1EF4B24BB9133006E7264 /* Profile+TableViewDelegate.swift */,
+				B8B6A9BD28D51454005C67EA /* ProfileCellActionDelegate.swift */,
 				B8DDF34C24BB8ECA008E0328 /* ProfileJokeHistoryTableViewCell.swift */,
 				B8DDF34E24BB8ED8008E0328 /* ProfileToggleSettingTableViewCell.swift */,
-				B8F1EF4B24BB9133006E7264 /* Profile+TableViewDelegate.swift */,
-				B8F1EF4D24BB9142006E7264 /* Profile+TableViewDataSource.swift */,
+				B89F69EA24B675AA00472067 /* ProfileViewController.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -510,7 +513,7 @@
 				B89F69B624B6663800472067 /* AppDelegate.swift in Sources */,
 				B890F48324B962010017BA21 /* UIView+ConstrainToSuperview.swift in Sources */,
 				B8EABB8624B8278A00A46443 /* NavigationManager.swift in Sources */,
-				B8D8F8B424BA518200BBEBB1 /* AppSession.swift in Sources */,
+				B8D8F8B424BA518200BBEBB1 /* AppSessionManager.swift in Sources */,
 				B8EABB8C24B847D900A46443 /* ActivityContainerViewController.swift in Sources */,
 				B854589424BAA12C00723E26 /* String+RemovingSpaces.swift in Sources */,
 				B8F1EF5024BBA731006E7264 /* JokeListViewController.swift in Sources */,
@@ -518,7 +521,7 @@
 				B848503824BB691C006EEE02 /* ActivityFeedViewModel.swift in Sources */,
 				B848503E24BB7D70006EEE02 /* ActivityFeedViewController.swift in Sources */,
 				B89CF24324B8E6DD0009A8CB /* UIActivityIndicatorView+Animations.swift in Sources */,
-				B89CF24124B8BBC70009A8CB /* User.swift in Sources */,
+				B89CF24124B8BBC70009A8CB /* UserInfo.swift in Sources */,
 				B866553724BAAF0900DD694F /* PunchLineLauncher.swift in Sources */,
 				B808CC3A24B948E200B39432 /* Setup.swift in Sources */,
 				B850D8FB24B9897A0011077D /* PunchLineTableViewCell.swift in Sources */,
@@ -528,11 +531,13 @@
 				B8F1EF4C24BB9133006E7264 /* Profile+TableViewDelegate.swift in Sources */,
 				B8CDC13024B9904D000C8B64 /* NewPunchLineTableViewCell.swift in Sources */,
 				B8B6A9BA28D29E96005C67EA /* FavoriteJoke.swift in Sources */,
+				B8B6A9BE28D51454005C67EA /* ProfileCellActionDelegate.swift in Sources */,
 				B8B6A9B128D26FD1005C67EA /* UIViewController+Alerts.swift in Sources */,
 				B89F69E124B6752400472067 /* PunchlineViewController.swift in Sources */,
 				B8CDC13724BA3239000C8B64 /* PunchLine.swift in Sources */,
 				B848503524BB66C5006EEE02 /* PunchLineEditorViewController.swift in Sources */,
 				B89F69EE24B675DA00472067 /* MainTabBarController.swift in Sources */,
+				B8B6A9C028D51564005C67EA /* Profile+CellActionDelegate.swift in Sources */,
 				B8B6A9B628D289F9005C67EA /* UsernameViewController.swift in Sources */,
 				B808CC4124B9583F00B39432 /* Punchline+ActivityFeedViewController.swift in Sources */,
 				B8722DB9251A7EDA00B513E1 /* SceneDelegate.swift in Sources */,
@@ -555,7 +560,6 @@
 				B89F69E324B6753600472067 /* SetupViewController.swift in Sources */,
 				B8CDC13424BA3224000C8B64 /* PublicPunchLine.swift in Sources */,
 				B8DDF34D24BB8ECA008E0328 /* ProfileJokeHistoryTableViewCell.swift in Sources */,
-				B854589024BA78BD00723E26 /* MatchablePublicPunchLines.swift in Sources */,
 				B89F69EB24B675AA00472067 /* ProfileViewController.swift in Sources */,
 				B808CC4324B9584500B39432 /* Setup+ActivityFeedViewController.swift in Sources */,
 				B808CC3C24B94FA200B39432 /* StyleManager.swift in Sources */,

@@ -14,10 +14,25 @@ class ProfileToggleSettingTableViewCell: UITableViewCell {
     @IBOutlet weak var settingTitleLabel: UILabel!
     @IBOutlet weak var settingSwitch: UISwitch!
 
-    func configure(with title: String) {
+    var switchType: ProfileSwitchType = .offensiveContent
+
+    weak var delegate: ProfileCellActionDelegate?
+
+    func configure(with title: String, switchType: ProfileSwitchType) {
         settingTitleLabel.text = title
         contentBackgroundView.layer.borderWidth = 1.0
         contentBackgroundView.layer.borderColor = UIColor.punchlinePink.withAlphaComponent(0.1).cgColor
+        self.switchType = switchType
+
+        switch switchType {
+        case .offensiveContent:
+            settingSwitch.isOn = AppSessionManager.userInfo?.shouldSeeOffensiveContent ?? false
+        }
+
+    }
+
+    @IBAction func switchValueChanged(_ sender: Any) {
+        delegate?.switchValueChanged(for: switchType)
     }
 
 }

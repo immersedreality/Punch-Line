@@ -21,13 +21,10 @@ extension PunchLineListViewController: CLLocationManagerDelegate {
         CoreLocationManager.reverseGeocode(location: location) { (locationMap) in
             guard locationMap.country != nil && locationMap.administrativeArea != nil && locationMap.locality != nil else { return }
             CoreLocationManager.stopUpdatingUsersLocation()
-            CloudKitManager.matchPublicPunchLineNames(to: locationMap, completion: { [weak self] thereAreNewPunchLines in
-                DispatchQueue.main.async {
-                    if thereAreNewPunchLines {
-                        self?.reloadTableViewWithAnimation()
-                    }
-                }
-            })
+            Task {
+                await CoreLocationManager.matchUserToPublicPunchlines(using: locationMap)
+                self.punchLineListTableView.reloadSections([0], with: .automatic)
+            }
         }
     }
     

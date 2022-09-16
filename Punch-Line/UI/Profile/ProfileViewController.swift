@@ -28,7 +28,12 @@ class ProfileViewController: UIViewController {
     }
 
     @IBAction func deleteAppDataButtonPressed(_ sender: Any) {
-        #warning("TODO: Implement iCloud user data deletion")
+        presentConfirmOrCancelAlertWith(title: AlertConstants.confirmTitle, message: AlertConstants.confirmDeletionMessage, confirmIsDestructive: true) { _ in
+            Task {
+                await CloudKitManager.deleteAllUserDataInCloud()
+                NavigationManager.setRootViewControllerTo(storyboardName: StoryboardNames.getStarted)
+            }
+        }
     }
 
 }

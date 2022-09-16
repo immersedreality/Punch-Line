@@ -11,7 +11,8 @@ import UIKit
 struct AlertConstants {
     static let cantConnectToiCloudTitle = "Can't Connect to iCloud"
     static let cantConnectToiCloudMessage = "Please make sure you are signed into iCloud on this device and that Punch-Line has access permission.  \nSettings > Apple ID > iCloud > Apps Using iCloud > Punch-Line"
-    static let confirmUsernameTitle = "Are you sure?"
+    static let confirmTitle = "Are you sure?"
+    static let confirmDeletionMessage = "This will permanently delete your user info and any custom Punch-Lines you created."
     static let confirmUsernameMessage = "This cannot be changed later unless you delete all of your Punch-Line data."
 }
 
@@ -83,13 +84,3 @@ struct TableViewSectionTitles {
     static let whatMadeTheCut = "What Made The Cut?"
     static let yourGroups = "Your Groups"
 }
-
-struct UserAuthorizationConstants {
-    static let databaseIssue = "There was an issue connecting you to the database."
-    static let enterAPassword = "Enter a password:"
-    static let enterAUsername = "Enter a username:"
-    static let enterYourPassword = "Enter your password:"
-    static let enterYourUsername = "Enter your username:"
-    static let passwordIsTooShort = "Password must be six or more characters."
-}
-

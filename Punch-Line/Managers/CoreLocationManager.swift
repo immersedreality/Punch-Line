@@ -45,6 +45,42 @@ final class CoreLocationManager {
             completion(locationMap)
         }
     }
+
+    class func matchUserToPublicPunchlines(using locationMap: PublicPunchLineLocationMap) async {
+
+        AppSessionManager.currentPublicPunchlineLaunchers.removeAll()
+
+        if let country = locationMap.country {
+            if let matchedLauncher = await CloudKitManager.getPublicPunchLineLauncher(for: .country, locationName: country) {
+                AppSessionManager.currentPublicPunchlineLaunchers.append(matchedLauncher)
+            } else {
+                if let newPublicLauncher = await CloudKitManager.createNewPublicPunchLineLauncher(for: .country, locationName: country) {
+                    AppSessionManager.currentPublicPunchlineLaunchers.append(newPublicLauncher)
+                }
+            }
+        }
+
+        if let administrativeArea = locationMap.administrativeArea {
+            if let matchedLauncher = await CloudKitManager.getPublicPunchLineLauncher(for: .stateOrProvince, locationName: administrativeArea) {
+                AppSessionManager.currentPublicPunchlineLaunchers.append(matchedLauncher)
+            } else {
+                if let newPublicLauncher = await CloudKitManager.createNewPublicPunchLineLauncher(for: .stateOrProvince, locationName: administrativeArea) {
+                    AppSessionManager.currentPublicPunchlineLaunchers.append(newPublicLauncher)
+                }
+            }
+        }
+
+        if let locality = locationMap.locality {
+            if let matchedLauncher = await CloudKitManager.getPublicPunchLineLauncher(for: .city, locationName: locality) {
+                AppSessionManager.currentPublicPunchlineLaunchers.append(matchedLauncher)
+            } else {
+                if let newPublicLauncher = await CloudKitManager.createNewPublicPunchLineLauncher(for: .city, locationName: locality) {
+                    AppSessionManager.currentPublicPunchlineLaunchers.append(newPublicLauncher)
+                }
+            }
+        }
+
+    }
     
 }
 

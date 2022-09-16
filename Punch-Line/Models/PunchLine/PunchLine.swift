@@ -9,9 +9,5 @@
 import Foundation
 
 protocol PunchLine {
-    var id: String { get }
     var name: String { get }
-    var activeSetups: [Setup] { get }
-    var activeJokes: [Joke] { get }
-    var survivingJokes: [Joke] { get }
 }

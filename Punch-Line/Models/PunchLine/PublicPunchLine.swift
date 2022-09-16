@@ -10,24 +10,18 @@ import Foundation
 import CloudKit
 
 struct PublicPunchLine: PunchLine {
-
-    let id: String
-    let scope: PublicScope
     let name: String
-
-    let activeSetups: [Setup] = []
-    let activeJokes: [Joke] = []
-    let survivingJokes: [Joke] = []
-
 }
 
-enum PublicPunchLineRecordKeys: String {
-    case type = "PublicPunchLine"
+struct PublicPunchLineRecordKeys {
+    static let type = "PublicPunchLine"
+    static let name = "name"
 }
 
 extension PublicPunchLine {
     var record: CKRecord {
-        let record = CKRecord(recordType: PublicPunchLineRecordKeys.type.rawValue)
+        let record = CKRecord(recordType: PublicPunchLineRecordKeys.type)
+        record[PublicPunchLineRecordKeys.name] = name as CKRecordValue
         return record
     }
 }

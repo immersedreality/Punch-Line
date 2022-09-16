@@ -11,7 +11,7 @@ import Foundation
 struct FavoriteJoke {
 
     let id: String
-    let owningUser: User
+    let owningUser: UserInfo
 
     let setup: String
     let setupAuthorUsername: String

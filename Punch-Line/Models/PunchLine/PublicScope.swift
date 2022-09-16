@@ -8,8 +8,8 @@
 
 import Foundation
 
-enum PublicScope {
-    case country, stateOrProvince, city
+enum PunchLineScope: String {
+    case country, stateOrProvince, city, custom
 
     var displayName: String {
         switch self {
@@ -19,6 +19,8 @@ enum PublicScope {
             return RegionDisplayNames.stateOrProvince
         case .city:
             return RegionDisplayNames.city
+        case .custom:
+            return ""
         }
     }
 

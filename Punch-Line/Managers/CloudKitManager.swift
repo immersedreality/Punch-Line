@@ -51,41 +51,122 @@ final class CloudKitManager {
 
     }
 
-    class func getUserFromPrivateDatebase() {
-
-    }
-
-    class func saveUserToPrivateDatabase(user: User) {
+    class func saveNew(userInfo: UserInfo) async {
         let privateDatabase = container.privateCloudDatabase
-        let userRecord = user.record
-        privateDatabase.save(userRecord) { savedRecord, error in
+        let userInfoRecord = userInfo.record
+
+        do {
+            try await privateDatabase.save(userInfoRecord)
+        } catch {
             #warning("TODO: Handle error")
         }
+
     }
 
-    class func matchPublicPunchLineNames(to locationMap: PublicPunchLineLocationMap, completion: @escaping (Bool) -> Void) {
-        var matchedPublicPunchLineNames: [String] = []
+    class func getUserInfo() async -> UserInfo? {
+        let privateDatabase = container.privateCloudDatabase
 
-        if let matchedMidSizeRegionName = MatchablePublicPunchLines.StatesAndProvinces.activeRegions
-            .first(where: { (regionName) -> Bool in
-                guard let midSizeRegionName = locationMap.administrativeArea else { return false }
-                return regionName == midSizeRegionName
-            }) {
-            matchedPublicPunchLineNames.append(matchedMidSizeRegionName)
+        do {
+            let retrievedRecords = try await privateDatabase.records(matching: CKQuery(recordType: UserInfoRecordKeys.type, predicate: NSPredicate(value: true)))
+            let retrievedUserInfoResult = retrievedRecords.matchResults.first?.1
+
+            switch retrievedUserInfoResult {
+            case .success(let retrievedUserInfoRecord):
+                let retrievedUserInfo = UserInfo(
+                    username: retrievedUserInfoRecord[UserInfoRecordKeys.username] as! String,
+                    shouldSeeOffensiveContent: retrievedUserInfoRecord[UserInfoRecordKeys.shouldSeeOffensiveContent] as! Bool
+                )
+                return retrievedUserInfo
+            case .failure, .none:
+                return nil
+            }
+        } catch {
+            return nil
         }
 
-        if let matchedLocalRegionName = MatchablePublicPunchLines.Cities.activeRegions
-            .first(where: { (regionName) -> Bool in
-                guard let localRegionName = locationMap.locality else { return false }
-                return regionName == localRegionName
-            }) {
-            matchedPublicPunchLineNames.append(matchedLocalRegionName)
+    }
+
+    class func update(userInfo: UserInfo) async {
+        let privateDatabase = container.privateCloudDatabase
+
+        do {
+            let retrievedRecords = try await privateDatabase.records(matching: CKQuery(recordType: UserInfoRecordKeys.type, predicate: NSPredicate(value: true)))
+            let retrievedUserInfoResult = retrievedRecords.matchResults.first?.1
+
+            switch retrievedUserInfoResult {
+            case .success(let retrievedUserInfoRecord):
+                retrievedUserInfoRecord.setValue(userInfo.username, forKey: UserInfoRecordKeys.username)
+                retrievedUserInfoRecord.setValue(userInfo.shouldSeeOffensiveContent, forKey: UserInfoRecordKeys.shouldSeeOffensiveContent)
+                try await privateDatabase.save(retrievedUserInfoRecord)
+            case .failure, .none:
+                break
+            }
+        } catch {
+            #warning("TODO: Handle error")
         }
 
-        #warning("TODO: Sync matched public punchlines with iCloud databases")
+    }
+
+    class func getPublicPunchLineLauncher(for scope: PunchLineScope, locationName: String) async -> PunchLineLauncher? {
+        let publicDatabase = container.publicCloudDatabase
+        let publicPunchLineLauncherName = scope.rawValue + "." + locationName
+        var matchedPunchLineLauncher: PunchLineLauncher?
+
+        do {
+            let retrievedRecords = try await publicDatabase.records(matching: CKQuery(recordType: PunchLineLauncherRecordKeys.type, predicate: NSPredicate(value: true)))
+
+            let matchedRecord = retrievedRecords.matchResults.first { _, result in
+                switch result {
+                case .success(let record):
+                    if record[PunchLineLauncherRecordKeys.identifier] == publicPunchLineLauncherName {
+                        matchedPunchLineLauncher = PunchLineLauncher(
+                            identifier: record[PunchLineLauncherRecordKeys.identifier] as! String,
+                            displayName: record[PunchLineLauncherRecordKeys.displayName] as! String,
+                            scope: PunchLineScope(rawValue: record[PunchLineLauncherRecordKeys.scope] as! String)!
+                        )
+                        return true
+                    } else {
+                        return false
+                    }
+                case .failure:
+                    return false
+                }
+            }
+            
+            return matchedPunchLineLauncher
+        } catch {
+            return nil
+        }
+
+    }
+
+    class func createNewPublicPunchLineLauncher(for scope: PunchLineScope, locationName: String) async -> PunchLineLauncher? {
+        let publicDatabase = container.publicCloudDatabase
+        let newPublicPunchLineLauncher = PunchLineLauncher(identifier: scope.rawValue + "." + locationName, displayName: locationName, scope: scope)
+        let newPublicPunchLineLauncherRecord = newPublicPunchLineLauncher.record
+
+        do {
+            try await publicDatabase.save(newPublicPunchLineLauncherRecord)
+            return newPublicPunchLineLauncher
+        } catch {
+            return nil
+        }
+
+    }
+
+    class func deleteAllUserDataInCloud() async {
+        let privateDatabase = container.privateCloudDatabase
+
+        do {
+            let retrievedRecords = try await privateDatabase.records(matching: CKQuery(recordType: UserInfoRecordKeys.type, predicate: NSPredicate(value: true)))
+            let retrievedUserInfoID = retrievedRecords.matchResults.first?.0
+            if let userInfoRecordID = retrievedUserInfoID {
+                try await privateDatabase.deleteRecord(withID: userInfoRecordID)
+            }
+        } catch {
+            #warning("TODO: Handle error")
+        }
         
-        completion(true)
-
     }
 
 }

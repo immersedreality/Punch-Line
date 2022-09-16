@@ -11,8 +11,7 @@ import CloudKit
 
 struct CustomPunchLine: PunchLine {
 
-    let id: String
-    let owningUser: User
+    let owningUser: UserInfo
     let name: String
 
     let activeSetups: [Setup] = []

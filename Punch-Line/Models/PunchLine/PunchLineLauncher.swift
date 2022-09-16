@@ -11,24 +11,25 @@ import CloudKit
 
 struct PunchLineLauncher {
 
-    let id: String
-    let name: String
-    let type: PunchLineLauncherType
-    let publicScope: PublicScope?
-    
+    let identifier: String
+    let displayName: String
+    let scope: PunchLineScope
+
 }
 
-enum PunchLineLauncherType: String {
-    case publicLauncher, customLauncher
-}
-
-enum PunchLineLauncherRecordKeys: String {
-    case type = "PunchLineLauncher"
+struct PunchLineLauncherRecordKeys {
+    static let type = "PunchLineLauncher"
+    static let identifier = "identifier"
+    static let displayName = "displayName"
+    static let scope = "scope"
 }
 
 extension PunchLineLauncher {
     var record: CKRecord {
-        let record = CKRecord(recordType: PunchLineLauncherRecordKeys.type.rawValue)
+        let record = CKRecord(recordType: PunchLineLauncherRecordKeys.type)
+        record[PunchLineLauncherRecordKeys.identifier] = identifier as CKRecordValue
+        record[PunchLineLauncherRecordKeys.displayName] = displayName as CKRecordValue
+        record[PunchLineLauncherRecordKeys.scope] = scope.rawValue as CKRecordValue
         return record
     }
 }
