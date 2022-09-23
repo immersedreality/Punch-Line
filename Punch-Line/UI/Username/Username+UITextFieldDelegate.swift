@@ -21,9 +21,15 @@ extension UsernameViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         guard let username = usernameTextField.text else { return false }
         guard username.count > 0 else { return false }
-        presentConfirmOrCancelAlertWith(title: AlertConstants.confirmTitle, message: AlertConstants.confirmUsernameMessage, confirmIsDestructive: false) { _ in
-            AppSessionManager.createNewUserInfo(with: username)
-            NavigationManager.setRootViewControllerTo(storyboardName: StoryboardNames.main)
+        presentConfirmOrCancelAlertWith(title: AlertConstants.confirmTitle, message: AlertConstants.confirmUsernameMessage, confirmIsDestructive: false) { [weak self] _ in
+            Task {
+                if await AppSessionManager.canCreateNewUser(for: username) {
+                    AppSessionManager.createNewUserInfo(with: username)
+                    NavigationManager.setRootViewControllerTo(storyboardName: StoryboardNames.main)
+                } else {
+                    self?.presentOkayAlertWith(title: AlertConstants.usernameUnavailableTitle, message: AlertConstants.usernameUnavailableMessage)
+                }
+            }
         }
         return true
     }

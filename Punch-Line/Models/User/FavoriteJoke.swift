@@ -7,15 +7,12 @@
 //
 
 import Foundation
+import CloudKit
 
 struct FavoriteJoke {
-
-    let id: String
-    let owningUser: UserInfo
-
+    let owningUser: CKRecord.Reference
     let setup: String
-    let setupAuthorUsername: String
+    let setupAuthor: String
     let punchline: String
-    let punchlineAuthorUsername: String
-
+    let punchlineAuthor: String
 }

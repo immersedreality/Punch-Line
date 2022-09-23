@@ -11,8 +11,15 @@ import UIKit
 final class ActivityFeedManager {
 
     class func generateActivityFeedViewController() -> ActivityFeedViewController {
+
+        if AppSessionManager.userInfo?.submittedDailySetupsCount ?? 0 < 3 {
+            return instantiateSetupViewController()
+        }
+
         return instantiateSetupViewController()
+        
     }
+
 
     private class func instantiateSetupViewController() -> SetupViewController {
         let storyboard = UIStoryboard(name: StoryboardNames.setup, bundle: nil)

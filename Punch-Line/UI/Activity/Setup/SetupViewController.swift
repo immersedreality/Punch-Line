@@ -20,6 +20,7 @@ class SetupViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureStartAJokeLabel()
         configureTextView()
         configureReminderLabel()
     }
@@ -33,7 +34,20 @@ class SetupViewController: UIViewController {
         super.viewDidAppear(animated)
         setupTextView.becomeFirstResponder()
     }
-    
+
+    private func configureStartAJokeLabel() {
+        switch AppSessionManager.userInfo?.submittedDailySetupsCount {
+        case 0:
+            startAJokeLabel.text = ActivityFeedMessages.setupStartFirst
+        case 1:
+            startAJokeLabel.text = ActivityFeedMessages.setupStartSecond
+        case 2:
+            startAJokeLabel.text = ActivityFeedMessages.setupStartThird
+        default:
+            startAJokeLabel.text = ActivityFeedMessages.setupStartBeyond
+        }
+    }
+
     private func configureTextView() {
         setupTextView.delegate = self
     }
@@ -43,15 +57,21 @@ class SetupViewController: UIViewController {
     }
 
     @IBAction func doneButtonTapped(_ sender: Any) {
-        guard setupTextView.text.count >= 15 else { return }
-        guard setupTextView.text.last == "?" || setupTextView.text.dropFirst(setupTextView.text.count - 3) == "..." else {
-            animateReminderLabel()
+        guard setupTextView.text.removingSpaces().count >= 10 else {
+            animateReminderLabel(with: ActivityFeedMessages.setupLength)
             return
         }
+
+        guard setupTextView.text.last == "?" || setupTextView.text.last == "…" else {
+            animateReminderLabel(with: ActivityFeedMessages.setupEnd)
+            return
+        }
+
         setupTextView.resignFirstResponder()
     }
     
-    private func animateReminderLabel() {
+    private func animateReminderLabel(with message: String) {
+        reminderLabel.text = message
         UIView.animate(withDuration: 0.3, animations: {
             self.reminderLabel.alpha = 1.0
         }) { (_) in

@@ -19,18 +19,29 @@ class PunchLineListViewModel {
 
     var selectedPunchLineLauncher: PunchLineLauncher?
 
-    func generatePunchLineToLaunch() -> PunchLine? {
-//        guard let launcher = selectedPunchLineLauncher else { return nil }
-//        switch launcher.type {
-//        #warning("TODO: Write logic to launch Punch-Lines")
-//        case .publicLauncher:
-//            return nil
-//        case .customLauncher:
-//            return nil
-//        }
+    func generatePublicPunchLineToLaunch() -> PublicPunchLine? {
+        guard let launcher = selectedPunchLineLauncher else { return nil }
+
+        Task {
+            let allPunchLinesForLauncher = await CloudKitManager.getPunchLines(for: launcher)
+
+            guard !allPunchLinesForLauncher.isEmpty else {
+                let newPunchLine = await CloudKitManager.createNewPublicPunchLine(for: launcher)
+                return newPunchLine
+            }
+
+            return allPunchLinesForLauncher.first { punchLine in
+                CloudKitManager.getItemCount(for: punchLine) <= 750
+            } as? PublicPunchLine
+
+        }
 
         return nil
 
+    }
+
+    func generateCustomPunchLineToLaunch() -> CustomPunchLine? {
+        return nil
     }
 
 }

@@ -10,25 +10,12 @@ import Foundation
 import CloudKit
 
 struct CustomPunchLine: PunchLine {
-
-    let owningUser: UserInfo
-    let name: String
-
-    let activeSetups: [Setup] = []
-    let activeJokes: [Joke] = []
-    let survivingJokes: [Joke] = []
-    
+    let cloudKitID: CKRecord.ID
+    let owningLauncher: CKRecord.Reference
+    let displayName: String
     let memberIDs: [String] = []
-    
 }
 
-enum CustomPunchLineRecordKeys: String {
-    case type = "CustomPunchLine"
-}
-
-extension CustomPunchLine {
-    var record: CKRecord {
-        let record = CKRecord(recordType: CustomPunchLineRecordKeys.type.rawValue)
-        return record
-    }
+struct CustomPunchLineRecordKeys {
+    static let type = "CustomPunchLine"
 }

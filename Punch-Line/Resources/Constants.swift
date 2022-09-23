@@ -8,12 +8,23 @@
 
 import UIKit
 
+struct ActivityFeedMessages {
+    static let setupStartFirst = "Start a joke with a funny setup!"
+    static let setupStartSecond = "Start another joke with an even funnier setup!"
+    static let setupStartThird = "Start one more with your funniest setup yet!"
+    static let setupStartBeyond = "Keep the setups coming!"
+    static let setupLength = "Your setup is too short. Try harder!"
+    static let setupEnd = "Setups must end with either a question mark (?) or an ellipsis (…)"
+}
+
 struct AlertConstants {
     static let cantConnectToiCloudTitle = "Can't Connect to iCloud"
     static let cantConnectToiCloudMessage = "Please make sure you are signed into iCloud on this device and that Punch-Line has access permission.  \nSettings > Apple ID > iCloud > Apps Using iCloud > Punch-Line"
     static let confirmTitle = "Are you sure?"
     static let confirmDeletionMessage = "This will permanently delete your user info and any custom Punch-Lines you created."
     static let confirmUsernameMessage = "This cannot be changed later unless you delete all of your Punch-Line data."
+    static let usernameUnavailableTitle = "Username Unavailable"
+    static let usernameUnavailableMessage = "Please enter a different username and try again."
 }
 
 struct CellIdentifiers {

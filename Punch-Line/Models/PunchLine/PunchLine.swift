@@ -7,7 +7,10 @@
 //
 
 import Foundation
+import CloudKit
 
 protocol PunchLine {
-    var name: String { get }
+    var cloudKitID: CKRecord.ID { get }
+    var owningLauncher: CKRecord.Reference { get }
+    var displayName: String { get }
 }

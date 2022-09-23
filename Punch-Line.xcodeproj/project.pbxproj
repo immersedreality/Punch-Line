@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		B808CC3824B912EB00B39432 /* Joke.swift in Sources */ = {isa = PBXBuildFile; fileRef = B808CC3724B912EB00B39432 /* Joke.swift */; };
-		B808CC3A24B948E200B39432 /* Setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = B808CC3924B948E200B39432 /* Setup.swift */; };
 		B808CC3C24B94FA200B39432 /* StyleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B808CC3B24B94FA200B39432 /* StyleManager.swift */; };
 		B808CC4124B9583F00B39432 /* Punchline+ActivityFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B808CC4024B9583F00B39432 /* Punchline+ActivityFeedViewController.swift */; };
 		B808CC4324B9584500B39432 /* Setup+ActivityFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B808CC4224B9584500B39432 /* Setup+ActivityFeedViewController.swift */; };
@@ -60,6 +59,9 @@
 		B8B6A9BA28D29E96005C67EA /* FavoriteJoke.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B6A9B928D29E96005C67EA /* FavoriteJoke.swift */; };
 		B8B6A9BE28D51454005C67EA /* ProfileCellActionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B6A9BD28D51454005C67EA /* ProfileCellActionDelegate.swift */; };
 		B8B6A9C028D51564005C67EA /* Profile+CellActionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B6A9BF28D51564005C67EA /* Profile+CellActionDelegate.swift */; };
+		B8B6A9C328DE503F005C67EA /* Setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B6A9C228DE503F005C67EA /* Setup.swift */; };
+		B8B6A9C528DE5762005C67EA /* String+RemovingSpaces.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B6A9C428DE5762005C67EA /* String+RemovingSpaces.swift */; };
+		B8B6A9C928DE662D005C67EA /* Userbase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B6A9C828DE662D005C67EA /* Userbase.swift */; };
 		B8CDC13024B9904D000C8B64 /* NewPunchLineTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CDC12F24B9904D000C8B64 /* NewPunchLineTableViewCell.swift */; };
 		B8CDC13224BA283E000C8B64 /* UIColor+CustomColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CDC13124BA283E000C8B64 /* UIColor+CustomColors.swift */; };
 		B8CDC13424BA3224000C8B64 /* PublicPunchLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CDC13324BA3224000C8B64 /* PublicPunchLine.swift */; };
@@ -79,7 +81,6 @@
 
 /* Begin PBXFileReference section */
 		B808CC3724B912EB00B39432 /* Joke.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Joke.swift; sourceTree = "<group>"; };
-		B808CC3924B948E200B39432 /* Setup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setup.swift; sourceTree = "<group>"; };
 		B808CC3B24B94FA200B39432 /* StyleManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleManager.swift; sourceTree = "<group>"; };
 		B808CC4024B9583F00B39432 /* Punchline+ActivityFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Punchline+ActivityFeedViewController.swift"; sourceTree = "<group>"; };
 		B808CC4224B9584500B39432 /* Setup+ActivityFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Setup+ActivityFeedViewController.swift"; sourceTree = "<group>"; };
@@ -133,6 +134,9 @@
 		B8B6A9B928D29E96005C67EA /* FavoriteJoke.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteJoke.swift; sourceTree = "<group>"; };
 		B8B6A9BD28D51454005C67EA /* ProfileCellActionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCellActionDelegate.swift; sourceTree = "<group>"; };
 		B8B6A9BF28D51564005C67EA /* Profile+CellActionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Profile+CellActionDelegate.swift"; sourceTree = "<group>"; };
+		B8B6A9C228DE503F005C67EA /* Setup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Setup.swift; sourceTree = "<group>"; };
+		B8B6A9C428DE5762005C67EA /* String+RemovingSpaces.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+RemovingSpaces.swift"; sourceTree = "<group>"; };
+		B8B6A9C828DE662D005C67EA /* Userbase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Userbase.swift; sourceTree = "<group>"; };
 		B8CDC12F24B9904D000C8B64 /* NewPunchLineTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPunchLineTableViewCell.swift; sourceTree = "<group>"; };
 		B8CDC13124BA283E000C8B64 /* UIColor+CustomColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+CustomColors.swift"; sourceTree = "<group>"; };
 		B8CDC13324BA3224000C8B64 /* PublicPunchLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicPunchLine.swift; sourceTree = "<group>"; };
@@ -263,6 +267,7 @@
 		B866553824BAAFCD00DD694F /* User */ = {
 			isa = PBXGroup;
 			children = (
+				B8B6A9C828DE662D005C67EA /* Userbase.swift */,
 				B8B6A9B928D29E96005C67EA /* FavoriteJoke.swift */,
 				B89CF24024B8BBC70009A8CB /* UserInfo.swift */,
 			);
@@ -341,8 +346,8 @@
 		B89F69D124B6671100472067 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				B8B6A9C128DE5021005C67EA /* Joke */,
 				B866553824BAAFCD00DD694F /* User */,
-				B8D8F8B024BA4EE500BBEBB1 /* Joke */,
 				B8CDC13524BA3227000C8B64 /* PunchLine */,
 			);
 			path = Models;
@@ -351,6 +356,7 @@
 		B89F6A0E24B80ACD00472067 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				B8B6A9C428DE5762005C67EA /* String+RemovingSpaces.swift */,
 				B8CDC13124BA283E000C8B64 /* UIColor+CustomColors.swift */,
 				B89F6A1024B80AEE00472067 /* UITextField+AddBottomBorder.swift */,
 				B8B6A9B028D26FD1005C67EA /* UIViewController+Alerts.swift */,
@@ -368,6 +374,15 @@
 			path = Username;
 			sourceTree = "<group>";
 		};
+		B8B6A9C128DE5021005C67EA /* Joke */ = {
+			isa = PBXGroup;
+			children = (
+				B808CC3724B912EB00B39432 /* Joke.swift */,
+				B8B6A9C228DE503F005C67EA /* Setup.swift */,
+			);
+			path = Joke;
+			sourceTree = "<group>";
+		};
 		B8CDC13524BA3227000C8B64 /* PunchLine */ = {
 			isa = PBXGroup;
 			children = (
@@ -378,15 +393,6 @@
 				B8B6A9AE28D23C1E005C67EA /* PublicScope.swift */,
 			);
 			path = PunchLine;
-			sourceTree = "<group>";
-		};
-		B8D8F8B024BA4EE500BBEBB1 /* Joke */ = {
-			isa = PBXGroup;
-			children = (
-				B808CC3724B912EB00B39432 /* Joke.swift */,
-				B808CC3924B948E200B39432 /* Setup.swift */,
-			);
-			path = Joke;
 			sourceTree = "<group>";
 		};
 		B8DDF34B24BB8E38008E0328 /* Profile */ = {
@@ -502,6 +508,7 @@
 				B89F6A1124B80AEE00472067 /* UITextField+AddBottomBorder.swift in Sources */,
 				B854589624BAA6D400723E26 /* PunchLineList+CLLocationManagerDelegate.swift in Sources */,
 				B89F69B624B6663800472067 /* AppDelegate.swift in Sources */,
+				B8B6A9C528DE5762005C67EA /* String+RemovingSpaces.swift in Sources */,
 				B8EABB8624B8278A00A46443 /* NavigationManager.swift in Sources */,
 				B8D8F8B424BA518200BBEBB1 /* AppSessionManager.swift in Sources */,
 				B8EABB8C24B847D900A46443 /* ActivityContainerViewController.swift in Sources */,
@@ -511,7 +518,6 @@
 				B848503E24BB7D70006EEE02 /* ActivityFeedViewController.swift in Sources */,
 				B89CF24124B8BBC70009A8CB /* UserInfo.swift in Sources */,
 				B866553724BAAF0900DD694F /* PunchLineLauncher.swift in Sources */,
-				B808CC3A24B948E200B39432 /* Setup.swift in Sources */,
 				B850D8FB24B9897A0011077D /* PunchLineTableViewCell.swift in Sources */,
 				B850D8F724B988DB0011077D /* PunchLineList+TableViewDelegate.swift in Sources */,
 				B8A58FF824B986C90007B744 /* CustomPunchLine.swift in Sources */,
@@ -530,6 +536,7 @@
 				B808CC4124B9583F00B39432 /* Punchline+ActivityFeedViewController.swift in Sources */,
 				B8722DB9251A7EDA00B513E1 /* SceneDelegate.swift in Sources */,
 				B8F1EF4E24BB9142006E7264 /* Profile+TableViewDataSource.swift in Sources */,
+				B8B6A9C328DE503F005C67EA /* Setup.swift in Sources */,
 				B8B6A9B728D289F9005C67EA /* Username+UITextFieldDelegate.swift in Sources */,
 				B8EA41DA24BBAE2700D52A1B /* JokeList+TableViewDelegate.swift in Sources */,
 				B89F69DD24B674D600472067 /* VoteViewController.swift in Sources */,
@@ -540,6 +547,7 @@
 				B8DDF34F24BB8ED8008E0328 /* ProfileToggleSettingTableViewCell.swift in Sources */,
 				B848503C24BB7077006EEE02 /* Setup+TextViewDelegate.swift in Sources */,
 				B89F69FD24B7EA9F00472067 /* Constants.swift in Sources */,
+				B8B6A9C928DE662D005C67EA /* Userbase.swift in Sources */,
 				B8B6A9AF28D23C1E005C67EA /* PublicScope.swift in Sources */,
 				B866553A24BABEA900DD694F /* PunchLineListViewModel.swift in Sources */,
 				B89F6A1524B80CE500472067 /* CloudKitManager.swift in Sources */,

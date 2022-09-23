@@ -10,21 +10,17 @@ import Foundation
 import CloudKit
 
 struct UserInfo {
+    let cloudKitID: CKRecord.ID
     let username: String
+    let lastSignInDate: Date
+    let submittedDailySetupsCount: Int
     let shouldSeeOffensiveContent: Bool
 }
 
 struct UserInfoRecordKeys {
     static let type = "UserInfo"
     static let username = "username"
+    static let lastSignInDate = "lastSignInDate"
+    static let submittedDailySetupsCount = "submittedDailySetupsCount"
     static let shouldSeeOffensiveContent = "shouldSeeOffensiveContent"
-}
-
-extension UserInfo {
-    var record: CKRecord {
-        let record = CKRecord(recordType: UserInfoRecordKeys.type)
-        record[UserInfoRecordKeys.username] = username as CKRecordValue
-        record[UserInfoRecordKeys.shouldSeeOffensiveContent] = shouldSeeOffensiveContent as CKRecordValue
-        return record
-    }
 }

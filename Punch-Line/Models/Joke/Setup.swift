@@ -10,25 +10,11 @@ import Foundation
 import CloudKit
 
 struct Setup {
-
-    let id: String
-    let dateCreated: Date = Date()
-
+    let owningPunchLine: CKRecord.Reference
     let text: String
-    let authorID: String
-
-    let isOffensiveCount: Int
-    let isUnfunnyCount: Int
-    
+    let author: String
 }
 
-enum SetupRecordKeys: String {
-    case type = "Setup"
-}
-
-extension Setup {
-    var record: CKRecord {
-        let record = CKRecord(recordType: SetupRecordKeys.type.rawValue)
-        return record
-    }
+struct SetupRecordKeys {
+    static let type = "Setup"
 }

@@ -11,21 +11,19 @@ import CloudKit
 
 struct Joke {
 
-    let id: String
-    let dateCreated: Date = Date()
+    let owningPunchLine: CKRecord.Reference
 
     let setup: String
-    let setupAuthorID: String
+    let setupAuthor: String
 
     let punchline: String
-    let punchlineAuthorID: String
+    let punchlineAuthor: String
     
     let haCount: Int
     let mehCount: Int
     let ughCount: Int
     let isTooFunnyCount: Int
     let isOffensiveCount: Int
-    let favoritedCount: Int
 
     var totalVoteCount: Double {
         return Double(haCount + mehCount + ughCount + (isTooFunnyCount * 2))
@@ -49,13 +47,6 @@ struct Joke {
 
 }
 
-enum JokeRecordKeys: String {
-    case type = "Joke"
-}
-
-extension Joke {
-    var record: CKRecord {
-        let record = CKRecord(recordType: JokeRecordKeys.type.rawValue)
-        return record
-    }
+struct JokeRecordKeys {
+    static let type = "Joke"
 }

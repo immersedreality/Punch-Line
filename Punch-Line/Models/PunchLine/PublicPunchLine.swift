@@ -10,18 +10,13 @@ import Foundation
 import CloudKit
 
 struct PublicPunchLine: PunchLine {
-    let name: String
+    let cloudKitID: CKRecord.ID
+    let owningLauncher: CKRecord.Reference
+    let displayName: String
 }
 
 struct PublicPunchLineRecordKeys {
     static let type = "PublicPunchLine"
-    static let name = "name"
-}
-
-extension PublicPunchLine {
-    var record: CKRecord {
-        let record = CKRecord(recordType: PublicPunchLineRecordKeys.type)
-        record[PublicPunchLineRecordKeys.name] = name as CKRecordValue
-        return record
-    }
+    static let owningLauncher = "owningLauncher"
+    static let displayName = "displayName"
 }

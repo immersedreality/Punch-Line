@@ -10,11 +10,12 @@ import Foundation
 import CloudKit
 
 struct PunchLineLauncher {
-
+    let cloudKitID: CKRecord.ID
+    let owningUser: CKRecord.Reference?
+    
     let identifier: String
     let displayName: String
     let scope: PunchLineScope
-
 }
 
 struct PunchLineLauncherRecordKeys {
@@ -22,14 +23,4 @@ struct PunchLineLauncherRecordKeys {
     static let identifier = "identifier"
     static let displayName = "displayName"
     static let scope = "scope"
-}
-
-extension PunchLineLauncher {
-    var record: CKRecord {
-        let record = CKRecord(recordType: PunchLineLauncherRecordKeys.type)
-        record[PunchLineLauncherRecordKeys.identifier] = identifier as CKRecordValue
-        record[PunchLineLauncherRecordKeys.displayName] = displayName as CKRecordValue
-        record[PunchLineLauncherRecordKeys.scope] = scope.rawValue as CKRecordValue
-        return record
-    }
 }
