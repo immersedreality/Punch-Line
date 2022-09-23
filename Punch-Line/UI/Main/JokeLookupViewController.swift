@@ -17,14 +17,6 @@ class JokeLookupViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        configureNavigationBar()
-    }
-
-    private func configureNavigationBar() {
-        let imageView = UIImageView(image: #imageLiteral(resourceName: "Icon-NavigationTitle"))
-        imageView.contentMode = .scaleAspectFit
-        imageView.tintColor = .punchlinePink
-        self.navigationItem.titleView = imageView
     }
 
     @IBAction func selectPunchLineButtonTapped(_ sender: Any) {
