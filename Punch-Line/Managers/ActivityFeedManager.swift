@@ -12,12 +12,19 @@ final class ActivityFeedManager {
 
     class func generateActivityFeedViewController() -> ActivityFeedViewController {
 
-        if AppSessionManager.userInfo?.submittedDailySetupsCount ?? 0 < 3 {
-            return instantiateSetupViewController()
+        guard let todaysTaskCount = AppSessionManager.userInfo?.todaysTaskCount else {
+            return instantiateVoteViewController()
         }
 
-        return instantiateSetupViewController()
-        
+        switch todaysTaskCount {
+        case 0...2:
+            return instantiateSetupViewController()
+        case 3, 5, 8, 12, 17, 23, 30, 38, 47, 57:
+            return instantiatePunchlineViewController()
+        default:
+            return instantiateVoteViewController()
+        }
+
     }
 
 

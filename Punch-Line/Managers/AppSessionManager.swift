@@ -46,7 +46,7 @@ final class AppSessionManager {
             cloudKitID: userInfo.cloudKitID,
             username: userInfo.username,
             lastSignInDate: Date(),
-            submittedDailySetupsCount: 0,
+            todaysTaskCount: 0,
             shouldSeeOffensiveContent: userInfo.shouldSeeOffensiveContent
         )
 
@@ -57,14 +57,14 @@ final class AppSessionManager {
         self.userInfo = updatedUserInfo
     }
 
-    class func incrementDailySubmittedSetupCount() {
+    class func incrementTodaysTaskCount() {
         guard let userInfo = userInfo else { return }
 
         let updatedUserInfo = UserInfo(
             cloudKitID: userInfo.cloudKitID,
             username: userInfo.username,
             lastSignInDate: userInfo.lastSignInDate,
-            submittedDailySetupsCount: userInfo.submittedDailySetupsCount + 1,
+            todaysTaskCount: userInfo.todaysTaskCount + 1,
             shouldSeeOffensiveContent: userInfo.shouldSeeOffensiveContent
         )
 
@@ -82,7 +82,7 @@ final class AppSessionManager {
             cloudKitID: userInfo.cloudKitID,
             username: userInfo.username,
             lastSignInDate: userInfo.lastSignInDate,
-            submittedDailySetupsCount: userInfo.submittedDailySetupsCount,
+            todaysTaskCount: userInfo.todaysTaskCount,
             shouldSeeOffensiveContent: !userInfo.shouldSeeOffensiveContent
         )
 

@@ -36,7 +36,7 @@ class SetupViewController: UIViewController {
     }
 
     private func configureStartAJokeLabel() {
-        switch AppSessionManager.userInfo?.submittedDailySetupsCount {
+        switch AppSessionManager.userInfo?.todaysTaskCount {
         case 0:
             startAJokeLabel.text = ActivityFeedMessages.setupStartFirst
         case 1:
