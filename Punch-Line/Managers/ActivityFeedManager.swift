@@ -10,10 +10,14 @@ import UIKit
 
 final class ActivityFeedManager {
 
-    class func generateActivityFeedViewController() -> ActivityFeedViewController {
+    class func generateActivityFeedViewController(for punchlineID: String) -> ActivityFeedViewController {
 
-        guard let todaysTaskCount = AppSessionManager.userInfo?.todaysTaskCount else {
-            return instantiateVoteViewController()
+        guard let punchlineIndex = AppSessionManager.userInfo?.todaysPunchlines.firstIndex(of: punchlineID) else {
+            return instantiateSetupViewController()
+        }
+
+        guard let todaysTaskCount = AppSessionManager.userInfo?.todaysTaskCounts[punchlineIndex] else {
+            return instantiateSetupViewController()
         }
 
         switch todaysTaskCount {

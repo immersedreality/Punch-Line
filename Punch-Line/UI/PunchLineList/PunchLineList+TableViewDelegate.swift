@@ -37,7 +37,10 @@ extension PunchLineListViewController: UITableViewDelegate {
         switch indexPath.section {
         case 0:
             viewModel.selectedPunchLineLauncher = viewModel.publicPunchLineLaunchers[indexPath.row]
-            performSegue(withIdentifier: SegueIdentifiers.presentActivityFeedViewController, sender: self)
+            Task {
+                await viewModel.generatePublicPunchLineToLaunch()
+                performSegue(withIdentifier: SegueIdentifiers.presentActivityFeedViewController, sender: self)
+            }
         case 1:
             if indexPath.row == viewModel.customPunchLineLaunchers.count {
                 performSegue(withIdentifier: SegueIdentifiers.presentPunchLineEditorViewController, sender: self)

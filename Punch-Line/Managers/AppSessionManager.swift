@@ -46,7 +46,8 @@ final class AppSessionManager {
             cloudKitID: userInfo.cloudKitID,
             username: userInfo.username,
             lastSignInDate: Date(),
-            todaysTaskCount: 0,
+            todaysPunchlines: [String](),
+            todaysTaskCounts: [Int](),
             shouldSeeOffensiveContent: userInfo.shouldSeeOffensiveContent
         )
 
@@ -57,14 +58,30 @@ final class AppSessionManager {
         self.userInfo = updatedUserInfo
     }
 
-    class func incrementTodaysTaskCount() {
+    class func incrementTodaysTaskCount(for punchlineID: String) {
         guard let userInfo = userInfo else { return }
+
+        var updatedPunchlines = userInfo.todaysPunchlines
+        var updatedTaskCounts = userInfo.todaysTaskCounts
+
+        if userInfo.todaysPunchlines.contains(punchlineID) {
+            guard let punchlineToUpdateIndex = updatedPunchlines.firstIndex(of: punchlineID) else {
+                return
+            }
+            var taskCountToIncrement = updatedTaskCounts[punchlineToUpdateIndex]
+            taskCountToIncrement += 1
+            updatedTaskCounts[punchlineToUpdateIndex] = taskCountToIncrement
+        } else {
+            updatedPunchlines.append(punchlineID)
+            updatedTaskCounts.append(1)
+        }
 
         let updatedUserInfo = UserInfo(
             cloudKitID: userInfo.cloudKitID,
             username: userInfo.username,
             lastSignInDate: userInfo.lastSignInDate,
-            todaysTaskCount: userInfo.todaysTaskCount + 1,
+            todaysPunchlines: updatedPunchlines,
+            todaysTaskCounts: updatedTaskCounts,
             shouldSeeOffensiveContent: userInfo.shouldSeeOffensiveContent
         )
 
@@ -82,7 +99,8 @@ final class AppSessionManager {
             cloudKitID: userInfo.cloudKitID,
             username: userInfo.username,
             lastSignInDate: userInfo.lastSignInDate,
-            todaysTaskCount: userInfo.todaysTaskCount,
+            todaysPunchlines: userInfo.todaysPunchlines,
+            todaysTaskCounts: userInfo.todaysTaskCounts,
             shouldSeeOffensiveContent: !userInfo.shouldSeeOffensiveContent
         )
 

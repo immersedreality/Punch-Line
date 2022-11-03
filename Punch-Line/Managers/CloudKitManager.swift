@@ -121,7 +121,6 @@ final class CloudKitManager {
         let userInfoRecord = CKRecord(recordType: UserInfoRecordKeys.type)
         userInfoRecord[UserInfoRecordKeys.username] = username as CKRecordValue
         userInfoRecord[UserInfoRecordKeys.lastSignInDate] = Date() as CKRecordValue
-        userInfoRecord[UserInfoRecordKeys.todaysTaskCount] = 0 as CKRecordValue
         userInfoRecord[UserInfoRecordKeys.shouldSeeOffensiveContent] = true as CKRecordValue
 
         do {
@@ -131,7 +130,8 @@ final class CloudKitManager {
                 cloudKitID: userInfoRecord.recordID,
                 username: userInfoRecord[UserInfoRecordKeys.username] as! String,
                 lastSignInDate: userInfoRecord[UserInfoRecordKeys.lastSignInDate] as! Date,
-                todaysTaskCount: userInfoRecord[UserInfoRecordKeys.todaysTaskCount] as! Int,
+                todaysPunchlines: userInfoRecord[UserInfoRecordKeys.todaysPunchlines] as? [String] ?? [],
+                todaysTaskCounts: userInfoRecord[UserInfoRecordKeys.todaysTaskCounts] as? [Int] ?? [],
                 shouldSeeOffensiveContent: userInfoRecord[UserInfoRecordKeys.shouldSeeOffensiveContent] as! Bool
             )
         } catch {
@@ -153,7 +153,8 @@ final class CloudKitManager {
                     cloudKitID: retrievedUserInfoRecord.recordID,
                     username: retrievedUserInfoRecord[UserInfoRecordKeys.username] as! String,
                     lastSignInDate: retrievedUserInfoRecord[UserInfoRecordKeys.lastSignInDate] as! Date,
-                    todaysTaskCount: retrievedUserInfoRecord[UserInfoRecordKeys.todaysTaskCount] as! Int,
+                    todaysPunchlines: retrievedUserInfoRecord[UserInfoRecordKeys.todaysPunchlines] as? [String] ?? [],
+                    todaysTaskCounts: retrievedUserInfoRecord[UserInfoRecordKeys.todaysTaskCounts] as? [Int] ?? [],
                     shouldSeeOffensiveContent: retrievedUserInfoRecord[UserInfoRecordKeys.shouldSeeOffensiveContent] as! Bool
                 )
                 return retrievedUserInfo
@@ -177,7 +178,12 @@ final class CloudKitManager {
             case .success(let retrievedUserInfoRecord):
                 retrievedUserInfoRecord.setValue(userInfo.username, forKey: UserInfoRecordKeys.username)
                 retrievedUserInfoRecord.setValue(userInfo.lastSignInDate, forKey: UserInfoRecordKeys.lastSignInDate)
-                retrievedUserInfoRecord.setValue(userInfo.todaysTaskCount, forKey: UserInfoRecordKeys.todaysTaskCount)
+                if !userInfo.todaysPunchlines.isEmpty {
+                    retrievedUserInfoRecord.setValue(userInfo.todaysPunchlines, forKey: UserInfoRecordKeys.todaysPunchlines)
+                }
+                if !userInfo.todaysTaskCounts.isEmpty {
+                    retrievedUserInfoRecord.setValue(userInfo.todaysTaskCounts, forKey: UserInfoRecordKeys.todaysTaskCounts)
+                }
                 retrievedUserInfoRecord.setValue(userInfo.shouldSeeOffensiveContent, forKey: UserInfoRecordKeys.shouldSeeOffensiveContent)
                 try await privateDatabase.save(retrievedUserInfoRecord)
             case .failure, .none:

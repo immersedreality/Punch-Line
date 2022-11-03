@@ -58,19 +58,8 @@ class PunchLineListViewController: UIViewController {
         case SegueIdentifiers.presentActivityFeedViewController:
             guard let activityContainerNavigationController = segue.destination as? UINavigationController else { return }
             guard let activityContainerViewController =  activityContainerNavigationController.topViewController as? ActivityContainerViewController else { return }
-            guard let selectedPunchLineLauncher = viewModel.selectedPunchLineLauncher else { return }
-
-            var punchLineToLaunch: PunchLine?
-
-            switch selectedPunchLineLauncher.scope {
-            case .country, .stateOrProvince, .city:
-                punchLineToLaunch = viewModel.generatePublicPunchLineToLaunch()
-            case .custom:
-                punchLineToLaunch = viewModel.generateCustomPunchLineToLaunch()
-            }
-
-            guard let punchLineToLaunch = punchLineToLaunch else { return }
-            let activityFeedViewModel = ActivityFeedViewModel(punchLine: punchLineToLaunch)
+            guard let punchlineToLaunch = viewModel.punchlineToLaunch else { return }
+            let activityFeedViewModel = ActivityFeedViewModel(punchLine: punchlineToLaunch)
             activityContainerViewController.viewModel = activityFeedViewModel
         case SegueIdentifiers.presentPunchLineEditorViewController:
             return

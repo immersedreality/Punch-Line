@@ -1,5 +1,5 @@
 //
-//  PublicScope.swift
+//  PunchLineScope.swift
 //  Punch-Line
 //
 //  Created by Jeffrey Eugene Hoch on 9/14/22.

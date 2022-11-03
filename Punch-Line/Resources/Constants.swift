@@ -9,6 +9,7 @@
 import UIKit
 
 struct ActivityFeedMessages {
+    static let punchlineLength = "Your punchline is too short. Try harder!"
     static let setupStartFirst = "Start a joke with a funny setup!"
     static let setupStartSecond = "Start another joke with an even funnier setup!"
     static let setupStartThird = "Start one more with your funniest setup yet!"
@@ -38,6 +39,7 @@ struct CellIdentifiers {
 }
 
 struct FlagActionTitles {
+    static let cancel = "Cancel"
     static let flagJokeAsOffensive = "Flag joke as offensive"
     static let flagJokeAsTooFunny = "Flag joke as too funny"
     static let flagSetupAsOffensive = "Flag setup as offensive"

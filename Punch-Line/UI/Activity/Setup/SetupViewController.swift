@@ -10,14 +10,16 @@ import UIKit
 
 class SetupViewController: UIViewController {
 
+    // MARK: Properties
     @IBOutlet weak var startAJokeLabel: UILabel!
     @IBOutlet weak var setupTextView: UITextView!
     @IBOutlet weak var reminderLabel: UILabel!
 
-    var activityContainerViewController: ActivityContainerViewController? {
-        return parent as? ActivityContainerViewController
+    var activityContainerViewController: ActivityContainerViewController {
+        return parent as! ActivityContainerViewController
     }
-    
+
+    // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         configureStartAJokeLabel()
@@ -35,10 +37,15 @@ class SetupViewController: UIViewController {
         setupTextView.becomeFirstResponder()
     }
 
+    // MARK: Config
     private func configureStartAJokeLabel() {
-        switch AppSessionManager.userInfo?.todaysTaskCount {
-        case 0:
+        let activePunchlineID = activityContainerViewController.viewModel.punchLine.cloudKitID.recordName
+        guard let activePunchlineIndex = AppSessionManager.userInfo?.todaysPunchlines.firstIndex(of: activePunchlineID) else {
             startAJokeLabel.text = ActivityFeedMessages.setupStartFirst
+            return
+        }
+
+        switch AppSessionManager.userInfo?.todaysTaskCounts[activePunchlineIndex] {
         case 1:
             startAJokeLabel.text = ActivityFeedMessages.setupStartSecond
         case 2:
@@ -56,6 +63,7 @@ class SetupViewController: UIViewController {
         reminderLabel.alpha = 0.0
     }
 
+    // MARK: Actions
     @IBAction func doneButtonTapped(_ sender: Any) {
         guard setupTextView.text.removingSpaces().count >= 10 else {
             animateReminderLabel(with: ActivityFeedMessages.setupLength)
@@ -67,9 +75,10 @@ class SetupViewController: UIViewController {
             return
         }
 
-        setupTextView.resignFirstResponder()
+        performNavigation()
     }
-    
+
+    // MARK: Methods
     private func animateReminderLabel(with message: String) {
         reminderLabel.text = message
         UIView.animate(withDuration: 0.3, animations: {
@@ -79,6 +88,12 @@ class SetupViewController: UIViewController {
                 self.reminderLabel.alpha = 0.0
             })
         }
+    }
+
+    private func performNavigation() {
+        setupTextView.resignFirstResponder()
+        AppSessionManager.incrementTodaysTaskCount(for: activityContainerViewController.viewModel.punchLine.cloudKitID.recordName)
+        activityContainerViewController.navigateToNextActivityFeedViewController()
     }
 
 }

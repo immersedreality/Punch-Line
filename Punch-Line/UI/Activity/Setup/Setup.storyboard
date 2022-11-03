@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="5Ko-1d-th1">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="5Ko-1d-th1">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -40,7 +40,7 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <color key="textColor" systemColor="labelColor"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="16"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                         <integer key="value" value="8"/>
@@ -79,6 +79,7 @@
                             <constraint firstItem="nmC-Ap-qNR" firstAttribute="trailing" secondItem="DH3-id-hva" secondAttribute="trailing" constant="24" id="0Ky-7q-PhW"/>
                             <constraint firstItem="DH3-id-hva" firstAttribute="top" secondItem="i86-Uf-mes" secondAttribute="bottom" constant="16" id="2Aw-oM-dBe"/>
                             <constraint firstItem="nmC-Ap-qNR" firstAttribute="trailing" secondItem="i86-Uf-mes" secondAttribute="trailing" constant="16" id="35G-Fn-yVd"/>
+                            <constraint firstItem="Or6-o8-BrB" firstAttribute="trailing" secondItem="HoC-XR-TWT" secondAttribute="trailing" id="50i-CP-Jmi"/>
                             <constraint firstItem="HoC-XR-TWT" firstAttribute="top" secondItem="0al-hr-gj7" secondAttribute="bottom" constant="16" id="CJg-U3-exa"/>
                             <constraint firstItem="DH3-id-hva" firstAttribute="leading" secondItem="nmC-Ap-qNR" secondAttribute="leading" constant="24" id="Jpo-Ya-H5f"/>
                             <constraint firstItem="nmC-Ap-qNR" firstAttribute="trailing" secondItem="HoC-XR-TWT" secondAttribute="trailing" constant="16" id="UWM-8G-aIV"/>
@@ -88,7 +89,6 @@
                             <constraint firstItem="Or6-o8-BrB" firstAttribute="top" secondItem="DH3-id-hva" secondAttribute="bottom" constant="8" id="gRl-gV-5EQ"/>
                             <constraint firstItem="0al-hr-gj7" firstAttribute="centerX" secondItem="nmC-Ap-qNR" secondAttribute="centerX" id="h9v-cb-pAP"/>
                             <constraint firstItem="HoC-XR-TWT" firstAttribute="leading" secondItem="nmC-Ap-qNR" secondAttribute="leading" constant="16" id="o6g-e1-Sml"/>
-                            <constraint firstItem="nmC-Ap-qNR" firstAttribute="trailing" secondItem="Or6-o8-BrB" secondAttribute="trailing" constant="16" id="uVy-4Y-mFz"/>
                             <constraint firstItem="0al-hr-gj7" firstAttribute="top" secondItem="nmC-Ap-qNR" secondAttribute="top" constant="12" id="yIa-kR-aaj"/>
                         </constraints>
                     </view>

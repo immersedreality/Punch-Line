@@ -25,7 +25,8 @@ class ActivityContainerViewController: UIViewController {
     }
 
     private func configureChildViewController() {
-        let nextActivityFeedViewController = ActivityFeedManager.generateActivityFeedViewController()
+        let punchlineID = viewModel.punchLine.cloudKitID.recordName
+        let nextActivityFeedViewController = ActivityFeedManager.generateActivityFeedViewController(for: punchlineID)
         self.addChild(nextActivityFeedViewController)
         self.view.addSubview(nextActivityFeedViewController.view)
         nextActivityFeedViewController.didMove(toParent: self)
@@ -40,6 +41,18 @@ class ActivityContainerViewController: UIViewController {
 
     func navigateToNextActivityFeedViewController() {
         performSegue(withIdentifier: SegueIdentifiers.showActivityContainerViewController, sender: self)
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+
+        switch segue.identifier {
+        case SegueIdentifiers.showActivityContainerViewController:
+            guard let activityContainerViewController = segue.destination as? ActivityContainerViewController else { return }
+            activityContainerViewController.viewModel = self.viewModel
+        default:
+            return
+        }
+
     }
 
 }

@@ -13,7 +13,8 @@ struct UserInfo {
     let cloudKitID: CKRecord.ID
     let username: String
     let lastSignInDate: Date
-    let todaysTaskCount: Int
+    let todaysPunchlines: [String]
+    let todaysTaskCounts: [Int]
     let shouldSeeOffensiveContent: Bool
 }
 
@@ -21,6 +22,7 @@ struct UserInfoRecordKeys {
     static let type = "UserInfo"
     static let username = "username"
     static let lastSignInDate = "lastSignInDate"
-    static let todaysTaskCount = "todaysTaskCount"
+    static let todaysPunchlines = "todaysPunchlines"
+    static let todaysTaskCounts = "todaysTaskCounts"
     static let shouldSeeOffensiveContent = "shouldSeeOffensiveContent"
 }
