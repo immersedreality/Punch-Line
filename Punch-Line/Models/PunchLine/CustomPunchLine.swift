@@ -13,9 +13,10 @@ struct CustomPunchLine: PunchLine {
     let cloudKitID: CKRecord.ID
     let owningLauncher: CKRecord.Reference
     let displayName: String
-    let memberIDs: [String] = []
 }
 
 struct CustomPunchLineRecordKeys {
     static let type = "CustomPunchLine"
+    static let owningLauncher = "owningLauncher"
+    static let displayName = "displayName"
 }

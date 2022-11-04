@@ -13,9 +13,11 @@ extension PunchLineListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
         case 0:
-            return TableViewSectionTitles.thePublic
+            return TableViewSectionTitles.publicPunchLines
         case 1:
-            return TableViewSectionTitles.yourGroups
+            return TableViewSectionTitles.ownedPunchLines
+        case 2:
+            return TableViewSectionTitles.joinedPunchLines
         default:
             return nil
         }
@@ -66,12 +68,15 @@ extension PunchLineListViewController: UITableViewDelegate {
                 performSegue(withIdentifier: SegueIdentifiers.presentActivityFeedViewController, sender: self)
             }
         case 1:
-            if indexPath.row == viewModel.customPunchLineLaunchers.count {
+            if indexPath.row == viewModel.ownedCustomPunchlineLaunchers.count {
                 performSegue(withIdentifier: SegueIdentifiers.presentPunchLineEditorViewController, sender: self)
             } else {
-                viewModel.selectedPunchLineLauncher = viewModel.customPunchLineLaunchers[indexPath.row]
+                viewModel.selectedPunchLineLauncher = viewModel.ownedCustomPunchlineLaunchers[indexPath.row]
                 performSegue(withIdentifier: SegueIdentifiers.presentActivityFeedViewController, sender: self)
             }
+        case 2:
+            viewModel.selectedPunchLineLauncher = viewModel.joinedCustomPunchlineLaunchers[indexPath.row]
+            performSegue(withIdentifier: SegueIdentifiers.presentActivityFeedViewController, sender: self)
         default:
             return
         }

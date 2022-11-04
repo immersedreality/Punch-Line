@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CloudKit
 
 final class AppSessionManager {
     

@@ -11,7 +11,13 @@ import UIKit
 extension PunchLineListViewController: UITableViewDataSource {
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        var numberOfSections = 2
+
+        if viewModel.joinedCustomPunchlineLaunchers.count > 0 {
+            numberOfSections += 1
+        }
+
+        return numberOfSections
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -19,7 +25,9 @@ extension PunchLineListViewController: UITableViewDataSource {
         case 0:
             return viewModel.publicPunchLineLaunchers.count
         case 1:
-            return viewModel.customPunchLineLaunchers.count + 1
+            return viewModel.ownedCustomPunchlineLaunchers.count + 1
+        case 2:
+            return viewModel.joinedCustomPunchlineLaunchers.count
         default:
             return 0
         }
@@ -35,7 +43,7 @@ extension PunchLineListViewController: UITableViewDataSource {
             cell.punchLineLauncher = viewModel.publicPunchLineLaunchers[indexPath.row]
             return cell
         case 1:
-            if indexPath.row == viewModel.customPunchLineLaunchers.count {
+            if indexPath.row == viewModel.ownedCustomPunchlineLaunchers.count {
                 guard let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.newPunchLineCell) as? NewPunchLineTableViewCell else {
                     return UITableViewCell()
                 }
@@ -44,9 +52,15 @@ extension PunchLineListViewController: UITableViewDataSource {
                 guard let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.punchLineCell) as? PunchLineTableViewCell else {
                     return UITableViewCell()
                 }
-                cell.punchLineLauncher = viewModel.customPunchLineLaunchers[indexPath.row]
+                cell.punchLineLauncher = viewModel.ownedCustomPunchlineLaunchers[indexPath.row]
                 return cell
             }
+        case 2:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.punchLineCell) as? PunchLineTableViewCell else {
+                return UITableViewCell()
+            }
+            cell.punchLineLauncher = viewModel.joinedCustomPunchlineLaunchers[indexPath.row]
+            return cell
         default:
             return UITableViewCell()
         }

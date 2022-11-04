@@ -9,4 +9,14 @@
 import UIKit
 
 class MainTabBarController: UITabBarController {
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        Task {
+            if await CloudKitManager.requestUserDiscoverabilityPermission() == false {
+                presentOkayAlertWith(title: AlertConstants.notCurrentlyDiscoverableTitle, message: AlertConstants.notCurrentlyDiscoverableMessage)
+            }
+        }
+    }
+
 }

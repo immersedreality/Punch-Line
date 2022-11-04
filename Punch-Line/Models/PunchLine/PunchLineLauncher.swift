@@ -20,6 +20,7 @@ struct PunchLineLauncher {
 
 struct PunchLineLauncherRecordKeys {
     static let type = "PunchLineLauncher"
+    static let owningUser = "owningUser"
     static let identifier = "identifier"
     static let displayName = "displayName"
     static let scope = "scope"

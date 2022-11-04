@@ -15,7 +15,8 @@ class PunchLineListViewModel {
             return AppSessionManager.currentPublicPunchlineLaunchers
         }
     }
-    let customPunchLineLaunchers: [PunchLineLauncher] = []
+    var ownedCustomPunchlineLaunchers: [PunchLineLauncher] = []
+    var joinedCustomPunchlineLaunchers: [PunchLineLauncher] = []
 
     var selectedPunchLineLauncher: PunchLineLauncher?
     var punchlineToLaunch: PunchLine?

@@ -20,10 +20,12 @@ struct ActivityFeedMessages {
 
 struct AlertConstants {
     static let cantConnectToiCloudTitle = "Can't Connect to iCloud"
-    static let cantConnectToiCloudMessage = "Please make sure you are signed into iCloud on this device and that Punch-Line has access permission.  \nSettings > Apple ID > iCloud > Apps Using iCloud > Punch-Line"
+    static let cantConnectToiCloudMessage = "Please make sure you are signed into iCloud on this device and that Punch-Line has access permission.  \n\nSettings > Apple ID > iCloud > Apps Using iCloud > Punch-Line"
     static let confirmTitle = "Are you sure?"
     static let confirmDeletionMessage = "This will permanently delete your user info and any custom Punch-Lines you created."
     static let confirmUsernameMessage = "This cannot be changed later unless you delete all of your Punch-Line data."
+    static let notCurrentlyDiscoverableTitle = "Not Currently Discoverable"
+    static let notCurrentlyDiscoverableMessage = "You are not currently discoverable by other Punch-Line users.  If you wish to create or join custom Punch-Lines you must enable the appropriate setting.  \n\nSettings > Apple ID > iCloud > Apps Using iCloud > Look Me Up"
     static let usernameUnavailableTitle = "Username Unavailable"
     static let usernameUnavailableMessage = "Please enter a different username and try again."
 }
@@ -94,7 +96,8 @@ struct TableViewActionTitles {
 }
 
 struct TableViewSectionTitles {
-    static let thePublic = "The Public"
+    static let joinedPunchLines = "Punch-Lines You've Joined"
+    static let ownedPunchLines = "Punch-Lines You Own"
+    static let publicPunchLines = "Public Punch-Lines"
     static let whatMadeTheCut = "What Made The Cut?"
-    static let yourGroups = "Your Groups"
 }
