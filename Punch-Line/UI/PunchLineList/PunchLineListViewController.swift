@@ -44,12 +44,10 @@ class PunchLineListViewController: UIViewController {
 
     private func reloadTableView() {
         viewModel = PunchLineListViewModel()
-        punchLineListTableView.reloadData()
-    }
-
-    func reloadTableViewWithAnimation() {
-        viewModel = PunchLineListViewModel()
-        punchLineListTableView.reloadSections([0, 1], with: .fade)
+        Task {
+            await viewModel.fetchCustomPunchlineLaunchers()
+            punchLineListTableView.reloadData()
+        }
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

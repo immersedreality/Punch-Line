@@ -22,7 +22,12 @@ class PunchLineListViewModel {
     var punchlineToLaunch: PunchLine?
     var setUpToLaunchWith: Setup?
     var jokeToLaunchWith: Joke?
-    
+
+    func fetchCustomPunchlineLaunchers() async {
+        ownedCustomPunchlineLaunchers = await CloudKitManager.getOwnedCustomPunchLineLaunchers()
+        joinedCustomPunchlineLaunchers = await CloudKitManager.getJoinedCustomPunchLineLaunchers()
+    }
+
     func generatePublicPunchLineToLaunch() async {
         guard let launcher = selectedPunchLineLauncher else { return }
 

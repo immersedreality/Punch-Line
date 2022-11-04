@@ -55,6 +55,20 @@ class PunchLineEditorViewController: UIViewController {
     }
     
     @IBAction func createUpdateButtonTapped(_ sender: Any) {
+        guard let punchLineName = punchLineNameTextField.text, punchLineName.removingSpaces().count >= 5 else {
+            presentOkayAlertWith(title: AlertConstants.punchLineNameNotLongEnoughTitle, message: AlertConstants.punchLineNameNotLongEnoughMessage)
+            return
+        }
+
+        guard viewModel.matchedPunchLineUserIdentities.count > 0 else {
+            presentOkayAlertWith(title: AlertConstants.punchLineNeedsFriendsTitle, message: AlertConstants.punchLineNeedsFriendsMessage)
+            return
+        }
+
+        Task {
+            await viewModel.createCustomPunchLineLauncher(with: punchLineName)
+            self.dismiss(animated: true)
+        }
     }
     
 }

@@ -12,7 +12,8 @@ import CloudKit
 struct PunchLineLauncher {
     let cloudKitID: CKRecord.ID
     let owningUser: CKRecord.Reference?
-    
+    let participantUserIDs: [String]?
+
     let identifier: String
     let displayName: String
     let scope: PunchLineScope
@@ -21,6 +22,7 @@ struct PunchLineLauncher {
 struct PunchLineLauncherRecordKeys {
     static let type = "PunchLineLauncher"
     static let owningUser = "owningUser"
+    static let participantUserIDs = "participantUserIDs"
     static let identifier = "identifier"
     static let displayName = "displayName"
     static let scope = "scope"

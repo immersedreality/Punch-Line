@@ -3,4 +3,54 @@
    uuid = "C48C33E9-C9A0-4371-A1D6-A2B7A3512EAA"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0267F970-0D35-456A-8844-0C8846403363"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Punch-Line/Managers/CloudKitManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "431"
+            endingLineNumber = "431"
+            landmarkName = "getJoinedCustomPunchLineLaunchers()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "0267F970-0D35-456A-8844-0C8846403363 - c9213f944b9cd483"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(6) suspend resume partial function for static Punch_Line.CloudKitManager.getJoinedCustomPunchLineLaunchers() async -&gt; Swift.Array&lt;Punch_Line.PunchLineLauncher&gt;"
+                  moduleName = "Punch-Line"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jeffreyeugenehoch/Projects/Punch-Line/Punch-Line/Managers/CloudKitManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "431"
+                  endingLineNumber = "431"
+                  offsetFromSymbolStart = "184">
+               </Location>
+               <Location
+                  uuid = "0267F970-0D35-456A-8844-0C8846403363 - e1f83b49ad77908d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(7) suspend resume partial function for static Punch_Line.CloudKitManager.getJoinedCustomPunchLineLaunchers() async -&gt; Swift.Array&lt;Punch_Line.PunchLineLauncher&gt;"
+                  moduleName = "Punch-Line"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jeffreyeugenehoch/Projects/Punch-Line/Punch-Line/Managers/CloudKitManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "431"
+                  endingLineNumber = "431"
+                  offsetFromSymbolStart = "201">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

@@ -60,7 +60,7 @@ final class CloudKitManager {
             return nil
         }
     }
-
+    
     // MARK: Userbase
 
     class func generateNewUserbase(with username: String) async {
@@ -307,6 +307,7 @@ final class CloudKitManager {
                     matchedPunchLineLauncher = PunchLineLauncher(
                         cloudKitID: record.recordID,
                         owningUser: nil,
+                        participantUserIDs: nil,
                         identifier: record[PunchLineLauncherRecordKeys.identifier] as! String,
                         displayName: record[PunchLineLauncherRecordKeys.displayName] as! String,
                         scope: PunchLineScope(rawValue: record[PunchLineLauncherRecordKeys.scope] as! String)!
@@ -336,6 +337,7 @@ final class CloudKitManager {
             let newPublicPunchLineLauncher = PunchLineLauncher(
                 cloudKitID: launcherRecord.recordID,
                 owningUser: nil,
+                participantUserIDs: nil,
                 identifier: launcherRecord[PunchLineLauncherRecordKeys.identifier] as! String,
                 displayName: launcherRecord[PunchLineLauncherRecordKeys.displayName] as! String,
                 scope: PunchLineScope(rawValue: launcherRecord[PunchLineLauncherRecordKeys.scope] as! String)!
@@ -346,51 +348,29 @@ final class CloudKitManager {
         }
     }
 
-    class func createNewCustomPunchLineLauncher(with name: String) async -> PunchLineLauncher? {
-        guard let userInfoID = AppSessionManager.userInfo?.cloudKitID else { return nil }
-
-        let privateDatabase = container.privateCloudDatabase
+    class func createNewCustomPunchLineLauncher(with name: String, participantUserIDs: [String]) async {
+        let publicDatabase = container.publicCloudDatabase
 
         do {
-            let launcherRecordZone = CKRecordZone(zoneName: UUID().uuidString)
-            try await privateDatabase.save(launcherRecordZone)
-
-            let launcherRecordZoneShare = CKShare(recordZoneID: launcherRecordZone.zoneID)
-            try await privateDatabase.save(launcherRecordZoneShare)
-            
-            let launcherRecord = CKRecord(
-                recordType: PunchLineLauncherRecordKeys.type,
-                recordID: CKRecord.ID(recordName: UUID().uuidString, zoneID: launcherRecordZone.zoneID)
-            )
-
-            launcherRecord[PunchLineLauncherRecordKeys.owningUser] = CKRecord.Reference(recordID: userInfoID, action: .deleteSelf)
+            let launcherRecord = CKRecord(recordType: PunchLineLauncherRecordKeys.type)
+            launcherRecord[PunchLineLauncherRecordKeys.owningUser] = try await CKRecord.Reference(recordID: container.userRecordID(), action: .deleteSelf)
+            launcherRecord[PunchLineLauncherRecordKeys.participantUserIDs] = participantUserIDs as CKRecordValue
             launcherRecord[PunchLineLauncherRecordKeys.identifier] = (PunchLineScope.custom.rawValue + "." + name.removingSpaces()) as CKRecordValue
             launcherRecord[PunchLineLauncherRecordKeys.displayName] = name as CKRecordValue
             launcherRecord[PunchLineLauncherRecordKeys.scope] = PunchLineScope.custom.rawValue as CKRecordValue
-
-            let newCustomPunchLineLauncher = PunchLineLauncher(
-                cloudKitID: launcherRecord.recordID,
-                owningUser: launcherRecord[PunchLineLauncherRecordKeys.owningUser] as? CKRecord.Reference,
-                identifier: launcherRecord[PunchLineLauncherRecordKeys.identifier] as! String,
-                displayName: launcherRecord[PunchLineLauncherRecordKeys.displayName] as! String,
-                scope: PunchLineScope(rawValue: launcherRecord[PunchLineLauncherRecordKeys.scope] as! String)!
-            )
-            
-            return newCustomPunchLineLauncher
+            try await publicDatabase.save(launcherRecord)
         } catch {
-            return nil
+            return
         }
     }
 
     class func getOwnedCustomPunchLineLaunchers() async -> [PunchLineLauncher] {
-        guard let userID = AppSessionManager.userInfo?.cloudKitID else { return [] }
-
-        let privateDatabase = container.privateCloudDatabase
+        let publicDatabase = container.publicCloudDatabase
         var ownedCustomPunchLineLaunchers: [PunchLineLauncher] = []
 
         do {
-            let recordToMatch = CKRecord.Reference(recordID: userID, action: .deleteSelf)
-            let retrievedRecords = try await privateDatabase.records(matching: CKQuery(
+            let recordToMatch = try await CKRecord.Reference(recordID: container.userRecordID(), action: .deleteSelf)
+            let retrievedRecords = try await publicDatabase.records(matching: CKQuery(
                 recordType: PunchLineLauncherRecordKeys.type,
                 predicate: NSPredicate(format: "owningUser == %@", recordToMatch))
             )
@@ -401,6 +381,7 @@ final class CloudKitManager {
                     let ownedCustomLauncher = PunchLineLauncher(
                         cloudKitID: recordID,
                         owningUser: recordToMatch,
+                        participantUserIDs: launcherRecord[PunchLineLauncherRecordKeys.participantUserIDs] as? [String] ?? [],
                         identifier: launcherRecord[PunchLineLauncherRecordKeys.identifier] as! String,
                         displayName: launcherRecord[PunchLineLauncherRecordKeys.displayName] as! String,
                         scope: .custom
@@ -417,8 +398,38 @@ final class CloudKitManager {
         }
     }
 
-    class func getSharedCustomPunchLineLaunchers() {
+    class func getJoinedCustomPunchLineLaunchers() async -> [PunchLineLauncher] {
+        let publicDatabase = container.publicCloudDatabase
+        var joinedCustomPunchLineLaunchers: [PunchLineLauncher] = []
 
+        do {
+            let recordToMatch = try await container.userRecordID().recordName
+            let retrievedRecords = try await publicDatabase.records(matching: CKQuery(
+                recordType: PunchLineLauncherRecordKeys.type,
+                predicate: NSPredicate(format: "ANY participantUserIDs == %@", recordToMatch)
+            ))
+
+            retrievedRecords.matchResults.forEach { (recordID, result) in
+                switch result {
+                case .success(let launcherRecord):
+                    let ownedCustomLauncher = PunchLineLauncher(
+                        cloudKitID: recordID,
+                        owningUser: launcherRecord[PunchLineLauncherRecordKeys.owningUser] as? CKRecord.Reference,
+                        participantUserIDs: launcherRecord[PunchLineLauncherRecordKeys.participantUserIDs] as? [String] ?? [],
+                        identifier: launcherRecord[PunchLineLauncherRecordKeys.identifier] as! String,
+                        displayName: launcherRecord[PunchLineLauncherRecordKeys.displayName] as! String,
+                        scope: .custom
+                    )
+                    joinedCustomPunchLineLaunchers.append(ownedCustomLauncher)
+                case .failure:
+                    return
+                }
+            }
+
+            return joinedCustomPunchLineLaunchers
+        } catch {
+            return []
+        }
     }
 
     class func removeCustomPunchLineLauncher() {

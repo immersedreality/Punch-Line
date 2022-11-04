@@ -15,6 +15,9 @@ extension PunchLineEditorViewController: CNContactPickerDelegate {
         Task {
             await viewModel.matchContactEmailsToPunchLineUsers(contacts: contacts)
             userTableView.reloadData()
+            if contacts.count > viewModel.matchedPunchLineUserIdentities.count {
+                presentOkayAlertWith(title: AlertConstants.noAccountForContactTitle, message: AlertConstants.noAccountForContactMessage)
+            }
         }
     }
 
