@@ -37,8 +37,32 @@ extension PunchLineListViewController: UITableViewDelegate {
         switch indexPath.section {
         case 0:
             viewModel.selectedPunchLineLauncher = viewModel.publicPunchLineLaunchers[indexPath.row]
+
             Task {
                 await viewModel.generatePublicPunchLineToLaunch()
+
+                guard let punchlineIndex = AppSessionManager.userInfo?.todaysPunchlines.firstIndex(of: viewModel.punchlineToLaunch?.cloudKitID.recordName ?? "") else {
+                    performSegue(withIdentifier: SegueIdentifiers.presentActivityFeedViewController, sender: self)
+                    return
+                }
+
+                guard let todaysTaskCount = AppSessionManager.userInfo?.todaysTaskCounts[punchlineIndex] else {
+                    performSegue(withIdentifier: SegueIdentifiers.presentActivityFeedViewController, sender: self)
+                    return
+                }
+
+                viewModel.setUpToLaunchWith = nil
+                viewModel.jokeToLaunchWith = nil
+                
+                switch todaysTaskCount {
+                case 1...2:
+                    break
+                case 3, 5, 8, 12, 17, 23, 30, 38, 47, 57:
+                    await viewModel.getARandomSetup()
+                default:
+                    await viewModel.getARandomJoke()
+                }
+
                 performSegue(withIdentifier: SegueIdentifiers.presentActivityFeedViewController, sender: self)
             }
         case 1:

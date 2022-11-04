@@ -19,6 +19,8 @@ class PunchLineListViewModel {
 
     var selectedPunchLineLauncher: PunchLineLauncher?
     var punchlineToLaunch: PunchLine?
+    var setUpToLaunchWith: Setup?
+    var jokeToLaunchWith: Joke?
     
     func generatePublicPunchLineToLaunch() async {
         guard let launcher = selectedPunchLineLauncher else { return }
@@ -38,6 +40,16 @@ class PunchLineListViewModel {
 
     func generateCustomPunchLineToLaunch() -> CustomPunchLine? {
         return nil
+    }
+
+    func getARandomSetup() async {
+        guard let punchlineToLaunch = punchlineToLaunch else { return }
+        setUpToLaunchWith = await CloudKitManager.getRandomSetup(from: punchlineToLaunch)
+    }
+
+    func getARandomJoke() async {
+        guard let punchlineToLaunch = punchlineToLaunch else { return }
+        jokeToLaunchWith = await CloudKitManager.getRandomJoke(from: punchlineToLaunch)
     }
 
 }

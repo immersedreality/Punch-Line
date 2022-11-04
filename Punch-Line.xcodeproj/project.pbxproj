@@ -25,6 +25,8 @@
 		B866553724BAAF0900DD694F /* PunchLineLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = B866553624BAAF0900DD694F /* PunchLineLauncher.swift */; };
 		B866553A24BABEA900DD694F /* PunchLineListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B866553924BABEA900DD694F /* PunchLineListViewModel.swift */; };
 		B8706859291456FF001FADBD /* Punchline+TextViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8706858291456FF001FADBD /* Punchline+TextViewDelegate.swift */; };
+		B870685C2914A8E0001FADBD /* NothingToDo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B870685B2914A8E0001FADBD /* NothingToDo.storyboard */; };
+		B870685E2914A8EB001FADBD /* NothingToDoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B870685D2914A8EB001FADBD /* NothingToDoViewController.swift */; };
 		B8722DB9251A7EDA00B513E1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8722DB8251A7EDA00B513E1 /* SceneDelegate.swift */; };
 		B89CF24124B8BBC70009A8CB /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89CF24024B8BBC70009A8CB /* UserInfo.swift */; };
 		B89F69B624B6663800472067 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89F69B524B6663800472067 /* AppDelegate.swift */; };
@@ -99,6 +101,8 @@
 		B866553624BAAF0900DD694F /* PunchLineLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PunchLineLauncher.swift; sourceTree = "<group>"; };
 		B866553924BABEA900DD694F /* PunchLineListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PunchLineListViewModel.swift; sourceTree = "<group>"; };
 		B8706858291456FF001FADBD /* Punchline+TextViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Punchline+TextViewDelegate.swift"; sourceTree = "<group>"; };
+		B870685B2914A8E0001FADBD /* NothingToDo.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NothingToDo.storyboard; sourceTree = "<group>"; };
+		B870685D2914A8EB001FADBD /* NothingToDoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NothingToDoViewController.swift; sourceTree = "<group>"; };
 		B8722DB8251A7EDA00B513E1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		B89CF24024B8BBC70009A8CB /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		B89F69B224B6663800472067 /* Punch-Line.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Punch-Line.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -246,6 +250,7 @@
 				B848503D24BB7D70006EEE02 /* ActivityFeedViewController.swift */,
 				B8EABB8B24B847D900A46443 /* ActivityContainerViewController.swift */,
 				B848503724BB691C006EEE02 /* ActivityFeedViewModel.swift */,
+				B870685A2914A8C7001FADBD /* NothingToDo */,
 				B808CC3F24B9582400B39432 /* Punchline */,
 				B808CC3E24B9581F00B39432 /* Setup */,
 				B808CC3D24B9581200B39432 /* Vote */,
@@ -275,6 +280,15 @@
 				B89CF24024B8BBC70009A8CB /* UserInfo.swift */,
 			);
 			path = User;
+			sourceTree = "<group>";
+		};
+		B870685A2914A8C7001FADBD /* NothingToDo */ = {
+			isa = PBXGroup;
+			children = (
+				B870685B2914A8E0001FADBD /* NothingToDo.storyboard */,
+				B870685D2914A8EB001FADBD /* NothingToDoViewController.swift */,
+			);
+			path = NothingToDo;
 			sourceTree = "<group>";
 		};
 		B89F69A924B6663800472067 = {
@@ -486,6 +500,7 @@
 				B848503324BB66B3006EEE02 /* PunchLineEditor.storyboard in Resources */,
 				B89F69D324B6682E00472067 /* Setup.storyboard in Resources */,
 				B89F69FF24B7ED0800472067 /* GetStarted.storyboard in Resources */,
+				B870685C2914A8E0001FADBD /* NothingToDo.storyboard in Resources */,
 				B89F69C424B6663A00472067 /* LaunchScreen.storyboard in Resources */,
 				B89F69C124B6663A00472067 /* Assets.xcassets in Resources */,
 				B89F69BF24B6663800472067 /* Main.storyboard in Resources */,
@@ -512,6 +527,7 @@
 				B854589624BAA6D400723E26 /* PunchLineList+CLLocationManagerDelegate.swift in Sources */,
 				B89F69B624B6663800472067 /* AppDelegate.swift in Sources */,
 				B8B6A9C528DE5762005C67EA /* String+RemovingSpaces.swift in Sources */,
+				B870685E2914A8EB001FADBD /* NothingToDoViewController.swift in Sources */,
 				B8EABB8624B8278A00A46443 /* NavigationManager.swift in Sources */,
 				B8D8F8B424BA518200BBEBB1 /* AppSessionManager.swift in Sources */,
 				B8EABB8C24B847D900A46443 /* ActivityContainerViewController.swift in Sources */,

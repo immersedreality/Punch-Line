@@ -171,8 +171,8 @@ final class CloudKitManager {
         let privateDatabase = container.privateCloudDatabase
 
         do {
-            let retrievedRecords = try await privateDatabase.records(matching: CKQuery(recordType: UserInfoRecordKeys.type, predicate: NSPredicate(value: true)))
-            let retrievedUserInfoResult = retrievedRecords.matchResults.first?.1
+            let retrievedRecords = try await privateDatabase.records(for: [userInfo.cloudKitID])
+            let retrievedUserInfoResult = retrievedRecords.first?.1
 
             switch retrievedUserInfoResult {
             case .success(let retrievedUserInfoRecord):
@@ -212,16 +212,72 @@ final class CloudKitManager {
 
     // MARK: FavoriteJoke
 
-    class func addFavoriteJoke(to userInfo: UserInfo) {
+    class func addFavorite(joke: Joke, to userInfo: UserInfo) async {
+        let privateDatabase = container.privateCloudDatabase
+
+        do {
+            let favoriteJokeRecord = CKRecord(recordType: FavoriteJokeRecordKeys.type)
+            favoriteJokeRecord[FavoriteJokeRecordKeys.owningUser] = CKRecord.Reference(recordID: userInfo.cloudKitID, action: .deleteSelf)
+            favoriteJokeRecord[FavoriteJokeRecordKeys.setup] = joke.setup as CKRecordValue
+            favoriteJokeRecord[FavoriteJokeRecordKeys.setupAuthor] = joke.setupAuthor as CKRecordValue
+            favoriteJokeRecord[FavoriteJokeRecordKeys.punchline] = joke.punchline as CKRecordValue
+            favoriteJokeRecord[FavoriteJokeRecordKeys.punchlineAuthor] = joke.punchlineAuthor as CKRecordValue
+            try await privateDatabase.save(favoriteJokeRecord)
+        } catch {
+            return
+        }
 
     }
 
-    class func getFavoriteJokes(for userInfo: UserInfo) {
+    class func getFavoriteJokes(for userInfo: UserInfo) async -> [FavoriteJoke] {
+        let privateDatabase = container.privateCloudDatabase
+
+        do {
+            let recordToMatch = CKRecord.Reference(recordID: userInfo.cloudKitID, action: .deleteSelf)
+            let retrievedRecords = try await privateDatabase.records(matching: CKQuery(
+                recordType: FavoriteJokeRecordKeys.type,
+                predicate: NSPredicate(value: true))
+            )
+
+            var favoriteJokes: [FavoriteJoke] = []
+
+            retrievedRecords.matchResults.forEach { recordID, result in
+                switch result {
+                case .success(let favoriteJokeRecord):
+                    let favoriteJoke = FavoriteJoke(
+                        cloudKitID: recordID,
+                        owningUser: recordToMatch,
+                        setup: favoriteJokeRecord[FavoriteJokeRecordKeys.setup] as! String,
+                        setupAuthor: favoriteJokeRecord[FavoriteJokeRecordKeys.setupAuthor] as! String,
+                        punchline: favoriteJokeRecord[FavoriteJokeRecordKeys.punchline] as! String,
+                        punchlineAuthor: favoriteJokeRecord[FavoriteJokeRecordKeys.punchlineAuthor] as! String
+                    )
+                    favoriteJokes.append(favoriteJoke)
+                case .failure:
+                    break
+                }
+            }
+
+            return favoriteJokes
+
+        } catch {
+            return []
+        }
 
     }
 
-    class func removeFavoriteJoke(from userInfo: UserInfo) {
+    class func delete(favoriteJoke: FavoriteJoke) async {
+        let privateDatabase = container.privateCloudDatabase
 
+        do {
+            let retrievedRecords = try await privateDatabase.records(for: [favoriteJoke.cloudKitID])
+            let retrievedFavoriteJokeID = retrievedRecords.first?.0
+            if let favoriteJokeID = retrievedFavoriteJokeID {
+                try await privateDatabase.deleteRecord(withID: favoriteJokeID)
+            }
+        } catch {
+            return
+        }
     }
 
     // MARK: PunchLineLauncher
@@ -370,29 +426,252 @@ final class CloudKitManager {
 
     // MARK: Setup
 
-    class func addSetup(to punchLine: PunchLine) {
+    class func addSetup(to punchLine: PunchLine, setup: String, author: String) async {
+
+        if punchLine is PublicPunchLine {
+            let publicDatabase = container.publicCloudDatabase
+
+            do {
+                let setupRecord = CKRecord(recordType: SetupRecordKeys.type)
+                setupRecord[SetupRecordKeys.owningPunchLine] = CKRecord.Reference(recordID: punchLine.cloudKitID, action: .deleteSelf)
+                setupRecord[SetupRecordKeys.text] = setup as CKRecordValue
+                setupRecord[SetupRecordKeys.author] = author as CKRecordValue
+                setupRecord[SetupRecordKeys.isUnfunnyCount] = 0 as CKRecordValue
+                setupRecord[SetupRecordKeys.isOffensiveCount] = 0 as CKRecordValue
+                try await publicDatabase.save(setupRecord)
+            } catch {
+                return
+            }
+
+        } else if punchLine is CustomPunchLine {
+            return
+        }
+
+        return
+    }
+
+    class func getRandomSetup(from punchLine: PunchLine) async -> Setup? {
+
+        if punchLine is PublicPunchLine {
+            let publicDatabase = container.publicCloudDatabase
+
+            do {
+                let recordToMatch = CKRecord.Reference(recordID: punchLine.cloudKitID, action: .deleteSelf)
+                let retrievedRecords = try await publicDatabase.records(matching: CKQuery(
+                    recordType: SetupRecordKeys.type,
+                    predicate: NSPredicate(format: "owningPunchLine == %@", recordToMatch))
+                )
+
+                guard retrievedRecords.matchResults.count > 0 else {
+                    return nil
+                }
+
+                let randomIndex = Int.random(in: 0..<retrievedRecords.matchResults.count)
+
+                switch retrievedRecords.matchResults[randomIndex].1 {
+                case .success(let setupRecord):
+                    return Setup(
+                        cloudKitID: setupRecord.recordID,
+                        owningPunchLine: setupRecord[SetupRecordKeys.owningPunchLine] as! CKRecord.Reference,
+                        text: setupRecord[SetupRecordKeys.text] as! String,
+                        author: setupRecord[SetupRecordKeys.author] as! String,
+                        isUnfunnyCount: setupRecord[SetupRecordKeys.isUnfunnyCount] as! Int,
+                        isOffensiveCount: setupRecord[SetupRecordKeys.isOffensiveCount] as! Int
+                    )
+                case .failure:
+                    return nil
+                }
+            } catch {
+                return nil
+            }
+
+        } else if punchLine is CustomPunchLine {
+            return nil
+        }
+
+        return nil
+    }
+
+    class func update(setup: Setup, in punchLine: PunchLine) async {
+
+        if punchLine is PublicPunchLine {
+            let publicDatabase = container.publicCloudDatabase
+
+            do {
+                let retrievedRecords = try await publicDatabase.records(for: [setup.cloudKitID])
+                let retrievedSetupRecordResult = retrievedRecords.first?.1
+
+                switch retrievedSetupRecordResult {
+                case .success(let retrievedSetupRecord):
+                    retrievedSetupRecord.setValue(setup.text, forKey: SetupRecordKeys.text)
+                    retrievedSetupRecord.setValue(setup.author, forKey: SetupRecordKeys.author)
+                    retrievedSetupRecord.setValue(setup.isUnfunnyCount, forKey: SetupRecordKeys.isUnfunnyCount)
+                    retrievedSetupRecord.setValue(setup.isOffensiveCount, forKey: SetupRecordKeys.isOffensiveCount)
+                    try await publicDatabase.save(retrievedSetupRecord)
+                case .failure, .none:
+                    break
+                }
+            } catch {
+                // TODO: Handle Error
+            }
+
+        } else if punchLine is CustomPunchLine {
+
+        }
 
     }
 
-    class func getSetup(from punchLine: PunchLine) {
+    class func delete(setup: Setup, in punchLine: PunchLine) async {
 
-    }
+        if punchLine is PublicPunchLine {
+            let publicDatabase = container.publicCloudDatabase
 
-    class func removeSetup(from punchLine: PunchLine) {
+            do {
+                let retrievedRecords = try await publicDatabase.records(for: [setup.cloudKitID])
+                let retrievedSetupID = retrievedRecords.first?.0
+                if let setupID = retrievedSetupID {
+                    try await publicDatabase.deleteRecord(withID: setupID)
+                }
+            } catch {
+                return
+            }
+
+        } else if punchLine is CustomPunchLine {
+
+        }
 
     }
 
     // MARK: Joke
 
-    class func addJoke(to punchLine: PunchLine) {
+    class func addJoke(to punchLine: PunchLine, setup: String, setupAuthor: String, punchline: String, punchlineAuthor: String) async {
+
+        if punchLine is PublicPunchLine {
+            let publicDatabase = container.publicCloudDatabase
+
+            do {
+                let jokeRecord = CKRecord(recordType: JokeRecordKeys.type)
+                jokeRecord[JokeRecordKeys.owningPunchLine] = CKRecord.Reference(recordID: punchLine.cloudKitID, action: .deleteSelf)
+                jokeRecord[JokeRecordKeys.setup] = setup as CKRecordValue
+                jokeRecord[JokeRecordKeys.setupAuthor] = setupAuthor as CKRecordValue
+                jokeRecord[JokeRecordKeys.punchline] = punchline as CKRecordValue
+                jokeRecord[JokeRecordKeys.punchlineAuthor] = punchlineAuthor as CKRecordValue
+                jokeRecord[JokeRecordKeys.haCount] = 0 as CKRecordValue
+                jokeRecord[JokeRecordKeys.mehCount] = 0 as CKRecordValue
+                jokeRecord[JokeRecordKeys.ughCount] = 0 as CKRecordValue
+                jokeRecord[JokeRecordKeys.isTooFunnyCount] = 0 as CKRecordValue
+                jokeRecord[JokeRecordKeys.isOffensiveCount] = 0 as CKRecordValue
+                try await publicDatabase.save(jokeRecord)
+            } catch {
+                return
+            }
+
+        } else if punchLine is CustomPunchLine {
+            return
+        }
+
+        return
+    }
+
+    class func getRandomJoke(from punchLine: PunchLine) async -> Joke? {
+
+        if punchLine is PublicPunchLine {
+            let publicDatabase = container.publicCloudDatabase
+
+            do {
+                let recordToMatch = CKRecord.Reference(recordID: punchLine.cloudKitID, action: .deleteSelf)
+                let retrievedRecords = try await publicDatabase.records(matching: CKQuery(
+                    recordType: JokeRecordKeys.type,
+                    predicate: NSPredicate(format: "owningPunchLine == %@", recordToMatch))
+                )
+
+                guard retrievedRecords.matchResults.count > 0 else {
+                    return nil
+                }
+
+                let randomIndex = Int.random(in: 0..<retrievedRecords.matchResults.count)
+
+                switch retrievedRecords.matchResults[randomIndex].1 {
+                case .success(let jokeRecord):
+                    return Joke(
+                        cloudKitID: jokeRecord.recordID,
+                        owningPunchLine: jokeRecord[JokeRecordKeys.owningPunchLine] as! CKRecord.Reference,
+                        setup: jokeRecord[JokeRecordKeys.setup] as! String,
+                        setupAuthor: jokeRecord[JokeRecordKeys.setupAuthor] as! String,
+                        punchline: jokeRecord[JokeRecordKeys.punchline] as! String,
+                        punchlineAuthor: jokeRecord[JokeRecordKeys.punchlineAuthor] as! String,
+                        haCount: jokeRecord[JokeRecordKeys.haCount] as! Int,
+                        mehCount: jokeRecord[JokeRecordKeys.mehCount] as! Int,
+                        ughCount: jokeRecord[JokeRecordKeys.ughCount] as! Int,
+                        isTooFunnyCount: jokeRecord[JokeRecordKeys.isTooFunnyCount] as! Int,
+                        isOffensiveCount: jokeRecord[JokeRecordKeys.isOffensiveCount] as! Int
+                    )
+                case .failure:
+                    return nil
+                }
+            } catch {
+                return nil
+            }
+            
+        } else if punchLine is CustomPunchLine {
+            return nil
+        }
+
+        return nil
+    }
+
+    class func update(joke: Joke, in punchLine: PunchLine) async {
+
+        if punchLine is PublicPunchLine {
+            let publicDatabase = container.publicCloudDatabase
+
+            do {
+                let retrievedRecords = try await publicDatabase.records(for: [joke.cloudKitID])
+                let retrievedJokeRecordResult = retrievedRecords.first?.1
+
+                switch retrievedJokeRecordResult {
+                case .success(let retrievedJokeRecord):
+                    retrievedJokeRecord.setValue(joke.setup, forKey: JokeRecordKeys.setup)
+                    retrievedJokeRecord.setValue(joke.setupAuthor, forKey: JokeRecordKeys.setupAuthor)
+                    retrievedJokeRecord.setValue(joke.punchline, forKey: JokeRecordKeys.punchline)
+                    retrievedJokeRecord.setValue(joke.punchlineAuthor, forKey: JokeRecordKeys.punchlineAuthor)
+                    retrievedJokeRecord.setValue(joke.haCount, forKey: JokeRecordKeys.haCount)
+                    retrievedJokeRecord.setValue(joke.mehCount, forKey: JokeRecordKeys.mehCount)
+                    retrievedJokeRecord.setValue(joke.ughCount, forKey: JokeRecordKeys.ughCount)
+                    retrievedJokeRecord.setValue(joke.isTooFunnyCount, forKey: JokeRecordKeys.isTooFunnyCount)
+                    retrievedJokeRecord.setValue(joke.isOffensiveCount, forKey: JokeRecordKeys.isOffensiveCount)
+                    try await publicDatabase.save(retrievedJokeRecord)
+                case .failure, .none:
+                    break
+                }
+            } catch {
+                // TODO: Handle Error
+            }
+
+        } else if punchLine is CustomPunchLine {
+
+        }
 
     }
 
-    class func getJoke(from punchLine: PunchLine) {
+    class func delete(joke: Joke, in punchLine: PunchLine) async {
 
-    }
+        if punchLine is PublicPunchLine {
+            let publicDatabase = container.publicCloudDatabase
 
-    class func removeJoke(from punchLine: PunchLine) {
+            do {
+                let retrievedRecords = try await publicDatabase.records(for: [joke.cloudKitID])
+                let retrievedJokeID = retrievedRecords.first?.0
+                if let jokeID = retrievedJokeID {
+                    try await publicDatabase.deleteRecord(withID: jokeID)
+                }
+            } catch {
+                return
+            }
+
+        } else if punchLine is CustomPunchLine {
+
+        }
 
     }
 

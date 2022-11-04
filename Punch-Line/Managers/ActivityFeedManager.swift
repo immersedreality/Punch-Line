@@ -21,7 +21,7 @@ final class ActivityFeedManager {
         }
 
         switch todaysTaskCount {
-        case 0...2:
+        case 1...2:
             return instantiateSetupViewController()
         case 3, 5, 8, 12, 17, 23, 30, 38, 47, 57:
             return instantiatePunchlineViewController()
@@ -56,6 +56,15 @@ final class ActivityFeedManager {
             return voteViewController
         } else {
             return VoteViewController()
+        }
+    }
+
+    class func instantiateNothingToDoViewController() -> NothingToDoViewController {
+        let storyboard = UIStoryboard(name: StoryboardNames.nothingToDo, bundle: nil)
+        if let nothingToDoViewController = storyboard.instantiateInitialViewController() as? NothingToDoViewController {
+            return nothingToDoViewController
+        } else {
+            return NothingToDoViewController()
         }
     }
     

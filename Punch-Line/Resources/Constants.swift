@@ -80,6 +80,7 @@ struct SegueIdentifiers {
 struct StoryboardNames {
     static let getStarted = "GetStarted"
     static let main = "Main"
+    static let nothingToDo = "NothingToDo"
     static let punchline = "Punchline"
     static let setup = "Setup"
     static let vote = "Vote"

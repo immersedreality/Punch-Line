@@ -11,6 +11,7 @@ import CloudKit
 
 struct Joke {
 
+    let cloudKitID: CKRecord.ID
     let owningPunchLine: CKRecord.Reference
 
     let setup: String
@@ -49,4 +50,14 @@ struct Joke {
 
 struct JokeRecordKeys {
     static let type = "Joke"
+    static let owningPunchLine = "owningPunchLine"
+    static let setup = "setup"
+    static let setupAuthor = "setupAuthor"
+    static let punchline = "punchline"
+    static let punchlineAuthor = "punchlineAuthor"
+    static let haCount = "haCount"
+    static let mehCount = "mehCount"
+    static let ughCount = "ughCount"
+    static let isTooFunnyCount = "isTooFunnyCount"
+    static let isOffensiveCount = "isOffensiveCount"
 }

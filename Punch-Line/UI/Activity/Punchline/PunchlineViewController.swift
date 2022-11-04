@@ -23,6 +23,7 @@ class PunchlineViewController: UIViewController {
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureSetup()
         configureTextView()
         configureReminderLabel()
     }
@@ -38,6 +39,10 @@ class PunchlineViewController: UIViewController {
     }
 
     // MARK: Config
+    private func configureSetup() {
+        setupLabel.text = activityContainerViewController.viewModel.getCurrentSetup()?.text
+    }
+
     private func configureTextView() {
         punchlineTextView.delegate = self
     }
@@ -45,25 +50,34 @@ class PunchlineViewController: UIViewController {
     private func configureReminderLabel() {
         reminderLabel.alpha = 0.0
     }
-
+    
     // MARK: Actions
     @IBAction func doneButtonTapped(_ sender: Any) {
-        guard punchlineTextView.text.removingSpaces().count >= 10 else {
+        guard punchlineTextView.text.removingSpaces().count >= 2 else {
             animateReminderLabel(with: ActivityFeedMessages.punchlineLength)
             return
         }
 
-        performNavigation()
+        Task {
+            await activityContainerViewController.viewModel.addJokeToPunchLine(text: punchlineTextView.text)
+            performNavigation()
+        }
     }
 
     @IBAction func flagButtonTapped(_ sender: Any) {
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
         let flagAsOffensiveAction = UIAlertAction(title: FlagActionTitles.flagSetupAsOffensive, style: .default) { _ in
-            self.performNavigation()
+            Task {
+                await self.activityContainerViewController.viewModel.flagSetup(as: .offensive)
+                self.performNavigation()
+            }
         }
         let flagAsUnfunnyAction = UIAlertAction(title: FlagActionTitles.flagSetupAsUnfunny, style: .default) { _ in
-            self.performNavigation()
+            Task {
+                await self.activityContainerViewController.viewModel.flagSetup(as: .unfunny)
+                self.performNavigation()
+            }
         }
         let cancelAction = UIAlertAction(title: FlagActionTitles.cancel, style: .cancel)
 
@@ -87,7 +101,7 @@ class PunchlineViewController: UIViewController {
 
     private func performNavigation() {
         punchlineTextView.resignFirstResponder()
-        AppSessionManager.incrementTodaysTaskCount(for: activityContainerViewController.viewModel.punchLine.cloudKitID.recordName)
+        AppSessionManager.incrementTodaysTaskCount(for: activityContainerViewController.viewModel.getPunchlineStringIdentifier())
         activityContainerViewController.navigateToNextActivityFeedViewController()
     }
 

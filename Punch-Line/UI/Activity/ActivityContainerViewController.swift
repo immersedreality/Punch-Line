@@ -25,8 +25,18 @@ class ActivityContainerViewController: UIViewController {
     }
 
     private func configureChildViewController() {
-        let punchlineID = viewModel.punchLine.cloudKitID.recordName
+        let punchlineID = viewModel.getPunchlineStringIdentifier()
         let nextActivityFeedViewController = ActivityFeedManager.generateActivityFeedViewController(for: punchlineID)
+
+        if (nextActivityFeedViewController is PunchlineViewController && viewModel.getCurrentSetup() == nil) ||
+            (nextActivityFeedViewController is VoteViewController && viewModel.getCurrentJoke() == nil) {
+            let nothingToDoViewController = ActivityFeedManager.instantiateNothingToDoViewController()
+            self.addChild(nothingToDoViewController)
+            self.view.addSubview(nothingToDoViewController.view)
+            nextActivityFeedViewController.didMove(toParent: self)
+            return
+        }
+
         self.addChild(nextActivityFeedViewController)
         self.view.addSubview(nextActivityFeedViewController.view)
         nextActivityFeedViewController.didMove(toParent: self)
@@ -40,7 +50,28 @@ class ActivityContainerViewController: UIViewController {
     }
 
     func navigateToNextActivityFeedViewController() {
-        performSegue(withIdentifier: SegueIdentifiers.showActivityContainerViewController, sender: self)
+        guard let punchlineIndex = AppSessionManager.userInfo?.todaysPunchlines.firstIndex(of: viewModel.getPunchlineStringIdentifier()) else {
+            return
+        }
+
+        guard let todaysTaskCount = AppSessionManager.userInfo?.todaysTaskCounts[punchlineIndex] else {
+            return
+        }
+
+        viewModel.clearCurrentValues()
+
+        Task {
+            switch todaysTaskCount {
+            case 1...2:
+                break
+            case 3, 5, 8, 12, 17, 23, 30, 38, 47, 57:
+                await viewModel.getARandomSetup()
+            default:
+                await viewModel.getARandomJoke()
+            }
+
+            performSegue(withIdentifier: SegueIdentifiers.showActivityContainerViewController, sender: self)
+        }
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

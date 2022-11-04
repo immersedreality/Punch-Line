@@ -39,7 +39,7 @@ class SetupViewController: UIViewController {
 
     // MARK: Config
     private func configureStartAJokeLabel() {
-        let activePunchlineID = activityContainerViewController.viewModel.punchLine.cloudKitID.recordName
+        let activePunchlineID = activityContainerViewController.viewModel.getPunchlineStringIdentifier()
         guard let activePunchlineIndex = AppSessionManager.userInfo?.todaysPunchlines.firstIndex(of: activePunchlineID) else {
             startAJokeLabel.text = ActivityFeedMessages.setupStartFirst
             return
@@ -75,7 +75,10 @@ class SetupViewController: UIViewController {
             return
         }
 
-        performNavigation()
+        Task {
+            await activityContainerViewController.viewModel.addSetupToPunchLine(text: setupTextView.text)
+            performNavigation()
+        }
     }
 
     // MARK: Methods
@@ -92,7 +95,7 @@ class SetupViewController: UIViewController {
 
     private func performNavigation() {
         setupTextView.resignFirstResponder()
-        AppSessionManager.incrementTodaysTaskCount(for: activityContainerViewController.viewModel.punchLine.cloudKitID.recordName)
+        AppSessionManager.incrementTodaysTaskCount(for: activityContainerViewController.viewModel.getPunchlineStringIdentifier())
         activityContainerViewController.navigateToNextActivityFeedViewController()
     }
 
