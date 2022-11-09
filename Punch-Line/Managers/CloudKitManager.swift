@@ -294,6 +294,7 @@ final class CloudKitManager {
         let publicDatabase = container.publicCloudDatabase
         let publicPunchLineLauncherName = scope.rawValue + "." + locationName
         var matchedPunchLineLauncher: PunchLineLauncher?
+        var matchedPunchLineLauncherRecord: CKRecord?
 
         do {
             let retrievedRecords = try await publicDatabase.records(matching: CKQuery(
@@ -304,6 +305,7 @@ final class CloudKitManager {
             let _ = retrievedRecords.matchResults.first { _, result in
                 switch result {
                 case .success(let record):
+                    matchedPunchLineLauncherRecord = record
                     matchedPunchLineLauncher = PunchLineLauncher(
                         cloudKitID: record.recordID,
                         owningUser: nil,
@@ -311,14 +313,22 @@ final class CloudKitManager {
                         identifier: record[PunchLineLauncherRecordKeys.identifier] as! String,
                         displayName: record[PunchLineLauncherRecordKeys.displayName] as! String,
                         scope: PunchLineScope(rawValue: record[PunchLineLauncherRecordKeys.scope] as! String)!,
-                        hasHadDailyReset: record[PunchLineLauncherRecordKeys.hasHadDailyReset] as! Bool
+                        lastDailyResetDate: record[PunchLineLauncherRecordKeys.lastDailyResetDate] as! Date
                     )
                     return true
                 case .failure:
                     return false
                 }
             }
-            
+
+            if let matchedPunchLineLauncher, let matchedPunchLineLauncherRecord {
+                if !Calendar.current.isDate(Date.now, inSameDayAs: matchedPunchLineLauncher.lastDailyResetDate) {
+                    await removePunchLines(from: matchedPunchLineLauncher)
+                    matchedPunchLineLauncherRecord[PunchLineLauncherRecordKeys.lastDailyResetDate] = Date() as CKRecordValue
+                    try await publicDatabase.save(matchedPunchLineLauncherRecord)
+                }
+            }
+
             return matchedPunchLineLauncher
         } catch {
             return nil
@@ -332,7 +342,7 @@ final class CloudKitManager {
         launcherRecord[PunchLineLauncherRecordKeys.identifier] = (scope.rawValue + "." + locationName) as CKRecordValue
         launcherRecord[PunchLineLauncherRecordKeys.displayName] = locationName as CKRecordValue
         launcherRecord[PunchLineLauncherRecordKeys.scope] = scope.rawValue as CKRecordValue
-        launcherRecord[PunchLineLauncherRecordKeys.hasHadDailyReset] = false as CKRecordValue
+        launcherRecord[PunchLineLauncherRecordKeys.lastDailyResetDate] = Date() as CKRecordValue
 
         do {
             try await publicDatabase.save(launcherRecord)
@@ -343,7 +353,7 @@ final class CloudKitManager {
                 identifier: launcherRecord[PunchLineLauncherRecordKeys.identifier] as! String,
                 displayName: launcherRecord[PunchLineLauncherRecordKeys.displayName] as! String,
                 scope: PunchLineScope(rawValue: launcherRecord[PunchLineLauncherRecordKeys.scope] as! String)!,
-                hasHadDailyReset: launcherRecord[PunchLineLauncherRecordKeys.hasHadDailyReset] as! Bool
+                lastDailyResetDate: launcherRecord[PunchLineLauncherRecordKeys.lastDailyResetDate] as! Date
             )
             return newPublicPunchLineLauncher
         } catch {
@@ -361,7 +371,7 @@ final class CloudKitManager {
             launcherRecord[PunchLineLauncherRecordKeys.identifier] = (PunchLineScope.custom.rawValue + "." + name.removingSpaces()) as CKRecordValue
             launcherRecord[PunchLineLauncherRecordKeys.displayName] = name as CKRecordValue
             launcherRecord[PunchLineLauncherRecordKeys.scope] = PunchLineScope.custom.rawValue as CKRecordValue
-            launcherRecord[PunchLineLauncherRecordKeys.hasHadDailyReset] = false as CKRecordValue
+            launcherRecord[PunchLineLauncherRecordKeys.lastDailyResetDate] = Date() as CKRecordValue
             try await publicDatabase.save(launcherRecord)
         } catch {
             return
@@ -371,6 +381,7 @@ final class CloudKitManager {
     class func getOwnedCustomPunchLineLaunchers() async -> [PunchLineLauncher] {
         let publicDatabase = container.publicCloudDatabase
         var ownedCustomPunchLineLaunchers: [PunchLineLauncher] = []
+        var ownedCustomPunchLineLauncherRecords: [CKRecord] = []
 
         do {
             let recordToMatch = try await CKRecord.Reference(recordID: container.userRecordID(), action: .deleteSelf)
@@ -382,6 +393,7 @@ final class CloudKitManager {
             retrievedRecords.matchResults.forEach { (recordID, result) in
                 switch result {
                 case .success(let launcherRecord):
+                    ownedCustomPunchLineLauncherRecords.append(launcherRecord)
                     let ownedCustomLauncher = PunchLineLauncher(
                         cloudKitID: recordID,
                         owningUser: recordToMatch,
@@ -389,11 +401,19 @@ final class CloudKitManager {
                         identifier: launcherRecord[PunchLineLauncherRecordKeys.identifier] as! String,
                         displayName: launcherRecord[PunchLineLauncherRecordKeys.displayName] as! String,
                         scope: .custom,
-                        hasHadDailyReset: launcherRecord[PunchLineLauncherRecordKeys.hasHadDailyReset] as! Bool
+                        lastDailyResetDate: launcherRecord[PunchLineLauncherRecordKeys.lastDailyResetDate] as! Date
                     )
                     ownedCustomPunchLineLaunchers.append(ownedCustomLauncher)
                 case .failure:
                     return
+                }
+            }
+
+            for (index, ownedCustomPunchLineLauncher) in ownedCustomPunchLineLaunchers.enumerated() {
+                if !Calendar.current.isDate(Date.now, inSameDayAs: ownedCustomPunchLineLauncher.lastDailyResetDate) {
+                    await removePunchLines(from: ownedCustomPunchLineLauncher)
+                    ownedCustomPunchLineLauncherRecords[index][PunchLineLauncherRecordKeys.lastDailyResetDate] = Date() as CKRecordValue
+                    try await publicDatabase.save(ownedCustomPunchLineLauncherRecords[index])
                 }
             }
 
@@ -406,6 +426,7 @@ final class CloudKitManager {
     class func getJoinedCustomPunchLineLaunchers() async -> [PunchLineLauncher] {
         let publicDatabase = container.publicCloudDatabase
         var joinedCustomPunchLineLaunchers: [PunchLineLauncher] = []
+        var joinedCustomPunchLineLauncherRecords: [CKRecord] = []
 
         do {
             let recordToMatch = try await container.userRecordID().recordName
@@ -417,6 +438,7 @@ final class CloudKitManager {
             retrievedRecords.matchResults.forEach { (recordID, result) in
                 switch result {
                 case .success(let launcherRecord):
+                    joinedCustomPunchLineLauncherRecords.append(launcherRecord)
                     let ownedCustomLauncher = PunchLineLauncher(
                         cloudKitID: recordID,
                         owningUser: launcherRecord[PunchLineLauncherRecordKeys.owningUser] as? CKRecord.Reference,
@@ -424,11 +446,19 @@ final class CloudKitManager {
                         identifier: launcherRecord[PunchLineLauncherRecordKeys.identifier] as! String,
                         displayName: launcherRecord[PunchLineLauncherRecordKeys.displayName] as! String,
                         scope: .custom,
-                        hasHadDailyReset: launcherRecord[PunchLineLauncherRecordKeys.hasHadDailyReset] as! Bool
+                        lastDailyResetDate: launcherRecord[PunchLineLauncherRecordKeys.lastDailyResetDate] as! Date
                     )
                     joinedCustomPunchLineLaunchers.append(ownedCustomLauncher)
                 case .failure:
                     return
+                }
+            }
+
+            for (index, joinedCustomPunchLineLauncher) in joinedCustomPunchLineLaunchers.enumerated() {
+                if !Calendar.current.isDate(Date.now, inSameDayAs: joinedCustomPunchLineLauncher.lastDailyResetDate) {
+                    await removePunchLines(from: joinedCustomPunchLineLauncher)
+                    joinedCustomPunchLineLauncherRecords[index][PunchLineLauncherRecordKeys.lastDailyResetDate] = Date() as CKRecordValue
+                    try await publicDatabase.save(joinedCustomPunchLineLauncherRecords[index])
                 }
             }
 
@@ -507,7 +537,29 @@ final class CloudKitManager {
 
     }
 
-    class func removePunchLine(from launcher: PunchLineLauncher) {
+    class func removePunchLines(from launcher: PunchLineLauncher) async {
+        let publicDatabase = container.publicCloudDatabase
+
+        switch launcher.scope {
+        case .country, .stateOrProvince, .city:
+            do {
+                let recordToMatch = CKRecord.Reference(recordID: launcher.cloudKitID, action: .deleteSelf)
+                let retrievedRecords = try await publicDatabase.records(matching: CKQuery(
+                    recordType: PublicPunchLineRecordKeys.type,
+                    predicate: NSPredicate(format: "owningLauncher == %@", recordToMatch)
+                ))
+
+                let retrievedRecordIDs = retrievedRecords.matchResults.map { $0.0 }
+                for punchLineRecordID in retrievedRecordIDs {
+                    try await publicDatabase.deleteRecord(withID: punchLineRecordID)
+                }
+
+            } catch {
+                // TODO: Handle Error
+            }
+        case .custom:
+            return
+        }
 
     }
 

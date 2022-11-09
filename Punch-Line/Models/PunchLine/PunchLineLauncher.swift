@@ -18,7 +18,7 @@ struct PunchLineLauncher {
     let identifier: String
     let displayName: String
     let scope: PunchLineScope
-    let hasHadDailyReset: Bool
+    let lastDailyResetDate: Date
 }
 
 struct PunchLineLauncherRecordKeys {
@@ -28,5 +28,5 @@ struct PunchLineLauncherRecordKeys {
     static let identifier = "identifier"
     static let displayName = "displayName"
     static let scope = "scope"
-    static let hasHadDailyReset = "hasHadDailyReset"
+    static let lastDailyResetDate = "lastDailyResetDate"
 }
