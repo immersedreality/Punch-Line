@@ -11,12 +11,14 @@ import CloudKit
 
 struct PunchLineLauncher {
     let cloudKitID: CKRecord.ID
+
     let owningUser: CKRecord.Reference?
     let participantUserIDs: [String]?
 
     let identifier: String
     let displayName: String
     let scope: PunchLineScope
+    let hasHadDailyReset: Bool
 }
 
 struct PunchLineLauncherRecordKeys {
@@ -26,4 +28,5 @@ struct PunchLineLauncherRecordKeys {
     static let identifier = "identifier"
     static let displayName = "displayName"
     static let scope = "scope"
+    static let hasHadDailyReset = "hasHadDailyReset"
 }

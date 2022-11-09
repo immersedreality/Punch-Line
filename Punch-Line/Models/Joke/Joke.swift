@@ -41,6 +41,7 @@ struct Joke {
     }
 
     var isOffensive: Bool {
+        guard isOffensiveCount > 2 else { return false }
         let isOffensiveCountDouble = Double(isOffensiveCount)
         let totalPlusOffensiveFlagCount = isOffensiveCountDouble + totalVoteCount
         return (isOffensiveCountDouble / totalPlusOffensiveFlagCount) > 0.10

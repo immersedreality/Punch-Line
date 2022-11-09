@@ -12,6 +12,10 @@ import CloudKit
 class ActivityFeedViewModel {
 
     private let punchLine: PunchLine
+
+    private var fetchedSetups: [Setup] = []
+    private var fetchedJokes: [Joke] = []
+
     private var currentSetup: Setup?
     private var currentJoke: Joke?
 
@@ -21,6 +25,14 @@ class ActivityFeedViewModel {
 
     func getPunchlineStringIdentifier() -> String {
         return punchLine.cloudKitID.recordName
+    }
+
+    func setFetchedSetups(setups: [Setup]) {
+        fetchedSetups = setups
+    }
+
+    func setFetchedJokes(jokes: [Joke]) {
+        fetchedJokes = jokes
     }
 
     func setCurrent(setup: Setup) {
@@ -39,6 +51,11 @@ class ActivityFeedViewModel {
         return currentJoke
     }
 
+    func clearFetchedValues() {
+        fetchedSetups.removeAll()
+        fetchedJokes.removeAll()
+    }
+
     func clearCurrentValues() {
         currentSetup = nil
         currentJoke = nil
@@ -49,7 +66,14 @@ class ActivityFeedViewModel {
     }
 
     func getARandomSetup() async {
-        currentSetup = await CloudKitManager.getRandomSetup(from: punchLine)
+        if fetchedSetups.isEmpty {
+            fetchedSetups = await CloudKitManager.getSetups(for: punchLine)
+        }
+
+        guard !fetchedSetups.isEmpty else { return }
+
+        let randomIndex = Int.random(in: 0..<fetchedSetups.count)
+        currentSetup = fetchedSetups.remove(at: randomIndex)
     }
 
     func flagSetup(as flag: SetupFlag) async {
@@ -61,6 +85,7 @@ class ActivityFeedViewModel {
                 owningPunchLine: setup.owningPunchLine,
                 text: setup.text,
                 author: setup.author,
+                totalInteractionsCount: setup.totalInteractionsCount + 1,
                 isUnfunnyCount: setup.isUnfunnyCount + 1,
                 isOffensiveCount: setup.isOffensiveCount
             )
@@ -72,6 +97,7 @@ class ActivityFeedViewModel {
                 owningPunchLine: setup.owningPunchLine,
                 text: setup.text,
                 author: setup.author,
+                totalInteractionsCount: setup.totalInteractionsCount + 1,
                 isUnfunnyCount: setup.isUnfunnyCount,
                 isOffensiveCount: setup.isOffensiveCount + 1
             )
@@ -80,6 +106,7 @@ class ActivityFeedViewModel {
     }
 
     func addJokeToPunchLine(text: String) async {
+        await updateSetupInteractionCount()
         await CloudKitManager.addJoke(
             to: punchLine,
             setup: currentSetup?.text ?? "",
@@ -89,8 +116,29 @@ class ActivityFeedViewModel {
         )
     }
 
+    private func updateSetupInteractionCount() async {
+        guard let setup = currentSetup else { return }
+        let updatedSetup = Setup(
+            cloudKitID: setup.cloudKitID,
+            owningPunchLine: setup.owningPunchLine,
+            text: setup.text,
+            author: setup.author,
+            totalInteractionsCount: setup.totalInteractionsCount + 1,
+            isUnfunnyCount: setup.isUnfunnyCount,
+            isOffensiveCount: setup.isOffensiveCount
+        )
+        await CloudKitManager.update(setup: updatedSetup, in: punchLine)
+    }
+
     func getARandomJoke() async {
-        currentJoke = await CloudKitManager.getRandomJoke(from: punchLine)
+        if fetchedJokes.isEmpty {
+            fetchedJokes = await CloudKitManager.getJokes(for: punchLine)
+        }
+
+        guard !fetchedJokes.isEmpty else { return }
+
+        let randomIndex = Int.random(in: 0..<fetchedJokes.count)
+        currentJoke = fetchedJokes.remove(at: randomIndex)
     }
 
     func voteOnJoke(vote: JokeVote) async {

@@ -310,7 +310,8 @@ final class CloudKitManager {
                         participantUserIDs: nil,
                         identifier: record[PunchLineLauncherRecordKeys.identifier] as! String,
                         displayName: record[PunchLineLauncherRecordKeys.displayName] as! String,
-                        scope: PunchLineScope(rawValue: record[PunchLineLauncherRecordKeys.scope] as! String)!
+                        scope: PunchLineScope(rawValue: record[PunchLineLauncherRecordKeys.scope] as! String)!,
+                        hasHadDailyReset: record[PunchLineLauncherRecordKeys.hasHadDailyReset] as! Bool
                     )
                     return true
                 case .failure:
@@ -331,6 +332,7 @@ final class CloudKitManager {
         launcherRecord[PunchLineLauncherRecordKeys.identifier] = (scope.rawValue + "." + locationName) as CKRecordValue
         launcherRecord[PunchLineLauncherRecordKeys.displayName] = locationName as CKRecordValue
         launcherRecord[PunchLineLauncherRecordKeys.scope] = scope.rawValue as CKRecordValue
+        launcherRecord[PunchLineLauncherRecordKeys.hasHadDailyReset] = false as CKRecordValue
 
         do {
             try await publicDatabase.save(launcherRecord)
@@ -340,7 +342,8 @@ final class CloudKitManager {
                 participantUserIDs: nil,
                 identifier: launcherRecord[PunchLineLauncherRecordKeys.identifier] as! String,
                 displayName: launcherRecord[PunchLineLauncherRecordKeys.displayName] as! String,
-                scope: PunchLineScope(rawValue: launcherRecord[PunchLineLauncherRecordKeys.scope] as! String)!
+                scope: PunchLineScope(rawValue: launcherRecord[PunchLineLauncherRecordKeys.scope] as! String)!,
+                hasHadDailyReset: launcherRecord[PunchLineLauncherRecordKeys.hasHadDailyReset] as! Bool
             )
             return newPublicPunchLineLauncher
         } catch {
@@ -358,6 +361,7 @@ final class CloudKitManager {
             launcherRecord[PunchLineLauncherRecordKeys.identifier] = (PunchLineScope.custom.rawValue + "." + name.removingSpaces()) as CKRecordValue
             launcherRecord[PunchLineLauncherRecordKeys.displayName] = name as CKRecordValue
             launcherRecord[PunchLineLauncherRecordKeys.scope] = PunchLineScope.custom.rawValue as CKRecordValue
+            launcherRecord[PunchLineLauncherRecordKeys.hasHadDailyReset] = false as CKRecordValue
             try await publicDatabase.save(launcherRecord)
         } catch {
             return
@@ -384,7 +388,8 @@ final class CloudKitManager {
                         participantUserIDs: launcherRecord[PunchLineLauncherRecordKeys.participantUserIDs] as? [String] ?? [],
                         identifier: launcherRecord[PunchLineLauncherRecordKeys.identifier] as! String,
                         displayName: launcherRecord[PunchLineLauncherRecordKeys.displayName] as! String,
-                        scope: .custom
+                        scope: .custom,
+                        hasHadDailyReset: launcherRecord[PunchLineLauncherRecordKeys.hasHadDailyReset] as! Bool
                     )
                     ownedCustomPunchLineLaunchers.append(ownedCustomLauncher)
                 case .failure:
@@ -418,7 +423,8 @@ final class CloudKitManager {
                         participantUserIDs: launcherRecord[PunchLineLauncherRecordKeys.participantUserIDs] as? [String] ?? [],
                         identifier: launcherRecord[PunchLineLauncherRecordKeys.identifier] as! String,
                         displayName: launcherRecord[PunchLineLauncherRecordKeys.displayName] as! String,
-                        scope: .custom
+                        scope: .custom,
+                        hasHadDailyReset: launcherRecord[PunchLineLauncherRecordKeys.hasHadDailyReset] as! Bool
                     )
                     joinedCustomPunchLineLaunchers.append(ownedCustomLauncher)
                 case .failure:
@@ -521,6 +527,7 @@ final class CloudKitManager {
                 setupRecord[SetupRecordKeys.owningPunchLine] = CKRecord.Reference(recordID: punchLine.cloudKitID, action: .deleteSelf)
                 setupRecord[SetupRecordKeys.text] = setup as CKRecordValue
                 setupRecord[SetupRecordKeys.author] = author as CKRecordValue
+                setupRecord[SetupRecordKeys.totalInteractionsCount] = 0 as CKRecordValue
                 setupRecord[SetupRecordKeys.isUnfunnyCount] = 0 as CKRecordValue
                 setupRecord[SetupRecordKeys.isOffensiveCount] = 0 as CKRecordValue
                 try await publicDatabase.save(setupRecord)
@@ -535,7 +542,7 @@ final class CloudKitManager {
         return
     }
 
-    class func getRandomSetup(from punchLine: PunchLine) async -> Setup? {
+    class func getSetups(for punchLine: PunchLine) async -> [Setup] {
 
         if punchLine is PublicPunchLine {
             let publicDatabase = container.publicCloudDatabase
@@ -547,34 +554,43 @@ final class CloudKitManager {
                     predicate: NSPredicate(format: "owningPunchLine == %@", recordToMatch))
                 )
 
-                guard retrievedRecords.matchResults.count > 0 else {
-                    return nil
+                var setupsToReturn: [Setup] = []
+
+                retrievedRecords.matchResults.forEach { recordID, result in
+                    switch result {
+                    case .success(let setupRecord):
+                        guard let setupRecordAuthor = setupRecord[SetupRecordKeys.author] as? String else { return }
+                        guard let currentUsername = AppSessionManager.userInfo?.username else { return }
+                        guard setupRecordAuthor != currentUsername else { return }
+
+                        let setup = Setup(
+                            cloudKitID: setupRecord.recordID,
+                            owningPunchLine: setupRecord[SetupRecordKeys.owningPunchLine] as! CKRecord.Reference,
+                            text: setupRecord[SetupRecordKeys.text] as! String,
+                            author: setupRecordAuthor,
+                            totalInteractionsCount: setupRecord[SetupRecordKeys.totalInteractionsCount] as! Int,
+                            isUnfunnyCount: setupRecord[SetupRecordKeys.isUnfunnyCount] as! Int,
+                            isOffensiveCount: setupRecord[SetupRecordKeys.isOffensiveCount] as! Int
+                        )
+
+                        setupsToReturn.append(setup)
+                    case .failure:
+                        return
+                    }
                 }
 
-                let randomIndex = Int.random(in: 0..<retrievedRecords.matchResults.count)
+                return setupsToReturn
 
-                switch retrievedRecords.matchResults[randomIndex].1 {
-                case .success(let setupRecord):
-                    return Setup(
-                        cloudKitID: setupRecord.recordID,
-                        owningPunchLine: setupRecord[SetupRecordKeys.owningPunchLine] as! CKRecord.Reference,
-                        text: setupRecord[SetupRecordKeys.text] as! String,
-                        author: setupRecord[SetupRecordKeys.author] as! String,
-                        isUnfunnyCount: setupRecord[SetupRecordKeys.isUnfunnyCount] as! Int,
-                        isOffensiveCount: setupRecord[SetupRecordKeys.isOffensiveCount] as! Int
-                    )
-                case .failure:
-                    return nil
-                }
+
             } catch {
-                return nil
+                return []
             }
 
         } else if punchLine is CustomPunchLine {
-            return nil
+            return []
         }
 
-        return nil
+        return []
     }
 
     class func update(setup: Setup, in punchLine: PunchLine) async {
@@ -658,7 +674,7 @@ final class CloudKitManager {
         return
     }
 
-    class func getRandomJoke(from punchLine: PunchLine) async -> Joke? {
+    class func getJokes(for punchLine: PunchLine) async -> [Joke] {
 
         if punchLine is PublicPunchLine {
             let publicDatabase = container.publicCloudDatabase
@@ -670,39 +686,48 @@ final class CloudKitManager {
                     predicate: NSPredicate(format: "owningPunchLine == %@", recordToMatch))
                 )
 
-                guard retrievedRecords.matchResults.count > 0 else {
-                    return nil
+                var jokesToReturn: [Joke] = []
+
+                retrievedRecords.matchResults.forEach { recordID, result in
+                    switch result {
+                    case .success(let jokeRecord):
+                        guard let jokeRecordSetupAuthor = jokeRecord[JokeRecordKeys.setupAuthor] as? String else { return }
+                        guard let jokeRecordPunchlineAuthor = jokeRecord[JokeRecordKeys.punchlineAuthor] as? String else { return }
+                        guard let currentUsername = AppSessionManager.userInfo?.username else { return }
+                        guard jokeRecordSetupAuthor != currentUsername else { return }
+                        guard jokeRecordPunchlineAuthor != currentUsername else { return }
+
+                        let joke = Joke(
+                            cloudKitID: jokeRecord.recordID,
+                            owningPunchLine: jokeRecord[JokeRecordKeys.owningPunchLine] as! CKRecord.Reference,
+                            setup: jokeRecord[JokeRecordKeys.setup] as! String,
+                            setupAuthor: jokeRecord[JokeRecordKeys.setupAuthor] as! String,
+                            punchline: jokeRecord[JokeRecordKeys.punchline] as! String,
+                            punchlineAuthor: jokeRecord[JokeRecordKeys.punchlineAuthor] as! String,
+                            haCount: jokeRecord[JokeRecordKeys.haCount] as! Int,
+                            mehCount: jokeRecord[JokeRecordKeys.mehCount] as! Int,
+                            ughCount: jokeRecord[JokeRecordKeys.ughCount] as! Int,
+                            isTooFunnyCount: jokeRecord[JokeRecordKeys.isTooFunnyCount] as! Int,
+                            isOffensiveCount: jokeRecord[JokeRecordKeys.isOffensiveCount] as! Int
+                        )
+
+                        jokesToReturn.append(joke)
+                    case .failure:
+                        return
+                    }
                 }
 
-                let randomIndex = Int.random(in: 0..<retrievedRecords.matchResults.count)
+                return jokesToReturn
 
-                switch retrievedRecords.matchResults[randomIndex].1 {
-                case .success(let jokeRecord):
-                    return Joke(
-                        cloudKitID: jokeRecord.recordID,
-                        owningPunchLine: jokeRecord[JokeRecordKeys.owningPunchLine] as! CKRecord.Reference,
-                        setup: jokeRecord[JokeRecordKeys.setup] as! String,
-                        setupAuthor: jokeRecord[JokeRecordKeys.setupAuthor] as! String,
-                        punchline: jokeRecord[JokeRecordKeys.punchline] as! String,
-                        punchlineAuthor: jokeRecord[JokeRecordKeys.punchlineAuthor] as! String,
-                        haCount: jokeRecord[JokeRecordKeys.haCount] as! Int,
-                        mehCount: jokeRecord[JokeRecordKeys.mehCount] as! Int,
-                        ughCount: jokeRecord[JokeRecordKeys.ughCount] as! Int,
-                        isTooFunnyCount: jokeRecord[JokeRecordKeys.isTooFunnyCount] as! Int,
-                        isOffensiveCount: jokeRecord[JokeRecordKeys.isOffensiveCount] as! Int
-                    )
-                case .failure:
-                    return nil
-                }
             } catch {
-                return nil
+                return []
             }
             
         } else if punchLine is CustomPunchLine {
-            return nil
+            return []
         }
 
-        return nil
+        return []
     }
 
     class func update(joke: Joke, in punchLine: PunchLine) async {

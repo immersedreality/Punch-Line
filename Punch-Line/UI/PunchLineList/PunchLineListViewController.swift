@@ -57,12 +57,17 @@ class PunchLineListViewController: UIViewController {
             guard let activityContainerNavigationController = segue.destination as? UINavigationController else { return }
             guard let activityContainerViewController =  activityContainerNavigationController.topViewController as? ActivityContainerViewController else { return }
             guard let punchlineToLaunch = viewModel.punchlineToLaunch else { return }
+
             let activityFeedViewModel = ActivityFeedViewModel(punchLine: punchlineToLaunch)
+
             if let setupToLaunchWith = viewModel.setUpToLaunchWith {
                 activityFeedViewModel.setCurrent(setup: setupToLaunchWith)
+                activityFeedViewModel.setFetchedSetups(setups: viewModel.fetchedSetups)
             } else if let jokeToLaunchWith = viewModel.jokeToLaunchWith {
                 activityFeedViewModel.setCurrent(joke: jokeToLaunchWith)
+                activityFeedViewModel.setFetchedJokes(jokes: viewModel.fetchedJokes)
             }
+
             activityContainerViewController.viewModel = activityFeedViewModel
         case SegueIdentifiers.presentPunchLineEditorViewController:
             return

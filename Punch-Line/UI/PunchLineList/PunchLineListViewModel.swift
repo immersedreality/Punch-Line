@@ -20,6 +20,10 @@ class PunchLineListViewModel {
 
     var selectedPunchLineLauncher: PunchLineLauncher?
     var punchlineToLaunch: PunchLine?
+
+    var fetchedSetups: [Setup] = []
+    var fetchedJokes: [Joke] = []
+
     var setUpToLaunchWith: Setup?
     var jokeToLaunchWith: Joke?
 
@@ -50,12 +54,20 @@ class PunchLineListViewModel {
 
     func getARandomSetup() async {
         guard let punchlineToLaunch = punchlineToLaunch else { return }
-        setUpToLaunchWith = await CloudKitManager.getRandomSetup(from: punchlineToLaunch)
+        fetchedSetups = await CloudKitManager.getSetups(for: punchlineToLaunch)
+        guard !fetchedSetups.isEmpty else { return }
+
+        let randomIndex = Int.random(in: 0..<fetchedSetups.count)
+        setUpToLaunchWith = fetchedSetups.remove(at: randomIndex)
     }
 
     func getARandomJoke() async {
         guard let punchlineToLaunch = punchlineToLaunch else { return }
-        jokeToLaunchWith = await CloudKitManager.getRandomJoke(from: punchlineToLaunch)
+        fetchedJokes = await CloudKitManager.getJokes(for: punchlineToLaunch)
+        guard !fetchedJokes.isEmpty else { return }
+
+        let randomIndex = Int.random(in: 0..<fetchedJokes.count)
+        jokeToLaunchWith = fetchedJokes.remove(at: randomIndex)
     }
 
 }

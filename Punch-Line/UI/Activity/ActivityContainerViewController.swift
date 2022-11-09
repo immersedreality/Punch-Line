@@ -24,6 +24,11 @@ class ActivityContainerViewController: UIViewController {
         removeEarlierActivityFeedViewController()
     }
 
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        viewModel.clearFetchedValues()
+    }
+
     private func configureChildViewController() {
         let punchlineID = viewModel.getPunchlineStringIdentifier()
         let nextActivityFeedViewController = ActivityFeedManager.generateActivityFeedViewController(for: punchlineID)
