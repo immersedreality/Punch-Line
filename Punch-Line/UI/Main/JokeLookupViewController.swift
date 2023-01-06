@@ -10,22 +10,40 @@ import UIKit
 
 class JokeLookupViewController: UIViewController {
 
-    @IBOutlet weak var selectPunchLineButton: UIButton!
-    @IBOutlet weak var selectTimescaleButton: UIButton!
-    @IBOutlet weak var selectSortButton: UIButton!
-    @IBOutlet weak var jokeSearchBar: UISearchBar!
+    @IBOutlet weak var selectPunchLineTextField: UITextField!
+    @IBOutlet weak var selectDateTextField: UITextField!
+
+    let selectPunchLinePickerView = UIPickerView()
+    let selectDatePickerView = UIDatePicker()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureSelectPunchLinePickerView()
+        configureSelectDatePickerView()
+        configureTextFields()
     }
 
-    @IBAction func selectPunchLineButtonTapped(_ sender: Any) {
+    private func configureSelectPunchLinePickerView() {
+        selectPunchLinePickerView.delegate = self
+        selectPunchLinePickerView.backgroundColor = StyleManager.generateRandomBackgroundColor()
+        selectPunchLinePickerView.tintColor = .punchlinePink
     }
 
-    @IBAction func selectTimescaleButtonTapped(_ sender: Any) {
+    private func configureSelectDatePickerView() {
+        selectDatePickerView.preferredDatePickerStyle = .inline
+        selectDatePickerView.datePickerMode = .date
+        selectDatePickerView.timeZone = TimeZone.current
+        selectDatePickerView.date = Date()
+        selectDatePickerView.backgroundColor = StyleManager.generateRandomBackgroundColor()
+        selectDatePickerView.tintColor = .punchlinePink
     }
 
-    @IBAction func selectSortButtonTapped(_ sender: Any) {
+    private func configureTextFields() {
+        selectPunchLineTextField.delegate = self
+        selectPunchLineTextField.inputView = selectPunchLinePickerView
+
+        selectDateTextField.delegate = self
+        selectDateTextField.inputView = selectDatePickerView
     }
 
     @IBAction func profileButtonTapped(_ sender: Any) {

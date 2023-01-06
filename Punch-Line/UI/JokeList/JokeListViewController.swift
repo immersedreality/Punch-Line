@@ -11,6 +11,7 @@ import UIKit
 class JokeListViewController: UIViewController {
 
     @IBOutlet weak var jokeListTableView: UITableView!
+    @IBOutlet weak var noJokesView: UIView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,6 +21,7 @@ class JokeListViewController: UIViewController {
     private func configureTableView() {
         jokeListTableView.delegate = self
         jokeListTableView.dataSource = self
+        jokeListTableView.sectionHeaderTopPadding = 0
         jokeListTableView.rowHeight = UITableView.automaticDimension
         jokeListTableView.estimatedRowHeight = 100.0
     }

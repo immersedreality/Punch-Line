@@ -14,6 +14,8 @@
 		B808CC4524B9584800B39432 /* Vote+ActivityFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B808CC4424B9584800B39432 /* Vote+ActivityFeedViewController.swift */; };
 		B84545922967AA8400B2D057 /* CompletedPunchLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84545912967AA8400B2D057 /* CompletedPunchLine.swift */; };
 		B84545942967BBD300B2D057 /* SurvivingJoke.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84545932967BBD300B2D057 /* SurvivingJoke.swift */; };
+		B84545962967C68600B2D057 /* JokeLookup+UITextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84545952967C68600B2D057 /* JokeLookup+UITextFieldDelegate.swift */; };
+		B84545982967C7B800B2D057 /* JokeLookup+UIPickerViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84545972967C7B800B2D057 /* JokeLookup+UIPickerViewDelegate.swift */; };
 		B848503324BB66B3006EEE02 /* PunchLineEditor.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B848503224BB66B3006EEE02 /* PunchLineEditor.storyboard */; };
 		B848503524BB66C5006EEE02 /* PunchLineEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B848503424BB66C5006EEE02 /* PunchLineEditorViewController.swift */; };
 		B848503824BB691C006EEE02 /* ActivityFeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B848503724BB691C006EEE02 /* ActivityFeedViewModel.swift */; };
@@ -94,6 +96,8 @@
 		B808CC4424B9584800B39432 /* Vote+ActivityFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Vote+ActivityFeedViewController.swift"; sourceTree = "<group>"; };
 		B84545912967AA8400B2D057 /* CompletedPunchLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedPunchLine.swift; sourceTree = "<group>"; };
 		B84545932967BBD300B2D057 /* SurvivingJoke.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurvivingJoke.swift; sourceTree = "<group>"; };
+		B84545952967C68600B2D057 /* JokeLookup+UITextFieldDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JokeLookup+UITextFieldDelegate.swift"; sourceTree = "<group>"; };
+		B84545972967C7B800B2D057 /* JokeLookup+UIPickerViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JokeLookup+UIPickerViewDelegate.swift"; sourceTree = "<group>"; };
 		B848503224BB66B3006EEE02 /* PunchLineEditor.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PunchLineEditor.storyboard; sourceTree = "<group>"; };
 		B848503424BB66C5006EEE02 /* PunchLineEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PunchLineEditorViewController.swift; sourceTree = "<group>"; };
 		B848503724BB691C006EEE02 /* ActivityFeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityFeedViewModel.swift; sourceTree = "<group>"; };
@@ -236,6 +240,8 @@
 				B89F69E424B6755900472067 /* JokeLookupViewController.swift */,
 				B89F69ED24B675DA00472067 /* MainTabBarController.swift */,
 				B89F69BD24B6663800472067 /* Main.storyboard */,
+				B84545952967C68600B2D057 /* JokeLookup+UITextFieldDelegate.swift */,
+				B84545972967C7B800B2D057 /* JokeLookup+UIPickerViewDelegate.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -547,6 +553,7 @@
 				B854589624BAA6D400723E26 /* PunchLineList+CLLocationManagerDelegate.swift in Sources */,
 				B87068672914DAA0001FADBD /* PunchLineEditor+TableView.swift in Sources */,
 				B89F69B624B6663800472067 /* AppDelegate.swift in Sources */,
+				B84545982967C7B800B2D057 /* JokeLookup+UIPickerViewDelegate.swift in Sources */,
 				B8B6A9C528DE5762005C67EA /* String+RemovingSpaces.swift in Sources */,
 				B870685E2914A8EB001FADBD /* NothingToDoViewController.swift in Sources */,
 				B8EABB8624B8278A00A46443 /* NavigationManager.swift in Sources */,
@@ -573,6 +580,7 @@
 				B84545942967BBD300B2D057 /* SurvivingJoke.swift in Sources */,
 				B848503524BB66C5006EEE02 /* PunchLineEditorViewController.swift in Sources */,
 				B89F69EE24B675DA00472067 /* MainTabBarController.swift in Sources */,
+				B84545962967C68600B2D057 /* JokeLookup+UITextFieldDelegate.swift in Sources */,
 				B8B6A9C028D51564005C67EA /* Profile+CellActionDelegate.swift in Sources */,
 				B8B6A9B628D289F9005C67EA /* UsernameViewController.swift in Sources */,
 				B808CC4124B9583F00B39432 /* Punchline+ActivityFeedViewController.swift in Sources */,

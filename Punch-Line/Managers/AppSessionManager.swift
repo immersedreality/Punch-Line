@@ -12,7 +12,7 @@ import CloudKit
 final class AppSessionManager {
     
     static var userInfo: UserInfo?
-    static var currentPublicPunchlineLaunchers: [PunchLineLauncher] = []
+    static var currentPublicPunchLineLaunchers: [PunchLineLauncher] = []
 
     class func canCreateNewUser(for username: String) async -> Bool {
         if let userbase = await CloudKitManager.getUserbase() {

@@ -12,7 +12,7 @@ class PunchLineListViewModel {
 
     var publicPunchLineLaunchers: [PunchLineLauncher] {
         get {
-            return AppSessionManager.currentPublicPunchlineLaunchers
+            return AppSessionManager.currentPublicPunchLineLaunchers
         }
     }
     var ownedCustomPunchlineLaunchers: [PunchLineLauncher] = []

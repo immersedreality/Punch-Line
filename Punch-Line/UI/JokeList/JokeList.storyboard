@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="xDt-KY-agK">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="xDt-KY-agK">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -16,28 +17,28 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="adQ-hk-1FE">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <rect key="frame" x="0.0" y="48" width="414" height="814"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="JokeCell" id="oIM-qU-gkU">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="125.5"/>
+                                        <rect key="frame" x="0.0" y="50" width="414" height="125.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="oIM-qU-gkU" id="OiC-PJ-PD3">
-                                            <rect key="frame" x="0.0" y="0.0" width="383" height="125.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="383.5" height="125.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iJJ-NS-WIO">
-                                                    <rect key="frame" x="16" y="20" width="351" height="58"/>
+                                                    <rect key="frame" x="16" y="20" width="351.5" height="58"/>
                                                     <string key="text">What do you call big ass titties that never go home and never fall down?  And also a bunch of other stuff so this cell can expand.</string>
                                                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="16"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" systemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                     <size key="shadowOffset" width="0.0" height="0.0"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dumb ass little bitches." textAlignment="right" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mHT-w3-b5D">
-                                                    <rect key="frame" x="16" y="86" width="351" height="19.5"/>
+                                                    <rect key="frame" x="16" y="86" width="351.5" height="19.5"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" systemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -54,18 +55,43 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fqe-F1-QaT">
+                                <rect key="frame" x="0.0" y="48" width="414" height="814"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YNs-IL-ZCH">
+                                        <rect key="frame" x="16" y="317.5" width="382" height="179.5"/>
+                                        <string key="text">Jokes from this PunchLine could not be found on this date.
+
+Perhaps it didn't exist yet??</string>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="30"/>
+                                        <color key="textColor" red="0.85098039219999999" green="0.47058823529999999" blue="0.49803921569999998" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="YNs-IL-ZCH" firstAttribute="centerY" secondItem="fqe-F1-QaT" secondAttribute="centerY" id="LVA-In-bqg"/>
+                                    <constraint firstAttribute="trailing" secondItem="YNs-IL-ZCH" secondAttribute="trailing" constant="16" id="WrW-0W-Dkb"/>
+                                    <constraint firstItem="YNs-IL-ZCH" firstAttribute="leading" secondItem="fqe-F1-QaT" secondAttribute="leading" constant="16" id="ipC-IP-Nzy"/>
+                                </constraints>
+                            </view>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="4mz-bL-wHK"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="4mz-bL-wHK" firstAttribute="bottom" secondItem="adQ-hk-1FE" secondAttribute="bottom" id="Xt4-J5-9fV"/>
+                            <constraint firstItem="4mz-bL-wHK" firstAttribute="trailing" secondItem="fqe-F1-QaT" secondAttribute="trailing" id="YZC-dQ-Ey1"/>
                             <constraint firstItem="adQ-hk-1FE" firstAttribute="top" secondItem="4mz-bL-wHK" secondAttribute="top" id="ZYw-Qo-Yrc"/>
                             <constraint firstItem="4mz-bL-wHK" firstAttribute="trailing" secondItem="adQ-hk-1FE" secondAttribute="trailing" id="hRa-ez-X4N"/>
                             <constraint firstItem="adQ-hk-1FE" firstAttribute="leading" secondItem="4mz-bL-wHK" secondAttribute="leading" id="j40-Vz-qmJ"/>
+                            <constraint firstItem="fqe-F1-QaT" firstAttribute="top" secondItem="4mz-bL-wHK" secondAttribute="top" id="lF7-mi-jz1"/>
+                            <constraint firstItem="4mz-bL-wHK" firstAttribute="bottom" secondItem="fqe-F1-QaT" secondAttribute="bottom" id="mTC-gN-vlW"/>
+                            <constraint firstItem="fqe-F1-QaT" firstAttribute="leading" secondItem="4mz-bL-wHK" secondAttribute="leading" id="nfj-ri-DcX"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="4mz-bL-wHK"/>
                     </view>
                     <connections>
                         <outlet property="jokeListTableView" destination="adQ-hk-1FE" id="acc-OV-wyG"/>
+                        <outlet property="noJokesView" destination="fqe-F1-QaT" id="ZLA-HK-b1c"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="L37-9q-VZ0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -73,4 +99,12 @@
             <point key="canvasLocation" x="118.84057971014494" y="150.66964285714286"/>
         </scene>
     </scenes>
+    <resources>
+        <systemColor name="darkTextColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>

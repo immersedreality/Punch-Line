@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -183,109 +183,66 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="Q3F-81-uel">
-                                <rect key="frame" x="0.0" y="92" width="414" height="48"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tgz-dF-iMX">
+                                <rect key="frame" x="0.0" y="92" width="414" height="80"/>
+                                <subviews>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="PunchLine" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4Lw-xB-upE">
+                                        <rect key="frame" x="24" y="16" width="179" height="48"/>
+                                        <color key="backgroundColor" red="0.85098039219999999" green="0.47058823529999999" blue="0.49803921569999998" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="deviceRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="8"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Date" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SRs-Af-jOG">
+                                        <rect key="frame" x="211" y="16" width="179" height="48"/>
+                                        <color key="backgroundColor" red="0.85098039219999999" green="0.47058823529999999" blue="0.49803921569999998" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="deviceRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <textInputTraits key="textInputTraits" textContentType="date-time"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="8"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </textField>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="48" id="kL7-de-pJE"/>
+                                    <constraint firstAttribute="trailing" secondItem="SRs-Af-jOG" secondAttribute="trailing" constant="24" id="7se-Hc-dPD"/>
+                                    <constraint firstItem="4Lw-xB-upE" firstAttribute="leading" secondItem="Tgz-dF-iMX" secondAttribute="leading" constant="24" id="DrS-FK-IFK"/>
+                                    <constraint firstAttribute="bottom" secondItem="SRs-Af-jOG" secondAttribute="bottom" constant="16" id="EXk-cx-JxQ"/>
+                                    <constraint firstItem="SRs-Af-jOG" firstAttribute="leading" secondItem="Tgz-dF-iMX" secondAttribute="centerX" constant="4" id="TTy-Um-Xlj"/>
+                                    <constraint firstAttribute="bottom" secondItem="4Lw-xB-upE" secondAttribute="bottom" constant="16" id="U5R-ij-FLa"/>
+                                    <constraint firstAttribute="height" constant="80" id="dWR-QK-RR4"/>
+                                    <constraint firstItem="SRs-Af-jOG" firstAttribute="top" secondItem="Tgz-dF-iMX" secondAttribute="top" constant="16" id="ilP-5X-pOu"/>
+                                    <constraint firstItem="4Lw-xB-upE" firstAttribute="top" secondItem="Tgz-dF-iMX" secondAttribute="top" constant="16" id="j36-WI-Ab0"/>
+                                    <constraint firstAttribute="centerX" secondItem="4Lw-xB-upE" secondAttribute="trailing" constant="4" id="y9D-wc-HnS"/>
                                 </constraints>
-                                <textInputTraits key="textInputTraits"/>
-                            </searchBar>
+                            </view>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Frw-e8-cUG">
-                                <rect key="frame" x="0.0" y="276" width="414" height="537"/>
+                                <rect key="frame" x="0.0" y="172" width="414" height="641"/>
                                 <connections>
                                     <segue destination="yJ7-XV-Z1h" kind="embed" identifier="EmbedJokeListViewControllerInContainerView" id="xYD-b5-1cW"/>
                                 </connections>
                             </containerView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tgz-dF-iMX">
-                                <rect key="frame" x="0.0" y="140" width="414" height="136"/>
-                                <subviews>
-                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vXR-Mg-Yow">
-                                        <rect key="frame" x="24" y="16" width="366" height="48"/>
-                                        <color key="backgroundColor" red="0.85098039219999999" green="0.47058823529999999" blue="0.49803921569999998" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="48" id="cap-Qn-YYh"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                        <state key="normal" title="US And Canada">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="8"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="selectPunchLineButtonTapped:" destination="9ST-Ii-Uxr" eventType="touchUpInside" id="Ytc-dF-gIf"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="52z-84-HsM">
-                                        <rect key="frame" x="24" y="72" width="179" height="48"/>
-                                        <color key="backgroundColor" red="0.85098039219999999" green="0.47058823529999999" blue="0.49803921569999998" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="48" id="YS5-AL-Pnt"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                        <state key="normal" title="Yesterday">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="8"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="selectTimescaleButtonTapped:" destination="9ST-Ii-Uxr" eventType="touchUpInside" id="SUm-DT-6n3"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U5p-JM-d23">
-                                        <rect key="frame" x="211" y="72" width="179" height="48"/>
-                                        <color key="backgroundColor" red="0.85098039219999999" green="0.47058823529999999" blue="0.49803921569999998" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="48" id="0tP-3a-Xfp"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                        <state key="normal" title="Sort by: Rank">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="8"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="selectSortButtonTapped:" destination="9ST-Ii-Uxr" eventType="touchUpInside" id="sDh-9x-Cr7"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstItem="52z-84-HsM" firstAttribute="leading" secondItem="Tgz-dF-iMX" secondAttribute="leading" constant="24" id="8nr-Ec-Ps7"/>
-                                    <constraint firstItem="U5p-JM-d23" firstAttribute="top" secondItem="vXR-Mg-Yow" secondAttribute="bottom" constant="8" id="FYq-EL-klB"/>
-                                    <constraint firstAttribute="trailing" secondItem="vXR-Mg-Yow" secondAttribute="trailing" constant="24" id="J2J-3C-TfQ"/>
-                                    <constraint firstItem="52z-84-HsM" firstAttribute="top" secondItem="vXR-Mg-Yow" secondAttribute="bottom" constant="8" id="Jwu-7v-Vbh"/>
-                                    <constraint firstAttribute="bottom" secondItem="U5p-JM-d23" secondAttribute="bottom" constant="16" id="Ypz-gJ-gwU"/>
-                                    <constraint firstItem="vXR-Mg-Yow" firstAttribute="leading" secondItem="Tgz-dF-iMX" secondAttribute="leading" constant="24" id="amH-0o-UaX"/>
-                                    <constraint firstAttribute="height" constant="136" id="dWR-QK-RR4"/>
-                                    <constraint firstItem="U5p-JM-d23" firstAttribute="leading" secondItem="Tgz-dF-iMX" secondAttribute="centerX" constant="4" id="g6Y-bn-Sd0"/>
-                                    <constraint firstAttribute="trailing" secondItem="U5p-JM-d23" secondAttribute="trailing" constant="24" id="mhr-Rx-iqM"/>
-                                    <constraint firstItem="vXR-Mg-Yow" firstAttribute="top" secondItem="Tgz-dF-iMX" secondAttribute="top" constant="16" id="tX1-S9-v3e"/>
-                                    <constraint firstAttribute="centerX" secondItem="52z-84-HsM" secondAttribute="trailing" constant="4" id="vlT-lt-KTa"/>
-                                </constraints>
-                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="rm5-nc-yS4"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="rm5-nc-yS4" firstAttribute="trailing" secondItem="Frw-e8-cUG" secondAttribute="trailing" id="1UF-FY-eZR"/>
+                            <constraint firstItem="Tgz-dF-iMX" firstAttribute="top" secondItem="rm5-nc-yS4" secondAttribute="top" id="1ug-i2-2vK"/>
                             <constraint firstItem="Frw-e8-cUG" firstAttribute="top" secondItem="Tgz-dF-iMX" secondAttribute="bottom" id="BzM-hA-zdi"/>
                             <constraint firstItem="Tgz-dF-iMX" firstAttribute="leading" secondItem="rm5-nc-yS4" secondAttribute="leading" id="Cwv-qP-34j"/>
                             <constraint firstItem="rm5-nc-yS4" firstAttribute="bottom" secondItem="Frw-e8-cUG" secondAttribute="bottom" id="Phh-9P-Hrc"/>
-                            <constraint firstItem="Q3F-81-uel" firstAttribute="trailing" secondItem="rm5-nc-yS4" secondAttribute="trailing" id="RFK-KH-Ep5"/>
                             <constraint firstItem="rm5-nc-yS4" firstAttribute="trailing" secondItem="Tgz-dF-iMX" secondAttribute="trailing" id="aX9-EM-Udi"/>
                             <constraint firstItem="Frw-e8-cUG" firstAttribute="leading" secondItem="rm5-nc-yS4" secondAttribute="leading" id="rod-cn-u5N"/>
-                            <constraint firstItem="Q3F-81-uel" firstAttribute="leading" secondItem="rm5-nc-yS4" secondAttribute="leading" id="rqp-Jz-dv5"/>
-                            <constraint firstItem="Q3F-81-uel" firstAttribute="top" secondItem="rm5-nc-yS4" secondAttribute="top" id="tWs-lr-I13"/>
-                            <constraint firstItem="Tgz-dF-iMX" firstAttribute="top" secondItem="Q3F-81-uel" secondAttribute="bottom" id="vHo-fH-K1J"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="The Joke Vault" id="daj-LS-Gso">
@@ -296,10 +253,8 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="jokeSearchBar" destination="Q3F-81-uel" id="XMh-Cd-V1g"/>
-                        <outlet property="selectPunchLineButton" destination="vXR-Mg-Yow" id="Ijz-lp-i47"/>
-                        <outlet property="selectSortButton" destination="U5p-JM-d23" id="2Fi-yZ-ODt"/>
-                        <outlet property="selectTimescaleButton" destination="52z-84-HsM" id="5Vb-vT-Nfg"/>
+                        <outlet property="selectDateTextField" destination="SRs-Af-jOG" id="cMy-Tf-hSA"/>
+                        <outlet property="selectPunchLineTextField" destination="4Lw-xB-upE" id="SkJ-Sl-b5x"/>
                         <segue destination="27Y-ar-7VW" kind="presentation" identifier="PresentProfileViewController" id="hEg-if-RRo"/>
                     </connections>
                 </viewController>
