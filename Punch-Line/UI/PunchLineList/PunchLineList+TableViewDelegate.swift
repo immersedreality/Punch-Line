@@ -41,7 +41,7 @@ extension PunchLineListViewController: UITableViewDelegate {
             viewModel.selectedPunchLineLauncher = viewModel.publicPunchLineLaunchers[indexPath.row]
 
             Task {
-                await viewModel.generatePublicPunchLineToLaunch()
+                await viewModel.generatePunchLineToLaunch()
 
                 guard let punchlineIndex = AppSessionManager.userInfo?.todaysPunchlines.firstIndex(of: viewModel.punchlineToLaunch?.cloudKitID.recordName ?? "") else {
                     performSegue(withIdentifier: SegueIdentifiers.presentActivityFeedViewController, sender: self)

@@ -32,24 +32,19 @@ class PunchLineListViewModel {
         joinedCustomPunchlineLaunchers = await CloudKitManager.getJoinedCustomPunchLineLaunchers()
     }
 
-    func generatePublicPunchLineToLaunch() async {
+    func generatePunchLineToLaunch() async {
         guard let launcher = selectedPunchLineLauncher else { return }
 
         let allPunchLinesForLauncher = await CloudKitManager.getPunchLines(for: launcher)
+        let availablePunchLinesForLaunch = allPunchLinesForLauncher.filter { CloudKitManager.punchLineIsAvailable(punchLine: $0) }
 
-        guard !allPunchLinesForLauncher.isEmpty else {
-            let newPunchLine = await CloudKitManager.createNewPublicPunchLine(for: launcher)
+        guard !availablePunchLinesForLaunch.isEmpty else {
+            let newPunchLine = await CloudKitManager.createNewPunchLine(for: launcher)
             punchlineToLaunch = newPunchLine
             return
         }
 
-        punchlineToLaunch = allPunchLinesForLauncher.first { punchLine in
-            CloudKitManager.getItemCount(for: punchLine) <= 750
-        } as? PublicPunchLine
-    }
-
-    func generateCustomPunchLineToLaunch() -> CustomPunchLine? {
-        return nil
+        punchlineToLaunch = availablePunchLinesForLaunch.first
     }
 
     func getARandomSetup() async {

@@ -9,8 +9,14 @@
 import Foundation
 import CloudKit
 
-protocol PunchLine {
-    var cloudKitID: CKRecord.ID { get }
-    var owningLauncher: CKRecord.Reference { get }
-    var displayName: String { get }
+struct PunchLine {
+    let cloudKitID: CKRecord.ID
+    let owningLauncher: CKRecord.Reference
+    let displayName: String
+}
+
+struct PunchLineRecordKeys {
+    static let type = "PunchLine"
+    static let owningLauncher = "owningLauncher"
+    static let displayName = "displayName"
 }

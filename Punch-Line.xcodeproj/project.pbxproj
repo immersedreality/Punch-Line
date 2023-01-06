@@ -12,6 +12,8 @@
 		B808CC4124B9583F00B39432 /* Punchline+ActivityFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B808CC4024B9583F00B39432 /* Punchline+ActivityFeedViewController.swift */; };
 		B808CC4324B9584500B39432 /* Setup+ActivityFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B808CC4224B9584500B39432 /* Setup+ActivityFeedViewController.swift */; };
 		B808CC4524B9584800B39432 /* Vote+ActivityFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B808CC4424B9584800B39432 /* Vote+ActivityFeedViewController.swift */; };
+		B84545922967AA8400B2D057 /* CompletedPunchLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84545912967AA8400B2D057 /* CompletedPunchLine.swift */; };
+		B84545942967BBD300B2D057 /* SurvivingJoke.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84545932967BBD300B2D057 /* SurvivingJoke.swift */; };
 		B848503324BB66B3006EEE02 /* PunchLineEditor.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B848503224BB66B3006EEE02 /* PunchLineEditor.storyboard */; };
 		B848503524BB66C5006EEE02 /* PunchLineEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B848503424BB66C5006EEE02 /* PunchLineEditorViewController.swift */; };
 		B848503824BB691C006EEE02 /* ActivityFeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B848503724BB691C006EEE02 /* ActivityFeedViewModel.swift */; };
@@ -57,7 +59,6 @@
 		B89F6A1524B80CE500472067 /* CloudKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89F6A1424B80CE500472067 /* CloudKitManager.swift */; };
 		B8A58FF124B982360007B744 /* PunchLineListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8A58FF024B982360007B744 /* PunchLineListViewController.swift */; };
 		B8A58FF524B983AA0007B744 /* Activity.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8A58FF424B983AA0007B744 /* Activity.storyboard */; };
-		B8A58FF824B986C90007B744 /* CustomPunchLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8A58FF724B986C90007B744 /* CustomPunchLine.swift */; };
 		B8B6A9AF28D23C1E005C67EA /* PunchLineScope.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B6A9AE28D23C1E005C67EA /* PunchLineScope.swift */; };
 		B8B6A9B128D26FD1005C67EA /* UIViewController+Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B6A9B028D26FD1005C67EA /* UIViewController+Alerts.swift */; };
 		B8B6A9B628D289F9005C67EA /* UsernameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B6A9B328D289F9005C67EA /* UsernameViewController.swift */; };
@@ -71,8 +72,7 @@
 		B8B6A9C928DE662D005C67EA /* Userbase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B6A9C828DE662D005C67EA /* Userbase.swift */; };
 		B8CDC13024B9904D000C8B64 /* NewPunchLineTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CDC12F24B9904D000C8B64 /* NewPunchLineTableViewCell.swift */; };
 		B8CDC13224BA283E000C8B64 /* UIColor+CustomColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CDC13124BA283E000C8B64 /* UIColor+CustomColors.swift */; };
-		B8CDC13424BA3224000C8B64 /* PublicPunchLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CDC13324BA3224000C8B64 /* PublicPunchLine.swift */; };
-		B8CDC13724BA3239000C8B64 /* PunchLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CDC13624BA3239000C8B64 /* PunchLine.swift */; };
+		B8CDC13424BA3224000C8B64 /* PunchLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CDC13324BA3224000C8B64 /* PunchLine.swift */; };
 		B8D8F8B424BA518200BBEBB1 /* AppSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D8F8B324BA518200BBEBB1 /* AppSessionManager.swift */; };
 		B8DDF34D24BB8ECA008E0328 /* ProfileJokeHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DDF34C24BB8ECA008E0328 /* ProfileJokeHistoryTableViewCell.swift */; };
 		B8DDF34F24BB8ED8008E0328 /* ProfileToggleSettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DDF34E24BB8ED8008E0328 /* ProfileToggleSettingTableViewCell.swift */; };
@@ -92,6 +92,8 @@
 		B808CC4024B9583F00B39432 /* Punchline+ActivityFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Punchline+ActivityFeedViewController.swift"; sourceTree = "<group>"; };
 		B808CC4224B9584500B39432 /* Setup+ActivityFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Setup+ActivityFeedViewController.swift"; sourceTree = "<group>"; };
 		B808CC4424B9584800B39432 /* Vote+ActivityFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Vote+ActivityFeedViewController.swift"; sourceTree = "<group>"; };
+		B84545912967AA8400B2D057 /* CompletedPunchLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedPunchLine.swift; sourceTree = "<group>"; };
+		B84545932967BBD300B2D057 /* SurvivingJoke.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurvivingJoke.swift; sourceTree = "<group>"; };
 		B848503224BB66B3006EEE02 /* PunchLineEditor.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PunchLineEditor.storyboard; sourceTree = "<group>"; };
 		B848503424BB66C5006EEE02 /* PunchLineEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PunchLineEditorViewController.swift; sourceTree = "<group>"; };
 		B848503724BB691C006EEE02 /* ActivityFeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityFeedViewModel.swift; sourceTree = "<group>"; };
@@ -139,7 +141,6 @@
 		B89F6A1424B80CE500472067 /* CloudKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitManager.swift; sourceTree = "<group>"; };
 		B8A58FF024B982360007B744 /* PunchLineListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PunchLineListViewController.swift; sourceTree = "<group>"; };
 		B8A58FF424B983AA0007B744 /* Activity.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Activity.storyboard; sourceTree = "<group>"; };
-		B8A58FF724B986C90007B744 /* CustomPunchLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPunchLine.swift; sourceTree = "<group>"; };
 		B8B6A9AE28D23C1E005C67EA /* PunchLineScope.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PunchLineScope.swift; sourceTree = "<group>"; };
 		B8B6A9B028D26FD1005C67EA /* UIViewController+Alerts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Alerts.swift"; sourceTree = "<group>"; };
 		B8B6A9B328D289F9005C67EA /* UsernameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsernameViewController.swift; sourceTree = "<group>"; };
@@ -153,8 +154,7 @@
 		B8B6A9C828DE662D005C67EA /* Userbase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Userbase.swift; sourceTree = "<group>"; };
 		B8CDC12F24B9904D000C8B64 /* NewPunchLineTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPunchLineTableViewCell.swift; sourceTree = "<group>"; };
 		B8CDC13124BA283E000C8B64 /* UIColor+CustomColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+CustomColors.swift"; sourceTree = "<group>"; };
-		B8CDC13324BA3224000C8B64 /* PublicPunchLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicPunchLine.swift; sourceTree = "<group>"; };
-		B8CDC13624BA3239000C8B64 /* PunchLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PunchLine.swift; sourceTree = "<group>"; };
+		B8CDC13324BA3224000C8B64 /* PunchLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PunchLine.swift; sourceTree = "<group>"; };
 		B8D8F8B324BA518200BBEBB1 /* AppSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSessionManager.swift; sourceTree = "<group>"; };
 		B8DDF34C24BB8ECA008E0328 /* ProfileJokeHistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileJokeHistoryTableViewCell.swift; sourceTree = "<group>"; };
 		B8DDF34E24BB8ED8008E0328 /* ProfileToggleSettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileToggleSettingTableViewCell.swift; sourceTree = "<group>"; };
@@ -416,6 +416,7 @@
 			children = (
 				B808CC3724B912EB00B39432 /* Joke.swift */,
 				B8B6A9C228DE503F005C67EA /* Setup.swift */,
+				B84545932967BBD300B2D057 /* SurvivingJoke.swift */,
 			);
 			path = Joke;
 			sourceTree = "<group>";
@@ -424,10 +425,9 @@
 			isa = PBXGroup;
 			children = (
 				B866553624BAAF0900DD694F /* PunchLineLauncher.swift */,
-				B8A58FF724B986C90007B744 /* CustomPunchLine.swift */,
-				B8CDC13324BA3224000C8B64 /* PublicPunchLine.swift */,
-				B8CDC13624BA3239000C8B64 /* PunchLine.swift */,
+				B8CDC13324BA3224000C8B64 /* PunchLine.swift */,
 				B8B6A9AE28D23C1E005C67EA /* PunchLineScope.swift */,
+				B84545912967AA8400B2D057 /* CompletedPunchLine.swift */,
 			);
 			path = PunchLine;
 			sourceTree = "<group>";
@@ -560,8 +560,8 @@
 				B866553724BAAF0900DD694F /* PunchLineLauncher.swift in Sources */,
 				B850D8FB24B9897A0011077D /* PunchLineTableViewCell.swift in Sources */,
 				B850D8F724B988DB0011077D /* PunchLineList+TableViewDelegate.swift in Sources */,
-				B8A58FF824B986C90007B744 /* CustomPunchLine.swift in Sources */,
 				B89F6A0124B7ED1C00472067 /* GetStartedViewController.swift in Sources */,
+				B84545922967AA8400B2D057 /* CompletedPunchLine.swift in Sources */,
 				B8F1EF4C24BB9133006E7264 /* Profile+TableViewDelegate.swift in Sources */,
 				B8CDC13024B9904D000C8B64 /* NewPunchLineTableViewCell.swift in Sources */,
 				B8B6A9BA28D29E96005C67EA /* FavoriteJoke.swift in Sources */,
@@ -570,7 +570,7 @@
 				B8B6A9B128D26FD1005C67EA /* UIViewController+Alerts.swift in Sources */,
 				B89F69E124B6752400472067 /* PunchlineViewController.swift in Sources */,
 				B8706859291456FF001FADBD /* Punchline+TextViewDelegate.swift in Sources */,
-				B8CDC13724BA3239000C8B64 /* PunchLine.swift in Sources */,
+				B84545942967BBD300B2D057 /* SurvivingJoke.swift in Sources */,
 				B848503524BB66C5006EEE02 /* PunchLineEditorViewController.swift in Sources */,
 				B89F69EE24B675DA00472067 /* MainTabBarController.swift in Sources */,
 				B8B6A9C028D51564005C67EA /* Profile+CellActionDelegate.swift in Sources */,
@@ -598,7 +598,7 @@
 				B8A58FF124B982360007B744 /* PunchLineListViewController.swift in Sources */,
 				B89F69E524B6755900472067 /* JokeLookupViewController.swift in Sources */,
 				B89F69E324B6753600472067 /* SetupViewController.swift in Sources */,
-				B8CDC13424BA3224000C8B64 /* PublicPunchLine.swift in Sources */,
+				B8CDC13424BA3224000C8B64 /* PunchLine.swift in Sources */,
 				B8DDF34D24BB8ECA008E0328 /* ProfileJokeHistoryTableViewCell.swift in Sources */,
 				B89F69EB24B675AA00472067 /* ProfileViewController.swift in Sources */,
 				B808CC4324B9584500B39432 /* Setup+ActivityFeedViewController.swift in Sources */,
