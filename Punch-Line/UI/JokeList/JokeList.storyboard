@@ -20,7 +20,7 @@
                                 <rect key="frame" x="0.0" y="48" width="414" height="814"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="JokeCell" id="oIM-qU-gkU">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SurvivingJokeCell" id="oIM-qU-gkU" customClass="SurvivingJokeTableViewCell" customModule="Punch_Line" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="50" width="414" height="125.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="oIM-qU-gkU" id="OiC-PJ-PD3">
@@ -52,6 +52,10 @@
                                                 <constraint firstAttribute="trailing" secondItem="mHT-w3-b5D" secondAttribute="trailing" constant="16" id="yhy-t3-Uyb"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="punchlineLabel" destination="mHT-w3-b5D" id="cUh-Sv-sqe"/>
+                                            <outlet property="setupLabel" destination="iJJ-NS-WIO" id="3VL-PN-AUl"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -92,11 +96,22 @@ Perhaps it didn't exist yet??</string>
                     <connections>
                         <outlet property="jokeListTableView" destination="adQ-hk-1FE" id="acc-OV-wyG"/>
                         <outlet property="noJokesView" destination="fqe-F1-QaT" id="ZLA-HK-b1c"/>
+                        <segue destination="t0l-vd-vWP" kind="show" identifier="ShowJokeDetailViewController" id="0pv-DO-8w3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="L37-9q-VZ0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="118.84057971014494" y="150.66964285714286"/>
+        </scene>
+        <!--JokeDetail-->
+        <scene sceneID="a9O-sg-Er2">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="JokeDetail" storyboardName="JokeDetail" id="t0l-vd-vWP" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="brm-S8-BTz"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2WI-3n-O8b" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="699" y="151"/>
         </scene>
     </scenes>
     <resources>

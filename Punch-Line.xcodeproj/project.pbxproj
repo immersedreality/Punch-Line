@@ -36,6 +36,9 @@
 		B87068672914DAA0001FADBD /* PunchLineEditor+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87068662914DAA0001FADBD /* PunchLineEditor+TableView.swift */; };
 		B87068692914E6DE001FADBD /* PunchLineEditor+CNContactPickerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87068682914E6DE001FADBD /* PunchLineEditor+CNContactPickerDelegate.swift */; };
 		B8722DB9251A7EDA00B513E1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8722DB8251A7EDA00B513E1 /* SceneDelegate.swift */; };
+		B87817182970DBEC0067A671 /* JokeLookupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87817172970DBEC0067A671 /* JokeLookupViewController.swift */; };
+		B878171A2970DCBD0067A671 /* JokeLookupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87817192970DCBD0067A671 /* JokeLookupViewModel.swift */; };
+		B878171E2970FC640067A671 /* SurvivingJokeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B878171D2970FC640067A671 /* SurvivingJokeTableViewCell.swift */; };
 		B89CF24124B8BBC70009A8CB /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89CF24024B8BBC70009A8CB /* UserInfo.swift */; };
 		B89F69B624B6663800472067 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89F69B524B6663800472067 /* AppDelegate.swift */; };
 		B89F69BF24B6663800472067 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B89F69BD24B6663800472067 /* Main.storyboard */; };
@@ -49,7 +52,6 @@
 		B89F69DD24B674D600472067 /* VoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89F69DC24B674D600472067 /* VoteViewController.swift */; };
 		B89F69E124B6752400472067 /* PunchlineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89F69E024B6752400472067 /* PunchlineViewController.swift */; };
 		B89F69E324B6753600472067 /* SetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89F69E224B6753600472067 /* SetupViewController.swift */; };
-		B89F69E524B6755900472067 /* JokeLookupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89F69E424B6755900472067 /* JokeLookupViewController.swift */; };
 		B89F69E724B6757000472067 /* JokeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89F69E624B6757000472067 /* JokeDetailViewController.swift */; };
 		B89F69E924B6759A00472067 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B89F69E824B6759A00472067 /* Profile.storyboard */; };
 		B89F69EB24B675AA00472067 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89F69EA24B675AA00472067 /* ProfileViewController.swift */; };
@@ -118,6 +120,9 @@
 		B87068662914DAA0001FADBD /* PunchLineEditor+TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PunchLineEditor+TableView.swift"; sourceTree = "<group>"; };
 		B87068682914E6DE001FADBD /* PunchLineEditor+CNContactPickerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PunchLineEditor+CNContactPickerDelegate.swift"; sourceTree = "<group>"; };
 		B8722DB8251A7EDA00B513E1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		B87817172970DBEC0067A671 /* JokeLookupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JokeLookupViewController.swift; sourceTree = "<group>"; };
+		B87817192970DCBD0067A671 /* JokeLookupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JokeLookupViewModel.swift; sourceTree = "<group>"; };
+		B878171D2970FC640067A671 /* SurvivingJokeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurvivingJokeTableViewCell.swift; sourceTree = "<group>"; };
 		B89CF24024B8BBC70009A8CB /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		B89F69B224B6663800472067 /* Punch-Line.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Punch-Line.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B89F69B524B6663800472067 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -133,7 +138,6 @@
 		B89F69DC24B674D600472067 /* VoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteViewController.swift; sourceTree = "<group>"; };
 		B89F69E024B6752400472067 /* PunchlineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PunchlineViewController.swift; sourceTree = "<group>"; };
 		B89F69E224B6753600472067 /* SetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupViewController.swift; sourceTree = "<group>"; };
-		B89F69E424B6755900472067 /* JokeLookupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JokeLookupViewController.swift; sourceTree = "<group>"; };
 		B89F69E624B6757000472067 /* JokeDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JokeDetailViewController.swift; sourceTree = "<group>"; };
 		B89F69E824B6759A00472067 /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		B89F69EA24B675AA00472067 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -237,11 +241,12 @@
 		B80D3E9127AAEFA60095D777 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				B89F69E424B6755900472067 /* JokeLookupViewController.swift */,
+				B87817172970DBEC0067A671 /* JokeLookupViewController.swift */,
 				B89F69ED24B675DA00472067 /* MainTabBarController.swift */,
 				B89F69BD24B6663800472067 /* Main.storyboard */,
 				B84545952967C68600B2D057 /* JokeLookup+UITextFieldDelegate.swift */,
 				B84545972967C7B800B2D057 /* JokeLookup+UIPickerViewDelegate.swift */,
+				B87817192970DCBD0067A671 /* JokeLookupViewModel.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -460,6 +465,7 @@
 				B8F1EF4F24BBA731006E7264 /* JokeListViewController.swift */,
 				B8EA41D924BBAE2700D52A1B /* JokeList+TableViewDelegate.swift */,
 				B8EA41DB24BBAE3200D52A1B /* JokeList+TableViewDataSource.swift */,
+				B878171D2970FC640067A671 /* SurvivingJokeTableViewCell.swift */,
 			);
 			path = JokeList;
 			sourceTree = "<group>";
@@ -572,6 +578,7 @@
 				B8F1EF4C24BB9133006E7264 /* Profile+TableViewDelegate.swift in Sources */,
 				B8CDC13024B9904D000C8B64 /* NewPunchLineTableViewCell.swift in Sources */,
 				B8B6A9BA28D29E96005C67EA /* FavoriteJoke.swift in Sources */,
+				B878171E2970FC640067A671 /* SurvivingJokeTableViewCell.swift in Sources */,
 				B87068692914E6DE001FADBD /* PunchLineEditor+CNContactPickerDelegate.swift in Sources */,
 				B8B6A9BE28D51454005C67EA /* ProfileCellActionDelegate.swift in Sources */,
 				B8B6A9B128D26FD1005C67EA /* UIViewController+Alerts.swift in Sources */,
@@ -601,10 +608,11 @@
 				B8B6A9AF28D23C1E005C67EA /* PunchLineScope.swift in Sources */,
 				B866553A24BABEA900DD694F /* PunchLineListViewModel.swift in Sources */,
 				B87068612914B576001FADBD /* PunchLineEditor+TextFieldDelegate.swift in Sources */,
+				B878171A2970DCBD0067A671 /* JokeLookupViewModel.swift in Sources */,
 				B87068652914B720001FADBD /* PunchLineEditorViewModel.swift in Sources */,
 				B89F6A1524B80CE500472067 /* CloudKitManager.swift in Sources */,
+				B87817182970DBEC0067A671 /* JokeLookupViewController.swift in Sources */,
 				B8A58FF124B982360007B744 /* PunchLineListViewController.swift in Sources */,
-				B89F69E524B6755900472067 /* JokeLookupViewController.swift in Sources */,
 				B89F69E324B6753600472067 /* SetupViewController.swift in Sources */,
 				B8CDC13424BA3224000C8B64 /* PunchLine.swift in Sources */,
 				B8DDF34D24BB8ECA008E0328 /* ProfileJokeHistoryTableViewCell.swift in Sources */,

@@ -37,11 +37,11 @@ struct AlertConstants {
 }
 
 struct CellIdentifiers {
-    static let jokeCell = "JokeCell"
     static let jokeHistoryCell = "JokeHistoryCell"
     static let newPunchLineCell = "NewPunchLineCell"
     static let proTipCell = "ProTipCell"
     static let punchLineCell = "PunchLineCell"
+    static let survivingJokeCell = "SurvivingJokeCell"
     static let toggleSettingCell = "ToggleSettingCell"
     static let userCell = "UserCell"
 }
@@ -82,6 +82,7 @@ struct SegueIdentifiers {
     static let presentProfileViewController = "PresentProfileViewController"
     static let presentPunchLineEditorViewController = "PresentPunchLineEditorViewController"
     static let showActivityContainerViewController = "ShowActivityContainerViewController"
+    static let showJokeDetailViewController = "ShowJokeDetailViewController"
     static let showUsernameViewController = "ShowUsernameViewController"
 }
 

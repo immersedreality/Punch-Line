@@ -13,6 +13,7 @@ struct CompletedPunchLine {
     let cloudKitID: CKRecord.ID
     let displayName: String
     let scope: PunchLineScope
+    let launcherID: String
     let dateCompleted: Date
 
     let topTenSetUps: [String]
@@ -25,6 +26,7 @@ struct CompletedPunchLineRecordKeys {
     static let type = "PublicPunchLine"
     static let displayName = "displayName"
     static let scope = "scope"
+    static let launcherID = "launcherID"
     static let dateCompleted = "dateCompleted"
     static let topTenSetUps = "topTenSetUps"
     static let topTenSetUpAuthors = "topTenSetUpAuthors"

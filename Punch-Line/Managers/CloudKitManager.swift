@@ -230,6 +230,7 @@ final class CloudKitManager {
             favoriteJokeRecord[FavoriteJokeRecordKeys.setupAuthor] = survivingJoke.setupAuthor as CKRecordValue
             favoriteJokeRecord[FavoriteJokeRecordKeys.punchline] = survivingJoke.punchline as CKRecordValue
             favoriteJokeRecord[FavoriteJokeRecordKeys.punchlineAuthor] = survivingJoke.punchlineAuthor as CKRecordValue
+            favoriteJokeRecord[FavoriteJokeRecordKeys.dateCreated] = survivingJoke.dateCreated as CKRecordValue
             try await privateDatabase.save(favoriteJokeRecord)
         } catch {
             return
@@ -258,7 +259,8 @@ final class CloudKitManager {
                         setup: favoriteJokeRecord[FavoriteJokeRecordKeys.setup] as! String,
                         setupAuthor: favoriteJokeRecord[FavoriteJokeRecordKeys.setupAuthor] as! String,
                         punchline: favoriteJokeRecord[FavoriteJokeRecordKeys.punchline] as! String,
-                        punchlineAuthor: favoriteJokeRecord[FavoriteJokeRecordKeys.punchlineAuthor] as! String
+                        punchlineAuthor: favoriteJokeRecord[FavoriteJokeRecordKeys.punchlineAuthor] as! String,
+                        dateCreated: favoriteJokeRecord[FavoriteJokeRecordKeys.dateCreated] as! Date
                     )
                     favoriteJokes.append(favoriteJoke)
                 case .failure:
@@ -586,6 +588,7 @@ final class CloudKitManager {
             let completedPunchLineRecord = CKRecord(recordType: CompletedPunchLineRecordKeys.type)
             completedPunchLineRecord[CompletedPunchLineRecordKeys.displayName] = (punchLines.first?.displayName ?? "Missing Name") as CKRecordValue
             completedPunchLineRecord[CompletedPunchLineRecordKeys.scope] = launcher.scope.rawValue as CKRecordValue
+            completedPunchLineRecord[CompletedPunchLineRecordKeys.launcherID] = launcher.cloudKitID.recordName as CKRecordValue
             completedPunchLineRecord[CompletedPunchLineRecordKeys.dateCompleted] = launcher.lastDailyResetDate as CKRecordValue
             completedPunchLineRecord[CompletedPunchLineRecordKeys.topTenSetUps] = topTenJokes.map { $0.setup } as CKRecordValue
             completedPunchLineRecord[CompletedPunchLineRecordKeys.topTenSetUpAuthors] = topTenJokes.map { $0.setupAuthor } as CKRecordValue
@@ -598,10 +601,10 @@ final class CloudKitManager {
 
     }
 
-    class func getCompletedPunchLine(for scope: PunchLineScope, date: Date) async -> CompletedPunchLine? {
+    class func getCompletedPunchLine(for launcher: PunchLineLauncher, date: Date) async -> CompletedPunchLine? {
         let publicDatabase = container.publicCloudDatabase
 
-        let scopePredicate = NSPredicate(format: "scope = '\(scope.rawValue)'")
+        let launcherIDPredicate = NSPredicate(format: "launcherID = '\(launcher.cloudKitID.recordName)'")
 
         let calendar = Calendar.current
         let startOfDay = calendar.startOfDay(for: date)
@@ -611,7 +614,7 @@ final class CloudKitManager {
         do {
             let retrievedRecords = try await publicDatabase.records(matching: CKQuery(
                 recordType: CompletedPunchLineRecordKeys.type,
-                predicate: NSCompoundPredicate(type: .and, subpredicates: [scopePredicate, datePredicate]))
+                predicate: NSCompoundPredicate(type: .and, subpredicates: [launcherIDPredicate, datePredicate]))
             )
 
             let retrievedCompletedPunchLineResult = retrievedRecords.matchResults.first?.1
@@ -622,6 +625,7 @@ final class CloudKitManager {
                     cloudKitID: retrievedCompletedPunchLineRecord.recordID,
                     displayName: retrievedCompletedPunchLineRecord[CompletedPunchLineRecordKeys.displayName] as! String,
                     scope: PunchLineScope(rawValue: retrievedCompletedPunchLineRecord[PunchLineLauncherRecordKeys.scope] as! String)!,
+                    launcherID: retrievedCompletedPunchLineRecord[CompletedPunchLineRecordKeys.launcherID] as! String,
                     dateCompleted: retrievedCompletedPunchLineRecord[CompletedPunchLineRecordKeys.dateCompleted] as! Date,
                     topTenSetUps: retrievedCompletedPunchLineRecord[CompletedPunchLineRecordKeys.topTenSetUps] as! [String],
                     topTenSetUpAuthors: retrievedCompletedPunchLineRecord[CompletedPunchLineRecordKeys.topTenSetUpAuthors] as! [String],

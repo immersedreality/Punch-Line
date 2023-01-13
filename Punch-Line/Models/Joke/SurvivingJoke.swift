@@ -13,4 +13,5 @@ struct SurvivingJoke {
     let setupAuthor: String
     let punchline: String
     let punchlineAuthor: String
+    let dateCreated: Date
 }

@@ -16,6 +16,7 @@ struct FavoriteJoke {
     let setupAuthor: String
     let punchline: String
     let punchlineAuthor: String
+    let dateCreated: Date
 }
 
 struct FavoriteJokeRecordKeys {
@@ -25,4 +26,5 @@ struct FavoriteJokeRecordKeys {
     static let setupAuthor = "setupAuthor"
     static let punchline = "punchline"
     static let punchlineAuthor = "punchlineAuthor"
+    static let dateCreated = "dateCreated"
 }

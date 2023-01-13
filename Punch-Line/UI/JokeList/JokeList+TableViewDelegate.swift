@@ -11,6 +11,7 @@ import UIKit
 extension JokeListViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        guard completedPunchLine != nil else { return nil }
         return TableViewSectionTitles.whatMadeTheCut
     }
 
@@ -35,6 +36,9 @@ extension JokeListViewController: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let cell = tableView.cellForRow(at: indexPath) as? SurvivingJokeTableViewCell else { return }
+        selectedSurvivingJoke = cell.survivingJoke
+        performSegue(withIdentifier: SegueIdentifiers.showJokeDetailViewController, sender: self)
     }
 
 }

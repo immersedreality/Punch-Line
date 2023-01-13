@@ -9,5 +9,15 @@
 import UIKit
 
 extension JokeLookupViewController: UITextFieldDelegate {
-    
+
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        configureGestureRecognizer()
+
+        if textField == selectPunchLineTextField {
+            selectDateTextField.resignFirstResponder()
+        } else if textField == selectDateTextField {
+            selectPunchLineTextField.resignFirstResponder()
+        }
+    }
+
 }
