@@ -1,6 +1,7 @@
 {
-  "colors" : [
+  "images" : [
     {
+      "filename" : "PunchLineNoBg.png",
       "idiom" : "universal"
     }
   ],
