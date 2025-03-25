@@ -25,6 +25,11 @@ struct FlagActionTitles {
     static let flagSetupAsUnfunny = "Flag setup as unfunny"
 }
 
+struct ImageTitles {
+    static let iconNavigationTitle = "Icon-NavigationTitle"
+    static let logo = "Logo"
+}
+
 struct TabBarIcons {
     static let jokeVaultTab = "clock.arrow.trianglehead.counterclockwise.rotate.90"
     static let punchLineLaunchersTab = "pencil.and.scribble"

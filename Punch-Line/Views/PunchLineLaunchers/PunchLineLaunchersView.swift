@@ -9,12 +9,21 @@ import SwiftUI
 
 struct PunchLineLaunchersView: View {
     var body: some View {
-        List {
-            PunchLineLauncherView()
-            PunchLineLauncherView()
-            PunchLineLauncherView()
+        NavigationStack {
+            List {
+                PunchLineLauncherView()
+                PunchLineLauncherView()
+                PunchLineLauncherView()
+            }
+            .toolbar {
+                ToolbarItem(placement: .principal) {
+                    Image(ImageTitles.iconNavigationTitle)
+                        .foregroundStyle(.accent)
+                }
+            }
+            .navigationTitle("Your Punch-Lines")
+            .listRowSpacing(8.0)
         }
-        .listRowSpacing(8.0)
     }
 }
 

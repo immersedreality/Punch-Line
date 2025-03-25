@@ -9,19 +9,39 @@ import SwiftUI
 
 struct JokeVaultView: View {
     var body: some View {
-        ZStack {
-            StyleManager.generateRandomBackgroundColor()
-                .ignoresSafeArea(edges: [.top])
-            List {
-                JokeVaultDateView()
-                JokeVaultDateView()
-                JokeVaultDateView()
-                JokeVaultDateView()
-                JokeVaultDateView()
+        NavigationStack {
+            ZStack {
+                StyleManager.generateRandomBackgroundColor()
+                    .ignoresSafeArea(edges: [.top])
+                List {
+                    JokeVaultDateView()
+                    JokeVaultDateView()
+                    JokeVaultDateView()
+                    JokeVaultDateView()
+                    JokeVaultDateView()
+                    JokeVaultDateView()
+                    JokeVaultDateView()
+                    JokeVaultDateView()
+                    JokeVaultDateView()
+                    JokeVaultDateView()
+                    JokeVaultDateView()
+                    JokeVaultDateView()
+                    JokeVaultDateView()
+                    JokeVaultDateView()
+                    JokeVaultDateView()
+                }
+                .listRowSpacing(8.0)
+                .scrollContentBackground(.hidden)
             }
-            .listRowSpacing(8.0)
-            .scrollContentBackground(.hidden)
+            .toolbar {
+                ToolbarItem(placement: .principal) {
+                    Image(ImageTitles.iconNavigationTitle)
+                        .foregroundStyle(.accent)
+                }
+            }
+            .navigationTitle("The Joke Vault")
         }
+        .backgroundStyle(.black)
     }
 }
 
