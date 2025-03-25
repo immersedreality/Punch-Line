@@ -7,8 +7,22 @@
 
 import SwiftUI
 
-struct PunchLineColors {
-    static let pink = Color(red: 217.0, green: 120.0, blue: 127.0)
+struct ActivityFeedMessages {
+    static let punchlineLength = "Your punchline is too short. Try harder!"
+    static let setupStartFirst = "Start a joke with a funny setup!"
+    static let setupStartSecond = "Start another joke with an even funnier setup!"
+    static let setupStartThird = "Start one more with your funniest setup yet!"
+    static let setupStartBeyond = "Keep the setups coming!"
+    static let setupLength = "Your setup is too short. Try harder!"
+    static let setupEnd = "Setups must end with either a question mark (?) or an ellipsis (…)"
+}
+
+struct FlagActionTitles {
+    static let cancel = "Cancel"
+    static let flagJokeAsOffensive = "Flag joke as offensive"
+    static let flagJokeAsTooFunny = "Flag joke as too funny"
+    static let flagSetupAsOffensive = "Flag setup as offensive"
+    static let flagSetupAsUnfunny = "Flag setup as unfunny"
 }
 
 struct TabBarIcons {
@@ -18,4 +32,8 @@ struct TabBarIcons {
 
 struct UserDefaultsKeys {
     static let punchLineUserID = "PunchLineUserID"
+    static let punchLineUserName = "PunchLineUserName"
+    static let lastActivityDate = "LastActivityDate"
+    static let todaysTaskCounts = "TodaysTaskCounts"
+    static let shouldSeeOffensiveContent = "ShouldSeeOffensiveContent"
 }

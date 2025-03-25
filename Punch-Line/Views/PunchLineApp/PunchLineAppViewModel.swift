@@ -9,14 +9,8 @@ import Foundation
 
 class PunchLineAppViewModel {
 
-    func validatePunchLineUserID() {
-        if UserDefaults.standard.value(forKey: UserDefaultsKeys.punchLineUserID) == nil {
-            setPunchLineUserID()
-        }
-    }
-
-    private func setPunchLineUserID() {
-        UserDefaults.standard.set(UUID().uuidString, forKey: UserDefaultsKeys.punchLineUserID)
+    func validateUserInfo() {
+        AppSessionManager.validateUserInfo()
     }
 
 }

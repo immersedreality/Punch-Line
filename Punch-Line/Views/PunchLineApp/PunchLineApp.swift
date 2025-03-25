@@ -13,7 +13,7 @@ struct PunchLineApp: App {
     let viewModel = PunchLineAppViewModel()
 
     init() {
-        viewModel.validatePunchLineUserID()
+        viewModel.validateUserInfo()
     }
 
     var body: some Scene {

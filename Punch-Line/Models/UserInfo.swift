@@ -1,0 +1,16 @@
+//
+//  UserInfo.swift
+//  Punch-Line
+//
+//  Created by Jeffrey Eugene Hoch on 3/24/25.
+//
+
+import Foundation
+
+struct UserInfo {
+    let punchLineUserID: String
+    let punchLineUserName: String?
+    let lastActivityDate: Date
+    let todaysTaskCounts: [String: Int]
+    let shouldSeeOffensiveContent: Bool
+}

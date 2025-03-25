@@ -11,11 +11,11 @@ struct MainTabView: View {
     var body: some View {
         TabView {
             Tab("", systemImage: TabBarIcons.punchLineLaunchersTab) {
-
+                PunchLineLaunchersView()
             }
 
             Tab("", systemImage: TabBarIcons.jokeVaultTab) {
-
+                JokeVaultView()
             }
         }
     }
