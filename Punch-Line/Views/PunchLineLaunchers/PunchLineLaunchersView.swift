@@ -12,8 +12,6 @@ struct PunchLineLaunchersView: View {
         NavigationStack {
             List {
                 PunchLineLauncherView()
-                PunchLineLauncherView()
-                PunchLineLauncherView()
             }
             .toolbar {
                 ToolbarItem(placement: .principal) {
@@ -21,7 +19,7 @@ struct PunchLineLaunchersView: View {
                         .foregroundStyle(.accent)
                 }
             }
-            .navigationTitle("Your Punch-Lines")
+            .navigationTitle(NavigationTitles.punchLineLaunchers)
             .listRowSpacing(8.0)
         }
     }
@@ -32,14 +30,15 @@ struct PunchLineLauncherView: View {
         HStack {
             Spacer()
             VStack {
-                Text("Test Title")
-                    .font(Font.system(size: 24.0, weight: .bold))
-                    .foregroundStyle(.accent)
-                    .padding([.top], 48.0)
+//                Text("Punch-Line Title")
+//                    .font(Font.system(size: 24.0, weight: .bold))
+//                    .foregroundStyle(.accent)
+//                    .padding([.top], 48.0)
                 Text("Get in the Punch-Line --->")
                     .font(Font.system(size: 24.0, weight: .light))
                     .foregroundStyle(.accent)
-                    .padding([.bottom], 48.0)
+                    .shadow(color: .black, radius: 0.1, x: 0.1, y: 0.1)
+                    .padding([.vertical], 48.0)
             }
             Spacer()
         }

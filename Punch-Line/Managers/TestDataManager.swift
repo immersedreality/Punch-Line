@@ -35,26 +35,49 @@ final class TestDataManager {
         "No one likes pooping except for the really big poopers."
     ]
 
-    class func getRandomJoke() -> Joke {
-        let randomSetup = testSetUps[Int.random(in: 0...9)]
-        let randomPunchline = testPunchlines[Int.random(in: 0...9)]
+    class func getRandomJokes() -> [Joke] {
 
-        let randomJoke = Joke(
-            punchLineID: UUID().uuidString,
-            setup: randomSetup,
-            setupAuthorID: UUID().uuidString,
-            setupAuthorUsername: nil,
-            punchline: randomPunchline,
-            punchlineAuthorID: UUID().uuidString,
-            punchlineAuthorUsername: nil,
-            haCount: 0,
-            mehCount: 0,
-            ughCount: 0,
-            isTooFunnyCount: 0,
-            isOffensiveCount: 0
-        )
+        var randomJokes: [Joke] = []
 
-        return randomJoke
+        for _ in 0...9 {
+            let randomSetup = testSetUps[Int.random(in: 0...9)]
+            let randomPunchline = testPunchlines[Int.random(in: 0...9)]
+
+            let randomJoke = Joke(
+                punchLineID: UUID().uuidString,
+                setup: randomSetup,
+                setupAuthorID: UUID().uuidString,
+                setupAuthorUsername: nil,
+                punchline: randomPunchline,
+                punchlineAuthorID: UUID().uuidString,
+                punchlineAuthorUsername: nil,
+                haCount: 0,
+                mehCount: 0,
+                ughCount: 0,
+                isTooFunnyCount: 0,
+                isOffensiveCount: 0
+            )
+
+            randomJokes.append(randomJoke)
+        }
+
+        return randomJokes
+    }
+
+    class func getTestJokeHistoryDates() -> [JokeHistoryDate] {
+        guard let startDate = DateComponents(calendar: .current, year: 2025, month: 3, day: 1).date else { return [] }
+        let days = (Calendar.current.dateComponents([.day], from: startDate, to: Date()).day ?? 0) - 1
+
+        var jokeHistoryDates: [JokeHistoryDate] = []
+
+        (0...days).forEach { dayIndex in
+            guard let date = Calendar.current.date(byAdding: .day, value: dayIndex, to: startDate) else { return }
+            jokeHistoryDates.append(JokeHistoryDate(id: UUID().uuidString, punchLineID: UUID().uuidString, date: date, jokes: getRandomJokes()))
+        }
+
+        jokeHistoryDates.reverse()
+        
+        return jokeHistoryDates
     }
 
 }

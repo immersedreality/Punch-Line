@@ -30,8 +30,13 @@ struct ImageTitles {
     static let logo = "Logo"
 }
 
+struct NavigationTitles {
+    static let jokeHistory = "The GOATs"
+    static let punchLineLaunchers = "The Punch-Line"
+}
+
 struct TabBarIcons {
-    static let jokeVaultTab = "clock.arrow.trianglehead.counterclockwise.rotate.90"
+    static let jokeHistoryTab = "clock.arrow.trianglehead.counterclockwise.rotate.90"
     static let punchLineLaunchersTab = "pencil.and.scribble"
 }
 

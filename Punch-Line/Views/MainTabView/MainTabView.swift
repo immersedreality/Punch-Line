@@ -14,8 +14,8 @@ struct MainTabView: View {
                 PunchLineLaunchersView()
             }
 
-            Tab("", systemImage: TabBarIcons.jokeVaultTab) {
-                JokeVaultView()
+            Tab("", systemImage: TabBarIcons.jokeHistoryTab) {
+                JokeHistoryView()
             }
         }
     }
