@@ -7,8 +7,9 @@
 
 import Foundation
 
-struct Setup: Codable {
+struct Setup: Codable, Identifiable {
 
+    let id: String
     let punchLineID: String
 
     let text: String

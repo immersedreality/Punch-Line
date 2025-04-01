@@ -31,7 +31,7 @@ struct ImageTitles {
 }
 
 struct NavigationTitles {
-    static let jokeHistory = "The GOATs"
+    static let jokeHistory = "A History of Yuks"
     static let punchLineLaunchers = "The Punch-Line"
 }
 
@@ -46,4 +46,5 @@ struct UserDefaultsKeys {
     static let lastActivityDate = "LastActivityDate"
     static let todaysTaskCounts = "TodaysTaskCounts"
     static let shouldSeeOffensiveContent = "ShouldSeeOffensiveContent"
+    static let favoriteJokes = "FavoriteJokes"
 }

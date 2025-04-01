@@ -24,7 +24,6 @@ final class AppSessionManager {
     private class func initializeUserInfo() {
         UserDefaults.standard.set(UUID().uuidString, forKey: UserDefaultsKeys.punchLineUserID)
         UserDefaults.standard.set(Date(), forKey: UserDefaultsKeys.lastActivityDate)
-        UserDefaults.standard.set([String: Int](), forKey: UserDefaultsKeys.todaysTaskCounts)
         UserDefaults.standard.set(false, forKey: UserDefaultsKeys.shouldSeeOffensiveContent)
     }
 
@@ -37,28 +36,27 @@ final class AppSessionManager {
         let todaysTaskCounts = UserDefaults.standard.value(forKey: UserDefaultsKeys.todaysTaskCounts) as? [String: Int] ?? [:]
         let shouldSeeOffensiveContent = UserDefaults.standard.value(forKey: UserDefaultsKeys.shouldSeeOffensiveContent) as? Bool ?? false
 
+        var favoriteJokes: [FavoriteJoke]?
+        if let favoriteJokesData = UserDefaults.standard.object(forKey: UserDefaultsKeys.favoriteJokes) as? Data {
+            let decoder = JSONDecoder()
+            favoriteJokes = try? decoder.decode([FavoriteJoke].self, from: favoriteJokesData)
+        }
+
         let userInfo = UserInfo(
             punchLineUserID: punchLineUserID,
             punchLineUserName: punchLineUserName,
             lastActivityDate: lastActivityDate,
             todaysTaskCounts: todaysTaskCounts,
-            shouldSeeOffensiveContent: shouldSeeOffensiveContent
+            shouldSeeOffensiveContent: shouldSeeOffensiveContent,
+            favoriteJokes: favoriteJokes ?? []
         )
 
         return userInfo
     }
 
-    private class func set(userInfo: UserInfo) {
-        UserDefaults.standard.set(userInfo.punchLineUserID, forKey: UserDefaultsKeys.punchLineUserID)
-        UserDefaults.standard.set(userInfo.punchLineUserName, forKey: UserDefaultsKeys.punchLineUserName)
-        UserDefaults.standard.set(userInfo.lastActivityDate, forKey: UserDefaultsKeys.lastActivityDate)
-        UserDefaults.standard.set(userInfo.todaysTaskCounts, forKey: UserDefaultsKeys.todaysTaskCounts)
-        UserDefaults.standard.set(userInfo.shouldSeeOffensiveContent, forKey: UserDefaultsKeys.shouldSeeOffensiveContent)
-    }
-
     // MARK: Update Methods
     
-    private class func handleDateChange() {
+    private class func resetTaskCounts() {
         UserDefaults.standard.set([String: Int](), forKey: UserDefaultsKeys.todaysTaskCounts)
     }
 
@@ -73,6 +71,37 @@ final class AppSessionManager {
     class func toggleOffensiveContentFilter() {
         guard let userInfo = userInfo else { return }
         UserDefaults.standard.set(!userInfo.shouldSeeOffensiveContent, forKey: UserDefaultsKeys.shouldSeeOffensiveContent)
+    }
+
+    class func addFavoriteJoke(from joke: Joke) {
+        guard let userInfo = userInfo else { return }
+        var favoriteJokes = userInfo.favoriteJokes
+
+        let favoriteJoke = FavoriteJoke(
+            id: UUID().uuidString,
+            dateFavorited: Date(),
+            setup: joke.setup,
+            setupAuthorUsername: joke.setupAuthorUsername,
+            punchline: joke.punchline,
+            punchlineAuthorUsername: joke.punchlineAuthorUsername
+        )
+
+        favoriteJokes.append(favoriteJoke)
+        
+        let encoder = JSONEncoder()
+        if let favoriteJokesData = try? encoder.encode(favoriteJokes) {
+            UserDefaults.standard.set(favoriteJokesData, forKey: UserDefaultsKeys.favoriteJokes)
+        }
+    }
+
+    class func removeFavoriteJoke(with id: String) {
+        guard let userInfo = userInfo else { return }
+        var favoriteJokes = userInfo.favoriteJokes
+        favoriteJokes.removeAll { $0.id == id }
+        let encoder = JSONEncoder()
+        if let favoriteJokesData = try? encoder.encode(favoriteJokes) {
+            UserDefaults.standard.set(favoriteJokesData, forKey: UserDefaultsKeys.favoriteJokes)
+        }
     }
 
 }

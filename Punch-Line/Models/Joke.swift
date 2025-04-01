@@ -7,8 +7,9 @@
 
 import Foundation
 
-struct Joke: Codable {
+struct Joke: Codable, Identifiable {
 
+    let id: String
     let punchLineID: String
 
     let setup: String
@@ -24,6 +25,8 @@ struct Joke: Codable {
     let ughCount: Int
     let isTooFunnyCount: Int
     let isOffensiveCount: Int
+
+    let dayRanking: Int?
 
     var totalVoteCount: Double {
         return Double(haCount + mehCount + ughCount + (isTooFunnyCount * 2))

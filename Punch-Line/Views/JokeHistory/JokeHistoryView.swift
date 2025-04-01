@@ -16,8 +16,12 @@ struct JokeHistoryView: View {
             ZStack {
                 StyleManager.generateRandomBackgroundColor()
                     .ignoresSafeArea(edges: [.top])
-                List(viewModel.testJokeHistoryDates) { date in
-                    JokeHistoryDateView(displayDate: date.displayDate)
+                List(viewModel.testJokeHistoryEntries) { entry in
+                    NavigationLink {
+                        JokeListView(viewModel: JokeListViewModel(displayDate: entry.displayDate, jokes: entry.jokes))
+                    } label: {
+                        JokeHistoryEntryView(displayDate: entry.displayDate)
+                    }
                 }
                 .listRowSpacing(8.0)
                 .scrollContentBackground(.hidden)
@@ -30,24 +34,22 @@ struct JokeHistoryView: View {
             }
             .navigationTitle(NavigationTitles.jokeHistory)
         }
-        .backgroundStyle(.black)
     }
+
 }
 
-struct JokeHistoryDateView: View {
+struct JokeHistoryEntryView: View {
 
     let displayDate: String
-
+    
     var body: some View {
         HStack {
             Spacer()
-            VStack {
-                Text(displayDate + " --->")
-                    .font(Font.system(size: 24.0, weight: .bold))
-                    .foregroundStyle(.accent)
-                    .shadow(color: .black, radius: 0.1, x: 0.1, y: 0.1)
-                    .padding([.vertical], 16.0)
-            }
+            Text(displayDate)
+                .font(Font.system(size: 24.0, weight: .bold))
+                .foregroundStyle(.accent)
+                .shadow(color: .black, radius: 0.1, x: 0.1, y: 0.1)
+                .padding([.vertical], 16.0)
             Spacer()
         }
     }

@@ -9,6 +9,6 @@ import Foundation
 
 class JokeHistoryViewModel {
 
-    let testJokeHistoryDates = TestDataManager.getTestJokeHistoryDates()
-    
+    let testJokeHistoryEntries = TestDataManager.getTestJokeHistoryEntries()
+
 }

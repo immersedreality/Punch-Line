@@ -13,4 +13,5 @@ struct UserInfo {
     let lastActivityDate: Date
     let todaysTaskCounts: [String: Int]
     let shouldSeeOffensiveContent: Bool
+    let favoriteJokes: [FavoriteJoke]
 }
