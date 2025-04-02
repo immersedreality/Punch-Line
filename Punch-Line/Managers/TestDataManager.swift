@@ -87,7 +87,7 @@ final class TestDataManager {
     static let testIndexRange = 0...19
 
     class func getTestJokeHistoryEntries() -> [JokeHistoryEntry] {
-        guard let startDate = DateComponents(calendar: .current, year: 2025, month: 3, day: 1).date else { return [] }
+        guard let startDate = DateComponents(calendar: .current, year: 2025, month: 4, day: 1).date else { return [] }
         let days = (Calendar.current.dateComponents([.day], from: startDate, to: Date()).day ?? 0) - 1
 
         var jokeHistoryEntries: [JokeHistoryEntry] = []
