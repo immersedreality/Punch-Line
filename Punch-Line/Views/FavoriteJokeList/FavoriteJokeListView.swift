@@ -36,12 +36,6 @@ struct FavoriteJokeListView: View {
                 .listRowSpacing(8.0)
                 .scrollContentBackground(.hidden)
             }
-            .toolbar {
-                ToolbarItem(placement: .principal) {
-                    Image(ImageTitles.iconNavigationTitle)
-                        .foregroundStyle(.accent)
-                }
-            }
             .navigationTitle(NavigationTitles.favoriteJokes)
         }
         .navigationDestination(isPresented: $shouldNavigateBackToSettings) {
