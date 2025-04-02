@@ -79,6 +79,7 @@ final class AppSessionManager {
 
         let favoriteJoke = FavoriteJoke(
             id: UUID().uuidString,
+            originJokeID: joke.id,
             dateFavorited: Date(),
             setup: joke.setup,
             setupAuthorUsername: joke.setupAuthorUsername,

@@ -31,11 +31,13 @@ struct ImageTitles {
 }
 
 struct NavigationTitles {
+    static let favoriteJokes = "Faves"
     static let jokeHistory = "A History of Yuks"
     static let punchLineLaunchers = "The Punch-Line"
 }
 
-struct TabBarIcons {
+struct SystemIcons {
+    static let gear = "gear"
     static let jokeHistoryTab = "clock.arrow.trianglehead.counterclockwise.rotate.90"
     static let punchLineLaunchersTab = "pencil.and.scribble"
 }

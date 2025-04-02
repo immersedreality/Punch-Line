@@ -1,37 +1,34 @@
 //
-//  JokeListView.swift
+//  FavoriteJokeListView.swift
 //  Punch-Line
 //
-//  Created by Jeffrey Eugene Hoch on 3/31/25.
+//  Created by Jeffrey Eugene Hoch on 4/1/25.
 //
 
 import SwiftUI
 
-struct JokeListView: View {
+struct FavoriteJokeListView: View {
 
-    let viewModel: JokeListViewModel
+    let viewModel = FavoriteJokeListViewModel()
 
     @State private var showingConfirmationDialog = false
+    @State private var shouldNavigateBackToSettings = false
 
     var body: some View {
         NavigationStack {
             ZStack {
                 StyleManager.generateRandomBackgroundColor()
-                    .ignoresSafeArea(edges: [.top])
-                List(viewModel.jokes) { joke in
-                    JokeView(joke: joke)
+                    .ignoresSafeArea(edges: [.vertical])
+                List(viewModel.favoriteJokes) { favoriteJoke in
+                    FavoriteJokeView(favoriteJoke: favoriteJoke)
                         .onTapGesture {
                             showingConfirmationDialog = true
-                            viewModel.selectedJoke = joke
                         }
                         .confirmationDialog("", isPresented: $showingConfirmationDialog) {
-                            if viewModel.selectedJokeIsAlreadyFavorited() {
-                                Button("Remove from Favorites") {
-                                    viewModel.removeSelectedJokeFromFavorites()
-                                }
-                            } else {
-                                Button("Add to Favorites") {
-                                    viewModel.addSelectedJokeToFavorites()
+                            Button("Remove from Favorites") {
+                                viewModel.removeJokeFromFavorites(favoriteJoke: favoriteJoke)
+                                if AppSessionManager.userInfo?.favoriteJokes.isEmpty == true {
+                                    shouldNavigateBackToSettings = true
                                 }
                             }
                         }
@@ -45,43 +42,36 @@ struct JokeListView: View {
                         .foregroundStyle(.accent)
                 }
             }
-            .navigationTitle(viewModel.displayDate)
+            .navigationTitle(NavigationTitles.favoriteJokes)
+        }
+        .navigationDestination(isPresented: $shouldNavigateBackToSettings) {
+            SettingsView()
         }
     }
 
 }
 
-struct JokeView: View {
+struct FavoriteJokeView: View {
 
-    let joke: Joke
+    let favoriteJoke: FavoriteJoke
 
     var body: some View {
         HStack(spacing: 4.0) {
             VStack {
-                if let dayRanking = joke.dayRanking?.description {
-                    HStack {
-                        Spacer()
-                        Text("#" + dayRanking)
-                            .font(Font.system(size: 32.0, weight: .bold))
-                            .foregroundStyle(.accent)
-                            .padding([.bottom], 2.0)
-                        Spacer()
-                    }
-                }
                 HStack {
-                    Text(joke.setup)
+                    Text(favoriteJoke.setup)
                         .font(Font.system(size: 20.0, weight: .light))
                         .foregroundStyle(.accent)
                     Spacer(minLength: 16.0)
                 }
                 HStack {
                     Spacer(minLength: 16.0)
-                    Text(joke.punchline)
+                    Text(favoriteJoke.punchline)
                         .font(Font.system(size: 20.0, weight: .semibold))
                         .foregroundStyle(.accent)
                         .padding([.top], 2.0)
                 }
-                if let setupAuthor = joke.setupAuthorUsername {
+                if let setupAuthor = favoriteJoke.setupAuthorUsername {
                     HStack(spacing: 0.0) {
                         Text("Setup By -> ")
                             .font(Font.system(size: 12.0, weight: .light))
@@ -94,16 +84,16 @@ struct JokeView: View {
                         Spacer(minLength: 16.0)
                     }
                 }
-                if let punchlineAuthor = joke.punchlineAuthorUsername {
+                if let punchlineAuthor = favoriteJoke.punchlineAuthorUsername {
                     HStack(spacing: 0.0) {
                         Text("Punchline By -> ")
                             .font(Font.system(size: 12.0, weight: .light))
                             .foregroundStyle(.gray)
-                            .padding([.top], joke.setupAuthorUsername == nil ? 8.0 : 0.0)
+                            .padding([.top], favoriteJoke.setupAuthorUsername == nil ? 8.0 : 0.0)
                         Text(punchlineAuthor)
                             .font(Font.system(size: 12.0, weight: .semibold))
                             .foregroundStyle(.gray)
-                            .padding([.top], joke.setupAuthorUsername == nil ? 8.0 : 0.0)
+                            .padding([.top], favoriteJoke.setupAuthorUsername == nil ? 8.0 : 0.0)
                         Spacer(minLength: 16.0)
                     }
                 }
@@ -114,10 +104,5 @@ struct JokeView: View {
 }
 
 #Preview {
-    JokeListView(
-        viewModel: JokeListViewModel(
-            displayDate: TestDataManager.testDateDisplayString,
-            jokes: TestDataManager.getRandomJokes()
-        )
-    )
+    FavoriteJokeListView()
 }

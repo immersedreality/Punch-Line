@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct PunchLineLaunchersView: View {
+
+    @State private var showingModalSheet = false
+
     var body: some View {
         NavigationStack {
             List {
@@ -18,11 +21,23 @@ struct PunchLineLaunchersView: View {
                     Image(ImageTitles.iconNavigationTitle)
                         .foregroundStyle(.accent)
                 }
+                ToolbarItem(placement: .topBarTrailing) {
+                    Image(systemName: SystemIcons.gear)
+                        .foregroundStyle(.accent)
+                        .onTapGesture {
+                            showingModalSheet = true
+                        }
+                        .sheet(isPresented: $showingModalSheet) {
+                            SettingsView()
+                                .presentationDragIndicator(.visible)
+                        }
+                }
             }
             .navigationTitle(NavigationTitles.punchLineLaunchers)
             .listRowSpacing(8.0)
         }
     }
+    
 }
 
 struct PunchLineLauncherView: View {

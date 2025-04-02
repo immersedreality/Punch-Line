@@ -9,6 +9,7 @@ import Foundation
 
 struct FavoriteJoke: Codable, Identifiable {
     let id: String
+    let originJokeID: String
     let dateFavorited: Date
     let setup: String
     let setupAuthorUsername: String?

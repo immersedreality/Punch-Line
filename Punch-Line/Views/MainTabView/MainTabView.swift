@@ -10,11 +10,11 @@ import SwiftUI
 struct MainTabView: View {
     var body: some View {
         TabView {
-            Tab("", systemImage: TabBarIcons.punchLineLaunchersTab) {
+            Tab("", systemImage: SystemIcons.punchLineLaunchersTab) {
                 PunchLineLaunchersView()
             }
 
-            Tab("", systemImage: TabBarIcons.jokeHistoryTab) {
+            Tab("", systemImage: SystemIcons.jokeHistoryTab) {
                 JokeHistoryView()
             }
         }
