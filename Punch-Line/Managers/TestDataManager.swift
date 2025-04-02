@@ -58,7 +58,7 @@ final class TestDataManager {
         "Chloë Sevigny has done some weird stuff on camera.",
         "ART out of TEN.",
         "I don't know, but I'm gonna have sex with it.",
-        "I was born too late explore the world and too early see what Lunchables™ will do next!"
+        "I was born too late to explore the world and too early to see what Lunchables™ will do next!"
     ]
 
     static let testUsernames = [
