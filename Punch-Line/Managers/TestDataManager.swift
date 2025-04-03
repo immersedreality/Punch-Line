@@ -84,22 +84,153 @@ final class TestDataManager {
         "Job From The Bible"
     ]
 
-    static let testIndexRange = 0...19
+    static let testDataIndexRange = 0...19
+    static var testJokeHistoryEntryGroups: [JokeHistoryEntryGroup] = []
+    static var testYearCount = 1
+    static var testMonthCount = 1
 
-    class func getTestJokeHistoryEntries() -> [JokeHistoryEntry] {
-        guard let startDate = DateComponents(calendar: .current, year: 2025, month: 4, day: 1).date else { return [] }
-        let days = (Calendar.current.dateComponents([.day], from: startDate, to: Date()).day ?? 0) - 1
+    class func initializeTestJokeHistoryEntryGroups() {
+        guard let startingDate = DateComponents(calendar: .current, year: 2024, month: 1, day: 1).date else { return }
+        let currentDate = Date()
 
-        var jokeHistoryEntries: [JokeHistoryEntry] = []
+        // Calculate Date Range
 
-        (0...days).forEach { dayIndex in
-            guard let date = Calendar.current.date(byAdding: .day, value: dayIndex, to: startDate) else { return }
-            jokeHistoryEntries.append(JokeHistoryEntry(id: UUID().uuidString, punchLineID: UUID().uuidString, date: date, jokes: getRandomJokes()))
+        var iteratingDate = startingDate
+        var dateRange: [Date] = []
+
+        while iteratingDate <= currentDate {
+            dateRange.append(iteratingDate)
+            iteratingDate = Calendar.current.date(byAdding: .day, value: 1, to: iteratingDate) ?? Date()
         }
 
-        jokeHistoryEntries.reverse()
-        
-        return jokeHistoryEntries
+        dateRange.removeLast()
+
+        // Form JokeHistoryEntryGroups
+
+        var jokeHistoryEntryGroups: [JokeHistoryEntryGroup] = []
+        var currentEntryGroupID = UUID().uuidString
+        var currentJokeHistoryEntryBatch: [JokeHistoryEntry] = []
+        var yearIterator = Calendar.current.component(.year, from: startingDate)
+        var monthIterator = Calendar.current.component(.month, from: startingDate)
+
+        for date in dateRange {
+
+            let year = Calendar.current.component(.year, from: date)
+            let month = Calendar.current.component(.month, from: date)
+
+            if year == yearIterator && month == monthIterator {
+                currentJokeHistoryEntryBatch.append(JokeHistoryEntry(id: UUID().uuidString, entryGroupID: currentEntryGroupID, punchLineID: UUID().uuidString, date: date, jokes: getRandomJokes()))
+                if date == dateRange.last {
+                    currentJokeHistoryEntryBatch.reverse()
+
+                    let jokeHistoryEntryGroup = JokeHistoryEntryGroup(
+                        id: UUID().uuidString,
+                        punchLineID: UUID().uuidString,
+                        year: year,
+                        month: month,
+                        entries: currentJokeHistoryEntryBatch
+                    )
+
+                    jokeHistoryEntryGroups.append(jokeHistoryEntryGroup)
+                }
+            } else if year == yearIterator && month != monthIterator {
+                currentJokeHistoryEntryBatch.reverse()
+
+                let jokeHistoryEntryGroup = JokeHistoryEntryGroup(
+                    id: UUID().uuidString,
+                    punchLineID: UUID().uuidString,
+                    year: year,
+                    month: month - 1,
+                    entries: currentJokeHistoryEntryBatch
+                )
+
+                jokeHistoryEntryGroups.append(jokeHistoryEntryGroup)
+
+                currentJokeHistoryEntryBatch = []
+                monthIterator = month
+                testMonthCount += 1
+
+                currentJokeHistoryEntryBatch.append(JokeHistoryEntry(id: UUID().uuidString, entryGroupID: currentEntryGroupID, punchLineID: UUID().uuidString, date: date, jokes: getRandomJokes()))
+                if date == dateRange.last {
+                    currentJokeHistoryEntryBatch.reverse()
+
+                    let jokeHistoryEntryGroup = JokeHistoryEntryGroup(
+                        id: UUID().uuidString,
+                        punchLineID: UUID().uuidString,
+                        year: year,
+                        month: month,
+                        entries: currentJokeHistoryEntryBatch
+                    )
+
+                    jokeHistoryEntryGroups.append(jokeHistoryEntryGroup)
+                }
+            } else {
+                currentJokeHistoryEntryBatch.reverse()
+
+                let jokeHistoryEntryGroup = JokeHistoryEntryGroup(
+                    id: currentEntryGroupID,
+                    punchLineID: UUID().uuidString,
+                    year: year - 1,
+                    month: 12,
+                    entries: currentJokeHistoryEntryBatch
+                )
+
+                jokeHistoryEntryGroups.append(jokeHistoryEntryGroup)
+
+                currentEntryGroupID = UUID().uuidString
+                currentJokeHistoryEntryBatch = []
+                yearIterator = year
+                monthIterator = month
+                testYearCount += 1
+
+                currentJokeHistoryEntryBatch.append(JokeHistoryEntry(id: UUID().uuidString, entryGroupID: currentEntryGroupID, punchLineID: UUID().uuidString, date: date, jokes: getRandomJokes()))
+                if date == dateRange.last {
+                    currentJokeHistoryEntryBatch.reverse()
+
+                    let jokeHistoryEntryGroup = JokeHistoryEntryGroup(
+                        id: UUID().uuidString,
+                        punchLineID: UUID().uuidString,
+                        year: year,
+                        month: month,
+                        entries: currentJokeHistoryEntryBatch
+                    )
+
+                    jokeHistoryEntryGroups.append(jokeHistoryEntryGroup)
+                }
+            }
+
+        }
+
+        jokeHistoryEntryGroups.reverse()
+        self.testJokeHistoryEntryGroups = jokeHistoryEntryGroups
+    }
+
+    class func getRandomJokeHistoryEntries() -> [JokeHistoryEntry] {
+        guard let startingDate = DateComponents(calendar: .current, year: 2025, month: 11, day: 1).date else { return [] }
+        let currentDate = Date()
+
+        // Calculate Date Range
+
+        var iteratingDate = startingDate
+        var dateRange: [Date] = []
+
+        while iteratingDate <= currentDate {
+            dateRange.append(iteratingDate)
+            iteratingDate = Calendar.current.date(byAdding: .day, value: 1, to: iteratingDate) ?? Date()
+        }
+
+        dateRange.removeLast()
+
+        let currentEntryGroupID = UUID().uuidString
+        var currentJokeHistoryEntryBatch: [JokeHistoryEntry] = []
+
+        for date in dateRange {
+            currentJokeHistoryEntryBatch.append(JokeHistoryEntry(id: UUID().uuidString, entryGroupID: currentEntryGroupID, punchLineID: UUID().uuidString, date: date, jokes: getRandomJokes()))
+        }
+
+        currentJokeHistoryEntryBatch.reverse()
+
+        return currentJokeHistoryEntryBatch
     }
 
     class func getRandomJokes() -> [Joke] {
@@ -107,8 +238,8 @@ final class TestDataManager {
         var randomJokes: [Joke] = []
 
         for rank in 0...9 {
-            let randomSetup = testSetUps[Int.random(in: testIndexRange)]
-            let randomPunchline = testPunchlines[Int.random(in: testIndexRange)]
+            let randomSetup = testSetUps[Int.random(in: testDataIndexRange)]
+            let randomPunchline = testPunchlines[Int.random(in: testDataIndexRange)]
 
             let randomJoke = Joke(
                 id: UUID().uuidString,
@@ -133,9 +264,9 @@ final class TestDataManager {
         return randomJokes
     }
 
-    class func getRandomName() -> String? {
+    private class func getRandomName() -> String? {
         if Int.random(in: 0...1) == 1 {
-            return testUsernames[Int.random(in: testIndexRange)]
+            return testUsernames[Int.random(in: testDataIndexRange)]
         } else {
             return nil
         }

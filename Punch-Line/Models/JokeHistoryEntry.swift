@@ -10,6 +10,7 @@ import Foundation
 struct JokeHistoryEntry: Codable, Identifiable {
 
     let id: String
+    let entryGroupID: String
     let punchLineID: String
 
     let date: Date

@@ -12,7 +12,8 @@ struct JokeListView: View {
     let viewModel: JokeListViewModel
 
     @State private var showingConfirmationDialog = false
-
+    @State private var showingModalSheet = false
+    
     var body: some View {
         NavigationStack {
             ZStack {
@@ -43,6 +44,17 @@ struct JokeListView: View {
                 ToolbarItem(placement: .principal) {
                     Image(ImageTitles.iconNavigationTitle)
                         .foregroundStyle(.accent)
+                }
+                ToolbarItem(placement: .topBarTrailing) {
+                    Image(systemName: SystemIcons.gear)
+                        .foregroundStyle(.accent)
+                        .onTapGesture {
+                            showingModalSheet = true
+                        }
+                        .sheet(isPresented: $showingModalSheet) {
+                            SettingsView()
+                                .presentationDragIndicator(.visible)
+                        }
                 }
             }
             .navigationTitle(viewModel.displayDate)

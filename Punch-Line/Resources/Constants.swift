@@ -31,8 +31,10 @@ struct ImageTitles {
 }
 
 struct NavigationTitles {
-    static let favoriteJokes = "Faves"
-    static let jokeHistory = "A History of Yuks"
+    static let favoriteJokes = "Funny Faves"
+    static let jokeHistoryEntries = "Droll Days"
+    static let jokeHistoryMonths = "Mirth Months"
+    static let jokeHistoryYears = "Yuk Years"
     static let punchLineLaunchers = "The Punch-Line"
 }
 

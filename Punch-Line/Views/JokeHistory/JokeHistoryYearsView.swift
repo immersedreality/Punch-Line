@@ -1,15 +1,15 @@
 //
-//  JokeHistoryView.swift
+//  JokeHistoryYearsView.swift
 //  Punch-Line
 //
-//  Created by Jeffrey Eugene Hoch on 3/24/25.
+//  Created by Jeffrey Eugene Hoch on 4/2/25.
 //
 
 import SwiftUI
 
-struct JokeHistoryView: View {
+struct JokeHistoryYearsView: View {
 
-    let viewModel = JokeHistoryViewModel()
+    let viewModel = JokeHistoryYearsViewModel()
 
     @State private var showingModalSheet = false
 
@@ -18,11 +18,13 @@ struct JokeHistoryView: View {
             ZStack {
                 StyleManager.generateRandomBackgroundColor()
                     .ignoresSafeArea(edges: [.top])
-                List(viewModel.testJokeHistoryEntries) { entry in
+                List(viewModel.getRowData()) { rowData in
                     NavigationLink {
-                        JokeListView(viewModel: JokeListViewModel(displayDate: entry.displayDate, jokes: entry.jokes))
+                        JokeHistoryMonthsView(
+                            viewModel: JokeHistoryMonthsViewModel(selectedYear: rowData.rowValue)
+                        )
                     } label: {
-                        JokeHistoryEntryView(displayDate: entry.displayDate)
+                        JokeHistoryRowView(rowTitle: rowData.rowTitle)
                     }
                 }
                 .listRowSpacing(8.0)
@@ -45,28 +47,12 @@ struct JokeHistoryView: View {
                         }
                 }
             }
-            .navigationTitle(NavigationTitles.jokeHistory)
+            .navigationTitle(NavigationTitles.jokeHistoryYears)
         }
     }
 
-}
-
-struct JokeHistoryEntryView: View {
-
-    let displayDate: String
-    
-    var body: some View {
-        HStack {
-            Spacer()
-            Text(displayDate)
-                .font(Font.system(size: 24.0, weight: .bold))
-                .foregroundStyle(.accent)
-                .padding([.vertical], 16.0)
-            Spacer()
-        }
-    }
 }
 
 #Preview {
-    JokeHistoryView()
+    JokeHistoryYearsView()
 }

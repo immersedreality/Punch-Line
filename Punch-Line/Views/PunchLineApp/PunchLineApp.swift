@@ -14,6 +14,7 @@ struct PunchLineApp: App {
 
     init() {
         viewModel.validateUserInfo()
+        TestDataManager.initializeTestJokeHistoryEntryGroups()
     }
 
     var body: some Scene {
