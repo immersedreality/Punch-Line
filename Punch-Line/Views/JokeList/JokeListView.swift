@@ -129,7 +129,7 @@ struct JokeView: View {
     JokeListView(
         viewModel: JokeListViewModel(
             displayDate: TestDataManager.testDateDisplayString,
-            jokes: TestDataManager.getRandomJokes()
+            jokes: TestDataManager.getRandomJokes(for: UUID().uuidString)
         )
     )
 }

@@ -13,8 +13,8 @@ struct PunchLineLaunchersView: View {
 
     var body: some View {
         NavigationStack {
-            List {
-                PunchLineLauncherView()
+            List(TestDataManager.testPunchLines) { punchLine in
+                PunchLineLauncherView(punchLine: punchLine)
             }
             .toolbar {
                 ToolbarItem(placement: .principal) {
@@ -41,19 +41,23 @@ struct PunchLineLaunchersView: View {
 }
 
 struct PunchLineLauncherView: View {
+
+    let punchLine: PunchLine
+
     var body: some View {
         HStack {
             Spacer()
             VStack {
-//                Text("Punch-Line Title")
-//                    .font(Font.system(size: 24.0, weight: .bold))
-//                    .foregroundStyle(.accent)
-//                    .padding([.top], 48.0)
+                Text(punchLine.displayName)
+                    .font(Font.system(size: 24.0, weight: .bold))
+                    .foregroundStyle(.accent)
+                    .shadow(color: .black, radius: 0.1, x: 0.1, y: 0.1)
+                    .padding([.top], 48.0)
                 Text("Get in the Punch-Line --->")
                     .font(Font.system(size: 24.0, weight: .light))
                     .foregroundStyle(.accent)
                     .shadow(color: .black, radius: 0.1, x: 0.1, y: 0.1)
-                    .padding([.vertical], 48.0)
+                    .padding([.bottom], 48.0)
             }
             Spacer()
         }

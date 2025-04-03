@@ -10,7 +10,6 @@ import Foundation
 struct PunchLine: Codable, Identifiable {
     let id: String
     let displayName: String
-
     let owningUserID: String?
     let participantUserIDs: [String]?
     let scope: PunchLineScope
@@ -18,5 +17,5 @@ struct PunchLine: Codable, Identifiable {
 }
 
 enum PunchLineScope: String, Codable {
-    case global, regional, custom
+    case regional, topical, custom
 }

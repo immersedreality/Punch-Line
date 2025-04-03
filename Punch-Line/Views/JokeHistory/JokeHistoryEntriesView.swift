@@ -57,6 +57,8 @@ struct JokeHistoryEntriesView: View {
 
 #Preview {
     JokeHistoryEntriesView(
-        viewModel: JokeHistoryEntriesViewModel(jokeHistoryEntries: TestDataManager.getRandomJokeHistoryEntries())
+        viewModel: JokeHistoryEntriesViewModel(
+            jokeHistoryEntries: TestDataManager.getRandomJokeHistoryEntries(for: UUID().uuidString)
+        )
     )
 }

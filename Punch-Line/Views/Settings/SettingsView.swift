@@ -65,6 +65,9 @@ struct ShowOffensiveContentRow: View {
                 .foregroundStyle(.accent)
             Spacer()
             Toggle(isOn: $shouldSeeOffensiveContent) { }
+                .onChange(of: shouldSeeOffensiveContent) { _, _ in
+                    AppSessionManager.toggleOffensiveContentFilter()
+                }
         }
     }
 
@@ -75,7 +78,7 @@ struct GetPunchLineProRow: View {
     @State private var showingAlert = false
 
     var body: some View {
-        Text("Get PunchLine Pro!  Get Rid of Ads! Get Credit for Your Fantastic Joke Contributions!")
+        Text("Get PunchLine Pro!  Get Rid of Ads!! Get Credit for Your Fantastic Joke Contributions!!! Create and Share Your Own Custom Punch-Lines!!!!")
             .font(Font.system(size: 20.0, weight: .light))
             .foregroundStyle(.accent)
             .onTapGesture {
@@ -85,7 +88,7 @@ struct GetPunchLineProRow: View {
                 Button("Okeydoke") {
                 }
             } message: {
-                Text("This service is not yet available.")
+                Text("This service is not yet available.  Be patient, you little freak!")
             }
     }
 

@@ -26,7 +26,10 @@ struct JokeHistoryMonthsView: View {
                     NavigationLink {
                         JokeHistoryEntriesView(
                             viewModel: JokeHistoryEntriesViewModel(
-                                jokeHistoryEntries: viewModel.getSelectedJokeHistoryEntries(for: rowData.rowValue)
+                                jokeHistoryEntries: viewModel.getSelectedJokeHistoryEntries(
+                                    for: viewModel.punchLineID,
+                                    selectedMonth: rowData.rowValue
+                                )
                             )
                         )
                     } label: {
@@ -60,5 +63,7 @@ struct JokeHistoryMonthsView: View {
 }
 
 #Preview {
-    JokeHistoryMonthsView(viewModel: JokeHistoryMonthsViewModel(selectedYear: 2025))
+    JokeHistoryMonthsView(
+        viewModel: JokeHistoryMonthsViewModel(punchLineID: UUID().uuidString, selectedYear: 2025)
+    )
 }

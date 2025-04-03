@@ -9,7 +9,11 @@ import SwiftUI
 
 struct JokeHistoryYearsView: View {
 
-    let viewModel = JokeHistoryYearsViewModel()
+    let viewModel: JokeHistoryYearsViewModel
+
+    init(viewModel: JokeHistoryYearsViewModel) {
+        self.viewModel = viewModel
+    }
 
     @State private var showingModalSheet = false
 
@@ -21,7 +25,10 @@ struct JokeHistoryYearsView: View {
                 List(viewModel.getRowData()) { rowData in
                     NavigationLink {
                         JokeHistoryMonthsView(
-                            viewModel: JokeHistoryMonthsViewModel(selectedYear: rowData.rowValue)
+                            viewModel: JokeHistoryMonthsViewModel(
+                                punchLineID: viewModel.punchLineID,
+                                selectedYear: rowData.rowValue
+                            )
                         )
                     } label: {
                         JokeHistoryRowView(rowTitle: rowData.rowTitle)
@@ -54,5 +61,5 @@ struct JokeHistoryYearsView: View {
 }
 
 #Preview {
-    JokeHistoryYearsView()
+    JokeHistoryYearsView(viewModel: JokeHistoryYearsViewModel(punchLineID: UUID().uuidString))
 }

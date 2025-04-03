@@ -9,11 +9,19 @@ import Foundation
 
 class JokeHistoryYearsViewModel {
 
+    let punchLineID: String
+
+    init(punchLineID: String) {
+        self.punchLineID = punchLineID
+    }
+
     func getRowData() -> [JokeHistoryRowDataItem] {
+
+        guard let entryGroups = TestDataManager.testJokeHistoryEntryGroups[punchLineID] else { return [] }
 
         var rowData: [JokeHistoryRowDataItem] = []
 
-        for entryGroup in TestDataManager.testJokeHistoryEntryGroups {
+        for entryGroup in entryGroups {
             if !rowData.contains(where: { dataItem in
                 dataItem.rowTitle == entryGroup.year.description
             }) {
@@ -29,17 +37,21 @@ class JokeHistoryYearsViewModel {
 
 class JokeHistoryMonthsViewModel {
 
+    let punchLineID: String
     let selectedYear: Int
 
-    init(selectedYear: Int) {
+    init(punchLineID: String, selectedYear: Int) {
+        self.punchLineID = punchLineID
         self.selectedYear = selectedYear
     }
 
     func getRowData() -> [JokeHistoryRowDataItem] {
 
+        guard let entryGroups = TestDataManager.testJokeHistoryEntryGroups[punchLineID] else { return [] }
+
         var rowData: [JokeHistoryRowDataItem] = []
 
-        for entryGroup in TestDataManager.testJokeHistoryEntryGroups where entryGroup.year == selectedYear {
+        for entryGroup in entryGroups where entryGroup.year == selectedYear {
             if !rowData.contains(where: { dataItem in
                 dataItem.rowTitle == entryGroup.displayMonth
             }) {
@@ -51,8 +63,9 @@ class JokeHistoryMonthsViewModel {
 
     }
 
-    func getSelectedJokeHistoryEntries(for selectedMonth: Int) -> [JokeHistoryEntry] {
-        guard let selectedJokeHistoryEntryGroup = TestDataManager.testJokeHistoryEntryGroups.first(where: { entryGroup in
+    func getSelectedJokeHistoryEntries(for punchLineID: String, selectedMonth: Int) -> [JokeHistoryEntry] {
+        guard let entryGroups = TestDataManager.testJokeHistoryEntryGroups[punchLineID] else { return [] }
+        guard let selectedJokeHistoryEntryGroup = entryGroups.first(where: { entryGroup in
             entryGroup.year == selectedYear && entryGroup.month == selectedMonth
         }) else { return [] }
         return selectedJokeHistoryEntryGroup.entries ?? []

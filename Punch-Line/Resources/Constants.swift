@@ -34,8 +34,9 @@ struct NavigationTitles {
     static let favoriteJokes = "Funny Faves"
     static let jokeHistoryEntries = "Droll Days"
     static let jokeHistoryMonths = "Mirth Months"
+    static let jokeHistoryPunchLines = "Humor History"
     static let jokeHistoryYears = "Yuk Years"
-    static let punchLineLaunchers = "The Punch-Line"
+    static let punchLineLaunchers = "Laugh Launchers"
 }
 
 struct SystemIcons {
