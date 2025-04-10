@@ -87,8 +87,10 @@ struct VoteView: View {
         .padding([.horizontal], 16.0)
         .confirmationDialog("", isPresented: $showingConfirmationDialog) {
             Button(FlagActionTitles.flagJokeAsOffensive) {
+                navigateToNextActivity()
             }
             Button(FlagActionTitles.flagJokeAsTooFunny) {
+                navigateToNextActivity()
             }
         }
     }

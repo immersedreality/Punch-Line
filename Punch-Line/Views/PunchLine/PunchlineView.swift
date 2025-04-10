@@ -75,8 +75,10 @@ struct PunchlineView: View {
         }
         .confirmationDialog("", isPresented: $showingConfirmationDialog) {
             Button(FlagActionTitles.flagSetupAsOffensive) {
+                navigateToNextActivity()
             }
             Button(FlagActionTitles.flagSetupAsUnfunny) {
+                navigateToNextActivity()
             }
         }
     }
