@@ -23,10 +23,11 @@ struct FavoriteJokeListView: View {
                     FavoriteJokeView(favoriteJoke: favoriteJoke)
                         .onTapGesture {
                             showingConfirmationDialog = true
+                            viewModel.set(selectedFavoriteJoke: favoriteJoke)
                         }
                         .confirmationDialog("", isPresented: $showingConfirmationDialog) {
                             Button("Remove from Favorites") {
-                                viewModel.removeJokeFromFavorites(favoriteJoke: favoriteJoke)
+                                viewModel.removeSelectedFavoriteJokeFromFavorites()
                                 if AppSessionManager.userInfo?.favoriteJokes.isEmpty == true {
                                     shouldNavigateBackToSettings = true
                                 }
@@ -55,14 +56,12 @@ struct FavoriteJokeView: View {
                 HStack {
                     Text(favoriteJoke.setup)
                         .font(Font.system(size: 20.0, weight: .light))
-                        .foregroundStyle(.accent)
                     Spacer(minLength: 16.0)
                 }
                 HStack {
                     Spacer(minLength: 16.0)
                     Text(favoriteJoke.punchline)
                         .font(Font.system(size: 20.0, weight: .semibold))
-                        .foregroundStyle(.accent)
                         .padding([.top], 2.0)
                 }
                 if let setupAuthor = favoriteJoke.setupAuthorUsername {

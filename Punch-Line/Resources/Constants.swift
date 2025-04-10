@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ActivityFeedMessages {
+    static let punchline = "Finish this joke with a killer punchline!"
     static let punchlineLength = "Your punchline is too short. Try harder!"
     static let setupStartFirst = "Start a joke with a funny setup!"
     static let setupStartSecond = "Start another joke with an even funnier setup!"
@@ -15,6 +16,7 @@ struct ActivityFeedMessages {
     static let setupStartBeyond = "Keep the setups coming!"
     static let setupLength = "Your setup is too short. Try harder!"
     static let setupEnd = "Setups must end with either a question mark (?) or an ellipsis (…)"
+    static let vote = "Quick Question: Is This Funny?"
 }
 
 struct FlagActionTitles {
@@ -41,10 +43,11 @@ struct NavigationTitles {
 }
 
 struct SystemIcons {
-    static let gear = "gear"
     static let jokeHistoryTab = "clock.arrow.trianglehead.counterclockwise.rotate.90"
     static let jokeLookupTab = "magnifyingglass"
     static let punchLineLaunchersTab = "pencil.and.scribble"
+    static let reportButton = "flag.fill"
+    static let settingsButton = "gear"
 }
 
 struct UserDefaultsKeys {

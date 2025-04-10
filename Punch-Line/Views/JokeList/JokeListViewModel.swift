@@ -11,26 +11,20 @@ class JokeListViewModel {
 
     let displayDate: String
     let jokes: [Joke]
-    var selectedJoke: Joke?
+    private var selectedJoke: Joke?
 
     init(displayDate: String, jokes: [Joke]) {
         self.displayDate = displayDate
         self.jokes = jokes
     }
 
-    func selectedJokeIsAlreadyFavorited() -> Bool {
-        guard let favoriteJokes = AppSessionManager.userInfo?.favoriteJokes else { return false }
-        guard let selectedJoke else { return false}
+    // MARK: Setters/Getters
 
-        if favoriteJokes.contains(where: { favoriteJoke in
-            favoriteJoke.originJokeID == selectedJoke.id
-        }) {
-            return true
-        } else {
-            return false
-        }
-        
+    func set(selectedJoke: Joke) {
+        self.selectedJoke = selectedJoke
     }
+
+    // MARK: Update Methods
 
     func addSelectedJokeToFavorites() {
         guard let selectedJoke else { return }
@@ -50,4 +44,20 @@ class JokeListViewModel {
 
     }
 
+    // MARK: Validators
+
+    func selectedJokeIsAlreadyFavorited() -> Bool {
+        guard let favoriteJokes = AppSessionManager.userInfo?.favoriteJokes else { return false }
+        guard let selectedJoke else { return false}
+
+        if favoriteJokes.contains(where: { favoriteJoke in
+            favoriteJoke.originJokeID == selectedJoke.id
+        }) {
+            return true
+        } else {
+            return false
+        }
+
+    }
+    
 }

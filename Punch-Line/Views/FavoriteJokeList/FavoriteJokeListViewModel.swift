@@ -10,12 +10,29 @@ import SwiftUI
 
 class FavoriteJokeListViewModel {
 
+    private var selectedFavoriteJoke: FavoriteJoke?
+
     var favoriteJokes: [FavoriteJoke] {
         return AppSessionManager.userInfo?.favoriteJokes ?? []
     }
 
-    func removeJokeFromFavorites(favoriteJoke: FavoriteJoke) {
-        AppSessionManager.removeFavoriteJoke(with: favoriteJoke.id)
+    // MARK: Setters/ Getters
+    
+    func set(selectedFavoriteJoke: FavoriteJoke) {
+        self.selectedFavoriteJoke = selectedFavoriteJoke
+    }
+
+    // MARK: Update Methods
+
+    func removeSelectedFavoriteJokeFromFavorites() {
+        guard let selectedFavoriteJoke else { return }
+
+        if let favoriteJokeToRemove = favoriteJokes.first(where: { favoriteJoke in
+            favoriteJoke.id == selectedFavoriteJoke.id
+        }) {
+            AppSessionManager.removeFavoriteJoke(with: favoriteJokeToRemove.id)
+        }
+
     }
 
 }

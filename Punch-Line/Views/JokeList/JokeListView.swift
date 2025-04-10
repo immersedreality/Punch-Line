@@ -23,7 +23,7 @@ struct JokeListView: View {
                     JokeView(joke: joke)
                         .onTapGesture {
                             showingConfirmationDialog = true
-                            viewModel.selectedJoke = joke
+                            viewModel.set(selectedJoke: joke)
                         }
                 }
                 .listRowSpacing(8.0)
@@ -46,7 +46,7 @@ struct JokeListView: View {
                         .foregroundStyle(.accent)
                 }
                 ToolbarItem(placement: .topBarTrailing) {
-                    Image(systemName: SystemIcons.gear)
+                    Image(systemName: SystemIcons.settingsButton)
                         .foregroundStyle(.accent)
                         .onTapGesture {
                             showingModalSheet = true
@@ -83,14 +83,12 @@ struct JokeView: View {
                 HStack {
                     Text(joke.setup)
                         .font(Font.system(size: 20.0, weight: .light))
-                        .foregroundStyle(.accent)
                     Spacer(minLength: 16.0)
                 }
                 HStack {
                     Spacer(minLength: 16.0)
                     Text(joke.punchline)
                         .font(Font.system(size: 20.0, weight: .semibold))
-                        .foregroundStyle(.accent)
                         .padding([.top], 2.0)
                 }
                 if let setupAuthor = joke.setupAuthorUsername {

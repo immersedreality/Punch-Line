@@ -45,7 +45,7 @@ struct JokeHistoryMonthsView: View {
                         .foregroundStyle(.accent)
                 }
                 ToolbarItem(placement: .topBarTrailing) {
-                    Image(systemName: SystemIcons.gear)
+                    Image(systemName: SystemIcons.settingsButton)
                         .foregroundStyle(.accent)
                         .onTapGesture {
                             showingModalSheet = true

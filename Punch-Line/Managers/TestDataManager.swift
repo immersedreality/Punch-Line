@@ -322,4 +322,32 @@ final class TestDataManager {
         }
     }
 
+    class func getRandomSetup() -> String {
+        return testSetUps[Int.random(in: testDataIndexRange)]
+    }
+
+    class func getRandomJoke() -> Joke {
+        let randomSetup = testSetUps[Int.random(in: testDataIndexRange)]
+        let randomPunchline = testPunchlines[Int.random(in: testDataIndexRange)]
+
+        let randomJoke = Joke(
+            id: UUID().uuidString,
+            punchLineID: UUID().uuidString,
+            setup: randomSetup,
+            setupAuthorID: UUID().uuidString,
+            setupAuthorUsername: getRandomName(),
+            punchline: randomPunchline,
+            punchlineAuthorID: UUID().uuidString,
+            punchlineAuthorUsername: getRandomName(),
+            haCount: 0,
+            mehCount: 0,
+            ughCount: 0,
+            isTooFunnyCount: 0,
+            isOffensiveCount: 0,
+            dayRanking: nil
+        )
+
+        return randomJoke
+    }
+
 }
