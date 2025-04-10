@@ -1,5 +1,5 @@
 //
-//  PunchLineActivityView.swift
+//  PunchLineActivityRootView.swift
 //  Punch-Line
 //
 //  Created by Jeffrey Eugene Hoch on 4/9/25.
@@ -7,13 +7,14 @@
 
 import SwiftUI
 
-struct PunchLineActivityView: View {
+struct PunchLineActivityRootView: View {
 
     let viewModel: PunchLineActivityViewModel
 
     @State var isReadyForNextActivity: Bool = false
-    
+
     var body: some View {
+        NavigationStack {
             ZStack {
                 StyleManager.generateRandomBackgroundColor()
                     .ignoresSafeArea(edges: [.bottom])
@@ -25,19 +26,19 @@ struct PunchLineActivityView: View {
                 case .vote:
                     VoteView(viewModel: self.viewModel, isReadyForNextActivity: $isReadyForNextActivity)
                 }
-
             }
             .navigationBarBackButtonHidden()
             .navigationDestination(isPresented: $isReadyForNextActivity) {
                 PunchLineActivityView(viewModel: self.viewModel)
             }
+        }
     }
 
 }
 
 
 #Preview {
-    PunchLineActivityView(
+    PunchLineActivityRootView(
         viewModel: PunchLineActivityViewModel(
             punchLineID: UUID().uuidString,
             activity: .setup

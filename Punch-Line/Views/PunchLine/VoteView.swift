@@ -9,19 +9,40 @@ import SwiftUI
 
 struct VoteView: View {
 
-    let viewModel: PunchLineViewModel
-    
+    let viewModel: PunchLineActivityViewModel
+
+    @Binding var isReadyForNextActivity: Bool
+
     var body: some View {
         Text("VoteView")
+            .onTapGesture {
+                navigateToNextActivity()
+            }
+    }
+
+    private func navigateToNextActivity() {
+        viewModel.setNextActivity()
+        isReadyForNextActivity = true
     }
     
 }
 
 #Preview {
-    VoteView(
-        viewModel: PunchLineViewModel(
-            punchLineID: UUID().uuidString,
-            activity: .vote
-        )
-    )
+    struct Preview: View {
+        @State var isReadyForNextActivity = false
+
+        var body: some View {
+            VoteView(
+                viewModel: PunchLineActivityViewModel(
+                    punchLineID: UUID().uuidString,
+                    activity: .vote
+                ),
+                isReadyForNextActivity: $isReadyForNextActivity
+            )
+
+        }
+
+    }
+
+    return Preview()
 }

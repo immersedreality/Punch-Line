@@ -25,8 +25,8 @@ struct PunchLineLaunchersView: View {
             }
             .sheet(isPresented: $showingPunchLineSheet) {
                 if let punchLineID = viewModel.selectedPunchLineID {
-                    PunchLineActivityView(
-                        viewModel: PunchLineViewModel(
+                    PunchLineActivityRootView(
+                        viewModel: PunchLineActivityViewModel(
                             punchLineID: punchLineID,
                             activity: viewModel.getInitialPunchLineActivity()
                         )

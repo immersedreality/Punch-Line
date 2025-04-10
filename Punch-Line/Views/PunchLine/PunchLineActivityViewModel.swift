@@ -1,5 +1,5 @@
 //
-//  PunchLineViewModel.swift
+//  PunchLineActivityViewModel.swift
 //  Punch-Line
 //
 //  Created by Jeffrey Eugene Hoch on 4/9/25.
@@ -8,24 +8,24 @@
 import Foundation
 import SwiftUI
 
-class PunchLineViewModel {
+class PunchLineActivityViewModel {
 
     let punchLineID: String
-    let activity: PunchLineActivity
+    private var activity: PunchLineActivity
 
     init(punchLineID: String, activity: PunchLineActivity) {
         self.punchLineID = punchLineID
         self.activity = activity
     }
 
-    func getNextActivity() -> PunchLineActivity {
+    func setNextActivity() {
         switch activity {
         case .setup:
-            return .punchline
+            self.activity = .punchline
         case .punchline:
-            return .vote
+            self.activity = .vote
         case .vote:
-            return .setup
+            self.activity = .setup
         }
     }
 
