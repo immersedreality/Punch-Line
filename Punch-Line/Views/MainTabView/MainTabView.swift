@@ -9,15 +9,21 @@ import SwiftUI
 
 struct MainTabView: View {
 
-    var body: some View {
-        TabView {
+    @State private var selection = 1
 
-            Tab("", systemImage: SystemIcons.punchLineLaunchersTab) {
+    var body: some View {
+        TabView(selection: $selection) {
+
+            Tab("", systemImage: SystemIcons.jokeHistoryTab, value: 0) {
+                JokeHistoryPunchLinesView()
+            }
+
+            Tab("", systemImage: SystemIcons.punchLineLaunchersTab, value: 1) {
                 PunchLineLaunchersView()
             }
 
-            Tab("", systemImage: SystemIcons.jokeHistoryTab) {
-                JokeHistoryPunchLinesView()
+            Tab("", systemImage: SystemIcons.jokeLookupTab, value: 2) {
+                JokeLookupView()
             }
 
         }

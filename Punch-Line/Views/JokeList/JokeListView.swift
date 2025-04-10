@@ -25,20 +25,20 @@ struct JokeListView: View {
                             showingConfirmationDialog = true
                             viewModel.selectedJoke = joke
                         }
-                        .confirmationDialog("", isPresented: $showingConfirmationDialog) {
-                            if viewModel.selectedJokeIsAlreadyFavorited() {
-                                Button("Remove from Favorites") {
-                                    viewModel.removeSelectedJokeFromFavorites()
-                                }
-                            } else {
-                                Button("Add to Favorites") {
-                                    viewModel.addSelectedJokeToFavorites()
-                                }
-                            }
-                        }
                 }
                 .listRowSpacing(8.0)
                 .scrollContentBackground(.hidden)
+                .confirmationDialog("", isPresented: $showingConfirmationDialog) {
+                    if viewModel.selectedJokeIsAlreadyFavorited() {
+                        Button("Remove from Favorites") {
+                            viewModel.removeSelectedJokeFromFavorites()
+                        }
+                    } else {
+                        Button("Add to Favorites") {
+                            viewModel.addSelectedJokeToFavorites()
+                        }
+                    }
+                }
             }
             .toolbar {
                 ToolbarItem(placement: .principal) {

@@ -9,12 +9,30 @@ import SwiftUI
 
 struct PunchLineLaunchersView: View {
 
-    @State private var showingModalSheet = false
+    let viewModel = PunchLineLaunchersViewModel()
+
+    @State private var showingPunchLineSheet = false
+    @State private var showingSettingsSheet = false
 
     var body: some View {
         NavigationStack {
             List(TestDataManager.testPunchLines) { punchLine in
                 PunchLineLauncherView(punchLine: punchLine)
+                    .onTapGesture {
+                        viewModel.selectedPunchLineID = punchLine.id
+                        showingPunchLineSheet = true
+                    }
+            }
+            .sheet(isPresented: $showingPunchLineSheet) {
+                if let punchLineID = viewModel.selectedPunchLineID {
+                    PunchLineActivityView(
+                        viewModel: PunchLineViewModel(
+                            punchLineID: punchLineID,
+                            activity: viewModel.getInitialPunchLineActivity()
+                        )
+                    )
+                        .presentationDragIndicator(.visible)
+                }
             }
             .toolbar {
                 ToolbarItem(placement: .principal) {
@@ -25,9 +43,9 @@ struct PunchLineLaunchersView: View {
                     Image(systemName: SystemIcons.gear)
                         .foregroundStyle(.accent)
                         .onTapGesture {
-                            showingModalSheet = true
+                            showingSettingsSheet = true
                         }
-                        .sheet(isPresented: $showingModalSheet) {
+                        .sheet(isPresented: $showingSettingsSheet) {
                             SettingsView()
                                 .presentationDragIndicator(.visible)
                         }

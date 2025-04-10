@@ -32,16 +32,18 @@ struct ImageTitles {
 
 struct NavigationTitles {
     static let favoriteJokes = "Funny Faves"
-    static let jokeHistoryEntries = "Comedy Calendar"
+    static let jokeHistoryEntries = "Droll Days"
     static let jokeHistoryMonths = "Mirth Months"
     static let jokeHistoryPunchLines = "Humor History"
     static let jokeHistoryYears = "Yuk Years"
-    static let punchLineLaunchers = "Laugh Launchers"
+    static let jokeLookup = "Laugh Lookup"
+    static let punchLineLaunchers = "Comedy Creation"
 }
 
 struct SystemIcons {
     static let gear = "gear"
     static let jokeHistoryTab = "clock.arrow.trianglehead.counterclockwise.rotate.90"
+    static let jokeLookupTab = "magnifyingglass"
     static let punchLineLaunchersTab = "pencil.and.scribble"
 }
 
