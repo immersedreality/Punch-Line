@@ -24,9 +24,15 @@ struct JokeHistoryEntriesView: View {
                     .ignoresSafeArea(edges: [.top])
                 List(viewModel.jokeHistoryEntries) { entry in
                     NavigationLink {
-                        JokeListView(viewModel: JokeListViewModel(displayDate: entry.displayDate, jokes: entry.jokes))
+                        JokeListView(
+                            viewModel: JokeListViewModel(
+                                displayDate: entry.date.displayDate,
+                                jokes: entry.jokes,
+                                mode: .history
+                            )
+                        )
                     } label: {
-                        JokeHistoryRowView(rowTitle: entry.displayDate)
+                        JokeHistoryRowView(rowTitle: entry.date.displayDate)
                     }
                 }
                 .listRowSpacing(8.0)

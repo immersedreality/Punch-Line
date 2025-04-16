@@ -13,13 +13,13 @@ struct PunchlineView: View {
 
     @Binding var isReadyForNextActivity: Bool
     @State private var enteredPunchlineText: String = ""
-    @FocusState private var textEditorIsFocused: Bool
+    @FocusState private var textFieldIsFocused: Bool
     @State private var showingConfirmationDialog = false
 
     var body: some View {
         VStack {
             HStack {
-                Text(ActivityFeedMessages.punchline)
+                Text(viewModel.activityDisplayText)
                     .font(Font.system(size: 32.0, weight: .semibold))
                     .foregroundStyle(.accent)
                     .shadow(color: .black, radius: 0.1, x: 0.1, y: 0.1)
@@ -36,7 +36,7 @@ struct PunchlineView: View {
                 .textFieldStyle(.roundedBorder)
                 .multilineTextAlignment(.trailing)
                 .font(Font.system(size: 20.0, weight: .semibold))
-                .focused($textEditorIsFocused)
+                .focused($textFieldIsFocused)
                 .submitLabel(.done)
                 .onChange(of: enteredPunchlineText) { _, newValue in
                     if newValue.contains("\n") {
@@ -71,7 +71,7 @@ struct PunchlineView: View {
         }
         .padding([.horizontal], 16.0)
         .onAppear {
-            textEditorIsFocused = true
+            textFieldIsFocused = true
         }
         .confirmationDialog("", isPresented: $showingConfirmationDialog) {
             Button(FlagActionTitles.flagSetupAsOffensive) {
@@ -97,8 +97,9 @@ struct PunchlineView: View {
         var body: some View {
             PunchlineView(
                 viewModel: PunchLineActivityViewModel(
-                    punchLineID: UUID().uuidString,
-                    activity: .punchline
+                    punchLine: TestDataManager.testPunchLines[0],
+                    activity: .punchline,
+                    activityDisplayText: ActivityFeedMessages.punchline
                 ),
                 isReadyForNextActivity: $isReadyForNextActivity
             )

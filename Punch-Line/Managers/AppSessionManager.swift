@@ -55,17 +55,32 @@ final class AppSessionManager {
     }
 
     // MARK: Update Methods
-    
-    private class func resetTaskCounts() {
-        UserDefaults.standard.set([String: Int](), forKey: UserDefaultsKeys.todaysTaskCounts)
+
+    class func createTaskCountKey(for punchLineID: String) {
+        guard let userInfo = userInfo else { return }
+        var todaysTaskCounts = userInfo.todaysTaskCounts
+        todaysTaskCounts[punchLineID] = 0
+        UserDefaults.standard.set(todaysTaskCounts, forKey: UserDefaultsKeys.todaysTaskCounts)
     }
 
     class func incrementTodaysTaskCount(for punchLineID: String) {
         guard let userInfo = userInfo else { return }
+        resetTaskCountsIfNecessary()
         var todaysTaskCounts = userInfo.todaysTaskCounts
         let newTaskCountForPunchLine = (todaysTaskCounts[punchLineID] ?? 0) + 1
         todaysTaskCounts[punchLineID] = newTaskCountForPunchLine
         UserDefaults.standard.set(todaysTaskCounts, forKey: UserDefaultsKeys.todaysTaskCounts)
+        UserDefaults.standard.set(Date(), forKey: UserDefaultsKeys.lastActivityDate)
+    }
+
+    class func resetTaskCountsIfNecessary() {
+        guard let lastActivityDate = userInfo?.lastActivityDate else { return }
+        let lastActivityStartOfDay = Calendar.current.startOfDay(for: lastActivityDate)
+        let todayStartOfDay = Calendar.current.startOfDay(for: Date())
+
+        if lastActivityStartOfDay < todayStartOfDay {
+            UserDefaults.standard.set([String: Int](), forKey: UserDefaultsKeys.todaysTaskCounts)
+        }
     }
 
     class func toggleOffensiveContentFilter() {

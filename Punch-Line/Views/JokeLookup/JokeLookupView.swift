@@ -9,42 +9,59 @@ import SwiftUI
 
 struct JokeLookupView: View {
 
+    @StateObject var viewModel = JokeLookupViewModel()
+
     @State private var showingModalSheet = false
-    @State private var searchText: String = ""
+    @FocusState private var searchFieldIsFocused: Bool
 
     var body: some View {
         NavigationStack {
             ZStack {
-                StyleManager.generateRandomBackgroundColor()
+                StyleManager.jokeLookupBackgroundColor
                     .ignoresSafeArea(edges: [.top])
-                Text("There is currently nothing funny for me to show you. - Jeff")
-                    .font(Font.system(size: 24.0, weight: .bold))
-                    .foregroundStyle(.accent)
-                    .shadow(color: .black, radius: 0.1, x: 0.1, y: 0.1)
-                    .padding([.horizontal], 16.0)
-                    .toolbar {
-                        ToolbarItem(placement: .principal) {
-                            Image(ImageTitles.iconNavigationTitle)
-                                .foregroundStyle(.accent)
-                        }
-                        ToolbarItem(placement: .topBarTrailing) {
-                            Image(systemName: SystemIcons.settingsButton)
-                                .foregroundStyle(.accent)
-                                .onTapGesture {
-                                    showingModalSheet = true
-                                }
-                                .sheet(isPresented: $showingModalSheet) {
-                                    SettingsView()
-                                        .presentationDragIndicator(.visible)
-                                }
-                        }
-                    }
-                    .navigationTitle(NavigationTitles.jokeLookup)
-                    .listRowSpacing(8.0)
-                    .scrollContentBackground(.hidden)
+                if viewModel.searchResults.isEmpty {
+                    Text("There is currently nothing funny for me to show you. Perhaps you should try searching for something that could give you a little tickle. - Jeff")
+                        .font(Font.system(size: 24.0, weight: .bold))
+                        .foregroundStyle(.accent)
+                        .shadow(color: .black, radius: 0.1, x: 0.1, y: 0.1)
+                        .padding([.horizontal], 16.0)
+                } else {
+                    JokeListView(
+                        viewModel: JokeListViewModel(
+                            displayDate: "",
+                            jokes: viewModel.searchResults,
+                            mode: .lookup
+                        )
+                    )
+                }
             }
+            .toolbar {
+                ToolbarItem(placement: .principal) {
+                    Image(ImageTitles.iconNavigationTitle)
+                        .foregroundStyle(.accent)
+                }
+                ToolbarItem(placement: .topBarTrailing) {
+                    Image(systemName: SystemIcons.settingsButton)
+                        .foregroundStyle(.accent)
+                        .onTapGesture {
+                            showingModalSheet = true
+                        }
+                        .sheet(isPresented: $showingModalSheet) {
+                            SettingsView()
+                                .presentationDragIndicator(.visible)
+                        }
+                }
+            }
+            .navigationTitle(NavigationTitles.jokeLookup)
         }
-        .searchable(text: $searchText)
+        .searchable(text: $viewModel.searchText)
+        .searchFocused($searchFieldIsFocused)
+        .onAppear {
+            searchFieldIsFocused = true
+        }
+        .onChange(of: viewModel.debouncedSearchText) { _, _ in
+            viewModel.fetchSearchResults()
+        }
     }
 
 }

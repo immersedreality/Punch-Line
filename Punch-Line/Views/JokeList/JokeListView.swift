@@ -17,10 +17,12 @@ struct JokeListView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                StyleManager.generateRandomBackgroundColor()
-                    .ignoresSafeArea(edges: [.top])
+                if viewModel.mode == .history {
+                    StyleManager.generateRandomBackgroundColor()
+                        .ignoresSafeArea(edges: [.top])
+                }
                 List(viewModel.jokes) { joke in
-                    JokeView(joke: joke)
+                    JokeView(joke: joke, mode: viewModel.mode)
                         .onTapGesture {
                             showingConfirmationDialog = true
                             viewModel.set(selectedJoke: joke)
@@ -41,23 +43,25 @@ struct JokeListView: View {
                 }
             }
             .toolbar {
-                ToolbarItem(placement: .principal) {
-                    Image(ImageTitles.iconNavigationTitle)
-                        .foregroundStyle(.accent)
-                }
-                ToolbarItem(placement: .topBarTrailing) {
-                    Image(systemName: SystemIcons.settingsButton)
-                        .foregroundStyle(.accent)
-                        .onTapGesture {
-                            showingModalSheet = true
-                        }
-                        .sheet(isPresented: $showingModalSheet) {
-                            SettingsView()
-                                .presentationDragIndicator(.visible)
-                        }
+                if viewModel.mode == .history {
+                    ToolbarItem(placement: .principal) {
+                        Image(ImageTitles.iconNavigationTitle)
+                            .foregroundStyle(.accent)
+                    }
+                    ToolbarItem(placement: .topBarTrailing) {
+                        Image(systemName: SystemIcons.settingsButton)
+                            .foregroundStyle(.accent)
+                            .onTapGesture {
+                                showingModalSheet = true
+                            }
+                            .sheet(isPresented: $showingModalSheet) {
+                                SettingsView()
+                                    .presentationDragIndicator(.visible)
+                            }
+                    }
                 }
             }
-            .navigationTitle(viewModel.displayDate)
+                .navigationTitle(viewModel.getNavigationTitle())
         }
     }
 
@@ -66,18 +70,25 @@ struct JokeListView: View {
 struct JokeView: View {
 
     let joke: Joke
+    let mode: JokeListMode
 
     var body: some View {
         HStack(spacing: 4.0) {
             VStack {
                 if let dayRanking = joke.dayRanking?.description {
                     HStack {
-                        Spacer()
-                        Text("#" + dayRanking)
-                            .font(Font.system(size: 32.0, weight: .bold))
-                            .foregroundStyle(.accent)
-                            .padding([.bottom], 2.0)
-                        Spacer()
+                        switch mode {
+                        case .history:
+                            Text("#" + dayRanking)
+                                .font(Font.system(size: 32.0, weight: .bold))
+                                .foregroundStyle(.accent)
+                                .padding([.bottom], 2.0)
+                        case .lookup:
+                            Text("#" + dayRanking + " in " + joke.punchLineDisplayName + " on " + joke.dateCreated.displayDate)
+                                .font(Font.system(size: 12.0, weight: .bold))
+                                .foregroundStyle(.accent)
+                                .padding([.bottom], 2.0)
+                        }
                     }
                 }
                 HStack {
@@ -127,7 +138,8 @@ struct JokeView: View {
     JokeListView(
         viewModel: JokeListViewModel(
             displayDate: TestDataManager.testDateDisplayString,
-            jokes: TestDataManager.getRandomJokes(for: UUID().uuidString)
+            jokes: TestDataManager.getRandomJokes(for: UUID().uuidString),
+            mode: .lookup
         )
     )
 }

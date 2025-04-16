@@ -15,10 +15,5 @@ struct JokeHistoryEntry: Codable, Identifiable {
 
     let date: Date
     let jokes: [Joke]
-
-    var displayDate: String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .long
-        return dateFormatter.string(from: date)
-    }
+    
 }

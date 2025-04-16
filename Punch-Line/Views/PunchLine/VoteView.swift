@@ -17,7 +17,7 @@ struct VoteView: View {
     var body: some View {
         VStack {
             HStack {
-                Text(ActivityFeedMessages.vote)
+                Text(viewModel.activityDisplayText)
                     .font(Font.system(size: 32.0, weight: .semibold))
                     .foregroundStyle(.accent)
                     .shadow(color: .black, radius: 0.1, x: 0.1, y: 0.1)
@@ -109,8 +109,9 @@ struct VoteView: View {
         var body: some View {
             VoteView(
                 viewModel: PunchLineActivityViewModel(
-                    punchLineID: UUID().uuidString,
-                    activity: .vote
+                    punchLine: TestDataManager.testPunchLines[0],
+                    activity: .vote,
+                    activityDisplayText: ActivityFeedMessages.vote
                 ),
                 isReadyForNextActivity: $isReadyForNextActivity
             )

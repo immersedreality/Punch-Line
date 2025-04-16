@@ -11,6 +11,7 @@ struct Joke: Codable, Identifiable {
 
     let id: String
     let punchLineID: String
+    let punchLineDisplayName: String
 
     let setup: String
     let setupAuthorID: String
@@ -26,6 +27,7 @@ struct Joke: Codable, Identifiable {
     let isTooFunnyCount: Int
     let isOffensiveCount: Int
 
+    let dateCreated: Date
     let dayRanking: Int?
 
     var totalVoteCount: Double {

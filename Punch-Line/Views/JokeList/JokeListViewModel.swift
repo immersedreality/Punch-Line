@@ -11,17 +11,28 @@ class JokeListViewModel {
 
     let displayDate: String
     let jokes: [Joke]
+    let mode: JokeListMode
     private var selectedJoke: Joke?
 
-    init(displayDate: String, jokes: [Joke]) {
+    init(displayDate: String, jokes: [Joke], mode: JokeListMode) {
         self.displayDate = displayDate
         self.jokes = jokes
+        self.mode = mode
     }
 
     // MARK: Setters/Getters
 
     func set(selectedJoke: Joke) {
         self.selectedJoke = selectedJoke
+    }
+
+    func getNavigationTitle() -> String {
+        switch mode {
+        case .history:
+            return displayDate
+        case .lookup:
+            return NavigationTitles.jokeLookup
+        }
     }
 
     // MARK: Update Methods
@@ -60,4 +71,8 @@ class JokeListViewModel {
 
     }
     
+}
+
+enum JokeListMode {
+    case history, lookup
 }

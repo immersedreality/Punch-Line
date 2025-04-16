@@ -17,13 +17,15 @@ struct PunchLineActivityView: View {
             ZStack {
                 StyleManager.generateRandomBackgroundColor()
                     .ignoresSafeArea(edges: [.bottom])
-                switch viewModel.getCurrentActivity() {
+                switch viewModel.activity {
                 case .setup:
                     SetupView(viewModel: self.viewModel, isReadyForNextActivity: $isReadyForNextActivity)
                 case .punchline:
                     PunchlineView(viewModel: self.viewModel, isReadyForNextActivity: $isReadyForNextActivity)
                 case .vote:
                     VoteView(viewModel: self.viewModel, isReadyForNextActivity: $isReadyForNextActivity)
+                case .nothingToDo:
+                    NothingToDoView()
                 }
 
             }
@@ -39,8 +41,9 @@ struct PunchLineActivityView: View {
 #Preview {
     PunchLineActivityView(
         viewModel: PunchLineActivityViewModel(
-            punchLineID: UUID().uuidString,
-            activity: .setup
+            punchLine: TestDataManager.testPunchLines[0],
+            activity: .setup,
+            activityDisplayText: ActivityFeedMessages.setupFirst
         )
     )
 }

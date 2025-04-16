@@ -9,14 +9,13 @@ import SwiftUI
 
 struct ActivityFeedMessages {
     static let punchline = "Finish this joke with a killer punchline!"
-    static let punchlineLength = "Your punchline is too short. Try harder!"
-    static let setupStartFirst = "Start a joke with a funny setup!"
-    static let setupStartSecond = "Start another joke with an even funnier setup!"
-    static let setupStartThird = "Start one more with your funniest setup yet!"
-    static let setupStartBeyond = "Keep the setups coming!"
-    static let setupLength = "Your setup is too short. Try harder!"
+    static let setupFirst = "Start a joke with a funny setup!"
+    static let setupSecond = "Start another joke with an even funnier setup!"
+    static let setupThird = "Start one more with your funniest setup yet!"
+    static let setupBeyond = "Keep the setups coming!"
     static let setupEnd = "Setups must end with either a question mark (?) or an ellipsis (…)"
     static let vote = "Quick Question: Is This Funny?"
+    static let weDoneGoofed = "We done goofed!  You're not supposed to see this!"
 }
 
 struct FlagActionTitles {

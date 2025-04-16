@@ -14,7 +14,30 @@ final class TestDataManager {
         dateFormatter.dateStyle = .long
         return dateFormatter.string(from: Date())
     }
-    
+
+    static let testPunchLineDisplayNames = [
+        "United States",
+        "New York City",
+        "Florida",
+        "Ohio",
+        "Guatamala",
+        "France",
+        "Glorious Nippon",
+        "Movies",
+        "Television",
+        "Music",
+        "Video Games",
+        "Board Games",
+        "Tim's Custom Punch-Line",
+        "All About Tim Allen",
+        "Politics",
+        "Public Transportation",
+        "Vinyl",
+        "Whining About Reddit",
+        "Books",
+        "Russia"
+    ]
+
     static let testSetUps = [
         "Why did the chicken suck the chode?",
         "Yo, what the heck is that all about my man?",
@@ -290,10 +313,15 @@ final class TestDataManager {
         for rank in 0...9 {
             let randomSetup = testSetUps[Int.random(in: testDataIndexRange)]
             let randomPunchline = testPunchlines[Int.random(in: testDataIndexRange)]
+            var punchLineDisplayName = testPunchLines.first(where: { $0.id == punchLineID })?.displayName ?? ""
+            if punchLineDisplayName.isEmpty {
+                punchLineDisplayName = testPunchLineDisplayNames[Int.random(in: testDataIndexRange)]
+            }
 
             let randomJoke = Joke(
                 id: UUID().uuidString,
                 punchLineID: punchLineID,
+                punchLineDisplayName: punchLineDisplayName,
                 setup: randomSetup,
                 setupAuthorID: UUID().uuidString,
                 setupAuthorUsername: getRandomName(),
@@ -305,6 +333,7 @@ final class TestDataManager {
                 ughCount: 0,
                 isTooFunnyCount: 0,
                 isOffensiveCount: 0,
+                dateCreated: Date(),
                 dayRanking: rank + 1
             )
 
@@ -329,10 +358,12 @@ final class TestDataManager {
     class func getRandomJoke() -> Joke {
         let randomSetup = testSetUps[Int.random(in: testDataIndexRange)]
         let randomPunchline = testPunchlines[Int.random(in: testDataIndexRange)]
+        let randomPunchLineDisplayName = testPunchLineDisplayNames[Int.random(in: testDataIndexRange)]
 
         let randomJoke = Joke(
             id: UUID().uuidString,
             punchLineID: UUID().uuidString,
+            punchLineDisplayName: randomPunchLineDisplayName,
             setup: randomSetup,
             setupAuthorID: UUID().uuidString,
             setupAuthorUsername: getRandomName(),
@@ -344,10 +375,45 @@ final class TestDataManager {
             ughCount: 0,
             isTooFunnyCount: 0,
             isOffensiveCount: 0,
+            dateCreated: Date(),
             dayRanking: nil
         )
 
         return randomJoke
+    }
+
+    class func getFakeSearchResults(for searchString: String) -> [Joke] {
+
+        var searchResults: [Joke] = []
+
+        for _ in 0...49 {
+            guard let startingDate = DateComponents(calendar: .current, year: 2024, month: 1, day: 1).date else { continue }
+            let randomPunchLineDisplayName = testPunchLineDisplayNames[Int.random(in: testDataIndexRange)]
+            let randomRank = Int.random(in: 1...10)
+
+            let fakeSearchResult = Joke(
+                id: UUID().uuidString,
+                punchLineID: UUID().uuidString,
+                punchLineDisplayName: randomPunchLineDisplayName,
+                setup: "A setup that might have '\(searchString)' in it.",
+                setupAuthorID: UUID().uuidString,
+                setupAuthorUsername: getRandomName(),
+                punchline: "A punchline that might have '\(searchString)' in it.",
+                punchlineAuthorID: UUID().uuidString,
+                punchlineAuthorUsername: getRandomName(),
+                haCount: 0,
+                mehCount: 0,
+                ughCount: 0,
+                isTooFunnyCount: 0,
+                isOffensiveCount: 0,
+                dateCreated: Date.randomBetween(start: startingDate, end: Date()),
+                dayRanking: randomRank
+            )
+
+            searchResults.append(fakeSearchResult)
+        }
+
+        return searchResults
     }
 
 }

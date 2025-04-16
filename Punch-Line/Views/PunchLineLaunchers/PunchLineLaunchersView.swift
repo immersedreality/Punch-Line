@@ -19,19 +19,20 @@ struct PunchLineLaunchersView: View {
             List(TestDataManager.testPunchLines) { punchLine in
                 PunchLineLauncherView(punchLine: punchLine)
                     .onTapGesture {
-                        viewModel.selectedPunchLineID = punchLine.id
+                        viewModel.selectedPunchLine = punchLine
                         showingPunchLineSheet = true
                     }
             }
             .sheet(isPresented: $showingPunchLineSheet) {
-                if let punchLineID = viewModel.selectedPunchLineID {
+                if let punchLine = viewModel.selectedPunchLine {
                     PunchLineActivityRootView(
                         viewModel: PunchLineActivityViewModel(
-                            punchLineID: punchLineID,
-                            activity: viewModel.getInitialPunchLineActivity()
+                            punchLine: punchLine,
+                            activity: viewModel.getInitialPunchLineActivity(),
+                            activityDisplayText: viewModel.getInitialPunchLineActivityDisplayText()
                         )
                     )
-                        .presentationDragIndicator(.visible)
+                    .presentationDragIndicator(.visible)
                 }
             }
             .toolbar {

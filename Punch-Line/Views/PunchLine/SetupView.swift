@@ -13,12 +13,12 @@ struct SetupView: View {
 
     @Binding var isReadyForNextActivity: Bool
     @State private var enteredSetupText: String = ""
-    @FocusState private var textEditorIsFocused: Bool
+    @FocusState private var textFieldIsFocused: Bool
 
     var body: some View {
         VStack {
             HStack {
-                Text(ActivityFeedMessages.setupStartFirst)
+                Text(viewModel.activityDisplayText)
                     .font(Font.system(size: 32.0, weight: .semibold))
                     .foregroundStyle(.accent)
                     .shadow(color: .black, radius: 0.1, x: 0.1, y: 0.1)
@@ -28,7 +28,7 @@ struct SetupView: View {
             TextField("", text: $enteredSetupText, axis: .vertical)
                 .textFieldStyle(.roundedBorder)
                 .font(Font.system(size: 20.0, weight: .light))
-                .focused($textEditorIsFocused)
+                .focused($textFieldIsFocused)
                 .submitLabel(.done)
                 .onChange(of: enteredSetupText) { _, newValue in
                     if newValue.contains("\n") {
@@ -63,7 +63,7 @@ struct SetupView: View {
         }
         .padding([.horizontal], 16.0)
         .onAppear {
-            textEditorIsFocused = true
+            textFieldIsFocused = true
         }
     }
 
@@ -81,8 +81,9 @@ struct SetupView: View {
         var body: some View {
             SetupView(
                 viewModel: PunchLineActivityViewModel(
-                    punchLineID: UUID().uuidString,
-                    activity: .setup
+                    punchLine: TestDataManager.testPunchLines[0],
+                    activity: .setup,
+                    activityDisplayText: ActivityFeedMessages.setupFirst
                 ),
                 isReadyForNextActivity: $isReadyForNextActivity
             )

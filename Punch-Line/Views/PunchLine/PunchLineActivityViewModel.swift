@@ -10,36 +10,59 @@ import SwiftUI
 
 class PunchLineActivityViewModel {
 
-    let punchLineID: String
-    private var activity: PunchLineActivity
-
+    let punchLine: PunchLine
+    private(set) var activity: PunchLineActivity
+    private(set) var activityDisplayText: String
     var currentSetup: String?
     var currentJoke: Joke?
 
-    init(punchLineID: String, activity: PunchLineActivity) {
-        self.punchLineID = punchLineID
+    init(punchLine: PunchLine, activity: PunchLineActivity, activityDisplayText: String) {
+        AppSessionManager.resetTaskCountsIfNecessary()
+        self.punchLine = punchLine
         self.activity = activity
+        self.activityDisplayText = activityDisplayText
     }
 
     func setNextActivity() {
-        switch activity {
-        case .setup:
-            self.activity = .punchline
+
+        AppSessionManager.incrementTodaysTaskCount(for: punchLine.id)
+        
+        guard let todaysTaskCount = AppSessionManager.userInfo?.todaysTaskCounts[punchLine.id] else {
+            activity = .nothingToDo
+            activityDisplayText = ""
+            currentSetup = nil
+            currentJoke = nil
+            return
+        }
+
+        switch todaysTaskCount {
+        case 0:
+            activity = .setup
+            activityDisplayText = ActivityFeedMessages.setupFirst
+            currentSetup = nil
+            currentJoke = nil
+        case 1:
+            activity = .setup
+            activityDisplayText = ActivityFeedMessages.setupSecond
+            currentSetup = nil
+            currentJoke = nil
+        case 2:
+            activity = .setup
+            activityDisplayText = ActivityFeedMessages.setupThird
+            currentSetup = nil
+            currentJoke = nil
+        case 3, 5, 8, 12, 17, 23, 30, 38, 47, 57:
+            activity = .punchline
+            activityDisplayText = ActivityFeedMessages.punchline
             currentSetup = TestDataManager.getRandomSetup()
             currentJoke = nil
-        case .punchline:
-            self.activity = .vote
+        default:
+            activity = .vote
+            activityDisplayText = ActivityFeedMessages.vote
             currentJoke = TestDataManager.getRandomJoke()
             currentSetup = nil
-        case .vote:
-            self.activity = .setup
-            currentSetup = nil
-            currentJoke = nil
         }
-    }
 
-    func getCurrentActivity() -> PunchLineActivity {
-        return activity
     }
 
     func isValid(textEntry: String) -> Bool {
@@ -63,6 +86,8 @@ class PunchLineActivityViewModel {
             return true
         case .vote:
             return true
+        case .nothingToDo:
+            return true
         }
 
     }
@@ -70,5 +95,5 @@ class PunchLineActivityViewModel {
 }
 
 enum PunchLineActivity {
-    case setup, punchline, vote
+    case setup, punchline, vote, nothingToDo
 }
