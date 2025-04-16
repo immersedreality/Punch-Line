@@ -9,6 +9,7 @@ import SwiftUI
 
 struct JokeHistoryPunchLinesView: View {
 
+    @StateObject private var localDataManager = LocalDataManager.shared
     @State private var showingModalSheet = false
 
     var body: some View {
@@ -16,7 +17,7 @@ struct JokeHistoryPunchLinesView: View {
             ZStack {
                 StyleManager.generateRandomBackgroundColor()
                     .ignoresSafeArea(edges: [.top])
-                List(TestDataManager.testPunchLines) { punchLine in
+                List(localDataManager.fetchedPublicPunchLines) { punchLine in
                     PunchLineHistoryView(punchLine: punchLine)
                 }
                 .toolbar {

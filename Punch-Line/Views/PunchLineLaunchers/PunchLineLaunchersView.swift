@@ -11,12 +11,13 @@ struct PunchLineLaunchersView: View {
 
     let viewModel = PunchLineLaunchersViewModel()
 
+    @StateObject private var localDataManager = LocalDataManager.shared
     @State private var showingPunchLineSheet = false
     @State private var showingSettingsSheet = false
 
     var body: some View {
         NavigationStack {
-            List(TestDataManager.testPunchLines) { punchLine in
+            List(localDataManager.fetchedPublicPunchLines) { punchLine in
                 PunchLineLauncherView(punchLine: punchLine)
                     .onTapGesture {
                         viewModel.selectedPunchLine = punchLine

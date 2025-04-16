@@ -108,61 +108,11 @@ final class TestDataManager {
     ]
 
     static let testDataIndexRange = 0...19
-    static var testPunchLines: [PunchLine] = []
     static var testJokeHistoryEntryGroups: [String: [JokeHistoryEntryGroup]] = [:]
     static var testYearCount = 1
     static var testMonthCount = 1
 
-    class func initializeTestData() {
-        initializeTestPunchLines()
-        testPunchLines.forEach { initializeTestJokeHistoryEntryGroups(for: $0.id) }
-    }
-
-    private class func initializeTestPunchLines() {
-
-        let globalPunchLine = PunchLine(
-            id: UUID().uuidString,
-            displayName: "United States",
-            owningUserID: nil,
-            participantUserIDs: nil,
-            scope: .regional,
-            lastDailyResetDate: Date()
-        )
-        testPunchLines.append(globalPunchLine)
-
-        let newYorkCityPunchLine = PunchLine(
-            id: UUID().uuidString,
-            displayName: "New York City",
-            owningUserID: nil,
-            participantUserIDs: nil,
-            scope: .regional,
-            lastDailyResetDate: Date()
-        )
-        testPunchLines.append(newYorkCityPunchLine)
-
-        let moviesPunchLine = PunchLine(
-            id: UUID().uuidString,
-            displayName: "Movies",
-            owningUserID: nil,
-            participantUserIDs: nil,
-            scope: .topical,
-            lastDailyResetDate: Date()
-        )
-        testPunchLines.append(moviesPunchLine)
-
-        let videoGamesPunchLine = PunchLine(
-            id: UUID().uuidString,
-            displayName: "Video Games",
-            owningUserID: nil,
-            participantUserIDs: nil,
-            scope: .topical,
-            lastDailyResetDate: Date()
-        )
-        testPunchLines.append(videoGamesPunchLine)
-
-    }
-
-    private class func initializeTestJokeHistoryEntryGroups(for punchLineID: String) {
+    class func initializeTestJokeHistoryEntryGroups(for punchLineID: String) {
         guard let startingDate = DateComponents(calendar: .current, year: 2024, month: 1, day: 1).date else { return }
         let currentDate = Date()
 
@@ -313,7 +263,7 @@ final class TestDataManager {
         for rank in 0...9 {
             let randomSetup = testSetUps[Int.random(in: testDataIndexRange)]
             let randomPunchline = testPunchlines[Int.random(in: testDataIndexRange)]
-            var punchLineDisplayName = testPunchLines.first(where: { $0.id == punchLineID })?.displayName ?? ""
+            var punchLineDisplayName = LocalDataManager.shared.fetchedPublicPunchLines.first(where: { $0.id == punchLineID })?.displayName ?? ""
             if punchLineDisplayName.isEmpty {
                 punchLineDisplayName = testPunchLineDisplayNames[Int.random(in: testDataIndexRange)]
             }
@@ -328,13 +278,9 @@ final class TestDataManager {
                 punchline: randomPunchline,
                 punchlineAuthorID: UUID().uuidString,
                 punchlineAuthorUsername: getRandomName(),
-                haCount: 0,
-                mehCount: 0,
-                ughCount: 0,
-                isTooFunnyCount: 0,
-                isOffensiveCount: 0,
                 dateCreated: Date(),
-                dayRanking: rank + 1
+                dayRanking: rank + 1,
+                isOffensive: false
             )
 
             randomJokes.append(randomJoke)
@@ -370,13 +316,9 @@ final class TestDataManager {
             punchline: randomPunchline,
             punchlineAuthorID: UUID().uuidString,
             punchlineAuthorUsername: getRandomName(),
-            haCount: 0,
-            mehCount: 0,
-            ughCount: 0,
-            isTooFunnyCount: 0,
-            isOffensiveCount: 0,
             dateCreated: Date(),
-            dayRanking: nil
+            dayRanking: nil,
+            isOffensive: false
         )
 
         return randomJoke
@@ -401,13 +343,9 @@ final class TestDataManager {
                 punchline: "A punchline that might have '\(searchString)' in it.",
                 punchlineAuthorID: UUID().uuidString,
                 punchlineAuthorUsername: getRandomName(),
-                haCount: 0,
-                mehCount: 0,
-                ughCount: 0,
-                isTooFunnyCount: 0,
-                isOffensiveCount: 0,
                 dateCreated: Date.randomBetween(start: startingDate, end: Date()),
-                dayRanking: randomRank
+                dayRanking: randomRank,
+                isOffensive: false
             )
 
             searchResults.append(fakeSearchResult)

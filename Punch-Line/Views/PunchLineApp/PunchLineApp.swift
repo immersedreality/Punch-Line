@@ -14,7 +14,9 @@ struct PunchLineApp: App {
 
     init() {
         viewModel.validateUserInfo()
-        TestDataManager.initializeTestData()
+        Task {
+            await AppSessionManager.performInitialDataFetches()
+        }
     }
 
     var body: some Scene {

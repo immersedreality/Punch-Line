@@ -13,6 +13,8 @@ final class AppSessionManager {
         return getUserInfo()
     }
 
+    static var shouldMockNetworkCalls: Bool = true
+
     // MARK: User Initialization
 
     class func validateUserInfo() {
@@ -52,6 +54,11 @@ final class AppSessionManager {
         )
 
         return userInfo
+    }
+
+    class func performInitialDataFetches() async {
+        await APIManager.getPublicPunchLines()
+        LocalDataManager.shared.fetchedPublicPunchLines.forEach { TestDataManager.initializeTestJokeHistoryEntryGroups(for: $0.id) }
     }
 
     // MARK: Update Methods

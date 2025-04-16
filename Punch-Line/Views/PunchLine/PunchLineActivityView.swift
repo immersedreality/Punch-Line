@@ -41,7 +41,7 @@ struct PunchLineActivityView: View {
 #Preview {
     PunchLineActivityView(
         viewModel: PunchLineActivityViewModel(
-            punchLine: TestDataManager.testPunchLines[0],
+            punchLine: LocalDataManager.shared.fetchedPublicPunchLines[0],
             activity: .setup,
             activityDisplayText: ActivityFeedMessages.setupFirst
         )

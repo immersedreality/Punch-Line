@@ -8,6 +8,7 @@
 import Foundation
 
 struct JokeHistoryEntryGroup: Codable, Identifiable {
+
     let id: String
     let punchLineID: String
     let year: Int
