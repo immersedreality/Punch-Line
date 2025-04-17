@@ -90,11 +90,11 @@ struct PunchLineHistoryView: View {
                         Text(punchLine.displayName)
                             .font(Font.system(size: 24.0, weight: .bold))
                             .foregroundStyle(.accent)
-                            .padding([.top], 24.0)
+                            .padding([.top], 16.0)
                         Text("Best of the Punch-Line")
                             .font(Font.system(size: 24.0, weight: .light))
                             .foregroundStyle(.accent)
-                            .padding([.bottom], 24.0)
+                            .padding([.bottom], 16.0)
                     }
                     Spacer()
                 }

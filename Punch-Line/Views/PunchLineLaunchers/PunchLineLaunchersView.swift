@@ -72,12 +72,12 @@ struct PunchLineLauncherView: View {
                     .font(Font.system(size: 24.0, weight: .bold))
                     .foregroundStyle(.accent)
                     .shadow(color: .black, radius: 0.1, x: 0.1, y: 0.1)
-                    .padding([.top], 24.0)
+                    .padding([.top], 16.0)
                 Text("Get in the Punch-Line --->")
                     .font(Font.system(size: 24.0, weight: .light))
                     .foregroundStyle(.accent)
                     .shadow(color: .black, radius: 0.1, x: 0.1, y: 0.1)
-                    .padding([.bottom], 24.0)
+                    .padding([.bottom], 16.0)
             }
             Spacer()
         }
