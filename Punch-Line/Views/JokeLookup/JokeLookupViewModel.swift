@@ -29,7 +29,11 @@ class JokeLookupViewModel: ObservableObject {
 
     func fetchSearchResults() {
         guard debouncedSearchText.count > 2 else { return }
-        searchResults = TestDataManager.getFakeSearchResults(for: debouncedSearchText)
+        DispatchQueue.main.async {
+            Task {
+                self.searchResults = await APIManager.getSearchResults(for: self.debouncedSearchText)
+            }
+        }
     }
 
 }

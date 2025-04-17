@@ -9,6 +9,8 @@ import SwiftUI
 
 struct JokeHistoryPunchLinesView: View {
 
+    let viewModel = JokeHistoryPunchLinesViewModel()
+
     @StateObject private var localDataManager = LocalDataManager.shared
     @State private var showingModalSheet = false
 
@@ -18,7 +20,7 @@ struct JokeHistoryPunchLinesView: View {
                 StyleManager.generateRandomBackgroundColor()
                     .ignoresSafeArea(edges: [.top])
                 List(localDataManager.fetchedPublicPunchLines) { punchLine in
-                    PunchLineHistoryView(punchLine: punchLine)
+                    PunchLineHistoryView(viewModel: viewModel, punchLine: punchLine)
                 }
                 .toolbar {
                     ToolbarItem(placement: .principal) {
@@ -42,32 +44,41 @@ struct JokeHistoryPunchLinesView: View {
                 .scrollContentBackground(.hidden)
             }
         }
+        .onAppear {
+            viewModel.fetchJokeHistoryEntryGroups()
+        }
     }
 
 }
 
 struct PunchLineHistoryView: View {
 
+    let viewModel: JokeHistoryPunchLinesViewModel
     let punchLine: PunchLine
 
     var body: some View {
         HStack {
             NavigationLink {
-                if TestDataManager.testYearCount > 1 {
-                    JokeHistoryYearsView(viewModel: JokeHistoryYearsViewModel(punchLineID: punchLine.id))
-                } else if TestDataManager.testMonthCount > 1 {
+                if viewModel.entryGroupsYearCount(for: punchLine.id) > 1 {
+                    JokeHistoryYearsView(
+                        viewModel: JokeHistoryYearsViewModel(
+                            punchLineID: punchLine.id,
+                            entryGroups: viewModel.getSelectedJokeHistoryEntryGroups(for: punchLine.id)
+                        )
+                    )
+                } else if viewModel.entryGroupsMonthCount(for: punchLine.id) > 1 {
                     JokeHistoryMonthsView(
                         viewModel: JokeHistoryMonthsViewModel(
                             punchLineID: punchLine.id,
-                            selectedYear: Calendar.current.component(.year, from: Date())
+                            selectedYear: Calendar.current.component(.year, from: Date()),
+                            entryGroups: viewModel.getSelectedJokeHistoryEntryGroups(for: punchLine.id)
                         )
                     )
                 } else {
-                    if let entryGroups = TestDataManager.testJokeHistoryEntryGroups[punchLine.id],
-                       let entries = entryGroups.first?.entries {
+                    if let entryGroup = viewModel.getSelectedJokeHistoryEntryGroups(for: punchLine.id).first {
                         JokeHistoryEntriesView(
                             viewModel: JokeHistoryEntriesViewModel(
-                                jokeHistoryEntries: entries
+                                jokeHistoryEntryGroup: entryGroup
                             )
                         )
                     }
@@ -79,11 +90,11 @@ struct PunchLineHistoryView: View {
                         Text(punchLine.displayName)
                             .font(Font.system(size: 24.0, weight: .bold))
                             .foregroundStyle(.accent)
-                            .padding([.top], 48.0)
+                            .padding([.top], 24.0)
                         Text("Best of the Punch-Line")
                             .font(Font.system(size: 24.0, weight: .light))
                             .foregroundStyle(.accent)
-                            .padding([.bottom], 48.0)
+                            .padding([.bottom], 24.0)
                     }
                     Spacer()
                 }

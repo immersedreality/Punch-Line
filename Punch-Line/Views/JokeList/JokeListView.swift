@@ -32,13 +32,16 @@ struct JokeListView: View {
                 .scrollContentBackground(.hidden)
                 .confirmationDialog("", isPresented: $showingConfirmationDialog) {
                     if viewModel.selectedJokeIsAlreadyFavorited() {
-                        Button("Remove from Favorites") {
+                        Button(ConfirmationDialogMessages.removeFromFavorites) {
                             viewModel.removeSelectedJokeFromFavorites()
                         }
                     } else {
-                        Button("Add to Favorites") {
+                        Button(ConfirmationDialogMessages.addToFavorites) {
                             viewModel.addSelectedJokeToFavorites()
                         }
+                    }
+                    Button(ConfirmationDialogMessages.copyJoke) {
+                        viewModel.copyShareableJokeString()
                     }
                 }
             }
@@ -137,8 +140,8 @@ struct JokeView: View {
 #Preview {
     JokeListView(
         viewModel: JokeListViewModel(
-            displayDate: TestDataManager.testDateDisplayString,
-            jokes: TestDataManager.getRandomJokes(for: UUID().uuidString),
+            displayDate: MockDataManager.testDateDisplayString,
+            jokes: MockDataManager.getMockOrPreviewJokeBatch(numberOfJokes: 10),
             mode: .lookup
         )
     )

@@ -26,3 +26,23 @@ struct Joke: Codable, Identifiable {
     let isOffensive: Bool
     
 }
+
+struct JokePostRequest: Codable {
+    let punchLineID: String
+    let punchLineDisplayName: String
+    let setup: String
+    let setupAuthorID: String
+    let setupAuthorUsername: String?
+    let punchline: String
+    let punchlineAuthorID: String
+    let punchlineAuthorUsername: String?
+    let dateCreated: Date
+}
+
+enum JokeVote: String {
+    case ha, meh, ugh
+}
+
+enum JokeReportReason: String {
+    case offensive, tooFunny
+}

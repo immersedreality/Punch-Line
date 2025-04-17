@@ -27,7 +27,8 @@ struct JokeHistoryYearsView: View {
                         JokeHistoryMonthsView(
                             viewModel: JokeHistoryMonthsViewModel(
                                 punchLineID: viewModel.punchLineID,
-                                selectedYear: rowData.rowValue
+                                selectedYear: rowData.rowValue,
+                                entryGroups: viewModel.entryGroups
                             )
                         )
                     } label: {
@@ -61,5 +62,10 @@ struct JokeHistoryYearsView: View {
 }
 
 #Preview {
-    JokeHistoryYearsView(viewModel: JokeHistoryYearsViewModel(punchLineID: UUID().uuidString))
+    JokeHistoryYearsView(
+        viewModel: JokeHistoryYearsViewModel(
+            punchLineID: UUID().uuidString,
+            entryGroups: MockDataManager.getPreviewJokeHistoryEntryGroups()
+        )
+    )
 }

@@ -64,7 +64,12 @@ struct JokeHistoryEntriesView: View {
 #Preview {
     JokeHistoryEntriesView(
         viewModel: JokeHistoryEntriesViewModel(
-            jokeHistoryEntries: TestDataManager.getRandomJokeHistoryEntries(for: UUID().uuidString)
+            jokeHistoryEntryGroup: JokeHistoryEntryGroup(
+                id: UUID().uuidString,
+                punchLineID: UUID().uuidString,
+                year: 2025,
+                month: 4
+            )
         )
     )
 }

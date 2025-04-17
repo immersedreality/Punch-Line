@@ -5,7 +5,6 @@
 //  Created by Jeffrey Eugene Hoch on 4/1/25.
 //
 
-import Foundation
 import SwiftUI
 
 class FavoriteJokeListViewModel {
@@ -17,7 +16,7 @@ class FavoriteJokeListViewModel {
     }
 
     // MARK: Setters/ Getters
-    
+
     func set(selectedFavoriteJoke: FavoriteJoke) {
         self.selectedFavoriteJoke = selectedFavoriteJoke
     }
@@ -33,6 +32,11 @@ class FavoriteJokeListViewModel {
             AppSessionManager.removeFavoriteJoke(with: favoriteJokeToRemove.id)
         }
 
+    }
+
+    func copyShareableJokeString() {
+        guard let selectedFavoriteJoke else { return }
+        UIPasteboard.general.string = selectedFavoriteJoke.setup + "\n\n" + selectedFavoriteJoke.punchline + "\n\n" + ConfirmationDialogMessages.shareMessage
     }
 
 }

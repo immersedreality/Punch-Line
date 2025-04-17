@@ -9,10 +9,9 @@ import SwiftUI
 
 struct SetupView: View {
 
-    let viewModel: PunchLineActivityViewModel
+    @StateObject var viewModel: PunchLineActivityViewModel
 
     @Binding var isReadyForNextActivity: Bool
-    @State private var enteredSetupText: String = ""
     @FocusState private var textFieldIsFocused: Bool
 
     var body: some View {
@@ -25,20 +24,22 @@ struct SetupView: View {
                     .padding([.top], 48.0)
                 Spacer()
             }
-            TextField("", text: $enteredSetupText, axis: .vertical)
+            TextField("", text: $viewModel.enteredSetupText, axis: .vertical)
                 .textFieldStyle(.roundedBorder)
                 .font(Font.system(size: 20.0, weight: .light))
                 .focused($textFieldIsFocused)
                 .submitLabel(.done)
-                .onChange(of: enteredSetupText) { _, newValue in
+                .onChange(of: viewModel.enteredSetupText) { _, newValue in
                     if newValue.contains("\n") {
-                        enteredSetupText.replace("\n", with: "")
-                        if viewModel.isValid(textEntry: enteredSetupText) {
+                        viewModel.enteredSetupText.replace("\n", with: "")
+                        if viewModel.textEntryIsValid() {
+                            viewModel.createNewSetup()
                             navigateToNextActivity()
                         }
                     }
                 }
             Button {
+                viewModel.createNewSetup()
                 navigateToNextActivity()
             } label: {
                 HStack {
@@ -51,7 +52,7 @@ struct SetupView: View {
             .buttonStyle(.borderedProminent)
             .foregroundStyle(.white)
             .backgroundStyle(.accent)
-            .disabled(!viewModel.isValid(textEntry: enteredSetupText))
+            .disabled(!viewModel.textEntryIsValid())
             HStack {
                 Text(ActivityFeedMessages.setupEnd)
                     .font(Font.system(size: 16.0, weight: .light))

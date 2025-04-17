@@ -13,6 +13,7 @@ struct VoteView: View {
 
     @Binding var isReadyForNextActivity: Bool
     @State private var showingConfirmationDialog = false
+    @State private var showingAlert = false
 
     var body: some View {
         VStack {
@@ -38,6 +39,7 @@ struct VoteView: View {
             }
             Spacer()
             Button {
+                viewModel.voteOnCurrentJoke(vote: .ha)
                 navigateToNextActivity()
             } label: {
                 HStack {
@@ -51,6 +53,7 @@ struct VoteView: View {
             .foregroundStyle(.white)
             .backgroundStyle(.accent)
             Button {
+                viewModel.voteOnCurrentJoke(vote: .meh)
                 navigateToNextActivity()
             } label: {
                 HStack {
@@ -64,6 +67,7 @@ struct VoteView: View {
             .foregroundStyle(.white)
             .backgroundStyle(.accent)
             Button {
+                viewModel.voteOnCurrentJoke(vote: .ugh)
                 navigateToNextActivity()
             } label: {
                 HStack {
@@ -86,12 +90,24 @@ struct VoteView: View {
         }
         .padding([.horizontal], 16.0)
         .confirmationDialog("", isPresented: $showingConfirmationDialog) {
-            Button(FlagActionTitles.flagJokeAsOffensive) {
+            Button(ConfirmationDialogMessages.flagJokeAsOffensive) {
+                viewModel.reportCurrentJoke(for: .offensive)
                 navigateToNextActivity()
             }
-            Button(FlagActionTitles.flagJokeAsTooFunny) {
-                navigateToNextActivity()
+            Button(ConfirmationDialogMessages.flagJokeAsTooFunny) {
+                if viewModel.getTooFunnyReportsCount() < 10 {
+                    viewModel.reportCurrentJoke(for: .tooFunny)
+                    navigateToNextActivity()
+                } else {
+                    showingAlert = true
+                }
             }
+        }
+        .alert("Cool It!", isPresented: $showingAlert) {
+            Button("Okeydoke") {
+            }
+        } message: {
+            Text("You only get ten Too Funny reports a day! Stop being so easy to please, you dingus!")
         }
     }
 

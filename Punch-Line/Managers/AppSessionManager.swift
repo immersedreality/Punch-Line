@@ -36,6 +36,7 @@ final class AppSessionManager {
         let punchLineUserName = UserDefaults.standard.value(forKey: UserDefaultsKeys.punchLineUserName) as? String
         let lastActivityDate = UserDefaults.standard.value(forKey: UserDefaultsKeys.lastActivityDate) as? Date ?? Date()
         let todaysTaskCounts = UserDefaults.standard.value(forKey: UserDefaultsKeys.todaysTaskCounts) as? [String: Int] ?? [:]
+        let dailyTooFunnyReportsCount = UserDefaults.standard.value(forKey: UserDefaultsKeys.dailyTooFunnyReportsCount) as? Int ?? 0
         let shouldSeeOffensiveContent = UserDefaults.standard.value(forKey: UserDefaultsKeys.shouldSeeOffensiveContent) as? Bool ?? false
 
         var favoriteJokes: [FavoriteJoke]?
@@ -49,6 +50,7 @@ final class AppSessionManager {
             punchLineUserName: punchLineUserName,
             lastActivityDate: lastActivityDate,
             todaysTaskCounts: todaysTaskCounts,
+            dailyTooFunnyReportsCount: dailyTooFunnyReportsCount,
             shouldSeeOffensiveContent: shouldSeeOffensiveContent,
             favoriteJokes: favoriteJokes ?? []
         )
@@ -58,7 +60,6 @@ final class AppSessionManager {
 
     class func performInitialDataFetches() async {
         await APIManager.getPublicPunchLines()
-        LocalDataManager.shared.fetchedPublicPunchLines.forEach { TestDataManager.initializeTestJokeHistoryEntryGroups(for: $0.id) }
     }
 
     // MARK: Update Methods
@@ -87,7 +88,14 @@ final class AppSessionManager {
 
         if lastActivityStartOfDay < todayStartOfDay {
             UserDefaults.standard.set([String: Int](), forKey: UserDefaultsKeys.todaysTaskCounts)
+            UserDefaults.standard.set(0, forKey: UserDefaultsKeys.dailyTooFunnyReportsCount)
         }
+    }
+
+    class func incrementDailyTooFunnyReportsCount() {
+        guard let userInfo = userInfo else { return }
+        let newReportsCount = userInfo.dailyTooFunnyReportsCount + 1
+        UserDefaults.standard.set(newReportsCount, forKey: UserDefaultsKeys.dailyTooFunnyReportsCount)
     }
 
     class func toggleOffensiveContentFilter() {

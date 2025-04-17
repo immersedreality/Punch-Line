@@ -12,6 +12,7 @@ struct UserInfo {
     let punchLineUserName: String?
     let lastActivityDate: Date
     let todaysTaskCounts: [String: Int]
+    let dailyTooFunnyReportsCount: Int
     let shouldSeeOffensiveContent: Bool
     let favoriteJokes: [FavoriteJoke]
 }

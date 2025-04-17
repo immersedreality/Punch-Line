@@ -14,7 +14,7 @@ class PunchLineLaunchersViewModel {
     func getInitialPunchLineActivity() -> PunchLineActivity {
 
         guard let selectedPunchLineID = selectedPunchLine?.id else {
-            return .nothingToDo
+            return .somethingWentWrong
         }
 
         if let todaysTaskCount = AppSessionManager.userInfo?.todaysTaskCounts[selectedPunchLineID] {

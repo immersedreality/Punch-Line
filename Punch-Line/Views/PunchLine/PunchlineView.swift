@@ -9,10 +9,9 @@ import SwiftUI
 
 struct PunchlineView: View {
 
-    let viewModel: PunchLineActivityViewModel
+    @StateObject var viewModel: PunchLineActivityViewModel
 
     @Binding var isReadyForNextActivity: Bool
-    @State private var enteredPunchlineText: String = ""
     @FocusState private var textFieldIsFocused: Bool
     @State private var showingConfirmationDialog = false
 
@@ -27,26 +26,28 @@ struct PunchlineView: View {
                 Spacer()
             }
             HStack {
-                Text(viewModel.currentSetup ?? "What do you call big ass titties that never go up and never fall down?")
+                Text(viewModel.currentSetup?.text ?? "What do you call big ass titties that never go up and never fall down?")
                     .font(Font.system(size: 20.0, weight: .light))
                     .padding([.top], 2.0)
                 Spacer()
             }
-            TextField("", text: $enteredPunchlineText, axis: .vertical)
+            TextField("", text: $viewModel.enteredPunchlineText, axis: .vertical)
                 .textFieldStyle(.roundedBorder)
                 .multilineTextAlignment(.trailing)
                 .font(Font.system(size: 20.0, weight: .semibold))
                 .focused($textFieldIsFocused)
                 .submitLabel(.done)
-                .onChange(of: enteredPunchlineText) { _, newValue in
+                .onChange(of: viewModel.enteredPunchlineText) { _, newValue in
                     if newValue.contains("\n") {
-                        enteredPunchlineText.replace("\n", with: "")
-                        if viewModel.isValid(textEntry: enteredPunchlineText) {
+                        viewModel.enteredPunchlineText.replace("\n", with: "")
+                        if viewModel.textEntryIsValid() {
+                            viewModel.createNewJoke()
                             navigateToNextActivity()
                         }
                     }
                 }
             Button {
+                viewModel.createNewJoke()
                 navigateToNextActivity()
             } label: {
                 HStack {
@@ -59,7 +60,7 @@ struct PunchlineView: View {
             .buttonStyle(.borderedProminent)
             .foregroundStyle(.white)
             .backgroundStyle(.accent)
-            .disabled(!viewModel.isValid(textEntry: enteredPunchlineText))
+            .disabled(!viewModel.textEntryIsValid())
             Button {
                 showingConfirmationDialog = true
             } label: {
@@ -74,10 +75,12 @@ struct PunchlineView: View {
             textFieldIsFocused = true
         }
         .confirmationDialog("", isPresented: $showingConfirmationDialog) {
-            Button(FlagActionTitles.flagSetupAsOffensive) {
+            Button(ConfirmationDialogMessages.flagSetupAsOffensive) {
+                viewModel.reportCurrentSetup(for: .offensive)
                 navigateToNextActivity()
             }
-            Button(FlagActionTitles.flagSetupAsUnfunny) {
+            Button(ConfirmationDialogMessages.flagSetupAsUnfunny) {
+                viewModel.reportCurrentSetup(for: .unfunny)
                 navigateToNextActivity()
             }
         }

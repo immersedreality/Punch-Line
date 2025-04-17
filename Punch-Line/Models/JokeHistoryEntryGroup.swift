@@ -13,7 +13,6 @@ struct JokeHistoryEntryGroup: Codable, Identifiable {
     let punchLineID: String
     let year: Int
     let month: Int
-    let entries: [JokeHistoryEntry]?
 
     var displayMonth: String {
         DateFormatter().monthSymbols[month-1].capitalized

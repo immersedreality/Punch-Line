@@ -14,8 +14,19 @@ struct Setup: Codable, Identifiable {
 
     let text: String
     let authorID: String
-    let autherUsername: String?
+    let authorUsername: String?
 
     let isOffensive: Bool
 
+}
+
+struct SetupPostRequest: Codable {
+    let punchLineID: String
+    let text: String
+    let authorID: String
+    let authorUsername: String?
+}
+
+enum SetupReportReason: String {
+    case offensive, unfunny
 }

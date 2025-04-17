@@ -25,8 +25,8 @@ struct PunchLineActivityRootView: View {
                     PunchlineView(viewModel: self.viewModel, isReadyForNextActivity: $isReadyForNextActivity)
                 case .vote:
                     VoteView(viewModel: self.viewModel, isReadyForNextActivity: $isReadyForNextActivity)
-                case .nothingToDo:
-                    NothingToDoView()
+                case .somethingWentWrong:
+                    SomethingWentWrongView()
                 }
             }
             .navigationBarBackButtonHidden()

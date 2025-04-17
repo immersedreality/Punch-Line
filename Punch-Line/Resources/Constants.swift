@@ -18,12 +18,15 @@ struct ActivityFeedMessages {
     static let weDoneGoofed = "We done goofed!  You're not supposed to see this!"
 }
 
-struct FlagActionTitles {
-    static let cancel = "Cancel"
+struct ConfirmationDialogMessages {
+    static let addToFavorites = "Add to Favorites"
+    static let copyJoke = "Copy Joke for Easy Sharing"
     static let flagJokeAsOffensive = "Flag joke as offensive"
     static let flagJokeAsTooFunny = "Flag joke as too funny"
     static let flagSetupAsOffensive = "Flag setup as offensive"
     static let flagSetupAsUnfunny = "Flag setup as unfunny"
+    static let removeFromFavorites = "Remove from Favorites"
+    static let shareMessage = "(Shared from Punch-Line)"
 }
 
 struct ImageTitles {
@@ -54,6 +57,7 @@ struct UserDefaultsKeys {
     static let punchLineUserName = "PunchLineUserName"
     static let lastActivityDate = "LastActivityDate"
     static let todaysTaskCounts = "TodaysTaskCounts"
+    static let dailyTooFunnyReportsCount = "DailyTooFunnyReportsCount"
     static let shouldSeeOffensiveContent = "ShouldSeeOffensiveContent"
     static let favoriteJokes = "FavoriteJokes"
 }

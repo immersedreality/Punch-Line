@@ -5,7 +5,7 @@
 //  Created by Jeffrey Eugene Hoch on 3/31/25.
 //
 
-import Foundation
+import SwiftUI
 
 class JokeListViewModel {
 
@@ -70,7 +70,14 @@ class JokeListViewModel {
         }
 
     }
-    
+
+    // MARK: Sharing
+
+    func copyShareableJokeString() {
+        guard let selectedJoke else { return }
+        UIPasteboard.general.string = selectedJoke.setup + "\n\n" + selectedJoke.punchline + "\n\n" + ConfirmationDialogMessages.shareMessage
+    }
+
 }
 
 enum JokeListMode {

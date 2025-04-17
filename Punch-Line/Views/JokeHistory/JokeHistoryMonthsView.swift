@@ -24,14 +24,13 @@ struct JokeHistoryMonthsView: View {
                     .ignoresSafeArea(edges: [.top])
                 List(viewModel.getRowData()) { rowData in
                     NavigationLink {
-                        JokeHistoryEntriesView(
-                            viewModel: JokeHistoryEntriesViewModel(
-                                jokeHistoryEntries: viewModel.getSelectedJokeHistoryEntries(
-                                    for: viewModel.punchLineID,
-                                    selectedMonth: rowData.rowValue
+                        if let selectedEntryGroup = viewModel.getSelectedJokeHistoryEntryGroup(selectedMonth: rowData.rowValue) {
+                            JokeHistoryEntriesView(
+                                viewModel: JokeHistoryEntriesViewModel(
+                                    jokeHistoryEntryGroup: selectedEntryGroup
                                 )
                             )
-                        )
+                        }
                     } label: {
                         JokeHistoryRowView(rowTitle: rowData.rowTitle)
                     }
@@ -64,6 +63,10 @@ struct JokeHistoryMonthsView: View {
 
 #Preview {
     JokeHistoryMonthsView(
-        viewModel: JokeHistoryMonthsViewModel(punchLineID: UUID().uuidString, selectedYear: 2025)
+        viewModel: JokeHistoryMonthsViewModel(
+            punchLineID: UUID().uuidString,
+            selectedYear: 2025,
+            entryGroups: MockDataManager.getPreviewJokeHistoryEntryGroups()
+        )
     )
 }

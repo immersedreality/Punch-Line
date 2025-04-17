@@ -26,11 +26,14 @@ struct FavoriteJokeListView: View {
                             viewModel.set(selectedFavoriteJoke: favoriteJoke)
                         }
                         .confirmationDialog("", isPresented: $showingConfirmationDialog) {
-                            Button("Remove from Favorites") {
+                            Button(ConfirmationDialogMessages.removeFromFavorites) {
                                 viewModel.removeSelectedFavoriteJokeFromFavorites()
                                 if AppSessionManager.userInfo?.favoriteJokes.isEmpty == true {
                                     shouldNavigateBackToSettings = true
                                 }
+                            }
+                            Button(ConfirmationDialogMessages.copyJoke) {
+                                viewModel.copyShareableJokeString()
                             }
                         }
                 }
