@@ -18,6 +18,10 @@ struct ActivityFeedMessages {
     static let weDoneGoofed = "We done goofed!  You're not supposed to see this!"
 }
 
+let BannedWords = [
+    "fag", "fagging", "faggitt", "faggot", "faggs", "fagot", "fagots", "fags", "kike", "n1gga", "n1gger", "nigg3r", "nigg4h", "nigga", "niggah", "niggas", "niggaz", "nigger", "niggers", "tranny"
+]
+
 struct ConfirmationDialogMessages {
     static let addToFavorites = "Add to Favorites"
     static let copyJoke = "Copy Joke for Easy Sharing"

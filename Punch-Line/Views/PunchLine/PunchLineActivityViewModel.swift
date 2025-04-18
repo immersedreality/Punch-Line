@@ -124,12 +124,20 @@ class PunchLineActivityViewModel: ObservableObject {
                 return false
             }
 
+            guard !enteredSetupText.containsBannedWords() else {
+                return false
+            }
+
             return true
         case .punchline:
             guard enteredPunchlineText.removingSpaces().count >= 2 else {
                 return false
             }
-            
+
+            guard !enteredPunchlineText.containsBannedWords() else {
+                return false
+            }
+
             return true
         case .vote:
             return true
