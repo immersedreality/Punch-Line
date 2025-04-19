@@ -9,11 +9,16 @@ import Foundation
 
 class JokeHistoryPunchLinesViewModel {
 
+    let fetchedPublicPunchLines: [PunchLine]
     var fetchedJokeHistoryEntryGroups: [String: [JokeHistoryEntryGroup]] = [:]
+
+    init(fetchedPublicPunchLines: [PunchLine]) {
+        self.fetchedPublicPunchLines = fetchedPublicPunchLines
+    }
 
     func fetchJokeHistoryEntryGroups() {
         Task {
-            for punchLine in LocalDataManager.shared.fetchedPublicPunchLines {
+            for punchLine in fetchedPublicPunchLines {
                 let jokeHistoryEntryGroups = await APIManager.getJokeHistoryEntryGroups(for: punchLine.id)
                 fetchedJokeHistoryEntryGroups[punchLine.id] = jokeHistoryEntryGroups
             }

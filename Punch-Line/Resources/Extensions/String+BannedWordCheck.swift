@@ -10,9 +10,8 @@ import Foundation
 extension String {
 
     func containsBannedWords() -> Bool {
-        let subStrings = self.split(separator: " ")
-        for subString in subStrings {
-            if BannedWords.contains(String(subString)) {
+        for bannedWord in AppConstants.BannedWords {
+            if self.contains(bannedWord) {
                 return true
             }
         }

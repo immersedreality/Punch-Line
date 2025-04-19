@@ -10,7 +10,7 @@ import SwiftUI
 struct JokeHistoryEntriesView: View {
 
     let viewModel: JokeHistoryEntriesViewModel
-
+    
     init(viewModel: JokeHistoryEntriesViewModel) {
         self.viewModel = viewModel
     }

@@ -11,17 +11,18 @@ final class APIManager {
 
     // MARK: Punch-Lines
 
-    class func getPublicPunchLines() async {
+    class func getPublicPunchLines() async -> [PunchLine] {
         if AppSessionManager.shouldMockNetworkCalls {
             guard let data = fetchLocalMockJSONFile(fileName: "GET-PunchLines") else {
-                return
+                return []
             }
             guard let fetchedPublicPunchLines: [PunchLine] = decodeJSON(from: data) else {
-                return
+                return []
             }
-            LocalDataManager.shared.set(publicPunchLines: fetchedPublicPunchLines)
+            return fetchedPublicPunchLines
         } else {
             // Real Network Call
+            return []
         }
     }
 
@@ -31,6 +32,7 @@ final class APIManager {
         if AppSessionManager.shouldMockNetworkCalls {
             // Mock Network Call
         } else {
+            // PunchLine Pro check for Username
             // Real Network Call
         }
     }
@@ -57,6 +59,7 @@ final class APIManager {
         if AppSessionManager.shouldMockNetworkCalls {
             // Mock Network Call
         } else {
+            // PunchLine Pro check for Username
             // Real Network Call
         }
     }

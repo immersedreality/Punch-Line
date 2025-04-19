@@ -9,15 +9,14 @@ import SwiftUI
 
 struct PunchLineLaunchersView: View {
 
-    let viewModel = PunchLineLaunchersViewModel()
+    let viewModel: PunchLineLaunchersViewModel
 
-    @StateObject private var localDataManager = LocalDataManager.shared
     @State private var showingPunchLineSheet = false
     @State private var showingSettingsSheet = false
 
     var body: some View {
         NavigationStack {
-            List(localDataManager.fetchedPublicPunchLines) { punchLine in
+            List(viewModel.fetchedPublicPunchLines) { punchLine in
                 PunchLineLauncherView(punchLine: punchLine)
                     .onTapGesture {
                         viewModel.selectedPunchLine = punchLine
@@ -86,5 +85,7 @@ struct PunchLineLauncherView: View {
 }
 
 #Preview {
-    PunchLineLaunchersView()
+    PunchLineLaunchersView(
+        viewModel: PunchLineLaunchersViewModel(fetchedPublicPunchLines: MockDataManager.getPreviewPunchLines())
+    )
 }

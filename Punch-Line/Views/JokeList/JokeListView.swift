@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct JokeListView: View {
-
+    
     let viewModel: JokeListViewModel
-
+    let adViewModel = InterstitialAdViewModel()
+    
     @State private var showingConfirmationDialog = false
     @State private var showingModalSheet = false
     
@@ -64,10 +65,15 @@ struct JokeListView: View {
                     }
                 }
             }
-                .navigationTitle(viewModel.getNavigationTitle())
+            .navigationTitle(viewModel.getNavigationTitle())
+            .onAppear {
+                if AppSessionManager.shouldShowAd {
+                    adViewModel.showAd()
+                }
+            }
         }
     }
-
+    
 }
 
 struct JokeView: View {

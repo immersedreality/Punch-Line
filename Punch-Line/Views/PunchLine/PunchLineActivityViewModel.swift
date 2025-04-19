@@ -24,7 +24,6 @@ class PunchLineActivityViewModel: ObservableObject {
     var currentJoke: Joke?
 
     init(punchLine: PunchLine, activity: PunchLineActivity, activityDisplayText: String) {
-        AppSessionManager.resetTaskCountsIfNecessary()
         self.punchLine = punchLine
         self.activity = activity
         self.activityDisplayText = activityDisplayText

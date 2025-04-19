@@ -14,6 +14,9 @@ final class AppSessionManager {
     }
 
     static var shouldMockNetworkCalls: Bool = true
+    static var shouldShowAd: Bool = false
+    static var adAppearanceFrequency: TimeInterval = 300
+    static var adTimer = Timer()
 
     // MARK: User Initialization
 
@@ -34,6 +37,7 @@ final class AppSessionManager {
     private class func getUserInfo() -> UserInfo? {
         guard let punchLineUserID = UserDefaults.standard.value(forKey: UserDefaultsKeys.punchLineUserID) as? String else { return nil }
         let punchLineUserName = UserDefaults.standard.value(forKey: UserDefaultsKeys.punchLineUserName) as? String
+        let hasPunchLinePro = UserDefaults.standard.value(forKey: UserDefaultsKeys.hasPunchLinePro) as? Bool ?? false
         let lastActivityDate = UserDefaults.standard.value(forKey: UserDefaultsKeys.lastActivityDate) as? Date ?? Date()
         let todaysTaskCounts = UserDefaults.standard.value(forKey: UserDefaultsKeys.todaysTaskCounts) as? [String: Int] ?? [:]
         let dailyTooFunnyReportsCount = UserDefaults.standard.value(forKey: UserDefaultsKeys.dailyTooFunnyReportsCount) as? Int ?? 0
@@ -48,6 +52,7 @@ final class AppSessionManager {
         let userInfo = UserInfo(
             punchLineUserID: punchLineUserID,
             punchLineUserName: punchLineUserName,
+            hasPunchLinePro: hasPunchLinePro,
             lastActivityDate: lastActivityDate,
             todaysTaskCounts: todaysTaskCounts,
             dailyTooFunnyReportsCount: dailyTooFunnyReportsCount,
@@ -58,8 +63,15 @@ final class AppSessionManager {
         return userInfo
     }
 
-    class func performInitialDataFetches() async {
-        await APIManager.getPublicPunchLines()
+    class func initializeAdTimer() {
+        DispatchQueue.main.async {
+            adTimer = Timer.scheduledTimer(withTimeInterval: adAppearanceFrequency, repeats: true) { _ in
+                let userHasPunchLinePro = userInfo?.hasPunchLinePro ?? false
+                if !userHasPunchLinePro {
+                    shouldShowAd = true
+                }
+            }
+        }
     }
 
     // MARK: Update Methods
@@ -96,6 +108,11 @@ final class AppSessionManager {
         guard let userInfo = userInfo else { return }
         let newReportsCount = userInfo.dailyTooFunnyReportsCount + 1
         UserDefaults.standard.set(newReportsCount, forKey: UserDefaultsKeys.dailyTooFunnyReportsCount)
+    }
+
+    class func toggleHasPunchLinePro() {
+        guard let userInfo = userInfo else { return }
+        UserDefaults.standard.set(!userInfo.shouldSeeOffensiveContent, forKey: UserDefaultsKeys.hasPunchLinePro)
     }
 
     class func toggleOffensiveContentFilter() {

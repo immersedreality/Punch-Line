@@ -225,7 +225,7 @@ final class MockDataManager {
         for rank in 1...numberOfJokes {
             let randomSetup = testSetUps[Int.random(in: testDataIndexRange)]
             let randomPunchline = testPunchlines[Int.random(in: testDataIndexRange)]
-            var punchLineDisplayName = LocalDataManager.shared.fetchedPublicPunchLines.first(where: { $0.id == punchLineID })?.displayName ?? ""
+            var punchLineDisplayName = getPreviewPunchLines().first(where: { $0.id == punchLineID })?.displayName ?? ""
             if punchLineDisplayName.isEmpty {
                 punchLineDisplayName = testPunchLineDisplayNames[Int.random(in: testDataIndexRange)]
             }
@@ -260,6 +260,16 @@ final class MockDataManager {
     }
 
     // MARK: SwiftUI Preview Methods
+
+    class func getPreviewPunchLines() -> [PunchLine] {
+        guard let data = APIManager.fetchLocalMockJSONFile(fileName: "GET-PunchLines") else {
+            return []
+        }
+        guard let fetchedPublicPunchLines: [PunchLine] = APIManager.decodeJSON(from: data) else {
+            return []
+        }
+        return fetchedPublicPunchLines
+    }
 
     class func getPreviewJokeHistoryEntryGroups() -> [JokeHistoryEntryGroup] {
         guard let data = APIManager.fetchLocalMockJSONFile(fileName: "GET-EntryGroups") else {

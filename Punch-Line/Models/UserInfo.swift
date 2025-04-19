@@ -10,6 +10,7 @@ import Foundation
 struct UserInfo {
     let punchLineUserID: String
     let punchLineUserName: String?
+    let hasPunchLinePro: Bool
     let lastActivityDate: Date
     let todaysTaskCounts: [String: Int]
     let dailyTooFunnyReportsCount: Int

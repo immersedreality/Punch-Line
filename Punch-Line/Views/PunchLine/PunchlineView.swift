@@ -100,7 +100,7 @@ struct PunchlineView: View {
         var body: some View {
             PunchlineView(
                 viewModel: PunchLineActivityViewModel(
-                    punchLine: LocalDataManager.shared.fetchedPublicPunchLines[0],
+                    punchLine: MockDataManager.getPreviewPunchLines()[0],
                     activity: .punchline,
                     activityDisplayText: ActivityFeedMessages.punchline
                 ),

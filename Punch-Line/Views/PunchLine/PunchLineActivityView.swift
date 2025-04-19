@@ -10,6 +10,7 @@ import SwiftUI
 struct PunchLineActivityView: View {
 
     let viewModel: PunchLineActivityViewModel
+    let adViewModel: InterstitialAdViewModel
 
     @State var isReadyForNextActivity: Bool = false
     
@@ -31,7 +32,12 @@ struct PunchLineActivityView: View {
             }
             .navigationBarBackButtonHidden()
             .navigationDestination(isPresented: $isReadyForNextActivity) {
-                PunchLineActivityView(viewModel: self.viewModel)
+                PunchLineActivityView(viewModel: self.viewModel, adViewModel: self.adViewModel)
+            }
+            .onAppear {
+                if AppSessionManager.shouldShowAd {
+                    adViewModel.showAd()
+                }
             }
     }
 
@@ -41,9 +47,10 @@ struct PunchLineActivityView: View {
 #Preview {
     PunchLineActivityView(
         viewModel: PunchLineActivityViewModel(
-            punchLine: LocalDataManager.shared.fetchedPublicPunchLines[0],
+            punchLine: MockDataManager.getPreviewPunchLines()[0],
             activity: .setup,
             activityDisplayText: ActivityFeedMessages.setupFirst
-        )
+        ),
+        adViewModel: InterstitialAdViewModel()
     )
 }

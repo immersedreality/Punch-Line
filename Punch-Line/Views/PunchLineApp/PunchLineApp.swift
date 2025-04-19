@@ -10,13 +10,13 @@ import SwiftUI
 @main
 struct PunchLineApp: App {
 
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    
     let viewModel = PunchLineAppViewModel()
 
     init() {
         viewModel.validateUserInfo()
-        Task {
-            await AppSessionManager.performInitialDataFetches()
-        }
+        AppSessionManager.initializeAdTimer()
     }
 
     var body: some Scene {

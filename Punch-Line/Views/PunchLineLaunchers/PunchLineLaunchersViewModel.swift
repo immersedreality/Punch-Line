@@ -9,13 +9,20 @@ import Foundation
 
 class PunchLineLaunchersViewModel {
 
+    let fetchedPublicPunchLines: [PunchLine]
     var selectedPunchLine: PunchLine?
 
+    init(fetchedPublicPunchLines: [PunchLine]) {
+        self.fetchedPublicPunchLines = fetchedPublicPunchLines
+    }
+    
     func getInitialPunchLineActivity() -> PunchLineActivity {
 
         guard let selectedPunchLineID = selectedPunchLine?.id else {
             return .somethingWentWrong
         }
+
+        AppSessionManager.resetTaskCountsIfNecessary()
 
         if let todaysTaskCount = AppSessionManager.userInfo?.todaysTaskCounts[selectedPunchLineID] {
             switch todaysTaskCount {

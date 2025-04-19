@@ -18,9 +18,11 @@ struct ActivityFeedMessages {
     static let weDoneGoofed = "We done goofed!  You're not supposed to see this!"
 }
 
-let BannedWords = [
-    "fag", "fagging", "faggitt", "faggot", "faggs", "fagot", "fagots", "fags", "kike", "n1gga", "n1gger", "nigg3r", "nigg4h", "nigga", "niggah", "niggas", "niggaz", "nigger", "niggers", "tranny"
-]
+struct AppConstants {
+    static let adUnitID = "ca-app-pub-7985623540006861/2831009017"
+    static let testAdUnitID = "ca-app-pub-3940256099942544/4411468910"
+    static let BannedWords = ["fag", "fagging", "faggitt", "faggot", "faggs", "fagot", "fagots", "fags", "kike", "n1gga", "n1gger", "nigg3r", "nigg4h", "nigga", "niggah", "niggas", "niggaz", "nigger", "niggers", "tranny"]
+}
 
 struct ConfirmationDialogMessages {
     static let addToFavorites = "Add to Favorites"
@@ -59,6 +61,7 @@ struct SystemIcons {
 struct UserDefaultsKeys {
     static let punchLineUserID = "PunchLineUserID"
     static let punchLineUserName = "PunchLineUserName"
+    static let hasPunchLinePro = "HasPunchLinePro"
     static let lastActivityDate = "LastActivityDate"
     static let todaysTaskCounts = "TodaysTaskCounts"
     static let dailyTooFunnyReportsCount = "DailyTooFunnyReportsCount"
