@@ -20,15 +20,49 @@ class PunchLineActivityViewModel: ObservableObject {
     var fetchedSetups: [Setup] = []
     var fetchedJokes: [Joke] = []
 
+    var lastOwnSetup: Setup?
     var currentSetup: Setup?
     var currentJoke: Joke?
 
-    init(punchLine: any ActivePunchLine, activity: PunchLineActivity, activityDisplayText: String) {
+    init(punchLine: any ActivePunchLine, activity: PunchLineActivity, activityDisplayText: String, initialSetupBatch: [Setup], initialJokeBatch: [Joke]) {
         self.punchLine = punchLine
         self.activity = activity
         self.activityDisplayText = activityDisplayText
-        fetchSetupBatch()
-        fetchJokeBatch()
+        self.fetchedSetups = initialSetupBatch
+        self.fetchedJokes = initialJokeBatch
+
+        switch activity {
+        case .setup:
+            break
+        case .punchline:
+            currentSetup = initialSetupBatch.first
+        case .vote:
+            currentJoke = initialJokeBatch.first
+        case .somethingWentWrong:
+            break
+        }
+
+        updatePunchLineRelauncher()
+    }
+
+    init(punchLine: any ActivePunchLine, activity: PunchLineActivity, activityDisplayText: String, relauncher: PunchLineRelauncher) {
+        self.punchLine = punchLine
+        self.activity = activity
+        self.activityDisplayText = activityDisplayText
+        self.fetchedSetups = relauncher.previouslyFetchedSetups
+        self.fetchedJokes = relauncher.previouslyFetchedJokes
+
+        switch activity {
+        case .setup:
+            break
+        case .punchline:
+            currentSetup = relauncher.currentSetup
+        case .vote:
+            currentJoke = relauncher.currentJoke
+        case .somethingWentWrong:
+            break
+        }
+
     }
 
     // MARK: Data Fetchers
@@ -73,13 +107,7 @@ class PunchLineActivityViewModel: ObservableObject {
             break
         }
 
-        guard let todaysTaskCount = AppSessionManager.userInfo?.todaysTaskCounts[punchLine.id] else {
-            activity = .somethingWentWrong
-            activityDisplayText = ""
-            currentSetup = nil
-            currentJoke = nil
-            return
-        }
+        let todaysTaskCount = AppSessionManager.taskCount(for: punchLine.id)
 
         switch todaysTaskCount {
         case 0:
@@ -88,16 +116,43 @@ class PunchLineActivityViewModel: ObservableObject {
             currentSetup = nil
             currentJoke = nil
         case 1:
+            guard let lastOwnSetup else {
+                configureViewForError()
+                return
+            }
+            activity = .punchline
+            activityDisplayText = ActivityFeedMessages.ownPunchlineFirst
+            currentSetup = lastOwnSetup
+            currentJoke = nil
+        case 2:
             activity = .setup
             activityDisplayText = ActivityFeedMessages.setupSecond
             currentSetup = nil
             currentJoke = nil
-        case 2:
+        case 3:
+            guard let lastOwnSetup else {
+                configureViewForError()
+                return
+            }
+            activity = .punchline
+            activityDisplayText = ActivityFeedMessages.ownPunchlineSecond
+            currentSetup = lastOwnSetup
+            currentJoke = nil
+        case 4:
             activity = .setup
             activityDisplayText = ActivityFeedMessages.setupThird
             currentSetup = nil
             currentJoke = nil
-        case 3, 5, 8, 12, 17, 23, 30, 38, 47, 57:
+        case 5:
+            guard let lastOwnSetup else {
+                configureViewForError()
+                return
+            }
+            activity = .punchline
+            activityDisplayText = ActivityFeedMessages.ownPunchlineThird
+            currentSetup = lastOwnSetup
+            currentJoke = nil
+        case 6, 8, 11, 15, 20, 26, 33, 41, 50, 60:
             activity = .punchline
             activityDisplayText = ActivityFeedMessages.punchline
             currentSetup = fetchedSetups.first
@@ -109,6 +164,15 @@ class PunchLineActivityViewModel: ObservableObject {
             currentSetup = nil
         }
 
+        updatePunchLineRelauncher()
+
+    }
+
+    private func configureViewForError() {
+        activity = .somethingWentWrong
+        activityDisplayText = ""
+        currentSetup = nil
+        currentJoke = nil
     }
 
     func textEntryIsValid() -> Bool {
@@ -146,19 +210,45 @@ class PunchLineActivityViewModel: ObservableObject {
 
     }
 
+    func updatePunchLineRelauncher() {
+
+        let relauncher = PunchLineRelauncher(
+            previouslyFetchedSetups: fetchedSetups,
+            previouslyFetchedJokes: fetchedJokes,
+            currentSetup: currentSetup,
+            currentJoke: currentJoke
+        )
+
+        AppSessionManager.punchLineRelaunchers[punchLine.id] = relauncher
+
+    }
+
     // MARK: Setup Methods
 
     func createNewSetup() {
         guard let userInfo = AppSessionManager.userInfo else { return }
+
+        let ownSetup = Setup(
+            id: "",
+            punchLineID: punchLine.id,
+            text: enteredSetupText,
+            authorID: userInfo.punchLineUserID,
+            authorUsername: userInfo.punchLineUserName,
+            isOffensive: false
+        )
+        self.lastOwnSetup = ownSetup
+
         let setupPostRequest = SetupPostRequest(
             punchLineID: punchLine.id,
             text: enteredSetupText,
             authorID: userInfo.punchLineUserID,
             authorUsername: userInfo.punchLineUserName
         )
+
         Task {
             await APIManager.post(setup: setupPostRequest)
         }
+
     }
 
     // MARK: Punchline Methods

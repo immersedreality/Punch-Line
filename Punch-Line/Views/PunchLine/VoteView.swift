@@ -127,7 +127,9 @@ struct VoteView: View {
                 viewModel: PunchLineActivityViewModel(
                     punchLine: MockDataManager.getPreviewPublicPunchLines()[0],
                     activity: .vote,
-                    activityDisplayText: ActivityFeedMessages.vote
+                    activityDisplayText: ActivityFeedMessages.vote,
+                    initialSetupBatch: MockDataManager.getMockSetupBatch(),
+                    initialJokeBatch: MockDataManager.getMockOrPreviewJokeBatch(numberOfJokes: 50)
                 ),
                 isReadyForNextActivity: $isReadyForNextActivity
             )

@@ -102,7 +102,9 @@ struct PunchlineView: View {
                 viewModel: PunchLineActivityViewModel(
                     punchLine: MockDataManager.getPreviewPublicPunchLines()[0],
                     activity: .punchline,
-                    activityDisplayText: ActivityFeedMessages.punchline
+                    activityDisplayText: ActivityFeedMessages.punchline,
+                    initialSetupBatch: MockDataManager.getMockSetupBatch(),
+                    initialJokeBatch: MockDataManager.getMockOrPreviewJokeBatch(numberOfJokes: 50)
                 ),
                 isReadyForNextActivity: $isReadyForNextActivity
             )

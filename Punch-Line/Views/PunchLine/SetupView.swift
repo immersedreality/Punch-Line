@@ -84,7 +84,9 @@ struct SetupView: View {
                 viewModel: PunchLineActivityViewModel(
                     punchLine: MockDataManager.getPreviewPublicPunchLines()[0],
                     activity: .setup,
-                    activityDisplayText: ActivityFeedMessages.setupFirst
+                    activityDisplayText: ActivityFeedMessages.setupFirst,
+                    initialSetupBatch: MockDataManager.getMockSetupBatch(),
+                    initialJokeBatch: MockDataManager.getMockOrPreviewJokeBatch(numberOfJokes: 50)
                 ),
                 isReadyForNextActivity: $isReadyForNextActivity
             )

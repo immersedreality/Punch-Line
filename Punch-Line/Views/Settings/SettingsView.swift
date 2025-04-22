@@ -174,7 +174,7 @@ struct GetPunchLineProRow: View {
     @State private var showingAlert = false
 
     var body: some View {
-        Text("Get PunchLine Pro!  Why?!\n1. Get Rid Of Ads!\n2. Authorship Over Your Fantastic Joke Contributions!! \n3. Respond To Your Own Setups and Hog All The Glory!!!\n4. Create And Share Your Own Private Punch-Lines!!!!")
+        Text("Get PunchLine Pro!  Why?!\n1. Get Rid Of Ads!\n2. Authorship Over Your Fantastic Joke Contributions!! \n3. Create And Share Your Own Private Punch-Lines!!!")
             .font(Font.system(size: 20.0, weight: .light))
             .foregroundStyle(.accent)
             .onTapGesture {

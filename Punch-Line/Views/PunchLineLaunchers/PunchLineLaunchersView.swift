@@ -32,7 +32,7 @@ struct PunchLineLaunchersView: View {
                         )
                         .onTapGesture {
                             viewModel.setSelected(publicPunchLine: punchLine)
-                            showingPunchLineSheet = true
+                            launchPunchLine()
                         }
                     }
                 }
@@ -49,31 +49,16 @@ struct PunchLineLaunchersView: View {
                             )
                             .onTapGesture {
                                 viewModel.setSelected(privatePunchLine: punchLine)
-                                showingPunchLineSheet = true
+                                launchPunchLine()
                             }
                         }
                     }
                 }
             }
             .sheet(isPresented: $showingPunchLineSheet) {
-                if let punchLine = viewModel.selectedPublicPunchLine {
-                    PunchLineActivityRootView(
-                        viewModel: PunchLineActivityViewModel(
-                            punchLine: punchLine,
-                            activity: viewModel.getInitialPunchLineActivity(),
-                            activityDisplayText: viewModel.getInitialPunchLineActivityDisplayText()
-                        )
-                    )
-                    .presentationDragIndicator(.visible)
-                } else if let punchLine = viewModel.selectedPrivatePunchLine {
-                    PunchLineActivityRootView(
-                        viewModel: PunchLineActivityViewModel(
-                            punchLine: punchLine,
-                            activity: viewModel.getInitialPunchLineActivity(),
-                            activityDisplayText: viewModel.getInitialPunchLineActivityDisplayText()
-                        )
-                    )
-                    .presentationDragIndicator(.visible)
+                if let punchLineActivityViewModel = viewModel.punchLineActivityViewModel {
+                    PunchLineActivityRootView(viewModel: punchLineActivityViewModel)
+                        .presentationDragIndicator(.visible)
                 }
             }
             .toolbar {
@@ -124,7 +109,14 @@ struct PunchLineLaunchersView: View {
             .listRowSpacing(8.0)
         }
     }
-    
+
+    private func launchPunchLine() {
+        Task {
+            await viewModel.initializePunchLineActivityViewModel()
+            showingPunchLineSheet = true
+        }
+    }
+
 }
 
 struct PunchLineLauncherView: View {

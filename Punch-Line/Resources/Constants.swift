@@ -8,11 +8,13 @@
 import SwiftUI
 
 struct ActivityFeedMessages {
-    static let punchline = "Finish this joke with a killer punchline!"
-    static let setupFirst = "Start a joke with a funny setup!"
-    static let setupSecond = "Start another joke with an even funnier setup!"
-    static let setupThird = "Start one more with your funniest setup yet!"
-    static let setupBeyond = "Keep the setups coming!"
+    static let ownPunchlineFirst = "Now finish it with a killer punchline!"
+    static let ownPunchlineSecond = "Punchline it up, yo!"
+    static let ownPunchlineThird = "You know the drill, finish the joke!"
+    static let punchline = "Here's a setup.  Add your own punchline!"
+    static let setupFirst = "Start your joke with a funny setup!"
+    static let setupSecond = "Now start another with an even funnier setup!"
+    static let setupThird = "One more setup.  Make it the funniest yet!"
     static let setupEnd = "Setups must end with either a question mark (?) or an ellipsis (…)"
     static let vote = "Quick Question: Is This Funny?"
     static let weDoneGoofed = "We done goofed!  You're not supposed to see this!"

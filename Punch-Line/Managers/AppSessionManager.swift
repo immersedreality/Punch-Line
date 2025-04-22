@@ -9,14 +9,23 @@ import Foundation
 
 final class AppSessionManager {
 
+    // MARK: Globally Accessible Properties
+
     static var userInfo: UserInfo? {
         return getUserInfo()
     }
 
-    static var shouldMockNetworkCalls: Bool = true
+    static var punchLineRelaunchers: [String: PunchLineRelauncher] = [:]
+
+    // MARK: Ads
+
     static var shouldShowAd: Bool = false
-    static var adAppearanceFrequency: TimeInterval = 300
+    static var adAppearanceFrequency: TimeInterval = 180
     static var adTimer = Timer()
+
+    // MARK: Testing
+
+    static var shouldMockNetworkCalls: Bool = true
 
     // MARK: Initialization
 
@@ -43,7 +52,7 @@ final class AppSessionManager {
         }
     }
 
-    // MARK: Main Getter
+    // MARK: Getters
 
     private class func getUserInfo() -> UserInfo? {
         guard let punchLineUserID = UserDefaults.standard.value(forKey: UserDefaultsKeys.punchLineUserID) as? String else { return nil }
@@ -86,6 +95,14 @@ final class AppSessionManager {
         )
 
         return userInfo
+    }
+
+    class func taskCount(for punchLineID: String) -> Int {
+        guard let taskCount = userInfo?.todaysTaskCounts[punchLineID] else {
+            createTaskCountKey(for: punchLineID)
+            return 0
+        }
+        return taskCount
     }
 
     // MARK: Update Methods
