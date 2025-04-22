@@ -9,7 +9,7 @@ import SwiftUI
 
 struct PrivatePunchLinesListView: View {
 
-    @StateObject var viewModel: PrivatePunchLinesListViewModel
+    @ObservedObject var viewModel: PrivatePunchLinesListViewModel
 
     @State private var showingConfirmationDialog = false
 

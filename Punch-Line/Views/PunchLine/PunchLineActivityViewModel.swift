@@ -12,7 +12,7 @@ class PunchLineActivityViewModel: ObservableObject {
 
     let punchLine: any ActivePunchLine
     private(set) var activity: PunchLineActivity
-    private(set) var activityDisplayText: String
+    @Published var activityDisplayText: String
 
     @Published var enteredSetupText: String = ""
     @Published var enteredPunchlineText: String = ""

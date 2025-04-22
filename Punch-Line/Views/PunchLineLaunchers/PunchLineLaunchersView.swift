@@ -9,8 +9,9 @@ import SwiftUI
 
 struct PunchLineLaunchersView: View {
 
-    @StateObject var viewModel: PunchLineLaunchersViewModel
+    let viewModel: PunchLineLaunchersViewModel
 
+    @State private var showingPunchLineSheet = false
     @State private var showingCreateSheet = false
     @State private var showingJoinSheet = false
     @State private var showingSettingsSheet = false
@@ -31,6 +32,7 @@ struct PunchLineLaunchersView: View {
                         )
                         .onTapGesture {
                             viewModel.setSelected(publicPunchLine: punchLine)
+                            showingPunchLineSheet = true
                         }
                     }
                 }
@@ -47,12 +49,13 @@ struct PunchLineLaunchersView: View {
                             )
                             .onTapGesture {
                                 viewModel.setSelected(privatePunchLine: punchLine)
+                                showingPunchLineSheet = true
                             }
                         }
                     }
                 }
             }
-            .sheet(isPresented: $viewModel.showingPunchLineSheet) {
+            .sheet(isPresented: $showingPunchLineSheet) {
                 if let punchLine = viewModel.selectedPublicPunchLine {
                     PunchLineActivityRootView(
                         viewModel: PunchLineActivityViewModel(

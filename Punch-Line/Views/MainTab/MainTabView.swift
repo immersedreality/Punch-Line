@@ -10,7 +10,7 @@ import SwiftUI
 struct MainTabView: View {
 
     @StateObject var viewModel = MainViewModel()
-    @StateObject var notificationManager = GlobalNotificationManager.shared
+    @ObservedObject var notificationManager = GlobalNotificationManager.shared
 
     @State private var selection = 1
 

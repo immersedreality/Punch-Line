@@ -7,15 +7,13 @@
 
 import Foundation
 
-class PunchLineLaunchersViewModel: ObservableObject {
+class PunchLineLaunchersViewModel {
 
     let fetchedPublicPunchLines: [PublicPunchLine]
     private(set) var selectedPublicPunchLine: PublicPunchLine?
 
     let fetchedPrivatePunchLines: [PrivatePunchLine]
     private(set) var selectedPrivatePunchLine: PrivatePunchLine?
-
-    @Published var showingPunchLineSheet = false
 
     init(fetchedPublicPunchLines: [PublicPunchLine], fetchedPrivatePunchLines: [PrivatePunchLine]) {
         self.fetchedPublicPunchLines = fetchedPublicPunchLines
@@ -25,13 +23,11 @@ class PunchLineLaunchersViewModel: ObservableObject {
     func setSelected(publicPunchLine: PublicPunchLine) {
         selectedPublicPunchLine = publicPunchLine
         selectedPrivatePunchLine = nil
-        showingPunchLineSheet = true
     }
 
     func setSelected(privatePunchLine: PrivatePunchLine) {
         selectedPrivatePunchLine = privatePunchLine
         selectedPublicPunchLine = nil
-        showingPunchLineSheet = true
     }
 
     func getInitialPunchLineActivity() -> PunchLineActivity {
@@ -40,9 +36,7 @@ class PunchLineLaunchersViewModel: ObservableObject {
 
         if let selectedPublicPunchLineID = selectedPublicPunchLine?.id {
             selectedPunchLineID = selectedPublicPunchLineID
-        }
-
-        if let selectedPrivatePunchLineID = selectedPrivatePunchLine?.id {
+        } else if let selectedPrivatePunchLineID = selectedPrivatePunchLine?.id {
             selectedPunchLineID = selectedPrivatePunchLineID
         }
 

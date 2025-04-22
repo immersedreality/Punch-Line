@@ -24,12 +24,15 @@ class CreateOrJoinPrivatePunchLineViewModel: ObservableObject {
     @Published var showingErrorAlert: Bool = false
     @Published var shouldNavigateToSuccessScreen: Bool = false
 
+    var errorMode: CreateOrJoinPrivatePunchLineErrorMode = .failedCreate
     var errorAlertMessage: String {
-        switch mode {
-        case .create:
+        switch errorMode {
+        case .failedCreate:
             return "Could not create Punch-Line.  Please check your network connection and try again."
-        case .join:
+        case .failedJoin:
             return "Could not join Punch-Line.  Please check that your code is correct and try again."
+        case .alreadyInPunchLine:
+            return "You are already in it that Punch-Line!"
         }
     }
 
@@ -49,7 +52,6 @@ class CreateOrJoinPrivatePunchLineViewModel: ObservableObject {
     }
 
     func textEntryIsValid() -> Bool {
-
         switch mode {
         case .create:
             guard enteredText.removingSpaces().count >= 3 else {
@@ -91,12 +93,31 @@ class CreateOrJoinPrivatePunchLineViewModel: ObservableObject {
                 AppSessionManager.add(privatePunchLine: createdPrivatePunchLine)
                 shouldNavigateToSuccessScreen = true
             } else {
+                errorMode = .failedCreate
                 showingErrorAlert = true
             }
         }
     }
 
     func joinPrivatePunchLine() {
+        guard let userInfo = AppSessionManager.userInfo else { return }
+
+        guard !userInfo.ownedPrivatePunchLines.contains(where: { punchLine in
+            enteredText.uppercased() == punchLine.joinCode
+        }) else {
+            errorMode = .alreadyInPunchLine
+            showingErrorAlert = true
+            return
+        }
+
+        guard !userInfo.joinedPrivatePunchLines.contains(where: { punchLine in
+            enteredText.uppercased() == punchLine.joinCode
+        }) else {
+            errorMode = .alreadyInPunchLine
+            showingErrorAlert = true
+            return
+        }
+
         Task {
             let joinedPrivatePunchLines = await APIManager.getPrivatePunchLine(with: enteredText.uppercased())
             if let joinedPrivatePunchLine = joinedPrivatePunchLines.first {
@@ -104,13 +125,19 @@ class CreateOrJoinPrivatePunchLineViewModel: ObservableObject {
                 AppSessionManager.add(privatePunchLine: joinedPrivatePunchLine)
                 shouldNavigateToSuccessScreen = true
             } else {
+                errorMode = .failedJoin
                 showingErrorAlert = true
             }
         }
+        
     }
 
 }
 
 enum CreateOrJoinPrivatePunchLineViewMode {
     case create, join
+}
+
+enum CreateOrJoinPrivatePunchLineErrorMode {
+    case failedCreate, failedJoin, alreadyInPunchLine
 }

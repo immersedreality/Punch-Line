@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SetupView: View {
 
-    @StateObject var viewModel: PunchLineActivityViewModel
+    @ObservedObject var viewModel: PunchLineActivityViewModel
 
     @Binding var isReadyForNextActivity: Bool
     @FocusState private var textFieldIsFocused: Bool
