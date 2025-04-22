@@ -9,9 +9,8 @@ import SwiftUI
 
 struct PunchLineLaunchersView: View {
 
-    let viewModel: PunchLineLaunchersViewModel
+    @StateObject var viewModel: PunchLineLaunchersViewModel
 
-    @State private var showingPunchLineSheet = false
     @State private var showingCreateSheet = false
     @State private var showingJoinSheet = false
     @State private var showingSettingsSheet = false
@@ -31,8 +30,7 @@ struct PunchLineLaunchersView: View {
                             punchLineOwnerName: nil
                         )
                         .onTapGesture {
-                            viewModel.selectedPublicPunchLine = punchLine
-                            showingPunchLineSheet = true
+                            viewModel.setSelected(publicPunchLine: punchLine)
                         }
                     }
                 }
@@ -48,15 +46,23 @@ struct PunchLineLaunchersView: View {
                                 punchLineOwnerName: punchLine.owningUserName
                             )
                             .onTapGesture {
-                                viewModel.selectedPrivatePunchLine = punchLine
-                                showingPunchLineSheet = true
+                                viewModel.setSelected(privatePunchLine: punchLine)
                             }
                         }
                     }
                 }
             }
-            .sheet(isPresented: $showingPunchLineSheet) {
+            .sheet(isPresented: $viewModel.showingPunchLineSheet) {
                 if let punchLine = viewModel.selectedPublicPunchLine {
+                    PunchLineActivityRootView(
+                        viewModel: PunchLineActivityViewModel(
+                            punchLine: punchLine,
+                            activity: viewModel.getInitialPunchLineActivity(),
+                            activityDisplayText: viewModel.getInitialPunchLineActivityDisplayText()
+                        )
+                    )
+                    .presentationDragIndicator(.visible)
+                } else if let punchLine = viewModel.selectedPrivatePunchLine {
                     PunchLineActivityRootView(
                         viewModel: PunchLineActivityViewModel(
                             punchLine: punchLine,

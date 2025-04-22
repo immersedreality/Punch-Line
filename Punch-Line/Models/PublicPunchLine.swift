@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct PublicPunchLine: Codable, Identifiable {
+struct PublicPunchLine: ActivePunchLine, Codable, Identifiable {
     let id: String
     let displayName: String
     let lastDailyResetDate: Date

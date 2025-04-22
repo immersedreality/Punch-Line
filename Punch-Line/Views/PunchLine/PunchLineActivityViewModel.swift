@@ -10,7 +10,7 @@ import SwiftUI
 
 class PunchLineActivityViewModel: ObservableObject {
 
-    let punchLine: PublicPunchLine
+    let punchLine: any ActivePunchLine
     private(set) var activity: PunchLineActivity
     private(set) var activityDisplayText: String
 
@@ -23,7 +23,7 @@ class PunchLineActivityViewModel: ObservableObject {
     var currentSetup: Setup?
     var currentJoke: Joke?
 
-    init(punchLine: PublicPunchLine, activity: PunchLineActivity, activityDisplayText: String) {
+    init(punchLine: any ActivePunchLine, activity: PunchLineActivity, activityDisplayText: String) {
         self.punchLine = punchLine
         self.activity = activity
         self.activityDisplayText = activityDisplayText

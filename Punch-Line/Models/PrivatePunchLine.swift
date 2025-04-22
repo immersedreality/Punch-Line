@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct PrivatePunchLine: Codable, Identifiable {
+struct PrivatePunchLine: ActivePunchLine, Codable, Identifiable {
     let id: String
     let displayName: String
     let joinCode: String
