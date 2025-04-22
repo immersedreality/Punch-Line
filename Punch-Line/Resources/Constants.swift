@@ -13,7 +13,7 @@ struct ActivityFeedMessages {
     static let ownPunchlineThird = "You know the drill, finish the joke!"
     static let punchline = "Here's a setup.  Add your own punchline!"
     static let setupFirst = "Start your joke with a funny setup!"
-    static let setupSecond = "Now start another with an even funnier setup!"
+    static let setupSecond = "Now start a joke with an even funnier setup!"
     static let setupThird = "One more setup.  Make it the funniest yet!"
     static let setupEnd = "Setups must end with either a question mark (?) or an ellipsis (…)"
     static let vote = "Quick Question: Is This Funny?"

@@ -36,20 +36,20 @@ class PunchLineLaunchersViewModel {
 
     func initializePunchLineActivityViewModel() async {
         var activePunchLine: (any ActivePunchLine)?
-        
+
         if let punchLine = selectedPublicPunchLine {
             activePunchLine = punchLine
         } else if let punchLine = selectedPrivatePunchLine {
             activePunchLine = punchLine
         }
-        
+
         guard let activePunchLine else { return }
-        
+
         if let relauncher = AppSessionManager.punchLineRelaunchers[activePunchLine.id] {
             punchLineActivityViewModel = PunchLineActivityViewModel(
                 punchLine: activePunchLine,
                 activity: getInitialPunchLineActivity(),
-                activityDisplayText: getInitialPunchLineActivityDisplayText(),
+                activityDisplayText: getInitialPunchLineActivityDisplayText(for: .relaunch),
                 relauncher: relauncher
             )
         } else {
@@ -58,12 +58,12 @@ class PunchLineLaunchersViewModel {
             punchLineActivityViewModel = PunchLineActivityViewModel(
                 punchLine: activePunchLine,
                 activity: getInitialPunchLineActivity(),
-                activityDisplayText: getInitialPunchLineActivityDisplayText(),
+                activityDisplayText: getInitialPunchLineActivityDisplayText(for: .initial),
                 initialSetupBatch: fetchedSetups,
                 initialJokeBatch: fetchedJokes
             )
         }
-        
+
     }
 
     func getInitialPunchLineActivity() -> PunchLineActivity {
@@ -95,7 +95,7 @@ class PunchLineLaunchersViewModel {
         
     }
 
-    func getInitialPunchLineActivityDisplayText() -> String {
+    func getInitialPunchLineActivityDisplayText(for mode: ActivityDisplayTextGenerationMode) -> String {
 
         var selectedPunchLineID: String?
 
@@ -115,15 +115,15 @@ class PunchLineLaunchersViewModel {
         case 0:
             return ActivityFeedMessages.setupFirst
         case 1:
-            return ActivityFeedMessages.ownPunchlineFirst
+            return mode == .relaunch ? ActivityFeedMessages.ownPunchlineFirst : ActivityFeedMessages.punchline
         case 2:
             return ActivityFeedMessages.setupSecond
         case 3:
-            return ActivityFeedMessages.ownPunchlineSecond
+            return mode == .relaunch ? ActivityFeedMessages.ownPunchlineSecond : ActivityFeedMessages.punchline
         case 4:
             return ActivityFeedMessages.setupThird
         case 5:
-            return ActivityFeedMessages.ownPunchlineThird
+            return mode == .relaunch ? ActivityFeedMessages.ownPunchlineThird : ActivityFeedMessages.punchline
         case 6, 8, 11, 15, 20, 26, 33, 41, 50, 60:
             return ActivityFeedMessages.punchline
         default:
@@ -160,4 +160,8 @@ class PunchLineLaunchersViewModel {
         return jokes
     }
 
+}
+
+enum ActivityDisplayTextGenerationMode {
+    case initial, relaunch
 }
