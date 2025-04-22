@@ -16,6 +16,7 @@ class JokeHistoryPunchLinesViewModel {
     init(fetchedPublicPunchLines: [PublicPunchLine], fetchedPrivatePunchLines: [PrivatePunchLine]) {
         self.fetchedPublicPunchLines = fetchedPublicPunchLines
         self.fetchedPrivatePunchLines = fetchedPrivatePunchLines
+        fetchJokeHistoryEntryGroups()
     }
 
     func fetchJokeHistoryEntryGroups() {

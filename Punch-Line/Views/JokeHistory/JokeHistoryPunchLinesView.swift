@@ -104,9 +104,6 @@ struct JokeHistoryPunchLinesView: View {
                 .scrollContentBackground(.hidden)
             }
         }
-        .onAppear {
-            viewModel.fetchJokeHistoryEntryGroups()
-        }
     }
 
 }
