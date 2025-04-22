@@ -26,11 +26,14 @@ struct PunchLineLaunchersView: View {
                         .foregroundStyle(.accent)
                 ) {
                     ForEach(viewModel.fetchedPublicPunchLines) { punchLine in
-                        PunchLineLauncherView(displayName: punchLine.displayName)
-                            .onTapGesture {
-                                viewModel.selectedPublicPunchLine = punchLine
-                                showingPunchLineSheet = true
-                            }
+                        PunchLineLauncherView(
+                            displayName: punchLine.displayName,
+                            punchLineOwnerName: nil
+                        )
+                        .onTapGesture {
+                            viewModel.selectedPublicPunchLine = punchLine
+                            showingPunchLineSheet = true
+                        }
                     }
                 }
                 if !viewModel.fetchedPrivatePunchLines.isEmpty {
@@ -40,11 +43,14 @@ struct PunchLineLaunchersView: View {
                             .foregroundStyle(.accent)
                     ) {
                         ForEach(viewModel.fetchedPrivatePunchLines) { punchLine in
-                            PunchLineLauncherView(displayName: punchLine.displayName)
-                                .onTapGesture {
-                                    viewModel.selectedPrivatePunchLine = punchLine
-                                    showingPunchLineSheet = true
-                                }
+                            PunchLineLauncherView(
+                                displayName: punchLine.displayName,
+                                punchLineOwnerName: punchLine.owningUserName
+                            )
+                            .onTapGesture {
+                                viewModel.selectedPrivatePunchLine = punchLine
+                                showingPunchLineSheet = true
+                            }
                         }
                     }
                 }
@@ -66,13 +72,15 @@ struct PunchLineLaunchersView: View {
                     Image(systemName: SystemIcons.addPunchLineButton)
                         .foregroundStyle(.accent)
                         .onTapGesture {
-                            showingAddPunchLineDialog = true
+                            if AppSessionManager.userInfo?.hasPunchLinePro == true {
+                                showingAddPunchLineDialog = true
+                            } else {
+                                showingJoinSheet = true
+                            }
                         }
                         .confirmationDialog("", isPresented: $showingAddPunchLineDialog) {
-                            if AppSessionManager.userInfo?.hasPunchLinePro == true {
-                                Button(ConfirmationDialogMessages.createNewPrivatePunchLine) {
-                                    showingCreateSheet = true
-                                }
+                            Button(ConfirmationDialogMessages.createNewPrivatePunchLine) {
+                                showingCreateSheet = true
                             }
                             Button(ConfirmationDialogMessages.joinPrivatePunchLine) {
                                 showingJoinSheet = true
@@ -113,26 +121,42 @@ struct PunchLineLaunchersView: View {
 struct PunchLineLauncherView: View {
 
     let displayName: String
-
+    let punchLineOwnerName: String?
+    
     var body: some View {
-        HStack {
-            Spacer()
-            VStack {
-                Text(displayName)
-                    .font(Font.system(size: 24.0, weight: .bold))
-                    .foregroundStyle(.accent)
-                    .shadow(color: .black, radius: 0.1, x: 0.1, y: 0.1)
-                    .padding([.top], 16.0)
-                Text("Get in the Punch-Line --->")
-                    .font(Font.system(size: 24.0, weight: .light))
-                    .foregroundStyle(.accent)
-                    .shadow(color: .black, radius: 0.1, x: 0.1, y: 0.1)
-                    .padding([.bottom], 16.0)
+        ZStack {
+            HStack {
+                Spacer()
+                VStack {
+                    Text(displayName)
+                        .font(Font.system(size: 24.0, weight: .bold))
+                        .foregroundStyle(.accent)
+                        .shadow(color: .black, radius: 0.1, x: 0.1, y: 0.1)
+                        .padding([.top], 16.0)
+                    Text("Get in the Punch-Line --->")
+                        .font(Font.system(size: 24.0, weight: .light))
+                        .foregroundStyle(.accent)
+                        .shadow(color: .black, radius: 0.1, x: 0.1, y: 0.1)
+                        .padding([.bottom], 16.0)
+                }
+                Spacer()
             }
-            Spacer()
+            if let punchLineOwnerName {
+                VStack {
+                    Spacer()
+                    HStack {
+                        Spacer()
+                        Text(punchLineOwnerName)
+                            .font(Font.system(size: 12.0, weight: .light))
+                            .foregroundStyle(.accent)
+                            .shadow(color: .black, radius: 0.1, x: 0.1, y: 0.1)
+                    }
+                }
+            }
         }
         .listRowBackground(StyleManager.generateRandomBackgroundColor())
     }
+
 }
 
 #Preview {

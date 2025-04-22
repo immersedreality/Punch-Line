@@ -17,7 +17,7 @@ struct FavoriteJokeListView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                StyleManager.generateRandomBackgroundColor()
+                StyleManager.favoriteJokeListBackgroundColor
                     .ignoresSafeArea(edges: [.vertical])
                 List(viewModel.favoriteJokes) { favoriteJoke in
                     FavoriteJokeView(favoriteJoke: favoriteJoke)

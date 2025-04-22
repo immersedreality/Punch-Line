@@ -32,7 +32,8 @@ struct JokeHistoryPunchLinesView: View {
                             PunchLineHistoryView(
                                 viewModel: viewModel,
                                 punchLineID: punchLine.id,
-                                punchLineDisplayName: punchLine.displayName
+                                punchLineDisplayName: punchLine.displayName,
+                                punchLineOwnerName: nil
                             )
                         }
                     }
@@ -47,7 +48,8 @@ struct JokeHistoryPunchLinesView: View {
                                 PunchLineHistoryView(
                                     viewModel: viewModel,
                                     punchLineID: punchLine.id,
-                                    punchLineDisplayName: punchLine.displayName
+                                    punchLineDisplayName: punchLine.displayName,
+                                    punchLineOwnerName: punchLine.owningUserName
                                 )
                             }
                         }
@@ -58,13 +60,15 @@ struct JokeHistoryPunchLinesView: View {
                         Image(systemName: SystemIcons.addPunchLineButton)
                             .foregroundStyle(.accent)
                             .onTapGesture {
-                                showingAddPunchLineDialog = true
+                                if AppSessionManager.userInfo?.hasPunchLinePro == true {
+                                    showingAddPunchLineDialog = true
+                                } else {
+                                    showingJoinSheet = true
+                                }
                             }
                             .confirmationDialog("", isPresented: $showingAddPunchLineDialog) {
-                                if AppSessionManager.userInfo?.hasPunchLinePro == true {
-                                    Button(ConfirmationDialogMessages.createNewPrivatePunchLine) {
-                                        showingCreateSheet = true
-                                    }
+                                Button(ConfirmationDialogMessages.createNewPrivatePunchLine) {
+                                    showingCreateSheet = true
                                 }
                                 Button(ConfirmationDialogMessages.joinPrivatePunchLine) {
                                     showingJoinSheet = true
@@ -112,48 +116,62 @@ struct PunchLineHistoryView: View {
     let viewModel: JokeHistoryPunchLinesViewModel
     let punchLineID: String
     let punchLineDisplayName: String
+    let punchLineOwnerName: String?
 
     var body: some View {
-        HStack {
-            NavigationLink {
-                if viewModel.entryGroupsYearCount(for: punchLineID) > 1 {
-                    JokeHistoryYearsView(
-                        viewModel: JokeHistoryYearsViewModel(
-                            punchLineID: punchLineID,
-                            entryGroups: viewModel.getSelectedJokeHistoryEntryGroups(for: punchLineID)
-                        )
-                    )
-                } else if viewModel.entryGroupsMonthCount(for: punchLineID) > 1 {
-                    JokeHistoryMonthsView(
-                        viewModel: JokeHistoryMonthsViewModel(
-                            punchLineID: punchLineID,
-                            selectedYear: Calendar.current.component(.year, from: Date()),
-                            entryGroups: viewModel.getSelectedJokeHistoryEntryGroups(for: punchLineID)
-                        )
-                    )
-                } else {
-                    if let entryGroup = viewModel.getSelectedJokeHistoryEntryGroups(for: punchLineID).first {
-                        JokeHistoryEntriesView(
-                            viewModel: JokeHistoryEntriesViewModel(
-                                jokeHistoryEntryGroup: entryGroup
+        ZStack {
+            HStack {
+                NavigationLink {
+                    if viewModel.entryGroupsYearCount(for: punchLineID) > 1 {
+                        JokeHistoryYearsView(
+                            viewModel: JokeHistoryYearsViewModel(
+                                punchLineID: punchLineID,
+                                entryGroups: viewModel.getSelectedJokeHistoryEntryGroups(for: punchLineID)
                             )
                         )
+                    } else if viewModel.entryGroupsMonthCount(for: punchLineID) > 1 {
+                        JokeHistoryMonthsView(
+                            viewModel: JokeHistoryMonthsViewModel(
+                                punchLineID: punchLineID,
+                                selectedYear: Calendar.current.component(.year, from: Date()),
+                                entryGroups: viewModel.getSelectedJokeHistoryEntryGroups(for: punchLineID)
+                            )
+                        )
+                    } else {
+                        if let entryGroup = viewModel.getSelectedJokeHistoryEntryGroups(for: punchLineID).first {
+                            JokeHistoryEntriesView(
+                                viewModel: JokeHistoryEntriesViewModel(
+                                    jokeHistoryEntryGroup: entryGroup
+                                )
+                            )
+                        }
+                    }
+                } label: {
+                    HStack {
+                        Spacer()
+                        VStack {
+                            Text(punchLineDisplayName)
+                                .font(Font.system(size: 24.0, weight: .bold))
+                                .foregroundStyle(.accent)
+                                .padding([.top], 16.0)
+                            Text("Best of the Punch-Line")
+                                .font(Font.system(size: 24.0, weight: .light))
+                                .foregroundStyle(.accent)
+                                .padding([.bottom], 16.0)
+                        }
+                        Spacer()
                     }
                 }
-            } label: {
-                HStack {
+            }
+            if let punchLineOwnerName {
+                VStack {
                     Spacer()
-                    VStack {
-                        Text(punchLineDisplayName)
-                            .font(Font.system(size: 24.0, weight: .bold))
+                    HStack {
+                        Spacer()
+                        Text(punchLineOwnerName)
+                            .font(Font.system(size: 12.0, weight: .light))
                             .foregroundStyle(.accent)
-                            .padding([.top], 16.0)
-                        Text("Best of the Punch-Line")
-                            .font(Font.system(size: 24.0, weight: .light))
-                            .foregroundStyle(.accent)
-                            .padding([.bottom], 16.0)
                     }
-                    Spacer()
                 }
             }
         }

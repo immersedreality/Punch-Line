@@ -104,6 +104,7 @@ final class MockDataManager {
     ]
 
     static let testDataIndexRange = 0...19
+    static var tempMockPrivatePunchLine: PrivatePunchLine?
 
     // MARK: SwiftUI Preview Data
 
@@ -257,6 +258,21 @@ final class MockDataManager {
         } else {
             return nil
         }
+    }
+
+    class func createMockPrivatePunchLine(with request: PrivatePunchLinePostRequest) -> PrivatePunchLine {
+        let mockPrivatePunchLine = PrivatePunchLine(
+            id: UUID().uuidString,
+            displayName: request.displayName,
+            joinCode: "ABCDEF",
+            owningUserID: request.owningUserID,
+            owningUserName: request.owningUserName,
+            lastDailyResetDate: Date()
+        )
+
+        tempMockPrivatePunchLine = mockPrivatePunchLine
+
+        return mockPrivatePunchLine
     }
 
     // MARK: SwiftUI Preview Methods

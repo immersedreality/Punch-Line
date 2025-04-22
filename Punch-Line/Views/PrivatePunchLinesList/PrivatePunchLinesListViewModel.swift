@@ -7,7 +7,7 @@
 
 import Foundation
 
-class PrivatePunchLinesListViewModel {
+class PrivatePunchLinesListViewModel: ObservableObject {
 
     let mode: PrivatePunchLinesListViewMode
 
@@ -31,6 +31,8 @@ class PrivatePunchLinesListViewModel {
 
     private var selectedPrivatePunchLineID: String?
 
+    @Published var shouldNavigateBackToSettings = false
+
     init(mode: PrivatePunchLinesListViewMode) {
         self.mode = mode
     }
@@ -44,12 +46,21 @@ class PrivatePunchLinesListViewModel {
         Task {
             await APIManager.deletePrivatePunchLine(with: selectedPrivatePunchLineID)
             AppSessionManager.removeOwnedPrivatePunchLine(with: selectedPrivatePunchLineID)
+            GlobalNotificationManager.shared.shouldRefreshPunchLines = true
+            if privatePunchLines.isEmpty == true {
+                shouldNavigateBackToSettings = true
+            }
+
         }
     }
 
     func leaveSelectedPrivatePunchLine() {
         guard let selectedPrivatePunchLineID else { return }
         AppSessionManager.removeJoinedPrivatePunchLine(with: selectedPrivatePunchLineID)
+        GlobalNotificationManager.shared.shouldRefreshPunchLines = true
+        if privatePunchLines.isEmpty == true {
+            shouldNavigateBackToSettings = true
+        }
     }
 
 }

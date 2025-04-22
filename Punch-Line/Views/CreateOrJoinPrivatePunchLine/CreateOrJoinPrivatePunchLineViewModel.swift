@@ -33,13 +33,14 @@ class CreateOrJoinPrivatePunchLineViewModel: ObservableObject {
         }
     }
 
-    var createdPunchLineJoinCode: String = "ABCDEF"
+    var createdPunchLineJoinCode: String = ""
+    var punchLineDisplayName: String = ""
     var successMessage: String {
         switch mode {
         case .create:
-            return "Punch-Line Created! Give this code to anyone you'd like to join your Punch-Line: \(createdPunchLineJoinCode)"
+            return "\(punchLineDisplayName) Created!\n\nGive this code to anyone you'd like to join \(punchLineDisplayName): \(createdPunchLineJoinCode)"
         case .join:
-            return "Punch-Line Joined!"
+            return "\(punchLineDisplayName) Successfully Joined!"
         }
     }
 
@@ -85,8 +86,9 @@ class CreateOrJoinPrivatePunchLineViewModel: ObservableObject {
 
         Task {
             if let createdPrivatePunchLine = await APIManager.post(privatePunchLine: privatePunchLinePostRequest) {
-                AppSessionManager.add(privatePunchLine: createdPrivatePunchLine)
                 createdPunchLineJoinCode = createdPrivatePunchLine.joinCode
+                punchLineDisplayName = createdPrivatePunchLine.displayName
+                AppSessionManager.add(privatePunchLine: createdPrivatePunchLine)
                 shouldNavigateToSuccessScreen = true
             } else {
                 showingErrorAlert = true
@@ -96,8 +98,9 @@ class CreateOrJoinPrivatePunchLineViewModel: ObservableObject {
 
     func joinPrivatePunchLine() {
         Task {
-            let joinedPrivatePunchLines = await APIManager.getPrivatePunchLines(with: [enteredText])
+            let joinedPrivatePunchLines = await APIManager.getPrivatePunchLine(with: enteredText.uppercased())
             if let joinedPrivatePunchLine = joinedPrivatePunchLines.first {
+                punchLineDisplayName = joinedPrivatePunchLine.displayName
                 AppSessionManager.add(privatePunchLine: joinedPrivatePunchLine)
                 shouldNavigateToSuccessScreen = true
             } else {

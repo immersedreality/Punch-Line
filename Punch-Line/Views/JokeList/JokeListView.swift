@@ -19,7 +19,7 @@ struct JokeListView: View {
         NavigationStack {
             ZStack {
                 if viewModel.mode == .history {
-                    StyleManager.generateRandomBackgroundColor()
+                    StyleManager.jokeListBackgroundColor
                         .ignoresSafeArea(edges: [.top])
                 }
                 List(viewModel.jokes) { joke in

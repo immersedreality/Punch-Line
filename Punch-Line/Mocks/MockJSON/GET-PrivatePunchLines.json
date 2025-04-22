@@ -22,5 +22,77 @@
         "owningUserID": "ec20934a-7525-4f9b-82e5-bf684580c068",
         "owningUserName": "King Of Miami",
         "lastDailyResetDate": "2025-04-15T00:00:00Z"
+    },
+    {
+        "id": "ee5d7452-f126-43e8-bc88-057cf6fe16ed",
+        "displayName": "Gobbledygook",
+        "joinCode": "STUVWX",
+        "owningUserID": "54f8d653-603c-42fe-88f3-32edf71912c3",
+        "owningUserName": "Tim Allen",
+        "lastDailyResetDate": "2025-04-15T00:00:00Z"
+    },
+    {
+        "id": "d33673ea-1db5-4a86-bef1-afc47c50374f",
+        "displayName": "Cool Joke Club",
+        "joinCode": "YZABCD",
+        "owningUserID": "acbd63d3-6374-43f3-a5c7-52c31f8ab674",
+        "owningUserName": "KTC NYC",
+        "lastDailyResetDate": "2025-04-15T00:00:00Z"
+    },
+    {
+        "id": "d61b7b6a-9ed9-4d61-bbee-039165669055",
+        "displayName": "Farts 'N Poops",
+        "joinCode": "EFGHIJ",
+        "owningUserID": "ec20934a-7525-4f9b-82e5-bf684580c068",
+        "owningUserName": "King Of Miami",
+        "lastDailyResetDate": "2025-04-15T00:00:00Z"
+    },
+    {
+        "id": "488b7b14-d2cb-4ef7-a552-2b6de9b55564",
+        "displayName": "Babysitters",
+        "joinCode": "KLMNOP",
+        "owningUserID": "54f8d653-603c-42fe-88f3-32edf71912c3",
+        "owningUserName": "Tim Allen",
+        "lastDailyResetDate": "2025-04-15T00:00:00Z"
+    },
+    {
+        "id": "5ef4b112-8637-4b1b-8add-af041e54a716",
+        "displayName": "Cancellable Stuff",
+        "joinCode": "QRSTUV",
+        "owningUserID": "acbd63d3-6374-43f3-a5c7-52c31f8ab674",
+        "owningUserName": "KTC NYC",
+        "lastDailyResetDate": "2025-04-15T00:00:00Z"
+    },
+    {
+        "id": "1bb93bd9-54b6-4163-a9aa-003ae7008eee",
+        "displayName": "Work",
+        "joinCode": "WXYZAB",
+        "owningUserID": "ec20934a-7525-4f9b-82e5-bf684580c068",
+        "owningUserName": "King Of Miami",
+        "lastDailyResetDate": "2025-04-15T00:00:00Z"
+    },
+    {
+        "id": "33d9cab9-f847-411a-9be8-b85de0642109",
+        "displayName": "The Bozos",
+        "joinCode": "CDEFGH",
+        "owningUserID": "54f8d653-603c-42fe-88f3-32edf71912c3",
+        "owningUserName": "Tim Allen",
+        "lastDailyResetDate": "2025-04-15T00:00:00Z"
+    },
+    {
+        "id": "5a348a37-27a3-49f5-a1c6-624b109d1e8a",
+        "displayName": "Fairy Tales",
+        "joinCode": "IJKLMN",
+        "owningUserID": "acbd63d3-6374-43f3-a5c7-52c31f8ab674",
+        "owningUserName": "KTC NYC",
+        "lastDailyResetDate": "2025-04-15T00:00:00Z"
+    },
+    {
+        "id": "ff422e97-b150-4fcb-b468-62f7088058e8",
+        "displayName": "Canada",
+        "joinCode": "OPQRST",
+        "owningUserID": "ec20934a-7525-4f9b-82e5-bf684580c068",
+        "owningUserName": "King Of Miami",
+        "lastDailyResetDate": "2025-04-15T00:00:00Z"
     }
 ]

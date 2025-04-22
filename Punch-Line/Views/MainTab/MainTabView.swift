@@ -10,6 +10,7 @@ import SwiftUI
 struct MainTabView: View {
 
     @StateObject var viewModel = MainViewModel()
+    @StateObject var notificationManager = GlobalNotificationManager.shared
 
     @State private var selection = 1
 
@@ -39,10 +40,10 @@ struct MainTabView: View {
             }
 
         }
-        .onChange(of: GlobalNotificationManager.shared.shouldRefreshPunchLines) { _, newValue in
+        .onChange(of: notificationManager.shouldRefreshPunchLines) { _, newValue in
             if newValue == true {
                 viewModel.fetchPunchLines()
-                GlobalNotificationManager.shared.shouldRefreshPunchLines = false
+                notificationManager.shouldRefreshPunchLines = false
             }
         }
     }

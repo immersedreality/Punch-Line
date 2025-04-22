@@ -34,7 +34,30 @@ final class APIManager {
             guard let fetchedPrivatePunchLines: [PrivatePunchLine] = decodeJSON(from: data) else {
                 return []
             }
-            return fetchedPrivatePunchLines
+            
+            var filteredPunchLines = fetchedPrivatePunchLines.filter { ids.contains($0.id) }
+
+            if let mockPrivatePunchLine = MockDataManager.tempMockPrivatePunchLine {
+                filteredPunchLines.append(mockPrivatePunchLine)
+            }
+
+            return filteredPunchLines
+        } else {
+            // Real Network Call
+            return []
+        }
+    }
+
+    class func getPrivatePunchLine(with joinCode: String) async -> [PrivatePunchLine] {
+        if AppSessionManager.shouldMockNetworkCalls {
+            guard let data = fetchLocalMockJSONFile(fileName: MockRequestTitles.getPrivatePunchLines) else {
+                return []
+            }
+            guard let fetchedPrivatePunchLines: [PrivatePunchLine] = decodeJSON(from: data) else {
+                return []
+            }
+            let filteredPunchLines = fetchedPrivatePunchLines.filter { joinCode == $0.joinCode }
+            return filteredPunchLines
         } else {
             // Real Network Call
             return []
@@ -43,8 +66,7 @@ final class APIManager {
 
     class func post(privatePunchLine: PrivatePunchLinePostRequest) async -> PrivatePunchLine? {
         if AppSessionManager.shouldMockNetworkCalls {
-            // Mock Network Call
-            return nil
+            return MockDataManager.createMockPrivatePunchLine(with: privatePunchLine)
         } else {
             // Real Network Call
             return nil
@@ -53,7 +75,7 @@ final class APIManager {
 
     class func deletePrivatePunchLine(with id: String) async {
         if AppSessionManager.shouldMockNetworkCalls {
-            // Mock Network Call
+            MockDataManager.tempMockPrivatePunchLine = nil
         } else {
             // Real Network Call
         }

@@ -13,13 +13,20 @@ struct CreateOrJoinSuccessView: View {
 
     var body: some View {
         ZStack {
-            StyleManager.createOrJoinBackgroundColor
+            StyleManager.createOrJoinSuccessBackgroundColor
                 .ignoresSafeArea(edges: [.bottom])
             VStack(alignment: .center) {
+                Text("swipe down to close")
+                    .font(Font.system(size: 16.0, weight: .semibold))
+                    .foregroundStyle(.accent)
+                    .shadow(color: .black, radius: 0.1, x: 0.1, y: 0.1)
+                    .padding([.top], 16.0)
+                Spacer()
                 Text(viewModel.successMessage)
                     .font(Font.system(size: 32.0, weight: .semibold))
                     .foregroundStyle(.accent)
                     .shadow(color: .black, radius: 0.1, x: 0.1, y: 0.1)
+                Spacer()
             }
             .padding([.horizontal], 16.0)
             .navigationBarBackButtonHidden()

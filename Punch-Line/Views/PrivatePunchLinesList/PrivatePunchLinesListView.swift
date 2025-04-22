@@ -9,48 +9,41 @@ import SwiftUI
 
 struct PrivatePunchLinesListView: View {
 
-    let viewModel: PrivatePunchLinesListViewModel
-    
+    @StateObject var viewModel: PrivatePunchLinesListViewModel
+
     @State private var showingConfirmationDialog = false
-    @State private var shouldNavigateBackToSettings = false
 
     var body: some View {
         NavigationStack {
             ZStack {
-                StyleManager.generateRandomBackgroundColor()
+                StyleManager.privatePunchLineListBackgroundColor
                     .ignoresSafeArea(edges: [.vertical])
                 List(viewModel.privatePunchLines) { privatePunchLine in
-                    PrivatePunchLineView(privatePunchLine: privatePunchLine)
-                        .onTapGesture {
-                            showingConfirmationDialog = true
-                            viewModel.set(selectedPrivatePunchLineID: privatePunchLine.id)
-                        }
-                        .confirmationDialog("", isPresented: $showingConfirmationDialog) {
-                            switch viewModel.mode {
-                            case .owned:
-                                Button(ConfirmationDialogMessages.disbandPrivatePunchLine) {
-                                    viewModel.disbandSelectedPrivatePunchLine()
-                                    if viewModel.privatePunchLines.isEmpty == true {
-                                        shouldNavigateBackToSettings = true
-                                    }
-                                }
-                            case .joined:
-                                Button(ConfirmationDialogMessages.leavePrivatePunchLine) {
-                                    viewModel.leaveSelectedPrivatePunchLine()
-                                    if viewModel.privatePunchLines.isEmpty == true {
-                                        shouldNavigateBackToSettings = true
-                                    }
-                                }
-
+                    Button {
+                        showingConfirmationDialog = true
+                        viewModel.set(selectedPrivatePunchLineID: privatePunchLine.id)
+                    } label: {
+                        PrivatePunchLineView(privatePunchLine: privatePunchLine)
+                    }
+                    .confirmationDialog("", isPresented: $showingConfirmationDialog) {
+                        switch viewModel.mode {
+                        case .owned:
+                            Button(ConfirmationDialogMessages.disbandPrivatePunchLine) {
+                                viewModel.disbandSelectedPrivatePunchLine()
+                            }
+                        case .joined:
+                            Button(ConfirmationDialogMessages.leavePrivatePunchLine) {
+                                viewModel.leaveSelectedPrivatePunchLine()
                             }
                         }
+                    }
                 }
                 .listRowSpacing(8.0)
                 .scrollContentBackground(.hidden)
             }
             .navigationTitle(viewModel.navigationTitle)
         }
-        .navigationDestination(isPresented: $shouldNavigateBackToSettings) {
+        .navigationDestination(isPresented: $viewModel.shouldNavigateBackToSettings) {
             SettingsView()
         }
     }
