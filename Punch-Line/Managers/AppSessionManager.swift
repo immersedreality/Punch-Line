@@ -18,7 +18,7 @@ final class AppSessionManager {
     static var adAppearanceFrequency: TimeInterval = 300
     static var adTimer = Timer()
 
-    // MARK: User Initialization
+    // MARK: Initialization
 
     class func validateUserInfo() {
         if userInfo == nil {
@@ -32,7 +32,18 @@ final class AppSessionManager {
         UserDefaults.standard.set(false, forKey: UserDefaultsKeys.shouldSeeOffensiveContent)
     }
 
-    // MARK: Set/Get
+    class func initializeAdTimer() {
+        DispatchQueue.main.async {
+            adTimer = Timer.scheduledTimer(withTimeInterval: adAppearanceFrequency, repeats: true) { _ in
+                let userHasPunchLinePro = userInfo?.hasPunchLinePro ?? false
+                if !userHasPunchLinePro {
+                    shouldShowAd = true
+                }
+            }
+        }
+    }
+
+    // MARK: Main Getter
 
     private class func getUserInfo() -> UserInfo? {
         guard let punchLineUserID = UserDefaults.standard.value(forKey: UserDefaultsKeys.punchLineUserID) as? String else { return nil }
@@ -49,6 +60,18 @@ final class AppSessionManager {
             favoriteJokes = try? decoder.decode([FavoriteJoke].self, from: favoriteJokesData)
         }
 
+        var ownedPrivatePunchLines: [PrivatePunchLine]?
+        if let ownedPrivatePunchLinesData = UserDefaults.standard.object(forKey: UserDefaultsKeys.ownedPrivatePunchLines) as? Data {
+            let decoder = JSONDecoder()
+            ownedPrivatePunchLines = try? decoder.decode([PrivatePunchLine].self, from: ownedPrivatePunchLinesData)
+        }
+
+        var joinedPrivatePunchLines: [PrivatePunchLine]?
+        if let joinedPrivatePunchLinesData = UserDefaults.standard.object(forKey: UserDefaultsKeys.joinedPrivatePunchLines) as? Data {
+            let decoder = JSONDecoder()
+            joinedPrivatePunchLines = try? decoder.decode([PrivatePunchLine].self, from: joinedPrivatePunchLinesData)
+        }
+
         let userInfo = UserInfo(
             punchLineUserID: punchLineUserID,
             punchLineUserName: punchLineUserName,
@@ -57,24 +80,19 @@ final class AppSessionManager {
             todaysTaskCounts: todaysTaskCounts,
             dailyTooFunnyReportsCount: dailyTooFunnyReportsCount,
             shouldSeeOffensiveContent: shouldSeeOffensiveContent,
-            favoriteJokes: favoriteJokes ?? []
+            favoriteJokes: favoriteJokes ?? [],
+            ownedPrivatePunchLines: ownedPrivatePunchLines ?? [],
+            joinedPrivatePunchLines: joinedPrivatePunchLines ?? []
         )
 
         return userInfo
     }
 
-    class func initializeAdTimer() {
-        DispatchQueue.main.async {
-            adTimer = Timer.scheduledTimer(withTimeInterval: adAppearanceFrequency, repeats: true) { _ in
-                let userHasPunchLinePro = userInfo?.hasPunchLinePro ?? false
-                if !userHasPunchLinePro {
-                    shouldShowAd = true
-                }
-            }
-        }
-    }
-
     // MARK: Update Methods
+
+    class func set(userName: String) {
+        UserDefaults.standard.set(userName, forKey: UserDefaultsKeys.punchLineUserName)
+    }
 
     class func createTaskCountKey(for punchLineID: String) {
         guard let userInfo = userInfo else { return }
@@ -152,5 +170,45 @@ final class AppSessionManager {
         }
     }
 
-}
+    class func add(privatePunchLine: PrivatePunchLine) {
+        guard let userInfo = userInfo else { return }
 
+        if privatePunchLine.owningUserID == userInfo.punchLineUserID {
+            var ownedPrivatePunchLines = userInfo.ownedPrivatePunchLines
+            ownedPrivatePunchLines.append(privatePunchLine)
+            let encoder = JSONEncoder()
+            if let ownedPrivatePunchLinesData = try? encoder.encode(ownedPrivatePunchLines) {
+                UserDefaults.standard.set(ownedPrivatePunchLinesData, forKey: UserDefaultsKeys.ownedPrivatePunchLines)
+            }
+        } else {
+            var joinedPrivatePunchLines = userInfo.joinedPrivatePunchLines
+            joinedPrivatePunchLines.append(privatePunchLine)
+            let encoder = JSONEncoder()
+            if let joinedPrivatePunchLinesData = try? encoder.encode(joinedPrivatePunchLines) {
+                UserDefaults.standard.set(joinedPrivatePunchLinesData, forKey: UserDefaultsKeys.joinedPrivatePunchLines)
+            }
+        }
+
+    }
+
+    class func removeOwnedPrivatePunchLine(with id: String) {
+        guard let userInfo = userInfo else { return }
+        var ownedPrivatePunchLines = userInfo.ownedPrivatePunchLines
+        ownedPrivatePunchLines.removeAll { $0.id == id }
+        let encoder = JSONEncoder()
+        if let ownedPrivatePunchLinesData = try? encoder.encode(ownedPrivatePunchLines) {
+            UserDefaults.standard.set(ownedPrivatePunchLinesData, forKey: UserDefaultsKeys.ownedPrivatePunchLines)
+        }
+    }
+
+    class func removeJoinedPrivatePunchLine(with id: String) {
+        guard let userInfo = userInfo else { return }
+        var joinedPrivatePunchLines = userInfo.joinedPrivatePunchLines
+        joinedPrivatePunchLines.removeAll { $0.id == id }
+        let encoder = JSONEncoder()
+        if let joinedPrivatePunchLinesData = try? encoder.encode(joinedPrivatePunchLines) {
+            UserDefaults.standard.set(joinedPrivatePunchLinesData, forKey: UserDefaultsKeys.joinedPrivatePunchLines)
+        }
+    }
+
+}

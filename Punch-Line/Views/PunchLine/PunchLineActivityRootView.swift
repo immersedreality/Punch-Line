@@ -42,7 +42,7 @@ struct PunchLineActivityRootView: View {
 #Preview {
     PunchLineActivityRootView(
         viewModel: PunchLineActivityViewModel(
-            punchLine: MockDataManager.getPreviewPunchLines()[0],
+            punchLine: MockDataManager.getPreviewPublicPunchLines()[0],
             activity: .setup,
             activityDisplayText: ActivityFeedMessages.setupFirst
         )

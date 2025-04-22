@@ -9,16 +9,30 @@ import Foundation
 
 class PunchLineLaunchersViewModel {
 
-    let fetchedPublicPunchLines: [PunchLine]
-    var selectedPunchLine: PunchLine?
+    let fetchedPublicPunchLines: [PublicPunchLine]
+    var selectedPublicPunchLine: PublicPunchLine?
 
-    init(fetchedPublicPunchLines: [PunchLine]) {
+    let fetchedPrivatePunchLines: [PrivatePunchLine]
+    var selectedPrivatePunchLine: PrivatePunchLine?
+
+    init(fetchedPublicPunchLines: [PublicPunchLine], fetchedPrivatePunchLines: [PrivatePunchLine]) {
         self.fetchedPublicPunchLines = fetchedPublicPunchLines
+        self.fetchedPrivatePunchLines = fetchedPrivatePunchLines
     }
     
     func getInitialPunchLineActivity() -> PunchLineActivity {
 
-        guard let selectedPunchLineID = selectedPunchLine?.id else {
+        var selectedPunchLineID: String?
+
+        if let selectedPublicPunchLineID = selectedPublicPunchLine?.id {
+            selectedPunchLineID = selectedPublicPunchLineID
+        }
+
+        if let selectedPrivatePunchLineID = selectedPrivatePunchLine?.id {
+            selectedPunchLineID = selectedPrivatePunchLineID
+        }
+
+        guard let selectedPunchLineID else {
             return .somethingWentWrong
         }
 
@@ -42,7 +56,17 @@ class PunchLineLaunchersViewModel {
 
     func getInitialPunchLineActivityDisplayText() -> String {
 
-        guard let selectedPunchLineID = selectedPunchLine?.id else {
+        var selectedPunchLineID: String?
+
+        if let selectedPublicPunchLineID = selectedPublicPunchLine?.id {
+            selectedPunchLineID = selectedPublicPunchLineID
+        }
+
+        if let selectedPrivatePunchLineID = selectedPrivatePunchLine?.id {
+            selectedPunchLineID = selectedPrivatePunchLineID
+        }
+
+        guard let selectedPunchLineID else {
             return ActivityFeedMessages.weDoneGoofed
         }
 

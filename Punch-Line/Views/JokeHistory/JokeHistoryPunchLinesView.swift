@@ -11,17 +11,74 @@ struct JokeHistoryPunchLinesView: View {
 
     let viewModel: JokeHistoryPunchLinesViewModel
 
-    @State private var showingModalSheet = false
-
+    @State private var showingCreateSheet = false
+    @State private var showingJoinSheet = false
+    @State private var showingSettingsSheet = false
+    @State private var showingAddPunchLineDialog = false
+    
     var body: some View {
         NavigationStack {
             ZStack {
                 StyleManager.generateRandomBackgroundColor()
                     .ignoresSafeArea(edges: [.top])
-                List(viewModel.fetchedPublicPunchLines) { punchLine in
-                    PunchLineHistoryView(viewModel: viewModel, punchLine: punchLine)
+                List() {
+                    Section(
+                        header: Text("Public")
+                            .font(Font.system(size: 20.0, weight: .semibold))
+                            .foregroundStyle(.accent)
+                            .shadow(color: .black, radius: 0.1, x: 0.1, y: 0.1)
+                    ) {
+                        ForEach(viewModel.fetchedPublicPunchLines) { punchLine in
+                            PunchLineHistoryView(
+                                viewModel: viewModel,
+                                punchLineID: punchLine.id,
+                                punchLineDisplayName: punchLine.displayName
+                            )
+                        }
+                    }
+                    if !viewModel.fetchedPrivatePunchLines.isEmpty {
+                        Section(
+                            header: Text("Private")
+                                .font(Font.system(size: 20.0, weight: .semibold))
+                                .foregroundStyle(.accent)
+                                .shadow(color: .black, radius: 0.1, x: 0.1, y: 0.1)
+                        ) {
+                            ForEach(viewModel.fetchedPrivatePunchLines) { punchLine in
+                                PunchLineHistoryView(
+                                    viewModel: viewModel,
+                                    punchLineID: punchLine.id,
+                                    punchLineDisplayName: punchLine.displayName
+                                )
+                            }
+                        }
+                    }
                 }
                 .toolbar {
+                    ToolbarItem(placement: .topBarLeading) {
+                        Image(systemName: SystemIcons.addPunchLineButton)
+                            .foregroundStyle(.accent)
+                            .onTapGesture {
+                                showingAddPunchLineDialog = true
+                            }
+                            .confirmationDialog("", isPresented: $showingAddPunchLineDialog) {
+                                if AppSessionManager.userInfo?.hasPunchLinePro == true {
+                                    Button(ConfirmationDialogMessages.createNewPrivatePunchLine) {
+                                        showingCreateSheet = true
+                                    }
+                                }
+                                Button(ConfirmationDialogMessages.joinPrivatePunchLine) {
+                                    showingJoinSheet = true
+                                }
+                            }
+                            .sheet(isPresented: $showingCreateSheet) {
+                                CreateOrJoinPrivatePunchLineView(viewModel: CreateOrJoinPrivatePunchLineViewModel(mode: .create))
+                                    .presentationDragIndicator(.visible)
+                            }
+                            .sheet(isPresented: $showingJoinSheet) {
+                                CreateOrJoinPrivatePunchLineView(viewModel: CreateOrJoinPrivatePunchLineViewModel(mode: .join))
+                                    .presentationDragIndicator(.visible)
+                            }
+                    }
                     ToolbarItem(placement: .principal) {
                         Image(ImageTitles.iconNavigationTitle)
                             .foregroundStyle(.accent)
@@ -30,9 +87,9 @@ struct JokeHistoryPunchLinesView: View {
                         Image(systemName: SystemIcons.settingsButton)
                             .foregroundStyle(.accent)
                             .onTapGesture {
-                                showingModalSheet = true
+                                showingSettingsSheet = true
                             }
-                            .sheet(isPresented: $showingModalSheet) {
+                            .sheet(isPresented: $showingSettingsSheet) {
                                 SettingsView()
                                     .presentationDragIndicator(.visible)
                             }
@@ -53,28 +110,29 @@ struct JokeHistoryPunchLinesView: View {
 struct PunchLineHistoryView: View {
 
     let viewModel: JokeHistoryPunchLinesViewModel
-    let punchLine: PunchLine
+    let punchLineID: String
+    let punchLineDisplayName: String
 
     var body: some View {
         HStack {
             NavigationLink {
-                if viewModel.entryGroupsYearCount(for: punchLine.id) > 1 {
+                if viewModel.entryGroupsYearCount(for: punchLineID) > 1 {
                     JokeHistoryYearsView(
                         viewModel: JokeHistoryYearsViewModel(
-                            punchLineID: punchLine.id,
-                            entryGroups: viewModel.getSelectedJokeHistoryEntryGroups(for: punchLine.id)
+                            punchLineID: punchLineID,
+                            entryGroups: viewModel.getSelectedJokeHistoryEntryGroups(for: punchLineID)
                         )
                     )
-                } else if viewModel.entryGroupsMonthCount(for: punchLine.id) > 1 {
+                } else if viewModel.entryGroupsMonthCount(for: punchLineID) > 1 {
                     JokeHistoryMonthsView(
                         viewModel: JokeHistoryMonthsViewModel(
-                            punchLineID: punchLine.id,
+                            punchLineID: punchLineID,
                             selectedYear: Calendar.current.component(.year, from: Date()),
-                            entryGroups: viewModel.getSelectedJokeHistoryEntryGroups(for: punchLine.id)
+                            entryGroups: viewModel.getSelectedJokeHistoryEntryGroups(for: punchLineID)
                         )
                     )
                 } else {
-                    if let entryGroup = viewModel.getSelectedJokeHistoryEntryGroups(for: punchLine.id).first {
+                    if let entryGroup = viewModel.getSelectedJokeHistoryEntryGroups(for: punchLineID).first {
                         JokeHistoryEntriesView(
                             viewModel: JokeHistoryEntriesViewModel(
                                 jokeHistoryEntryGroup: entryGroup
@@ -86,7 +144,7 @@ struct PunchLineHistoryView: View {
                 HStack {
                     Spacer()
                     VStack {
-                        Text(punchLine.displayName)
+                        Text(punchLineDisplayName)
                             .font(Font.system(size: 24.0, weight: .bold))
                             .foregroundStyle(.accent)
                             .padding([.top], 16.0)
@@ -105,6 +163,9 @@ struct PunchLineHistoryView: View {
 
 #Preview {
     JokeHistoryPunchLinesView(
-        viewModel: JokeHistoryPunchLinesViewModel(fetchedPublicPunchLines: MockDataManager.getPreviewPunchLines())
+        viewModel: JokeHistoryPunchLinesViewModel(
+            fetchedPublicPunchLines: MockDataManager.getPreviewPublicPunchLines(),
+            fetchedPrivatePunchLines: MockDataManager.getPreviewPrivatePunchLines()
+        )
     )
 }

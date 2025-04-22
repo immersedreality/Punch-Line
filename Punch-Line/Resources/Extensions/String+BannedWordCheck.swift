@@ -11,7 +11,7 @@ extension String {
 
     func containsBannedWords() -> Bool {
         for bannedWord in AppConstants.BannedWords {
-            if self.contains(bannedWord) {
+            if self.lowercased().contains(bannedWord) {
                 return true
             }
         }

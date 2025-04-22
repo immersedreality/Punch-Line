@@ -9,6 +9,7 @@ import SwiftUI
 
 final class StyleManager {
 
+    static var createOrJoinBackgroundColor = generateRandomBackgroundColor()
     static var jokeLookupBackgroundColor = generateRandomBackgroundColor()
 
     struct PunchLineColors {

@@ -82,7 +82,7 @@ struct SetupView: View {
         var body: some View {
             SetupView(
                 viewModel: PunchLineActivityViewModel(
-                    punchLine: MockDataManager.getPreviewPunchLines()[0],
+                    punchLine: MockDataManager.getPreviewPublicPunchLines()[0],
                     activity: .setup,
                     activityDisplayText: ActivityFeedMessages.setupFirst
                 ),

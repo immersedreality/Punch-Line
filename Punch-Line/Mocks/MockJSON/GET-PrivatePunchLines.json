@@ -1,0 +1,26 @@
+[
+    {
+        "id": "ef5a5b89-a060-4109-9ef8-8e5e13603f9c",
+        "displayName": "Tim Allen's Punch-Line",
+        "joinCode": "ABCDEF",
+        "owningUserID": "54f8d653-603c-42fe-88f3-32edf71912c3",
+        "owningUserName": "Tim Allen",
+        "lastDailyResetDate": "2025-04-15T00:00:00Z"
+    },
+    {
+        "id": "f0b8dd22-2ec5-4d20-b8b4-42780b27d3e2",
+        "displayName": "NYC Jokes",
+        "joinCode": "GHIJKL",
+        "owningUserID": "acbd63d3-6374-43f3-a5c7-52c31f8ab674",
+        "owningUserName": "KTC NYC",
+        "lastDailyResetDate": "2025-04-15T00:00:00Z"
+    },
+    {
+        "id": "9d7630bc-5bc0-4595-ba24-976881bdc51d",
+        "displayName": "Dumb Shit",
+        "joinCode": "MNOPQR",
+        "owningUserID": "ec20934a-7525-4f9b-82e5-bf684580c068",
+        "owningUserName": "King Of Miami",
+        "lastDailyResetDate": "2025-04-15T00:00:00Z"
+    }
+]

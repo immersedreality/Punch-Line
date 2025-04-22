@@ -22,11 +22,22 @@ struct SettingsView: View {
                         .padding([.top], 24.0)
                         .padding([.horizontal], 16.0)
                     List {
+                        if AppSessionManager.userInfo?.hasPunchLinePro == true {
+                            UserNameRow()
+                        }
                         if AppSessionManager.userInfo?.favoriteJokes.isEmpty == false {
                             FavoriteJokesRow()
                         }
+                        if AppSessionManager.userInfo?.ownedPrivatePunchLines.isEmpty == false {
+                            OwnedPrivatePunchLinesRow()
+                        }
+                        if AppSessionManager.userInfo?.joinedPrivatePunchLines.isEmpty == false {
+                            JoinedPrivatePunchLinesRow()
+                        }
                         ShowOffensiveContentRow()
-                        GetPunchLineProRow()
+                        if AppSessionManager.userInfo?.hasPunchLinePro == false {
+                            GetPunchLineProRow()
+                        }
                     }
                     .listRowSpacing(8.0)
                     .scrollContentBackground(.hidden)
@@ -54,6 +65,34 @@ struct FavoriteJokesRow: View {
 
 }
 
+struct OwnedPrivatePunchLinesRow: View {
+
+    var body: some View {
+        NavigationLink {
+            PrivatePunchLinesListView(viewModel: PrivatePunchLinesListViewModel(mode: .owned))
+        } label: {
+            Text("Owned Private Punch-Lines")
+                .font(Font.system(size: 20.0, weight: .light))
+                .foregroundStyle(.accent)
+        }
+    }
+
+}
+
+struct JoinedPrivatePunchLinesRow: View {
+
+    var body: some View {
+        NavigationLink {
+            PrivatePunchLinesListView(viewModel: PrivatePunchLinesListViewModel(mode: .joined))
+        } label: {
+            Text("Joined Private Punch-Lines")
+                .font(Font.system(size: 20.0, weight: .light))
+                .foregroundStyle(.accent)
+        }
+    }
+
+}
+
 struct ShowOffensiveContentRow: View {
 
     @State private var shouldSeeOffensiveContent = AppSessionManager.userInfo?.shouldSeeOffensiveContent ?? false
@@ -73,12 +112,69 @@ struct ShowOffensiveContentRow: View {
 
 }
 
+struct UserNameRow: View {
+
+    @State private var enteredUserNameText: String = AppSessionManager.userInfo?.punchLineUserName ?? ""
+    @State private var showingAlert = false
+    @State var alertTitle = ""
+    @State var alertMessage = ""
+
+    var body: some View {
+        TextField("Enter Your Name Here", text: $enteredUserNameText)
+            .textFieldStyle(.plain)
+            .font(Font.system(size: 20.0, weight: .semibold))
+            .foregroundStyle(.accent)
+            .submitLabel(.done)
+            .onSubmit({
+                validateTextEntry()
+            })
+            .alert(alertTitle, isPresented: $showingAlert) {
+                Button("Okeydoke") {
+                }
+            } message: {
+                Text(alertMessage)
+            }
+    }
+
+    private func validateTextEntry() {
+        guard enteredUserNameText.count >= 8 else {
+            enteredUserNameText = AppSessionManager.userInfo?.punchLineUserName ?? ""
+            alertTitle = "Invalid Name"
+            alertMessage = "Names must be a minimum of 8 characters."
+            showingAlert = true
+            return
+        }
+
+        guard enteredUserNameText.count <= 32 else {
+            enteredUserNameText = AppSessionManager.userInfo?.punchLineUserName ?? ""
+            alertTitle = "Invalid Name"
+            alertMessage = "Names must be 32 characters or less."
+            showingAlert = true
+            return
+        }
+
+        guard !enteredUserNameText.containsBannedWords() else {
+            enteredUserNameText = AppSessionManager.userInfo?.punchLineUserName ?? ""
+            alertTitle = "Invalid Name"
+            alertMessage = "Names may not contain offensive words."
+            showingAlert = true
+            return
+        }
+
+        AppSessionManager.set(userName: enteredUserNameText)
+        alertTitle = "Name Updated"
+        alertMessage = "Your author name has been successfully updated!"
+        showingAlert = true
+    }
+
+}
+
 struct GetPunchLineProRow: View {
 
     @State private var showingAlert = false
 
     var body: some View {
-        Text("Get PunchLine Pro!  Get Rid of Ads!! Get Credit for Your Fantastic Joke Contributions!!! Create and Share Your Own Custom Punch-Lines!!!!")
+        Text("Get PunchLine Pro!  Why?!\n1. Get Rid Of Ads!\n2. Authorship Over Your Fantastic Joke Contributions!! \n3. Respond To Your Own Setups and Hog All The Glory!!!\n4. Create And Share Your Own Private Punch-Lines!!!!")
             .font(Font.system(size: 20.0, weight: .light))
             .foregroundStyle(.accent)
             .onTapGesture {

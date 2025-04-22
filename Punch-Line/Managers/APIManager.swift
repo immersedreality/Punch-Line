@@ -11,12 +11,12 @@ final class APIManager {
 
     // MARK: Punch-Lines
 
-    class func getPublicPunchLines() async -> [PunchLine] {
+    class func getPublicPunchLines() async -> [PublicPunchLine] {
         if AppSessionManager.shouldMockNetworkCalls {
-            guard let data = fetchLocalMockJSONFile(fileName: "GET-PunchLines") else {
+            guard let data = fetchLocalMockJSONFile(fileName: MockRequestTitles.getPublicPunchLines) else {
                 return []
             }
-            guard let fetchedPublicPunchLines: [PunchLine] = decodeJSON(from: data) else {
+            guard let fetchedPublicPunchLines: [PublicPunchLine] = decodeJSON(from: data) else {
                 return []
             }
             return fetchedPublicPunchLines
@@ -26,13 +26,46 @@ final class APIManager {
         }
     }
 
+    class func getPrivatePunchLines(with ids: [String]) async -> [PrivatePunchLine] {
+        if AppSessionManager.shouldMockNetworkCalls {
+            guard let data = fetchLocalMockJSONFile(fileName: MockRequestTitles.getPrivatePunchLines) else {
+                return []
+            }
+            guard let fetchedPrivatePunchLines: [PrivatePunchLine] = decodeJSON(from: data) else {
+                return []
+            }
+            return fetchedPrivatePunchLines
+        } else {
+            // Real Network Call
+            return []
+        }
+    }
+
+    class func post(privatePunchLine: PrivatePunchLinePostRequest) async -> PrivatePunchLine? {
+        if AppSessionManager.shouldMockNetworkCalls {
+            // Mock Network Call
+            return nil
+        } else {
+            // Real Network Call
+            return nil
+        }
+    }
+
+    class func deletePrivatePunchLine(with id: String) async {
+        if AppSessionManager.shouldMockNetworkCalls {
+            // Mock Network Call
+        } else {
+            // Real Network Call
+        }
+    }
+
     // MARK: Punch-Line Activities
 
     class func post(setup: SetupPostRequest) async {
         if AppSessionManager.shouldMockNetworkCalls {
             // Mock Network Call
         } else {
-            // PunchLine Pro check for Username
+            // Punch-Line Pro Check For UserName
             // Real Network Call
         }
     }
@@ -42,6 +75,7 @@ final class APIManager {
             return MockDataManager.getMockSetupBatch()
         } else {
             // Should Show Offensive Check
+            // Punch-Line Pro Check For Own Setups
             // Real Network Call
             return []
         }
@@ -59,7 +93,7 @@ final class APIManager {
         if AppSessionManager.shouldMockNetworkCalls {
             // Mock Network Call
         } else {
-            // PunchLine Pro check for Username
+            // Punch-Line Pro Check For UserName
             // Real Network Call
         }
     }
@@ -94,7 +128,7 @@ final class APIManager {
 
     class func getJokeHistoryEntryGroups(for punchLineID: String) async -> [JokeHistoryEntryGroup] {
         if AppSessionManager.shouldMockNetworkCalls {
-            guard let data = fetchLocalMockJSONFile(fileName: "GET-EntryGroups") else {
+            guard let data = fetchLocalMockJSONFile(fileName: MockRequestTitles.getEntryGroups) else {
                 return []
             }
             guard var fetchedEntryGroups: [JokeHistoryEntryGroup] = decodeJSON(from: data) else {
