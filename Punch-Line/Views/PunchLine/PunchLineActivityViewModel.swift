@@ -111,61 +111,123 @@ class PunchLineActivityViewModel: ObservableObject {
 
         switch todaysTaskCount {
         case 0:
-            activity = .setup
-            activityDisplayText = ActivityFeedMessages.setupFirst
-            currentSetup = nil
-            currentJoke = nil
+            configureViewForSetup(.first)
         case 1:
-            guard let lastOwnSetup else {
-                configureViewForError()
-                return
-            }
-            activity = .punchline
-            activityDisplayText = ActivityFeedMessages.ownPunchlineFirst
-            currentSetup = lastOwnSetup
-            currentJoke = nil
+            configureViewForOwnPunchline(.first)
         case 2:
-            activity = .setup
-            activityDisplayText = ActivityFeedMessages.setupSecond
-            currentSetup = nil
-            currentJoke = nil
+            configureViewForSetup(.second)
         case 3:
-            guard let lastOwnSetup else {
-                configureViewForError()
-                return
-            }
-            activity = .punchline
-            activityDisplayText = ActivityFeedMessages.ownPunchlineSecond
-            currentSetup = lastOwnSetup
-            currentJoke = nil
+            configureViewForOwnPunchline(.second)
         case 4:
-            activity = .setup
-            activityDisplayText = ActivityFeedMessages.setupThird
-            currentSetup = nil
-            currentJoke = nil
+            configureViewForSetup(.third)
         case 5:
-            guard let lastOwnSetup else {
-                configureViewForError()
-                return
-            }
-            activity = .punchline
-            activityDisplayText = ActivityFeedMessages.ownPunchlineThird
-            currentSetup = lastOwnSetup
-            currentJoke = nil
+            configureViewForOwnPunchline(.third)
         case 6, 8, 11, 15, 20, 26, 33, 41, 50, 60:
-            activity = .punchline
-            activityDisplayText = ActivityFeedMessages.punchline
-            currentSetup = fetchedSetups.first
-            currentJoke = nil
+            if lastOwnSetup != nil {
+                configureViewForOwnPunchline(.extra)
+            } else if fetchedSetups.first != nil {
+                configureViewForPunchline()
+            } else {
+                configureViewForSetup(.extra)
+            }
         default:
-            activity = .vote
-            activityDisplayText = ActivityFeedMessages.vote
-            currentJoke = fetchedJokes.first
-            currentSetup = nil
+            if lastOwnSetup != nil {
+                configureViewForOwnPunchline(.extra)
+            } else if fetchedJokes.first != nil {
+                configureViewForJoke()
+            } else if fetchedSetups.first != nil {
+                configureViewForPunchline()
+            } else {
+                configureViewForSetup(.extra)
+            }
         }
 
         updatePunchLineRelauncher()
 
+    }
+
+    private func configureViewForSetup(_ taskCount: TaskCounter) {
+        switch taskCount {
+        case .first:
+            activity = .setup
+            activityDisplayText = ActivityFeedMessages.setupFirst
+            currentSetup = nil
+            currentJoke = nil
+        case .second:
+            activity = .setup
+            activityDisplayText = ActivityFeedMessages.setupSecond
+            currentSetup = nil
+            currentJoke = nil
+        case .third:
+            activity = .setup
+            activityDisplayText = ActivityFeedMessages.setupThird
+            currentSetup = nil
+            currentJoke = nil
+        case .extra:
+            activity = .setup
+            activityDisplayText = ActivityFeedMessages.setupExtra
+            currentSetup = nil
+            currentJoke = nil
+        }
+    }
+
+    private func configureViewForOwnPunchline(_ taskCount: TaskCounter) {
+        guard let ownSetup = lastOwnSetup else {
+            configureViewForError()
+            return
+        }
+
+        switch taskCount {
+        case .first:
+            activity = .punchline
+            activityDisplayText = ActivityFeedMessages.ownPunchlineFirst
+            currentSetup = ownSetup
+            currentJoke = nil
+            lastOwnSetup = nil
+        case .second:
+            activity = .punchline
+            activityDisplayText = ActivityFeedMessages.ownPunchlineSecond
+            currentSetup = ownSetup
+            currentJoke = nil
+            lastOwnSetup = nil
+        case .third:
+            activity = .punchline
+            activityDisplayText = ActivityFeedMessages.ownPunchlineThird
+            currentSetup = ownSetup
+            currentJoke = nil
+            lastOwnSetup = nil
+        case .extra:
+            activity = .punchline
+            activityDisplayText = ActivityFeedMessages.ownPunchlineExtra
+            currentSetup = ownSetup
+            currentJoke = nil
+            lastOwnSetup = nil
+        }
+
+    }
+
+    private func configureViewForPunchline() {
+        guard let fetchedSetup = fetchedSetups.first else {
+            configureViewForError()
+            return
+        }
+
+        activity = .punchline
+        activityDisplayText = ActivityFeedMessages.punchline
+        currentSetup = fetchedSetup
+        currentJoke = nil
+    }
+
+    private func configureViewForJoke() {
+        guard let fetchedJoke = fetchedJokes.first else {
+            configureViewForError()
+            return
+        }
+
+        activity = .vote
+        activityDisplayText = ActivityFeedMessages.vote
+        currentJoke = fetchedJoke
+        currentSetup = nil
     }
 
     private func configureViewForError() {
@@ -306,4 +368,8 @@ class PunchLineActivityViewModel: ObservableObject {
 
 enum PunchLineActivity {
     case setup, punchline, vote, somethingWentWrong
+}
+
+enum TaskCounter {
+    case first, second, third, extra
 }
