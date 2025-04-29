@@ -155,7 +155,7 @@ final class AppSessionManager {
         UserDefaults.standard.set(!userInfo.shouldSeeOffensiveContent, forKey: UserDefaultsKeys.shouldSeeOffensiveContent)
     }
 
-    class func addFavoriteJoke(from joke: Joke) {
+    class func addFavoriteJoke(from joke: HistoryJoke) {
         guard let userInfo = userInfo else { return }
         var favoriteJokes = userInfo.favoriteJokes
 

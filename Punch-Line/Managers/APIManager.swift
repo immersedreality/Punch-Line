@@ -175,7 +175,7 @@ final class APIManager {
 
     // MARK: Joke Lookup
 
-    class func getSearchResults(for searchQuery: String) async -> [Joke] {
+    class func getSearchResults(for searchQuery: String) async -> [HistoryJoke] {
         if AppSessionManager.shouldMockNetworkCalls {
             return MockDataManager.getMockSearchResults(for: searchQuery)
         } else {

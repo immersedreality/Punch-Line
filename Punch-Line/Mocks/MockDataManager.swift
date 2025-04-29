@@ -132,7 +132,9 @@ final class MockDataManager {
         var jokeHistoryEntries: [JokeHistoryEntry] = []
 
         for date in dateRange {
-            jokeHistoryEntries.append(JokeHistoryEntry(id: UUID().uuidString, entryGroupID: entryGroup.id, punchLineID: entryGroup.punchLineID, date: date, jokes: getMockOrPreviewJokeBatch(for: entryGroup.punchLineID, numberOfJokes: 10)))
+            jokeHistoryEntries.append(
+                JokeHistoryEntry(id: UUID().uuidString, entryGroupID: entryGroup.id, punchLineID: entryGroup.punchLineID, date: date, jokes: getMockOrPreviewHistoryJokeBatch(for: entryGroup.punchLineID, numberOfJokes: 10))
+            )
         }
 
         jokeHistoryEntries.reverse()
@@ -141,16 +143,16 @@ final class MockDataManager {
         
     }
 
-    class func getMockSearchResults(for searchString: String) -> [Joke] {
+    class func getMockSearchResults(for searchString: String) -> [HistoryJoke] {
 
-        var searchResults: [Joke] = []
+        var searchResults: [HistoryJoke] = []
 
         for _ in 0...49 {
             guard let startingDate = DateComponents(calendar: .current, year: 2024, month: 1, day: 1).date else { continue }
             let randomPunchLineDisplayName = testPunchLineDisplayNames[Int.random(in: testDataIndexRange)]
             let randomRank = Int.random(in: 1...10)
 
-            let fakeSearchResult = Joke(
+            let fakeSearchResult = HistoryJoke(
                 id: UUID().uuidString,
                 punchLineID: UUID().uuidString,
                 punchLineDisplayName: randomPunchLineDisplayName,
@@ -180,6 +182,7 @@ final class MockDataManager {
             text: randomSetup,
             authorID: UUID().uuidString,
             authorUsername: getRandomName(),
+            dateCreated: Date(),
             isOffensive: false
         )
 
@@ -206,13 +209,13 @@ final class MockDataManager {
             punchLineID: UUID().uuidString,
             punchLineDisplayName: randomPunchLineDisplayName,
             setup: randomSetup,
+            setupID: UUID().uuidString,
             setupAuthorID: UUID().uuidString,
             setupAuthorUsername: getRandomName(),
             punchline: randomPunchline,
             punchlineAuthorID: UUID().uuidString,
             punchlineAuthorUsername: getRandomName(),
             dateCreated: Date(),
-            dayRanking: nil,
             isOffensive: false
         )
 
@@ -223,7 +226,7 @@ final class MockDataManager {
 
         var randomJokes: [Joke] = []
 
-        for rank in 1...numberOfJokes {
+        for _ in 1...numberOfJokes {
             let randomSetup = testSetUps[Int.random(in: testDataIndexRange)]
             let randomPunchline = testPunchlines[Int.random(in: testDataIndexRange)]
             var punchLineDisplayName = getPreviewPublicPunchLines().first(where: { $0.id == punchLineID })?.displayName ?? ""
@@ -232,6 +235,39 @@ final class MockDataManager {
             }
 
             let randomJoke = Joke(
+                id: UUID().uuidString,
+                punchLineID: punchLineID,
+                punchLineDisplayName: punchLineDisplayName,
+                setup: randomSetup,
+                setupID: UUID().uuidString,
+                setupAuthorID: UUID().uuidString,
+                setupAuthorUsername: getRandomName(),
+                punchline: randomPunchline,
+                punchlineAuthorID: UUID().uuidString,
+                punchlineAuthorUsername: getRandomName(),
+                dateCreated: Date(),
+                isOffensive: false
+            )
+
+            randomJokes.append(randomJoke)
+        }
+
+        return randomJokes
+    }
+
+    class func getMockOrPreviewHistoryJokeBatch(for punchLineID: String = UUID().uuidString, numberOfJokes: Int) -> [HistoryJoke] {
+
+        var randomJokes: [HistoryJoke] = []
+
+        for rank in 1...numberOfJokes {
+            let randomSetup = testSetUps[Int.random(in: testDataIndexRange)]
+            let randomPunchline = testPunchlines[Int.random(in: testDataIndexRange)]
+            var punchLineDisplayName = getPreviewPublicPunchLines().first(where: { $0.id == punchLineID })?.displayName ?? ""
+            if punchLineDisplayName.isEmpty {
+                punchLineDisplayName = testPunchLineDisplayNames[Int.random(in: testDataIndexRange)]
+            }
+
+            let randomJoke = HistoryJoke(
                 id: UUID().uuidString,
                 punchLineID: punchLineID,
                 punchLineDisplayName: punchLineDisplayName,
@@ -327,7 +363,9 @@ final class MockDataManager {
         var currentJokeHistoryEntryBatch: [JokeHistoryEntry] = []
 
         for date in dateRange {
-            currentJokeHistoryEntryBatch.append(JokeHistoryEntry(id: UUID().uuidString, entryGroupID: currentEntryGroupID, punchLineID: punchLineID, date: date, jokes: getMockOrPreviewJokeBatch(for: punchLineID, numberOfJokes: 10)))
+            currentJokeHistoryEntryBatch.append(
+                JokeHistoryEntry(id: UUID().uuidString, entryGroupID: currentEntryGroupID, punchLineID: punchLineID, date: date, jokes: getMockOrPreviewHistoryJokeBatch(for: punchLineID, numberOfJokes: 10))
+            )
         }
 
         currentJokeHistoryEntryBatch.reverse()

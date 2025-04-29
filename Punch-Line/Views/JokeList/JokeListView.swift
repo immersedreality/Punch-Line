@@ -78,26 +78,24 @@ struct JokeListView: View {
 
 struct JokeView: View {
 
-    let joke: Joke
+    let joke: HistoryJoke
     let mode: JokeListMode
 
     var body: some View {
         HStack(spacing: 4.0) {
             VStack {
-                if let dayRanking = joke.dayRanking?.description {
-                    HStack {
-                        switch mode {
-                        case .history:
-                            Text("#" + dayRanking)
-                                .font(Font.system(size: 32.0, weight: .bold))
-                                .foregroundStyle(.accent)
-                                .padding([.bottom], 2.0)
-                        case .lookup:
-                            Text("#" + dayRanking + " in " + joke.punchLineDisplayName + " on " + joke.dateCreated.displayDate)
-                                .font(Font.system(size: 12.0, weight: .bold))
-                                .foregroundStyle(.accent)
-                                .padding([.bottom], 2.0)
-                        }
+                HStack {
+                    switch mode {
+                    case .history:
+                        Text("#" + joke.dayRanking.description)
+                            .font(Font.system(size: 32.0, weight: .bold))
+                            .foregroundStyle(.accent)
+                            .padding([.bottom], 2.0)
+                    case .lookup:
+                        Text("#" + joke.dayRanking.description + " in " + joke.punchLineDisplayName + " on " + joke.dateCreated.displayDate)
+                            .font(Font.system(size: 12.0, weight: .bold))
+                            .foregroundStyle(.accent)
+                            .padding([.bottom], 2.0)
                     }
                 }
                 HStack {
@@ -147,7 +145,7 @@ struct JokeView: View {
     JokeListView(
         viewModel: JokeListViewModel(
             displayDate: MockDataManager.testDateDisplayString,
-            jokes: MockDataManager.getMockOrPreviewJokeBatch(numberOfJokes: 10),
+            jokes: MockDataManager.getMockOrPreviewHistoryJokeBatch(numberOfJokes: 10),
             mode: .lookup
         )
     )

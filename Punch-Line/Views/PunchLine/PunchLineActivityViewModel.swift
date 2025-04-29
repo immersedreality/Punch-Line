@@ -296,6 +296,7 @@ class PunchLineActivityViewModel: ObservableObject {
             text: enteredSetupText,
             authorID: userInfo.punchLineUserID,
             authorUsername: userInfo.punchLineUserName,
+            dateCreated: Date(),
             isOffensive: false
         )
         self.lastOwnSetup = ownSetup
@@ -329,12 +330,12 @@ class PunchLineActivityViewModel: ObservableObject {
             punchLineID: punchLine.id,
             punchLineDisplayName: punchLine.displayName,
             setup: setup.text,
+            setupID: setup.id,
             setupAuthorID: setup.authorID,
             setupAuthorUsername: setup.authorUsername,
             punchline: enteredPunchlineText,
             punchlineAuthorID: userInfo.punchLineUserID,
-            punchlineAuthorUsername: userInfo.punchLineUserName,
-            dateCreated: Date()
+            punchlineAuthorUsername: userInfo.punchLineUserName
         )
         Task {
             await APIManager.post(joke: jokePostRequest)

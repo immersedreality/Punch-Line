@@ -16,6 +16,7 @@ struct Setup: Codable, Identifiable {
     let authorID: String
     let authorUsername: String?
 
+    let dateCreated: Date
     let isOffensive: Bool
 
 }

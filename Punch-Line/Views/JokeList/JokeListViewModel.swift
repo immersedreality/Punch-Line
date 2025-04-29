@@ -10,11 +10,11 @@ import SwiftUI
 class JokeListViewModel {
 
     let displayDate: String
-    let jokes: [Joke]
+    let jokes: [HistoryJoke]
     let mode: JokeListMode
-    private var selectedJoke: Joke?
+    private var selectedJoke: HistoryJoke?
 
-    init(displayDate: String, jokes: [Joke], mode: JokeListMode) {
+    init(displayDate: String, jokes: [HistoryJoke], mode: JokeListMode) {
         self.displayDate = displayDate
         self.jokes = jokes
         self.mode = mode
@@ -22,7 +22,7 @@ class JokeListViewModel {
 
     // MARK: Setters/Getters
 
-    func set(selectedJoke: Joke) {
+    func set(selectedJoke: HistoryJoke) {
         self.selectedJoke = selectedJoke
     }
 
