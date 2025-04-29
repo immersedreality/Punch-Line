@@ -45,7 +45,7 @@ struct PunchLineLaunchersView: View {
                         ForEach(viewModel.fetchedPrivatePunchLines) { punchLine in
                             PunchLineLauncherView(
                                 displayName: punchLine.displayName,
-                                punchLineOwnerName: punchLine.owningUserName
+                                punchLineOwnerName: punchLine.owningUsername
                             )
                             .onTapGesture {
                                 viewModel.setSelected(privatePunchLine: punchLine)

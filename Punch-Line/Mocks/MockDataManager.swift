@@ -302,7 +302,7 @@ final class MockDataManager {
             displayName: request.displayName,
             joinCode: "ABCDEF",
             owningUserID: request.owningUserID,
-            owningUserName: request.owningUserName,
+            owningUsername: request.owningUsername,
             lastDailyResetDate: Date()
         )
 

@@ -83,7 +83,7 @@ class CreateOrJoinPrivatePunchLineViewModel: ObservableObject {
         let privatePunchLinePostRequest = PrivatePunchLinePostRequest(
             displayName: enteredText,
             owningUserID: userInfo.punchLineUserID,
-            owningUserName: userName
+            owningUsername: userName
         )
 
         Task {

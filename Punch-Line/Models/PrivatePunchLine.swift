@@ -12,12 +12,12 @@ struct PrivatePunchLine: ActivePunchLine, Codable, Identifiable {
     let displayName: String
     let joinCode: String
     let owningUserID: String
-    let owningUserName: String
+    let owningUsername: String
     let lastDailyResetDate: Date
 }
 
 struct PrivatePunchLinePostRequest: Codable {
     let displayName: String
     let owningUserID: String
-    let owningUserName: String
+    let owningUsername: String
 }

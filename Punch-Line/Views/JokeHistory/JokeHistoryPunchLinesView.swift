@@ -49,7 +49,7 @@ struct JokeHistoryPunchLinesView: View {
                                     viewModel: viewModel,
                                     punchLineID: punchLine.id,
                                     punchLineDisplayName: punchLine.displayName,
-                                    punchLineOwnerName: punchLine.owningUserName
+                                    punchLineOwnerName: punchLine.owningUsername
                                 )
                             }
                         }
