@@ -133,7 +133,7 @@ final class MockDataManager {
 
         for date in dateRange {
             jokeHistoryEntries.append(
-                JokeHistoryEntry(id: UUID().uuidString, entryGroupID: entryGroup.id, punchLineID: entryGroup.punchLineID, date: date, jokes: getMockOrPreviewHistoryJokeBatch(for: entryGroup.punchLineID, numberOfJokes: 10))
+                JokeHistoryEntry(id: UUID().uuidString, entryGroupID: entryGroup.id, date: date, jokes: getMockOrPreviewHistoryJokeBatch(for: entryGroup.punchLineID, numberOfJokes: 10))
             )
         }
 
@@ -154,7 +154,7 @@ final class MockDataManager {
 
             let fakeSearchResult = HistoryJoke(
                 id: UUID().uuidString,
-                punchLineID: UUID().uuidString,
+                entryID: UUID().uuidString,
                 punchLineDisplayName: randomPunchLineDisplayName,
                 setup: "A setup that might have '\(searchString)' in it.",
                 setupAuthorID: UUID().uuidString,
@@ -269,7 +269,7 @@ final class MockDataManager {
 
             let randomJoke = HistoryJoke(
                 id: UUID().uuidString,
-                punchLineID: punchLineID,
+                entryID: UUID().uuidString,
                 punchLineDisplayName: punchLineDisplayName,
                 setup: randomSetup,
                 setupAuthorID: UUID().uuidString,
@@ -364,7 +364,7 @@ final class MockDataManager {
 
         for date in dateRange {
             currentJokeHistoryEntryBatch.append(
-                JokeHistoryEntry(id: UUID().uuidString, entryGroupID: currentEntryGroupID, punchLineID: punchLineID, date: date, jokes: getMockOrPreviewHistoryJokeBatch(for: punchLineID, numberOfJokes: 10))
+                JokeHistoryEntry(id: UUID().uuidString, entryGroupID: currentEntryGroupID, date: date, jokes: getMockOrPreviewHistoryJokeBatch(for: punchLineID, numberOfJokes: 10))
             )
         }
 
