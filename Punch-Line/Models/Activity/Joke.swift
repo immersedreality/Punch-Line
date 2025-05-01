@@ -39,6 +39,14 @@ struct JokePostRequest: Codable {
     let punchlineAuthorUsername: String?
 }
 
+struct JokeVoteResponse: Codable {
+    let wasSuccessful: Bool
+}
+
+struct JokeReportResponse: Codable {
+    let wasSuccessful: Bool
+}
+
 enum JokeVote: String {
     case ha, meh, ugh
 }

@@ -21,3 +21,7 @@ struct PrivatePunchLinePostRequest: Codable {
     let owningUserID: String
     let owningUsername: String
 }
+
+struct PrivatePunchLineDeleteResponse: Codable {
+    let wasSuccessful: Bool
+}

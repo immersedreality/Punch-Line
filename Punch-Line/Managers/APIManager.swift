@@ -21,8 +21,8 @@ final class APIManager {
             }
             return fetchedPublicPunchLines
         } else {
-            // Real Network Call
-            return []
+            guard let publicPunchLines: [PublicPunchLine] = await handleURLRequest(for: .getPublicPunchLines) else { return [] }
+            return publicPunchLines
         }
     }
 
@@ -34,7 +34,7 @@ final class APIManager {
             guard let fetchedPrivatePunchLines: [PrivatePunchLine] = decodeJSON(from: data) else {
                 return []
             }
-            
+
             var filteredPunchLines = fetchedPrivatePunchLines.filter { ids.contains($0.id) }
 
             if let mockPrivatePunchLine = MockDataManager.tempMockPrivatePunchLine {
@@ -43,24 +43,24 @@ final class APIManager {
 
             return filteredPunchLines
         } else {
-            // Real Network Call
-            return []
+            guard let privatePunchLines: [PrivatePunchLine] = await handleURLRequest(for: .getPrivatePunchLinesWithIDs(punchLineIDs: ids)) else { return [] }
+            return privatePunchLines
         }
     }
 
-    class func getPrivatePunchLine(with joinCode: String) async -> [PrivatePunchLine] {
+    class func getPrivatePunchLine(with joinCode: String) async -> PrivatePunchLine? {
         if AppSessionManager.shouldMockNetworkCalls {
             guard let data = fetchLocalMockJSONFile(fileName: MockRequestTitles.getPrivatePunchLines) else {
-                return []
+                return nil
             }
             guard let fetchedPrivatePunchLines: [PrivatePunchLine] = decodeJSON(from: data) else {
-                return []
+                return nil
             }
-            let filteredPunchLines = fetchedPrivatePunchLines.filter { joinCode == $0.joinCode }
+            let filteredPunchLines = fetchedPrivatePunchLines.filter { joinCode == $0.joinCode }.first
             return filteredPunchLines
         } else {
-            // Real Network Call
-            return []
+            guard let privatePunchLine: PrivatePunchLine = await handleURLRequest(for: .getPrivatePunchLineWithJoinCode(joinCode: joinCode)) else { return nil }
+            return privatePunchLine
         }
     }
 
@@ -68,27 +68,29 @@ final class APIManager {
         if AppSessionManager.shouldMockNetworkCalls {
             return MockDataManager.createMockPrivatePunchLine(with: privatePunchLine)
         } else {
-            // Real Network Call
-            return nil
+            guard let privatePunchLine: PrivatePunchLine = await handleURLRequest(for: .postPrivatePunchLine(requestObject: privatePunchLine)) else { return nil }
+            return privatePunchLine
         }
     }
 
-    class func deletePrivatePunchLine(with id: String) async {
+    class func deletePrivatePunchLine(with id: String) async -> Bool {
         if AppSessionManager.shouldMockNetworkCalls {
             MockDataManager.tempMockPrivatePunchLine = nil
+            return true
         } else {
-            // Real Network Call
+            guard let response: PrivatePunchLineDeleteResponse = await handleURLRequest(for: .deletePrivatePunchLine(punchLineID: id)) else { return false }
+            return response.wasSuccessful
         }
     }
 
     // MARK: Punch-Line Activities
 
-    class func post(setup: SetupPostRequest) async {
+    class func post(setup: SetupPostRequest) async -> Bool {
         if AppSessionManager.shouldMockNetworkCalls {
-            // Mock Network Call
+            return true
         } else {
-            // Punch-Line Pro Check For UserName
-            // Real Network Call
+            guard let _: Setup = await handleURLRequest(for: .postSetup(requestObject: setup)) else { return false }
+            return true
         }
     }
 
@@ -96,26 +98,32 @@ final class APIManager {
         if AppSessionManager.shouldMockNetworkCalls {
             return MockDataManager.getMockSetupBatch()
         } else {
-            // Should Show Offensive Check
-            // Real Network Call
-            return []
+            guard let setups: [Setup] = await handleURLRequest(for: .getSetups(punchLineID: punchLineID, includeOffensiveContent: AppSessionManager.userInfo?.shouldSeeOffensiveContent ?? false)) else { return [] }
+            return setups
         }
     }
 
-    class func report(setup: Setup, for reportReason: SetupReportReason) async {
+    class func report(setup: Setup, for reportReason: SetupReportReason) async -> Bool {
         if AppSessionManager.shouldMockNetworkCalls {
-            // Mock Network Call
+            return true
         } else {
-            // Real Network Call
+            switch reportReason {
+            case .offensive:
+                guard let response: SetupReportResponse = await handleURLRequest(for: .setupReportOffensive(setupID: setup.id)) else { return false }
+                return response.wasSuccessful
+            case .unfunny:
+                guard let response: SetupReportResponse = await handleURLRequest(for: .setupReportUnfunny(setupID: setup.id)) else { return false }
+                return response.wasSuccessful
+            }
         }
     }
 
-    class func post(joke: JokePostRequest) async {
+    class func post(joke: JokePostRequest) async -> Bool {
         if AppSessionManager.shouldMockNetworkCalls {
-            // Mock Network Call
+            return true
         } else {
-            // Punch-Line Pro Check For UserName
-            // Real Network Call
+            guard let _: Joke = await handleURLRequest(for: .postJoke(requestObject: joke)) else { return false }
+            return true
         }
     }
 
@@ -123,25 +131,41 @@ final class APIManager {
         if AppSessionManager.shouldMockNetworkCalls {
             return MockDataManager.getMockOrPreviewJokeBatch(numberOfJokes: 50)
         } else {
-            // Should Show Offensive Check
-            // Real Network Call
-            return []
+            guard let jokes: [Joke] = await handleURLRequest(for: .getJokes(punchLineID: punchLineID, includeOffensiveContent: AppSessionManager.userInfo?.shouldSeeOffensiveContent ?? false)) else { return [] }
+            return jokes
         }
     }
 
-    class func voteOn(joke: Joke, with vote: JokeVote) async {
+    class func voteOn(joke: Joke, with vote: JokeVote) async -> Bool {
         if AppSessionManager.shouldMockNetworkCalls {
-            // Mock Network Call
+            return true
         } else {
-            // Real Network Call
+            switch vote {
+            case .ha:
+                guard let response: JokeVoteResponse = await handleURLRequest(for: .jokeVoteHa(jokeID: joke.id)) else { return false }
+                return response.wasSuccessful
+            case .meh:
+                guard let response: JokeVoteResponse = await handleURLRequest(for: .jokeVoteMeh(jokeID: joke.id)) else { return false }
+                return response.wasSuccessful
+            case .ugh:
+                guard let response: JokeVoteResponse = await handleURLRequest(for: .jokeVoteUgh(jokeID: joke.id)) else { return false }
+                return response.wasSuccessful
+            }
         }
     }
 
-    class func report(joke: Joke, for reportReason: JokeReportReason) async {
+    class func report(joke: Joke, for reportReason: JokeReportReason) async -> Bool {
         if AppSessionManager.shouldMockNetworkCalls {
-            // Mock Network Call
+            return true
         } else {
-            // Real Network Call
+            switch reportReason {
+            case .offensive:
+                guard let response: JokeReportResponse = await handleURLRequest(for: .jokeReportOffensive(jokeID: joke.id)) else { return false }
+                return response.wasSuccessful
+            case .tooFunny:
+                guard let response: JokeReportResponse = await handleURLRequest(for: .jokeReportTooFunny(jokeID: joke.id)) else { return false }
+                return response.wasSuccessful
+            }
         }
     }
 
@@ -158,8 +182,8 @@ final class APIManager {
             fetchedEntryGroups.reverse()
             return fetchedEntryGroups
         } else {
-            // Real Network Call
-            return []
+            guard let jokeHistoryEntryGroups: [JokeHistoryEntryGroup] = await handleURLRequest(for: .getJokeHistoryEntryGroups(punchLineID: punchLineID)) else { return [] }
+            return jokeHistoryEntryGroups
         }
     }
 
@@ -167,8 +191,8 @@ final class APIManager {
         if AppSessionManager.shouldMockNetworkCalls {
             return MockDataManager.getMockJokeHistoryEntries(for: entryGroup)
         } else {
-            // Real Network Call
-            return []
+            guard let jokeHistoryEntries: [JokeHistoryEntry] = await handleURLRequest(for: .getJokeHistoryEntries(entryGroupID: entryGroup.id)) else { return [] }
+            return jokeHistoryEntries
         }
     }
 
@@ -178,8 +202,8 @@ final class APIManager {
         if AppSessionManager.shouldMockNetworkCalls {
             return MockDataManager.getMockSearchResults(for: searchQuery)
         } else {
-            // Real Network Call
-            return []
+            guard let searchResults: [SurvivingJoke] = await handleURLRequest(for: .jokeLookupSearchQuery(searchQuery: searchQuery)) else { return [] }
+            return searchResults
         }
     }
 
@@ -198,6 +222,42 @@ final class APIManager {
 
     // MARK: Generic Networking Methods
 
+    class func handleURLRequest<DecodableObject: Codable>(for requestType: APIRequestType) async -> DecodableObject? {
+        guard let url = URL(string: requestType.path) else { return nil }
+
+        var request = URLRequest(url: url)
+        request.httpMethod = requestType.httpMethod
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+
+        if requestType.httpMethod == HTTPMethods.post {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssXXX"
+
+            let jsonEncoder = JSONEncoder()
+            jsonEncoder.dateEncodingStrategy = .formatted(dateFormatter)
+
+            switch requestType {
+            case .postPrivatePunchLine(let requestObject):
+                guard let body = try? jsonEncoder.encode(requestObject) else { return nil }
+                request.httpBody = body
+            case .postSetup(let requestObject):
+                guard let body = try? jsonEncoder.encode(requestObject) else { return nil }
+                request.httpBody = body
+            case .postJoke(let requestObject):
+                guard let body = try? jsonEncoder.encode(requestObject) else { return nil }
+                request.httpBody = body
+            default:
+                break
+            }
+        }
+
+        guard let (data, _) = try? await URLSession.shared.data(from: url) else { return nil }
+        guard let responseObject: DecodableObject = decodeJSON(from: data) else { return nil }
+
+        return responseObject
+
+    }
+
     class func decodeJSON<DecodableObject: Codable>(from data: Data) -> DecodableObject? {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssXXX"
@@ -206,8 +266,8 @@ final class APIManager {
         jsonDecoder.dateDecodingStrategy = .formatted(dateFormatter)
 
         do {
-            let fetchedSwiftObject = try jsonDecoder.decode(DecodableObject.self, from: data)
-            return fetchedSwiftObject
+            let decodedObject = try jsonDecoder.decode(DecodableObject.self, from: data)
+            return decodedObject
         } catch {
             print("DECODE ERROR: \(error)")
             return nil

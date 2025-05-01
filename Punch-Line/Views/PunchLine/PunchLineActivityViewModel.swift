@@ -295,7 +295,7 @@ class PunchLineActivityViewModel: ObservableObject {
             punchLineID: punchLine.id,
             text: enteredSetupText,
             authorID: userInfo.punchLineUserID,
-            authorUsername: userInfo.punchLineUserName,
+            authorUsername: userInfo.hasPunchLinePro ? userInfo.punchLineUserName : nil,
             dateCreated: Date(),
             isOffensive: false
         )
@@ -305,7 +305,7 @@ class PunchLineActivityViewModel: ObservableObject {
             punchLineID: punchLine.id,
             text: enteredSetupText,
             authorID: userInfo.punchLineUserID,
-            authorUsername: userInfo.punchLineUserName
+            authorUsername: userInfo.hasPunchLinePro ? userInfo.punchLineUserName : nil
         )
 
         Task {
@@ -335,7 +335,7 @@ class PunchLineActivityViewModel: ObservableObject {
             setupAuthorUsername: setup.authorUsername,
             punchline: enteredPunchlineText,
             punchlineAuthorID: userInfo.punchLineUserID,
-            punchlineAuthorUsername: userInfo.punchLineUserName
+            punchlineAuthorUsername: userInfo.hasPunchLinePro ? userInfo.punchLineUserName : nil
         )
         Task {
             await APIManager.post(joke: jokePostRequest)

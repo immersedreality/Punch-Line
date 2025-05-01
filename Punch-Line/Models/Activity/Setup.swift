@@ -28,6 +28,10 @@ struct SetupPostRequest: Codable {
     let authorUsername: String?
 }
 
+struct SetupReportResponse: Codable {
+    let wasSuccessful: Bool
+}
+
 enum SetupReportReason: String {
     case offensive, unfunny
 }

@@ -119,8 +119,8 @@ class CreateOrJoinPrivatePunchLineViewModel: ObservableObject {
         }
 
         Task {
-            let joinedPrivatePunchLines = await APIManager.getPrivatePunchLine(with: enteredText.uppercased())
-            if let joinedPrivatePunchLine = joinedPrivatePunchLines.first {
+            let joinedPrivatePunchLine = await APIManager.getPrivatePunchLine(with: enteredText.uppercased())
+            if let joinedPrivatePunchLine {
                 punchLineDisplayName = joinedPrivatePunchLine.displayName
                 AppSessionManager.add(privatePunchLine: joinedPrivatePunchLine)
                 shouldNavigateToSuccessScreen = true

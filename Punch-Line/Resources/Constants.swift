@@ -25,7 +25,6 @@ struct ActivityFeedMessages {
 struct AppConstants {
     static let adUnitID = "ca-app-pub-7985623540006861/2831009017"
     static let testAdUnitID = "ca-app-pub-3940256099942544/4411468910"
-    static let testAPIDomain = "http://localhost:8080"
     static let BannedWords = ["fag", "fagging", "faggitt", "faggot", "faggs", "fagot", "fagots", "fags", "kike", "n1gga", "n1gger", "nigg3r", "nigg4h", "nigga", "niggah", "niggas", "niggaz", "nigger", "niggers", "tranny"]
 }
 
@@ -42,6 +41,14 @@ struct ConfirmationDialogMessages {
     static let leavePrivatePunchLine = "Leave Private Punch-Line"
     static let removeFromFavorites = "Remove from Favorites"
     static let shareMessage = "(Shared from Punch-Line)"
+}
+
+struct HTTPMethods {
+    static let delete = "DELETE"
+    static let get = "GET"
+    static let patch = "PATCH"
+    static let post = "POST"
+    static let put = "PUT"
 }
 
 struct ImageTitles {
@@ -65,6 +72,31 @@ struct NavigationTitles {
     static let jokeLookup = "Laugh Lookup"
     static let ownedPrivatePunchLines = "Owned"
     static let punchLineLaunchers = "Comedy Creation"
+}
+
+struct RequestComponents {
+    static let entryGroupID = "?entryGroupID="
+    static let ha = "/ha"
+    static let includeOffensiveContent = "?includeOffensiveContent="
+    static let jokehistoryentries = "/jokehistoryentries"
+    static let jokehistoryentrygroups = "/jokehistoryentrygroups"
+    static let jokeID = "?jokeID="
+    static let jokelookup = "/jokelookup"
+    static let jokes = "/jokes"
+    static let meh = "/meh"
+    static let offensive = "/offensive"
+    static let privatepunchlines = "/privatepunchlines"
+    static let prodAPIDomain = ""
+    static let publicpunchlines = "/publicpunchlines"
+    static let punchLineID = "?punchLineID="
+    static let punchLineIDs = "?punchLineIDs="
+    static let searchQuery = "?searchQuery="
+    static let setupID = "?setupID="
+    static let setups = "/setups"
+    static let testAPIDomain = "http://localhost:8080"
+    static let toofunny = "/toofunny"
+    static let ugh = "/ugh"
+    static let unfunny = "/unfunny"
 }
 
 struct SystemIcons {

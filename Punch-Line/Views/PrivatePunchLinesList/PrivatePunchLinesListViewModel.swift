@@ -44,13 +44,14 @@ class PrivatePunchLinesListViewModel: ObservableObject {
     func disbandSelectedPrivatePunchLine() {
         guard let selectedPrivatePunchLineID else { return }
         Task {
-            await APIManager.deletePrivatePunchLine(with: selectedPrivatePunchLineID)
-            AppSessionManager.removeOwnedPrivatePunchLine(with: selectedPrivatePunchLineID)
-            GlobalNotificationManager.shared.shouldRefreshPunchLines = true
-            if privatePunchLines.isEmpty == true {
-                shouldNavigateBackToSettings = true
+            let punchLineWasDeleted = await APIManager.deletePrivatePunchLine(with: selectedPrivatePunchLineID)
+            if punchLineWasDeleted {
+                AppSessionManager.removeOwnedPrivatePunchLine(with: selectedPrivatePunchLineID)
+                GlobalNotificationManager.shared.shouldRefreshPunchLines = true
+                if privatePunchLines.isEmpty == true {
+                    shouldNavigateBackToSettings = true
+                }
             }
-
         }
     }
 
