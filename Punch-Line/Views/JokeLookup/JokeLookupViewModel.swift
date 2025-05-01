@@ -15,7 +15,7 @@ class JokeLookupViewModel: ObservableObject {
         }
     }
     @Published var debouncedSearchText: String = ""
-    @Published var searchResults: [HistoryJoke] = []
+    @Published var searchResults: [SurvivingJoke] = []
 
     init() {
         configureDebounce()

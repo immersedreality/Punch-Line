@@ -14,6 +14,15 @@ class PunchLineLaunchersViewModel {
 
     let fetchedPrivatePunchLines: [PrivatePunchLine]
     private(set) var selectedPrivatePunchLine: PrivatePunchLine?
+    private var selectedPunchLineID: String? {
+        if let selectedPublicPunchLineID = selectedPublicPunchLine?.id {
+            return selectedPublicPunchLineID
+        } else if let selectedPrivatePunchLineID = selectedPrivatePunchLine?.id {
+            return selectedPrivatePunchLineID
+        } else {
+            return nil
+        }
+    }
 
     var punchLineActivityViewModel: PunchLineActivityViewModel?
     
@@ -133,30 +142,19 @@ class PunchLineLaunchersViewModel {
     }
 
     func getPunchLineRelauncher() -> PunchLineRelauncher? {
-
-        var selectedPunchLineID: String?
-
-        if let selectedPublicPunchLineID = selectedPublicPunchLine?.id {
-            selectedPunchLineID = selectedPublicPunchLineID
-        } else if let selectedPrivatePunchLineID = selectedPrivatePunchLine?.id {
-            selectedPunchLineID = selectedPrivatePunchLineID
-        }
-
-        guard let selectedPunchLineID else {
-            return nil
-        }
-
+        guard let selectedPunchLineID else { return nil }
         return AppSessionManager.punchLineRelaunchers[selectedPunchLineID]
-        
     }
 
     func fetchSetupBatch() async -> [Setup] {
-        let setups = await APIManager.getSetups()
+        guard let selectedPunchLineID else { return [] }
+        let setups = await APIManager.getSetups(for: selectedPunchLineID)
         return setups
     }
 
-    func fetchJokeBatch() async -> [Joke ]{
-        let jokes = await APIManager.getJokes()
+    func fetchJokeBatch() async -> [Joke ] {
+        guard let selectedPunchLineID else { return [] }
+        let jokes = await APIManager.getJokes(for: selectedPunchLineID)
         return jokes
     }
 

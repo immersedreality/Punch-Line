@@ -92,12 +92,11 @@ final class APIManager {
         }
     }
 
-    class func getSetups() async -> [Setup] {
+    class func getSetups(for punchLineID: String) async -> [Setup] {
         if AppSessionManager.shouldMockNetworkCalls {
             return MockDataManager.getMockSetupBatch()
         } else {
             // Should Show Offensive Check
-            // Punch-Line Pro Check For Own Setups
             // Real Network Call
             return []
         }
@@ -120,7 +119,7 @@ final class APIManager {
         }
     }
 
-    class func getJokes() async -> [Joke] {
+    class func getJokes(for punchLineID: String) async -> [Joke] {
         if AppSessionManager.shouldMockNetworkCalls {
             return MockDataManager.getMockOrPreviewJokeBatch(numberOfJokes: 50)
         } else {
@@ -175,7 +174,7 @@ final class APIManager {
 
     // MARK: Joke Lookup
 
-    class func getSearchResults(for searchQuery: String) async -> [HistoryJoke] {
+    class func getSearchResults(for searchQuery: String) async -> [SurvivingJoke] {
         if AppSessionManager.shouldMockNetworkCalls {
             return MockDataManager.getMockSearchResults(for: searchQuery)
         } else {

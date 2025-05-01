@@ -13,6 +13,6 @@ struct JokeHistoryEntry: Codable, Identifiable {
     let entryGroupID: String
 
     let date: Date
-    let jokes: [HistoryJoke]
+    let jokes: [SurvivingJoke]
     
 }

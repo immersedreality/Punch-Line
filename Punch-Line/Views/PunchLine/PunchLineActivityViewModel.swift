@@ -69,14 +69,14 @@ class PunchLineActivityViewModel: ObservableObject {
 
     func fetchSetupBatch() {
         Task {
-            let newSetups = await APIManager.getSetups()
+            let newSetups = await APIManager.getSetups(for: punchLine.id)
             fetchedSetups.append(contentsOf: newSetups)
         }
     }
 
     func fetchJokeBatch() {
         Task {
-            let newJokes = await APIManager.getJokes()
+            let newJokes = await APIManager.getJokes(for: punchLine.id)
             fetchedJokes.append(contentsOf: newJokes)
         }
     }

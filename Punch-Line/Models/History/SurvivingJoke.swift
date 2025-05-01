@@ -1,5 +1,5 @@
 //
-//  HistoryJoke.swift
+//  SurvivingJoke.swift
 //  Punch-Line
 //
 //  Created by Jeffrey Eugene Hoch on 4/29/25.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct HistoryJoke: Codable, Identifiable {
+struct SurvivingJoke: Codable, Identifiable {
 
     let id: String
     let entryID: String

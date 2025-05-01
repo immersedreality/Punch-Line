@@ -78,7 +78,7 @@ struct JokeListView: View {
 
 struct JokeView: View {
 
-    let joke: HistoryJoke
+    let joke: SurvivingJoke
     let mode: JokeListMode
 
     var body: some View {
@@ -145,7 +145,7 @@ struct JokeView: View {
     JokeListView(
         viewModel: JokeListViewModel(
             displayDate: MockDataManager.testDateDisplayString,
-            jokes: MockDataManager.getMockOrPreviewHistoryJokeBatch(numberOfJokes: 10),
+            jokes: MockDataManager.getMockOrPreviewSurvivingJokeBatch(numberOfJokes: 10),
             mode: .lookup
         )
     )
