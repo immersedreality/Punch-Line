@@ -23,10 +23,6 @@ final class AppSessionManager {
     static var adAppearanceFrequency: TimeInterval = 180
     static var adTimer = Timer()
 
-    // MARK: Testing
-
-    static var shouldMockNetworkCalls: Bool = true
-
     // MARK: Initialization
 
     class func validateUserInfo() {
@@ -228,4 +224,8 @@ final class AppSessionManager {
         }
     }
 
+}
+
+enum NetworkEnvironment {
+    case mock, local, dev, prod
 }

@@ -28,8 +28,18 @@ enum APIRequestType {
 
     var path: String {
 
-        let domain = RequestComponents.testAPIDomain
-//        let domain = RequestComponents.prodAPIDomain
+        var domain = ""
+
+        switch APIManager.networkEnvironment {
+        case .mock:
+            break
+        case .local:
+            domain = RequestComponents.localAPIDomain
+        case .dev:
+            domain = RequestComponents.devAPIDomain
+        case .prod:
+            domain = RequestComponents.prodAPIDomain
+        }
 
         switch self {
         case .getPublicPunchLines:

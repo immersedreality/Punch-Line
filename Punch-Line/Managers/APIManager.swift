@@ -9,10 +9,14 @@ import Foundation
 
 final class APIManager {
 
+    // MARK: Network Environment
+
+    static let networkEnvironment: NetworkEnvironment = .mock
+
     // MARK: Punch-Lines
 
     class func getPublicPunchLines() async -> [PublicPunchLine] {
-        if AppSessionManager.shouldMockNetworkCalls {
+        if APIManager.networkEnvironment == .mock {
             guard let data = fetchLocalMockJSONFile(fileName: MockRequestTitles.getPublicPunchLines) else {
                 return []
             }
@@ -27,7 +31,7 @@ final class APIManager {
     }
 
     class func getPrivatePunchLines(with ids: [String]) async -> [PrivatePunchLine] {
-        if AppSessionManager.shouldMockNetworkCalls {
+        if APIManager.networkEnvironment == .mock {
             guard let data = fetchLocalMockJSONFile(fileName: MockRequestTitles.getPrivatePunchLines) else {
                 return []
             }
@@ -49,7 +53,7 @@ final class APIManager {
     }
 
     class func getPrivatePunchLine(with joinCode: String) async -> PrivatePunchLine? {
-        if AppSessionManager.shouldMockNetworkCalls {
+        if APIManager.networkEnvironment == .mock {
             guard let data = fetchLocalMockJSONFile(fileName: MockRequestTitles.getPrivatePunchLines) else {
                 return nil
             }
@@ -65,7 +69,7 @@ final class APIManager {
     }
 
     class func post(privatePunchLine: PrivatePunchLinePostRequest) async -> PrivatePunchLine? {
-        if AppSessionManager.shouldMockNetworkCalls {
+        if APIManager.networkEnvironment == .mock {
             return MockDataManager.createMockPrivatePunchLine(with: privatePunchLine)
         } else {
             guard let privatePunchLine: PrivatePunchLine = await handleURLRequest(for: .postPrivatePunchLine(requestObject: privatePunchLine)) else { return nil }
@@ -74,7 +78,7 @@ final class APIManager {
     }
 
     class func deletePrivatePunchLine(with id: String) async -> Bool {
-        if AppSessionManager.shouldMockNetworkCalls {
+        if APIManager.networkEnvironment == .mock {
             MockDataManager.tempMockPrivatePunchLine = nil
             return true
         } else {
@@ -86,7 +90,7 @@ final class APIManager {
     // MARK: Punch-Line Activities
 
     class func post(setup: SetupPostRequest) async -> Bool {
-        if AppSessionManager.shouldMockNetworkCalls {
+        if APIManager.networkEnvironment == .mock {
             return true
         } else {
             guard let _: Setup = await handleURLRequest(for: .postSetup(requestObject: setup)) else { return false }
@@ -95,7 +99,7 @@ final class APIManager {
     }
 
     class func getSetups(for punchLineID: String) async -> [Setup] {
-        if AppSessionManager.shouldMockNetworkCalls {
+        if APIManager.networkEnvironment == .mock {
             return MockDataManager.getMockSetupBatch()
         } else {
             guard let setups: [Setup] = await handleURLRequest(for: .getSetups(punchLineID: punchLineID, includeOffensiveContent: AppSessionManager.userInfo?.shouldSeeOffensiveContent ?? false)) else { return [] }
@@ -104,7 +108,7 @@ final class APIManager {
     }
 
     class func report(setup: Setup, for reportReason: SetupReportReason) async -> Bool {
-        if AppSessionManager.shouldMockNetworkCalls {
+        if APIManager.networkEnvironment == .mock {
             return true
         } else {
             switch reportReason {
@@ -119,7 +123,7 @@ final class APIManager {
     }
 
     class func post(joke: JokePostRequest) async -> Bool {
-        if AppSessionManager.shouldMockNetworkCalls {
+        if APIManager.networkEnvironment == .mock {
             return true
         } else {
             guard let _: Joke = await handleURLRequest(for: .postJoke(requestObject: joke)) else { return false }
@@ -128,7 +132,7 @@ final class APIManager {
     }
 
     class func getJokes(for punchLineID: String) async -> [Joke] {
-        if AppSessionManager.shouldMockNetworkCalls {
+        if APIManager.networkEnvironment == .mock {
             return MockDataManager.getMockOrPreviewJokeBatch(numberOfJokes: 50)
         } else {
             guard let jokes: [Joke] = await handleURLRequest(for: .getJokes(punchLineID: punchLineID, includeOffensiveContent: AppSessionManager.userInfo?.shouldSeeOffensiveContent ?? false)) else { return [] }
@@ -137,7 +141,7 @@ final class APIManager {
     }
 
     class func voteOn(joke: Joke, with vote: JokeVote) async -> Bool {
-        if AppSessionManager.shouldMockNetworkCalls {
+        if APIManager.networkEnvironment == .mock {
             return true
         } else {
             switch vote {
@@ -155,7 +159,7 @@ final class APIManager {
     }
 
     class func report(joke: Joke, for reportReason: JokeReportReason) async -> Bool {
-        if AppSessionManager.shouldMockNetworkCalls {
+        if APIManager.networkEnvironment == .mock {
             return true
         } else {
             switch reportReason {
@@ -172,7 +176,7 @@ final class APIManager {
     // MARK: Joke History
 
     class func getJokeHistoryEntryGroups(for punchLineID: String) async -> [JokeHistoryEntryGroup] {
-        if AppSessionManager.shouldMockNetworkCalls {
+        if APIManager.networkEnvironment == .mock {
             guard let data = fetchLocalMockJSONFile(fileName: MockRequestTitles.getEntryGroups) else {
                 return []
             }
@@ -188,7 +192,7 @@ final class APIManager {
     }
 
     class func getJokeHistoryEntries(for entryGroup: JokeHistoryEntryGroup) async -> [JokeHistoryEntry] {
-        if AppSessionManager.shouldMockNetworkCalls {
+        if APIManager.networkEnvironment == .mock {
             return MockDataManager.getMockJokeHistoryEntries(for: entryGroup)
         } else {
             guard let jokeHistoryEntries: [JokeHistoryEntry] = await handleURLRequest(for: .getJokeHistoryEntries(entryGroupID: entryGroup.id)) else { return [] }
@@ -199,7 +203,7 @@ final class APIManager {
     // MARK: Joke Lookup
 
     class func getSearchResults(for searchQuery: String) async -> [SurvivingJoke] {
-        if AppSessionManager.shouldMockNetworkCalls {
+        if APIManager.networkEnvironment == .mock {
             return MockDataManager.getMockSearchResults(for: searchQuery)
         } else {
             guard let searchResults: [SurvivingJoke] = await handleURLRequest(for: .jokeLookupSearchQuery(searchQuery: searchQuery)) else { return [] }

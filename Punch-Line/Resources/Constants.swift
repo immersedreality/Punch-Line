@@ -75,28 +75,39 @@ struct NavigationTitles {
 }
 
 struct RequestComponents {
-    static let entryGroupID = "?entryGroupID="
+
+    // MARK: Domains
+
+    static let devAPIDomain = ""
+    static let localAPIDomain = "http://localhost:8080"
+    static let prodAPIDomain = ""
+
+    // MARK: Path Components
+
     static let ha = "/ha"
-    static let includeOffensiveContent = "?includeOffensiveContent="
     static let jokehistoryentries = "/jokehistoryentries"
     static let jokehistoryentrygroups = "/jokehistoryentrygroups"
-    static let jokeID = "?jokeID="
     static let jokelookup = "/jokelookup"
     static let jokes = "/jokes"
     static let meh = "/meh"
     static let offensive = "/offensive"
     static let privatepunchlines = "/privatepunchlines"
-    static let prodAPIDomain = ""
     static let publicpunchlines = "/publicpunchlines"
+    static let setups = "/setups"
+    static let toofunny = "/toofunny"
+    static let ugh = "/ugh"
+    static let unfunny = "/unfunny"
+
+    // MARK: Params
+
+    static let entryGroupID = "?entryGroupID="
+    static let includeOffensiveContent = "?includeOffensiveContent="
+    static let jokeID = "?jokeID="
     static let punchLineID = "?punchLineID="
     static let punchLineIDs = "?punchLineIDs="
     static let searchQuery = "?searchQuery="
     static let setupID = "?setupID="
-    static let setups = "/setups"
-    static let testAPIDomain = "http://localhost:8080"
-    static let toofunny = "/toofunny"
-    static let ugh = "/ugh"
-    static let unfunny = "/unfunny"
+    
 }
 
 struct SystemIcons {
