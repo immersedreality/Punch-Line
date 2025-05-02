@@ -63,6 +63,7 @@ struct MockRequestTitles {
 }
 
 struct NavigationTitles {
+    static let entertainmentError = "Entertainment Error"
     static let favoriteJokes = "Funny Faves"
     static let joinedPrivatePunchLines = "Joined"
     static let jokeHistoryEntries = "Droll Days"

@@ -15,7 +15,7 @@ struct JokeHistoryPunchLinesView: View {
     @State private var showingJoinSheet = false
     @State private var showingSettingsSheet = false
     @State private var showingAddPunchLineDialog = false
-    
+
     var body: some View {
         NavigationStack {
             ZStack {
@@ -134,14 +134,14 @@ struct PunchLineHistoryView: View {
                                 entryGroups: viewModel.getSelectedJokeHistoryEntryGroups(for: punchLineID)
                             )
                         )
-                    } else {
-                        if let entryGroup = viewModel.getSelectedJokeHistoryEntryGroups(for: punchLineID).first {
-                            JokeHistoryEntriesView(
-                                viewModel: JokeHistoryEntriesViewModel(
-                                    jokeHistoryEntryGroup: entryGroup
-                                )
+                    } else if let entryGroup = viewModel.getSelectedJokeHistoryEntryGroups(for: punchLineID).first {
+                        JokeHistoryEntriesView(
+                            viewModel: JokeHistoryEntriesViewModel(
+                                jokeHistoryEntryGroup: entryGroup
                             )
-                        }
+                        )
+                    } else {
+                        JokeHistoryErrorView()
                     }
                 } label: {
                     HStack {
