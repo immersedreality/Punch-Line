@@ -175,18 +175,25 @@ final class APIManager {
 
     // MARK: Joke History
 
-    class func getJokeHistoryEntryGroups(for punchLineID: String) async -> [JokeHistoryEntryGroup] {
+    class func getJokeHistoryEntryGroups(for punchLineIDs: [String]) async -> [String: [JokeHistoryEntryGroup]] {
         if APIManager.networkEnvironment == .mock {
-            guard let data = fetchLocalMockJSONFile(fileName: MockRequestTitles.getEntryGroups) else {
-                return []
+
+            var allFetchedEntryGroups: [String: [JokeHistoryEntryGroup]] = [:]
+
+            for punchLineID in punchLineIDs {
+                guard let data = fetchLocalMockJSONFile(fileName: MockRequestTitles.getEntryGroups) else {
+                    continue
+                }
+                guard var fetchedEntryGroupsForPunchLine: [JokeHistoryEntryGroup] = decodeJSON(from: data) else {
+                    continue
+                }
+                fetchedEntryGroupsForPunchLine.reverse()
+                allFetchedEntryGroups[punchLineID] = fetchedEntryGroupsForPunchLine
             }
-            guard var fetchedEntryGroups: [JokeHistoryEntryGroup] = decodeJSON(from: data) else {
-                return []
-            }
-            fetchedEntryGroups.reverse()
-            return fetchedEntryGroups
+
+            return allFetchedEntryGroups
         } else {
-            guard let jokeHistoryEntryGroups: [JokeHistoryEntryGroup] = await handleURLRequest(for: .getJokeHistoryEntryGroups(punchLineID: punchLineID)) else { return [] }
+            guard let jokeHistoryEntryGroups: [String: [JokeHistoryEntryGroup]] = await handleURLRequest(for: .getJokeHistoryEntryGroups(punchLineIDs: punchLineIDs)) else { return [:] }
             return jokeHistoryEntryGroups
         }
     }

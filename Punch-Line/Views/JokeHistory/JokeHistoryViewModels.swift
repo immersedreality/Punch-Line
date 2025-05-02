@@ -20,15 +20,17 @@ class JokeHistoryPunchLinesViewModel {
     }
 
     func fetchJokeHistoryEntryGroups() {
+        var punchLineIDs: [String] = []
+
+        for punchLine in fetchedPublicPunchLines {
+            punchLineIDs.append(punchLine.id)
+        }
+        for punchLine in fetchedPrivatePunchLines {
+            punchLineIDs.append(punchLine.id)
+        }
+
         Task {
-            for punchLine in fetchedPublicPunchLines {
-                let jokeHistoryEntryGroups = await APIManager.getJokeHistoryEntryGroups(for: punchLine.id)
-                fetchedJokeHistoryEntryGroups[punchLine.id] = jokeHistoryEntryGroups
-            }
-            for punchLine in fetchedPrivatePunchLines {
-                let jokeHistoryEntryGroups = await APIManager.getJokeHistoryEntryGroups(for: punchLine.id)
-                fetchedJokeHistoryEntryGroups[punchLine.id] = jokeHistoryEntryGroups
-            }
+            fetchedJokeHistoryEntryGroups = await APIManager.getJokeHistoryEntryGroups(for: punchLineIDs)
         }
     }
 
