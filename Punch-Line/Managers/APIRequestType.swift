@@ -33,10 +33,10 @@ enum APIRequestType {
         switch APIManager.networkEnvironment {
         case .mock:
             break
-        case .local:
-            domain = RequestComponents.localAPIDomain
         case .dev:
             domain = RequestComponents.devAPIDomain
+        case .test:
+            domain = RequestComponents.testAPIDomain
         case .prod:
             domain = RequestComponents.prodAPIDomain
         }

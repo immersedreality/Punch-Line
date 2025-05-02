@@ -227,5 +227,5 @@ final class AppSessionManager {
 }
 
 enum NetworkEnvironment {
-    case mock, local, dev, prod
+    case mock, test, dev, prod
 }

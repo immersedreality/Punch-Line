@@ -78,8 +78,8 @@ struct RequestComponents {
 
     // MARK: Domains
 
-    static let devAPIDomain = ""
-    static let localAPIDomain = "http://localhost:8080"
+    static let devAPIDomain = "http://localhost:8080"
+    static let testAPIDomain = ""
     static let prodAPIDomain = ""
 
     // MARK: Path Components

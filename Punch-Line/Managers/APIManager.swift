@@ -11,7 +11,7 @@ final class APIManager {
 
     // MARK: Network Environment
 
-    static let networkEnvironment: NetworkEnvironment = .mock
+    static let networkEnvironment: NetworkEnvironment = .dev
 
     // MARK: Punch-Lines
 
@@ -262,7 +262,7 @@ final class APIManager {
             }
         }
 
-        guard let (data, _) = try? await URLSession.shared.data(from: url) else { return nil }
+        guard let (data, _) = try? await URLSession.shared.data(for: request) else { return nil }
         guard let responseObject: DecodableObject = decodeJSON(from: data) else { return nil }
 
         return responseObject
