@@ -56,9 +56,9 @@ class PunchLineActivityViewModel: ObservableObject {
         case .setup:
             break
         case .punchline:
-            currentSetup = relauncher.currentSetup
+            currentSetup = relauncher.currentSetup ?? fetchedSetups.first
         case .vote:
-            currentJoke = relauncher.currentJoke
+            currentJoke = relauncher.currentJoke ?? fetchedJokes.first
         case .somethingWentWrong:
             break
         }
@@ -107,6 +107,11 @@ class PunchLineActivityViewModel: ObservableObject {
             break
         }
 
+        guard AppSessionManager.userInfo?.userIsNotFunny != true else {
+            setNextActivityForUnfunnyUser()
+            return
+        }
+
         let todaysTaskCount = AppSessionManager.taskCount(for: punchLine.id)
 
         switch todaysTaskCount {
@@ -137,6 +142,29 @@ class PunchLineActivityViewModel: ObservableObject {
                 configureViewForJoke()
             } else if fetchedSetups.first != nil {
                 configureViewForPunchline()
+            } else {
+                configureViewForSetup(.extra)
+            }
+        }
+
+        updatePunchLineRelauncher()
+
+    }
+
+    private func setNextActivityForUnfunnyUser() {
+
+        let todaysTaskCount = AppSessionManager.taskCount(for: punchLine.id)
+
+        switch todaysTaskCount {
+        case 0:
+            configureViewForSetup(.first)
+        case 1:
+            configureViewForSetup(.second)
+        case 2:
+            configureViewForSetup(.third)
+        default:
+            if fetchedJokes.first != nil {
+                configureViewForJoke()
             } else {
                 configureViewForSetup(.extra)
             }
@@ -295,7 +323,7 @@ class PunchLineActivityViewModel: ObservableObject {
             punchLineID: punchLine.id,
             text: enteredSetupText,
             authorID: userInfo.punchLineUserID,
-            authorUsername: userInfo.hasPunchLinePro ? userInfo.punchLineUserName : nil,
+            authorUsername: userInfo.hasPunchLinePro ? userInfo.punchLineUsername : nil,
             dateCreated: Date(),
             isOffensive: false
         )
@@ -305,7 +333,7 @@ class PunchLineActivityViewModel: ObservableObject {
             punchLineID: punchLine.id,
             text: enteredSetupText,
             authorID: userInfo.punchLineUserID,
-            authorUsername: userInfo.hasPunchLinePro ? userInfo.punchLineUserName : nil
+            authorUsername: userInfo.hasPunchLinePro ? userInfo.punchLineUsername : nil
         )
 
         Task {
@@ -335,7 +363,7 @@ class PunchLineActivityViewModel: ObservableObject {
             setupAuthorUsername: setup.authorUsername,
             punchline: enteredPunchlineText,
             punchlineAuthorID: userInfo.punchLineUserID,
-            punchlineAuthorUsername: userInfo.hasPunchLinePro ? userInfo.punchLineUserName : nil
+            punchlineAuthorUsername: userInfo.hasPunchLinePro ? userInfo.punchLineUsername : nil
         )
         Task {
             await APIManager.post(joke: jokePostRequest)

@@ -92,14 +92,24 @@ class PunchLineLaunchersViewModel {
         AppSessionManager.resetTaskCountsIfNecessary()
 
         let todaysTaskCount = AppSessionManager.taskCount(for: selectedPunchLineID)
+        let userIsNotFunny = AppSessionManager.userInfo?.userIsNotFunny ?? false
 
-        switch todaysTaskCount {
-        case 0, 2, 4:
-            return .setup
-        case 1, 3, 5, 6, 8, 11, 15, 20, 26, 33, 41, 50, 60:
-            return .punchline
-        default:
-            return .vote
+        if userIsNotFunny {
+            switch todaysTaskCount {
+            case 0, 1, 2:
+                return .setup
+            default:
+                return .vote
+            }
+        } else {
+            switch todaysTaskCount {
+            case 0, 2, 4:
+                return .setup
+            case 1, 3, 5, 6, 8, 11, 15, 20, 26, 33, 41, 50, 60:
+                return .punchline
+            default:
+                return .vote
+            }
         }
         
     }
@@ -119,24 +129,38 @@ class PunchLineLaunchersViewModel {
         }
 
         let todaysTaskCount = AppSessionManager.taskCount(for: selectedPunchLineID)
+        let userIsNotFunny = AppSessionManager.userInfo?.userIsNotFunny ?? false
 
-        switch todaysTaskCount {
-        case 0:
-            return ActivityFeedMessages.setupFirst
-        case 1:
-            return mode == .relaunch ? ActivityFeedMessages.ownPunchlineFirst : ActivityFeedMessages.punchline
-        case 2:
-            return ActivityFeedMessages.setupSecond
-        case 3:
-            return mode == .relaunch ? ActivityFeedMessages.ownPunchlineSecond : ActivityFeedMessages.punchline
-        case 4:
-            return ActivityFeedMessages.setupThird
-        case 5:
-            return mode == .relaunch ? ActivityFeedMessages.ownPunchlineThird : ActivityFeedMessages.punchline
-        case 6, 8, 11, 15, 20, 26, 33, 41, 50, 60:
-            return ActivityFeedMessages.punchline
-        default:
-            return ActivityFeedMessages.vote
+        if userIsNotFunny {
+            switch todaysTaskCount {
+            case 0:
+                return ActivityFeedMessages.setupFirst
+            case 1:
+                return ActivityFeedMessages.setupSecond
+            case 2:
+                return ActivityFeedMessages.setupThird
+            default:
+                return ActivityFeedMessages.vote
+            }
+        } else {
+            switch todaysTaskCount {
+            case 0:
+                return ActivityFeedMessages.setupFirst
+            case 1:
+                return mode == .relaunch ? ActivityFeedMessages.ownPunchlineFirst : ActivityFeedMessages.punchline
+            case 2:
+                return ActivityFeedMessages.setupSecond
+            case 3:
+                return mode == .relaunch ? ActivityFeedMessages.ownPunchlineSecond : ActivityFeedMessages.punchline
+            case 4:
+                return ActivityFeedMessages.setupThird
+            case 5:
+                return mode == .relaunch ? ActivityFeedMessages.ownPunchlineThird : ActivityFeedMessages.punchline
+            case 6, 8, 11, 15, 20, 26, 33, 41, 50, 60:
+                return ActivityFeedMessages.punchline
+            default:
+                return ActivityFeedMessages.vote
+            }
         }
 
     }

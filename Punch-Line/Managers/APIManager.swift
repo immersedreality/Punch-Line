@@ -11,7 +11,7 @@ final class APIManager {
 
     // MARK: Network Environment
 
-    static let networkEnvironment: NetworkEnvironment = .dev
+    static let networkEnvironment: NetworkEnvironment = .mock
 
     // MARK: Punch-Lines
 

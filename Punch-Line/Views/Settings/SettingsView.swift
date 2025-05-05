@@ -23,7 +23,7 @@ struct SettingsView: View {
                         .padding([.horizontal], 16.0)
                     List {
                         if AppSessionManager.userInfo?.hasPunchLinePro == true {
-                            UserNameRow()
+                            UsernameRow()
                         }
                         if AppSessionManager.userInfo?.favoriteJokes.isEmpty == false {
                             FavoriteJokesRow()
@@ -35,6 +35,7 @@ struct SettingsView: View {
                             JoinedPrivatePunchLinesRow()
                         }
                         ShowOffensiveContentRow()
+                        ImNotFunnyModeRow()
                         if AppSessionManager.userInfo?.hasPunchLinePro == false {
                             GetPunchLineProRow()
                         }
@@ -105,22 +106,49 @@ struct ShowOffensiveContentRow: View {
             Spacer()
             Toggle(isOn: $shouldSeeOffensiveContent) { }
                 .onChange(of: shouldSeeOffensiveContent) { _, _ in
-                    AppSessionManager.toggleOffensiveContentFilter()
+                    AppSessionManager.toggleShouldSeeOffensiveContent()
                 }
         }
     }
 
 }
 
-struct UserNameRow: View {
+struct ImNotFunnyModeRow: View {
 
-    @State private var enteredUserNameText: String = AppSessionManager.userInfo?.punchLineUserName ?? ""
+    @State private var userIsNotFunny = AppSessionManager.userInfo?.userIsNotFunny ?? false
+
+    var body: some View {
+        VStack {
+            HStack {
+                Text("I'm Not Funny Mode")
+                    .font(Font.system(size: 20.0, weight: .light))
+                    .foregroundStyle(.accent)
+                Spacer()
+                Toggle(isOn: $userIsNotFunny) { }
+                    .onChange(of: userIsNotFunny) { _, _ in
+                        AppSessionManager.toggleUserIsNotFunny()
+                    }
+            }
+            HStack {
+                Text("When 'I'm Not Funny Mode' is enabled you will only be asked for setups and votes, never punchlines.")
+                    .font(Font.system(size: 12.0, weight: .light))
+                    .foregroundStyle(.gray)
+                Spacer()
+            }
+        }
+    }
+
+}
+
+struct UsernameRow: View {
+
+    @State private var enteredUsernameText: String = AppSessionManager.userInfo?.punchLineUsername ?? ""
     @State private var showingAlert = false
     @State var alertTitle = ""
     @State var alertMessage = ""
 
     var body: some View {
-        TextField("Enter Your Name Here", text: $enteredUserNameText)
+        TextField("Enter Your Name Here", text: $enteredUsernameText)
             .textFieldStyle(.plain)
             .font(Font.system(size: 20.0, weight: .semibold))
             .foregroundStyle(.accent)
@@ -137,31 +165,31 @@ struct UserNameRow: View {
     }
 
     private func validateTextEntry() {
-        guard enteredUserNameText.count >= 8 else {
-            enteredUserNameText = AppSessionManager.userInfo?.punchLineUserName ?? ""
+        guard enteredUsernameText.count >= 8 else {
+            enteredUsernameText = AppSessionManager.userInfo?.punchLineUsername ?? ""
             alertTitle = "Invalid Name"
             alertMessage = "Names must be a minimum of 8 characters."
             showingAlert = true
             return
         }
 
-        guard enteredUserNameText.count <= 32 else {
-            enteredUserNameText = AppSessionManager.userInfo?.punchLineUserName ?? ""
+        guard enteredUsernameText.count <= 32 else {
+            enteredUsernameText = AppSessionManager.userInfo?.punchLineUsername ?? ""
             alertTitle = "Invalid Name"
             alertMessage = "Names must be 32 characters or less."
             showingAlert = true
             return
         }
 
-        guard !enteredUserNameText.containsBannedWords() else {
-            enteredUserNameText = AppSessionManager.userInfo?.punchLineUserName ?? ""
+        guard !enteredUsernameText.containsBannedWords() else {
+            enteredUsernameText = AppSessionManager.userInfo?.punchLineUsername ?? ""
             alertTitle = "Invalid Name"
             alertMessage = "Names may not contain offensive words."
             showingAlert = true
             return
         }
 
-        AppSessionManager.set(userName: enteredUserNameText)
+        AppSessionManager.set(username: enteredUsernameText)
         alertTitle = "Name Updated"
         alertMessage = "Your author name has been successfully updated!"
         showingAlert = true

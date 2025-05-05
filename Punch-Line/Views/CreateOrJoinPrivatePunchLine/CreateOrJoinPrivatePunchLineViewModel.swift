@@ -78,12 +78,12 @@ class CreateOrJoinPrivatePunchLineViewModel: ObservableObject {
     }
 
     func createPrivatePunchLine() {
-        guard let userInfo = AppSessionManager.userInfo, let userName = userInfo.punchLineUserName else { return }
+        guard let userInfo = AppSessionManager.userInfo, let username = userInfo.punchLineUsername else { return }
 
         let privatePunchLinePostRequest = PrivatePunchLinePostRequest(
             displayName: enteredText,
             owningUserID: userInfo.punchLineUserID,
-            owningUsername: userName
+            owningUsername: username
         )
 
         Task {

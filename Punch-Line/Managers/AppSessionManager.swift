@@ -52,12 +52,13 @@ final class AppSessionManager {
 
     private class func getUserInfo() -> UserInfo? {
         guard let punchLineUserID = UserDefaults.standard.value(forKey: UserDefaultsKeys.punchLineUserID) as? String else { return nil }
-        let punchLineUserName = UserDefaults.standard.value(forKey: UserDefaultsKeys.punchLineUserName) as? String
+        let punchLineUsername = UserDefaults.standard.value(forKey: UserDefaultsKeys.punchLineUsername) as? String
         let hasPunchLinePro = UserDefaults.standard.value(forKey: UserDefaultsKeys.hasPunchLinePro) as? Bool ?? false
         let lastActivityDate = UserDefaults.standard.value(forKey: UserDefaultsKeys.lastActivityDate) as? Date ?? Date()
         let todaysTaskCounts = UserDefaults.standard.value(forKey: UserDefaultsKeys.todaysTaskCounts) as? [String: Int] ?? [:]
         let dailyTooFunnyReportsCount = UserDefaults.standard.value(forKey: UserDefaultsKeys.dailyTooFunnyReportsCount) as? Int ?? 0
         let shouldSeeOffensiveContent = UserDefaults.standard.value(forKey: UserDefaultsKeys.shouldSeeOffensiveContent) as? Bool ?? false
+        let userIsNotFunny  = UserDefaults.standard.value(forKey: UserDefaultsKeys.userIsNotFunny) as? Bool ?? false
 
         var favoriteJokes: [FavoriteJoke]?
         if let favoriteJokesData = UserDefaults.standard.object(forKey: UserDefaultsKeys.favoriteJokes) as? Data {
@@ -79,12 +80,13 @@ final class AppSessionManager {
 
         let userInfo = UserInfo(
             punchLineUserID: punchLineUserID,
-            punchLineUserName: punchLineUserName,
+            punchLineUsername: punchLineUsername,
             hasPunchLinePro: hasPunchLinePro,
             lastActivityDate: lastActivityDate,
             todaysTaskCounts: todaysTaskCounts,
             dailyTooFunnyReportsCount: dailyTooFunnyReportsCount,
             shouldSeeOffensiveContent: shouldSeeOffensiveContent,
+            userIsNotFunny: userIsNotFunny,
             favoriteJokes: favoriteJokes ?? [],
             ownedPrivatePunchLines: ownedPrivatePunchLines ?? [],
             joinedPrivatePunchLines: joinedPrivatePunchLines ?? []
@@ -103,8 +105,8 @@ final class AppSessionManager {
 
     // MARK: Update Methods
 
-    class func set(userName: String) {
-        UserDefaults.standard.set(userName, forKey: UserDefaultsKeys.punchLineUserName)
+    class func set(username: String) {
+        UserDefaults.standard.set(username, forKey: UserDefaultsKeys.punchLineUsername)
     }
 
     class func createTaskCountKey(for punchLineID: String) {
@@ -146,9 +148,14 @@ final class AppSessionManager {
         UserDefaults.standard.set(!userInfo.shouldSeeOffensiveContent, forKey: UserDefaultsKeys.hasPunchLinePro)
     }
 
-    class func toggleOffensiveContentFilter() {
+    class func toggleShouldSeeOffensiveContent() {
         guard let userInfo = userInfo else { return }
         UserDefaults.standard.set(!userInfo.shouldSeeOffensiveContent, forKey: UserDefaultsKeys.shouldSeeOffensiveContent)
+    }
+
+    class func toggleUserIsNotFunny() {
+        guard let userInfo = userInfo else { return }
+        UserDefaults.standard.set(!userInfo.userIsNotFunny, forKey: UserDefaultsKeys.userIsNotFunny)
     }
 
     class func addFavoriteJoke(from joke: SurvivingJoke) {

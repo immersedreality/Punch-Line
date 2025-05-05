@@ -122,12 +122,13 @@ struct SystemIcons {
 
 struct UserDefaultsKeys {
     static let punchLineUserID = "PunchLineUserID"
-    static let punchLineUserName = "PunchLineUserName"
+    static let punchLineUsername = "PunchLineUsername"
     static let hasPunchLinePro = "HasPunchLinePro"
     static let lastActivityDate = "LastActivityDate"
     static let todaysTaskCounts = "TodaysTaskCounts"
     static let dailyTooFunnyReportsCount = "DailyTooFunnyReportsCount"
     static let shouldSeeOffensiveContent = "ShouldSeeOffensiveContent"
+    static let userIsNotFunny = "UserIsNotFunny"
     static let favoriteJokes = "FavoriteJokes"
     static let ownedPrivatePunchLines = "OwnedPrivatePunchLines"
     static let joinedPrivatePunchLines = "JoinedPrivatePunchLines"
