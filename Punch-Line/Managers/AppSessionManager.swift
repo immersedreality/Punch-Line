@@ -53,7 +53,7 @@ final class AppSessionManager {
     private class func getUserInfo() -> UserInfo? {
         guard let punchLineUserID = UserDefaults.standard.value(forKey: UserDefaultsKeys.punchLineUserID) as? String else { return nil }
         let punchLineUsername = UserDefaults.standard.value(forKey: UserDefaultsKeys.punchLineUsername) as? String
-        let hasPunchLinePro = UserDefaults.standard.value(forKey: UserDefaultsKeys.hasPunchLinePro) as? Bool ?? true
+        let hasPunchLinePro = UserDefaults.standard.value(forKey: UserDefaultsKeys.hasPunchLinePro) as? Bool ?? false
         let lastActivityDate = UserDefaults.standard.value(forKey: UserDefaultsKeys.lastActivityDate) as? Date ?? Date()
         let todaysTaskCounts = UserDefaults.standard.value(forKey: UserDefaultsKeys.todaysTaskCounts) as? [String: Int] ?? [:]
         let dailyTooFunnyReportsCount = UserDefaults.standard.value(forKey: UserDefaultsKeys.dailyTooFunnyReportsCount) as? Int ?? 0
