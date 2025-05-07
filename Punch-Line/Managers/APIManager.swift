@@ -11,7 +11,7 @@ final class APIManager {
 
     // MARK: Network Environment
 
-    static let networkEnvironment: NetworkEnvironment = .mock
+    static let networkEnvironment: NetworkEnvironment = .dev
 
     // MARK: Punch-Lines
 
@@ -202,7 +202,7 @@ final class APIManager {
         if APIManager.networkEnvironment == .mock {
             return MockDataManager.getMockJokeHistoryEntries(for: entryGroup)
         } else {
-            guard let jokeHistoryEntries: [JokeHistoryEntry] = await handleURLRequest(for: .getJokeHistoryEntries(entryGroupID: entryGroup.id)) else { return [] }
+            guard let jokeHistoryEntries: [JokeHistoryEntry] = await handleURLRequest(for: .getJokeHistoryEntries(entryGroupID: entryGroup.id, includeOffensiveContent: AppSessionManager.userInfo?.shouldSeeOffensiveContent ?? false)) else { return [] }
             return jokeHistoryEntries
         }
     }
@@ -213,7 +213,7 @@ final class APIManager {
         if APIManager.networkEnvironment == .mock {
             return MockDataManager.getMockSearchResults(for: searchQuery)
         } else {
-            guard let searchResults: [SurvivingJoke] = await handleURLRequest(for: .jokeLookupSearchQuery(searchQuery: searchQuery)) else { return [] }
+            guard let searchResults: [SurvivingJoke] = await handleURLRequest(for: .jokeLookupSearchQuery(searchQuery: searchQuery, includeOffensiveContent: AppSessionManager.userInfo?.shouldSeeOffensiveContent ?? false)) else { return [] }
             return searchResults
         }
     }

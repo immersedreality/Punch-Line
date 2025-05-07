@@ -23,8 +23,8 @@ enum APIRequestType {
     case jokeReportOffensive(jokeID: String)
     case jokeReportTooFunny(jokeID: String)
     case getJokeHistoryEntryGroups(punchLineIDs: [String])
-    case getJokeHistoryEntries(entryGroupID: String)
-    case jokeLookupSearchQuery(searchQuery: String)
+    case getJokeHistoryEntries(entryGroupID: String, includeOffensiveContent: Bool)
+    case jokeLookupSearchQuery(searchQuery: String, includeOffensiveContent: Bool)
 
     var path: String {
 
@@ -45,7 +45,7 @@ enum APIRequestType {
         case .getPublicPunchLines:
             return domain + RequestComponents.publicpunchlines
         case .getPrivatePunchLinesWithIDs(let punchLineIDs):
-            return domain + RequestComponents.privatepunchlines + RequestComponents.punchLineIDs + punchLineIDs.joined(separator: ", ")
+            return domain + RequestComponents.privatepunchlines + RequestComponents.punchLineIDs + punchLineIDs.joined(separator: ",")
         case .getPrivatePunchLineWithJoinCode(let joinCode):
             return domain + RequestComponents.privatepunchlines + "/\(joinCode)"
         case .postPrivatePunchLine:
@@ -75,11 +75,11 @@ enum APIRequestType {
         case .jokeReportTooFunny(let jokeID):
             return domain + RequestComponents.jokes + RequestComponents.toofunny + RequestComponents.jokeID + jokeID
         case .getJokeHistoryEntryGroups(let punchLineIDs):
-            return domain + RequestComponents.jokehistoryentrygroups + RequestComponents.punchLineIDs + punchLineIDs.joined(separator: ", ")
-        case .getJokeHistoryEntries(let entryGroupID):
-            return domain + RequestComponents.jokehistoryentries + RequestComponents.entryGroupID + entryGroupID
-        case .jokeLookupSearchQuery(let searchQuery):
-            return domain + RequestComponents.jokelookup + RequestComponents.searchQuery + searchQuery
+            return domain + RequestComponents.jokehistoryentrygroups + RequestComponents.punchLineIDs + punchLineIDs.joined(separator: ",")
+        case .getJokeHistoryEntries(let entryGroupID, let includeOffensiveContent):
+            return domain + RequestComponents.jokehistoryentries + RequestComponents.entryGroupID + entryGroupID + RequestComponents.includeOffensiveContent + includeOffensiveContent.description
+        case .jokeLookupSearchQuery(let searchQuery, let includeOffensiveContent):
+            return domain + RequestComponents.jokelookup + RequestComponents.searchQuery + searchQuery + RequestComponents.includeOffensiveContent + includeOffensiveContent.description
         }
         
     }

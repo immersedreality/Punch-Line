@@ -19,22 +19,24 @@ class PrivatePunchLinesListViewModel: ObservableObject {
             return NavigationTitles.joinedPrivatePunchLines
         }
     }
-    
-    var privatePunchLines: [PrivatePunchLine] {
-        switch mode {
-        case .owned:
-            return AppSessionManager.userInfo?.ownedPrivatePunchLines ?? []
-        case .joined:
-            return AppSessionManager.userInfo?.joinedPrivatePunchLines ?? []
-        }
-    }
 
+    @Published var privatePunchLines: [PrivatePunchLine] = []
     private var selectedPrivatePunchLineID: String?
 
     @Published var shouldNavigateBackToSettings = false
 
     init(mode: PrivatePunchLinesListViewMode) {
         self.mode = mode
+        setPrivatePunchLines()
+    }
+
+    func setPrivatePunchLines() {
+        switch mode {
+        case .owned:
+            privatePunchLines = AppSessionManager.userInfo?.ownedPrivatePunchLines ?? []
+        case .joined:
+            privatePunchLines = AppSessionManager.userInfo?.joinedPrivatePunchLines ?? []
+        }
     }
 
     func set(selectedPrivatePunchLineID: String) {
@@ -48,6 +50,7 @@ class PrivatePunchLinesListViewModel: ObservableObject {
             if punchLineWasDeleted {
                 AppSessionManager.removeOwnedPrivatePunchLine(with: selectedPrivatePunchLineID)
                 GlobalNotificationManager.shared.shouldRefreshPunchLines = true
+                setPrivatePunchLines()
                 if privatePunchLines.isEmpty == true {
                     shouldNavigateBackToSettings = true
                 }
@@ -59,6 +62,7 @@ class PrivatePunchLinesListViewModel: ObservableObject {
         guard let selectedPrivatePunchLineID else { return }
         AppSessionManager.removeJoinedPrivatePunchLine(with: selectedPrivatePunchLineID)
         GlobalNotificationManager.shared.shouldRefreshPunchLines = true
+        setPrivatePunchLines()
         if privatePunchLines.isEmpty == true {
             shouldNavigateBackToSettings = true
         }

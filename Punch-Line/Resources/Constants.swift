@@ -22,6 +22,17 @@ struct ActivityFeedMessages {
     static let weDoneGoofed = "We done goofed!  You're not supposed to see this!"
 }
 
+struct AlertConstants {
+    static let comingSoon = "Coming Soon!"
+    static let coolIt = "Cool It!"
+    static let failure = "Failure!"
+    static let mustEnterUsername = "You must enter a username on the settings screen before you can create Punch-Lines, dude."
+    static let okeydoke = "Okeydoke"
+    static let serviceNotYetAvailable = "This service is not yet available.  Be patient, you little freak!"
+    static let tooFunnyReports = "You only get ten Too Funny reports a day! Stop being so easy to please, you dingus!"
+    static let whoAreYou = "Who Are You?"
+}
+
 struct AppConstants {
     static let adUnitID = "ca-app-pub-7985623540006861/2831009017"
     static let testAdUnitID = "ca-app-pub-3940256099942544/4411468910"

@@ -103,11 +103,11 @@ struct VoteView: View {
                 }
             }
         }
-        .alert("Cool It!", isPresented: $showingAlert) {
-            Button("Okeydoke") {
+        .alert(AlertConstants.coolIt, isPresented: $showingAlert) {
+            Button(AlertConstants.okeydoke) {
             }
         } message: {
-            Text("You only get ten Too Funny reports a day! Stop being so easy to please, you dingus!")
+            Text(AlertConstants.tooFunnyReports)
         }
     }
 

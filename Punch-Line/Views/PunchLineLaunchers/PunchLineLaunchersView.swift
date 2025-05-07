@@ -13,6 +13,7 @@ struct PunchLineLaunchersView: View {
 
     @State private var showingPunchLineSheet = false
     @State private var showingCreateSheet = false
+    @State private var showingUsernameAlert = false
     @State private var showingJoinSheet = false
     @State private var showingSettingsSheet = false
     @State private var showingAddPunchLineDialog = false
@@ -74,7 +75,11 @@ struct PunchLineLaunchersView: View {
                         }
                         .confirmationDialog("", isPresented: $showingAddPunchLineDialog) {
                             Button(ConfirmationDialogMessages.createNewPrivatePunchLine) {
-                                showingCreateSheet = true
+                                if AppSessionManager.userInfo?.punchLineUsername != nil {
+                                    showingCreateSheet = true
+                                } else {
+                                    showingUsernameAlert = true
+                                }
                             }
                             Button(ConfirmationDialogMessages.joinPrivatePunchLine) {
                                 showingJoinSheet = true
@@ -87,6 +92,12 @@ struct PunchLineLaunchersView: View {
                         .sheet(isPresented: $showingJoinSheet) {
                             CreateOrJoinPrivatePunchLineView(viewModel: CreateOrJoinPrivatePunchLineViewModel(mode: .join))
                                 .presentationDragIndicator(.visible)
+                        }
+                        .alert(AlertConstants.whoAreYou, isPresented: $showingUsernameAlert) {
+                            Button(AlertConstants.okeydoke) {
+                            }
+                        } message: {
+                            Text(AlertConstants.mustEnterUsername)
                         }
                 }
                 ToolbarItem(placement: .principal) {

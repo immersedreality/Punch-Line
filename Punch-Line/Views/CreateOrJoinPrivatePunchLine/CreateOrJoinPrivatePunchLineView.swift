@@ -70,8 +70,8 @@ struct CreateOrJoinPrivatePunchLineView: View {
                 .onAppear {
                     textFieldIsFocused = true
                 }
-                .alert("Failure!", isPresented: $viewModel.showingErrorAlert) {
-                    Button("Okeydoke") {
+                .alert(AlertConstants.failure, isPresented: $viewModel.showingErrorAlert) {
+                    Button(AlertConstants.okeydoke) {
                     }
                 } message: {
                     Text(viewModel.errorAlertMessage)

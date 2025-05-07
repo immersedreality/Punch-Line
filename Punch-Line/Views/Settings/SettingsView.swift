@@ -157,7 +157,7 @@ struct UsernameRow: View {
                 validateTextEntry()
             })
             .alert(alertTitle, isPresented: $showingAlert) {
-                Button("Okeydoke") {
+                Button(AlertConstants.okeydoke) {
                 }
             } message: {
                 Text(alertMessage)
@@ -208,11 +208,11 @@ struct GetPunchLineProRow: View {
             .onTapGesture {
                 showingAlert = true
             }
-            .alert("Coming Soon!", isPresented: $showingAlert) {
-                Button("Okeydoke") {
+            .alert(AlertConstants.comingSoon, isPresented: $showingAlert) {
+                Button(AlertConstants.okeydoke) {
                 }
             } message: {
-                Text("This service is not yet available.  Be patient, you little freak!")
+                Text(AlertConstants.serviceNotYetAvailable)
             }
     }
 

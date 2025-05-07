@@ -12,6 +12,7 @@ struct JokeHistoryPunchLinesView: View {
     let viewModel: JokeHistoryPunchLinesViewModel
 
     @State private var showingCreateSheet = false
+    @State private var showingUsernameAlert = false
     @State private var showingJoinSheet = false
     @State private var showingSettingsSheet = false
     @State private var showingAddPunchLineDialog = false
@@ -68,7 +69,11 @@ struct JokeHistoryPunchLinesView: View {
                             }
                             .confirmationDialog("", isPresented: $showingAddPunchLineDialog) {
                                 Button(ConfirmationDialogMessages.createNewPrivatePunchLine) {
-                                    showingCreateSheet = true
+                                    if AppSessionManager.userInfo?.punchLineUsername != nil {
+                                        showingCreateSheet = true
+                                    } else {
+                                        showingUsernameAlert = true
+                                    }
                                 }
                                 Button(ConfirmationDialogMessages.joinPrivatePunchLine) {
                                     showingJoinSheet = true
@@ -81,6 +86,12 @@ struct JokeHistoryPunchLinesView: View {
                             .sheet(isPresented: $showingJoinSheet) {
                                 CreateOrJoinPrivatePunchLineView(viewModel: CreateOrJoinPrivatePunchLineViewModel(mode: .join))
                                     .presentationDragIndicator(.visible)
+                            }
+                            .alert(AlertConstants.whoAreYou, isPresented: $showingUsernameAlert) {
+                                Button(AlertConstants.okeydoke) {
+                                }
+                            } message: {
+                                Text(AlertConstants.mustEnterUsername)
                             }
                     }
                     ToolbarItem(placement: .principal) {
