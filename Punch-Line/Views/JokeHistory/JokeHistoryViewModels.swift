@@ -11,26 +11,20 @@ class JokeHistoryPunchLinesViewModel {
 
     let fetchedPublicPunchLines: [PublicPunchLine]
     let fetchedPrivatePunchLines: [PrivatePunchLine]
-    var fetchedJokeHistoryEntryGroups: [String: [JokeHistoryEntryGroup]] = [:]
+    var jokeHistoryEntryGroupsByPunchLineID: [String: [JokeHistoryEntryGroup]] = [:]
 
     init(fetchedPublicPunchLines: [PublicPunchLine], fetchedPrivatePunchLines: [PrivatePunchLine]) {
         self.fetchedPublicPunchLines = fetchedPublicPunchLines
         self.fetchedPrivatePunchLines = fetchedPrivatePunchLines
-        fetchJokeHistoryEntryGroups()
+        configureJokeHistoryEntryGroups()
     }
 
-    func fetchJokeHistoryEntryGroups() {
-        var punchLineIDs: [String] = []
-
+    func configureJokeHistoryEntryGroups() {
         for punchLine in fetchedPublicPunchLines {
-            punchLineIDs.append(punchLine.id)
+            jokeHistoryEntryGroupsByPunchLineID[punchLine.id] = punchLine.historyEntryGroups
         }
         for punchLine in fetchedPrivatePunchLines {
-            punchLineIDs.append(punchLine.id)
-        }
-
-        Task {
-            fetchedJokeHistoryEntryGroups = await APIManager.getJokeHistoryEntryGroups(for: punchLineIDs)
+            jokeHistoryEntryGroupsByPunchLineID[punchLine.id] = punchLine.historyEntryGroups
         }
     }
 
@@ -38,7 +32,7 @@ class JokeHistoryPunchLinesViewModel {
         var yearCount = 0
         var lastCountedYear = 0
 
-        let entryGroupsToCount = fetchedJokeHistoryEntryGroups[punchLineID] ?? []
+        let entryGroupsToCount = jokeHistoryEntryGroupsByPunchLineID[punchLineID] ?? []
         for entryGroup in entryGroupsToCount {
             if lastCountedYear != entryGroup.year {
                 yearCount += 1
@@ -55,7 +49,7 @@ class JokeHistoryPunchLinesViewModel {
         var monthCount = 0
         var lastCountedMonth = 0
 
-        let entryGroupsToCount = fetchedJokeHistoryEntryGroups[punchLineID] ?? []
+        let entryGroupsToCount = jokeHistoryEntryGroupsByPunchLineID[punchLineID] ?? []
         for entryGroup in entryGroupsToCount {
             if lastCountedMonth != entryGroup.month {
                 monthCount += 1
@@ -67,7 +61,7 @@ class JokeHistoryPunchLinesViewModel {
     }
 
     func getSelectedJokeHistoryEntryGroups(for punchLineID: String) -> [JokeHistoryEntryGroup] {
-        return fetchedJokeHistoryEntryGroups[punchLineID] ?? []
+        return jokeHistoryEntryGroupsByPunchLineID[punchLineID] ?? []
     }
 
 }

@@ -174,30 +174,7 @@ final class APIManager {
     }
 
     // MARK: Joke History
-
-    class func getJokeHistoryEntryGroups(for punchLineIDs: [String]) async -> [String: [JokeHistoryEntryGroup]] {
-        if APIManager.networkEnvironment == .mock {
-
-            var allFetchedEntryGroups: [String: [JokeHistoryEntryGroup]] = [:]
-
-            for punchLineID in punchLineIDs {
-                guard let data = fetchLocalMockJSONFile(fileName: MockRequestTitles.getEntryGroups) else {
-                    continue
-                }
-                guard var fetchedEntryGroupsForPunchLine: [JokeHistoryEntryGroup] = decodeJSON(from: data) else {
-                    continue
-                }
-                fetchedEntryGroupsForPunchLine.reverse()
-                allFetchedEntryGroups[punchLineID] = fetchedEntryGroupsForPunchLine
-            }
-
-            return allFetchedEntryGroups
-        } else {
-            guard let jokeHistoryEntryGroups: [String: [JokeHistoryEntryGroup]] = await handleURLRequest(for: .getJokeHistoryEntryGroups(punchLineIDs: punchLineIDs)) else { return [:] }
-            return jokeHistoryEntryGroups
-        }
-    }
-
+    
     class func getJokeHistoryEntries(for entryGroup: JokeHistoryEntryGroup) async -> [JokeHistoryEntry] {
         if APIManager.networkEnvironment == .mock {
             return MockDataManager.getMockJokeHistoryEntries(for: entryGroup)
@@ -285,4 +262,8 @@ final class APIManager {
         }
     }
 
+}
+
+enum NetworkEnvironment {
+    case mock, test, dev, prod
 }

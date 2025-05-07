@@ -297,9 +297,14 @@ final class MockDataManager {
     }
 
     class func createMockPrivatePunchLine(with request: PrivatePunchLinePostRequest) -> PrivatePunchLine {
+
+        let data = APIManager.fetchLocalMockJSONFile(fileName: MockRequestTitles.getEntryGroups) ?? Data()
+        let entryGroups: [JokeHistoryEntryGroup] = APIManager.decodeJSON(from: data) ?? []
+
         let mockPrivatePunchLine = PrivatePunchLine(
             id: UUID().uuidString,
             displayName: request.displayName,
+            historyEntryGroups: entryGroups,
             joinCode: "ABCDEF",
             owningUserID: request.owningUserID,
             owningUsername: request.owningUsername,

@@ -10,6 +10,7 @@ import Foundation
 struct PrivatePunchLine: ActivePunchLine, Codable, Identifiable {
     let id: String
     let displayName: String
+    let historyEntryGroups: [JokeHistoryEntryGroup]
     let joinCode: String
     let owningUserID: String
     let owningUsername: String
