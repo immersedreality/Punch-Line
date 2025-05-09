@@ -48,6 +48,15 @@ final class APIManager {
             return filteredPunchLines
         } else {
             guard let privatePunchLines: [PrivatePunchLine] = await handleURLRequest(for: .getPrivatePunchLinesWithIDs(punchLineIDs: ids)) else { return [] }
+
+            for localPunchLine in AppSessionManager.userInfo?.joinedPrivatePunchLines ?? [] {
+                if privatePunchLines.contains(where: { privatePunchLine in
+                    localPunchLine.id == privatePunchLine.id
+                }) == false {
+                    AppSessionManager.removeJoinedPrivatePunchLine(with: localPunchLine.id)
+                }
+            }
+
             return privatePunchLines
         }
     }
@@ -175,12 +184,28 @@ final class APIManager {
 
     // MARK: Joke History
     
-    class func getJokeHistoryEntries(for entryGroup: JokeHistoryEntryGroup) async -> [JokeHistoryEntry] {
+    class func getJokeHistoryEntries(for entryGroups: [JokeHistoryEntryGroup]) async -> [String: [JokeHistoryEntry]] {
         if APIManager.networkEnvironment == .mock {
-            return MockDataManager.getMockJokeHistoryEntries(for: entryGroup)
+
+            var entriesResponseDictionary: [String: [JokeHistoryEntry]] = [:]
+
+            for entryGroup in entryGroups {
+                entriesResponseDictionary[entryGroup.id] = MockDataManager.getMockJokeHistoryEntries(for: entryGroup)
+            }
+
+            return entriesResponseDictionary
         } else {
-            guard let jokeHistoryEntries: [JokeHistoryEntry] = await handleURLRequest(for: .getJokeHistoryEntries(entryGroupID: entryGroup.id, includeOffensiveContent: AppSessionManager.userInfo?.shouldSeeOffensiveContent ?? false)) else { return [] }
+            guard let jokeHistoryEntries: [String: [JokeHistoryEntry]] = await handleURLRequest(for: .getJokeHistoryEntries(entryGroupIDs: entryGroups.map { $0.id })) else { return [:] }
             return jokeHistoryEntries
+        }
+    }
+
+    class func getSurvivingJokes(for entryID: String) async -> [SurvivingJoke] {
+        if APIManager.networkEnvironment == .mock {
+            return MockDataManager.getMockOrPreviewSurvivingJokeBatch(numberOfJokes: 100)
+        } else {
+            guard let searchResults: [SurvivingJoke] = await handleURLRequest(for: .getSurvivingJokes(entryID: entryID, includeOffensiveContent: AppSessionManager.userInfo?.shouldSeeOffensiveContent ?? false)) else { return [] }
+            return searchResults
         }
     }
 

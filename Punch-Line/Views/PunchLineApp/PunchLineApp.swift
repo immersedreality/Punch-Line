@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import AppTrackingTransparency
 
 @main
 struct PunchLineApp: App {
@@ -22,6 +23,17 @@ struct PunchLineApp: App {
     var body: some Scene {
         WindowGroup {
             MainTabView()
+                .onAppear {
+                    requestIDFA()
+                }
         }
     }
+
+    private func requestIDFA() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            ATTrackingManager.requestTrackingAuthorization(completionHandler: { status in
+            })
+        }
+    }
+
 }

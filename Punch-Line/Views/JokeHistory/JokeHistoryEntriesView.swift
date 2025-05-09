@@ -27,7 +27,7 @@ struct JokeHistoryEntriesView: View {
                         JokeListView(
                             viewModel: JokeListViewModel(
                                 displayDate: entry.date.displayDate,
-                                jokes: entry.jokes,
+                                entryID: entry.id,
                                 mode: .history
                             )
                         )
@@ -64,12 +64,7 @@ struct JokeHistoryEntriesView: View {
 #Preview {
     JokeHistoryEntriesView(
         viewModel: JokeHistoryEntriesViewModel(
-            jokeHistoryEntryGroup: JokeHistoryEntryGroup(
-                id: UUID().uuidString,
-                punchLineID: UUID().uuidString,
-                year: 2025,
-                month: 4
-            )
+            jokeHistoryEntries: MockDataManager.getPreviewJokeHistoryEntries()
         )
     )
 }

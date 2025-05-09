@@ -9,7 +9,7 @@ import SwiftUI
 
 struct JokeHistoryMonthsView: View {
 
-    let viewModel: JokeHistoryMonthsViewModel
+    @ObservedObject var viewModel: JokeHistoryMonthsViewModel
 
     init(viewModel: JokeHistoryMonthsViewModel) {
         self.viewModel = viewModel
@@ -24,16 +24,16 @@ struct JokeHistoryMonthsView: View {
                     .ignoresSafeArea(edges: [.top])
                 List(viewModel.getRowData()) { rowData in
                     NavigationLink {
-                        if let selectedEntryGroup = viewModel.getSelectedJokeHistoryEntryGroup(selectedMonth: rowData.rowValue) {
-                            JokeHistoryEntriesView(
-                                viewModel: JokeHistoryEntriesViewModel(
-                                    jokeHistoryEntryGroup: selectedEntryGroup
-                                )
+                        let selectedEntries = viewModel.getSelectedJokeHistoryEntries(selectedMonth: rowData.rowValue)
+                        JokeHistoryEntriesView(
+                            viewModel: JokeHistoryEntriesViewModel(
+                                jokeHistoryEntries: selectedEntries
                             )
-                        }
+                        )
                     } label: {
                         JokeHistoryRowView(rowTitle: rowData.rowTitle)
                     }
+                    .disabled(viewModel.entriesDictionary.isEmpty)
                 }
                 .listRowSpacing(8.0)
                 .scrollContentBackground(.hidden)
@@ -56,6 +56,9 @@ struct JokeHistoryMonthsView: View {
                 }
             }
             .navigationTitle(NavigationTitles.jokeHistoryMonths)
+        }
+        .onAppear {
+            viewModel.fetchEntriesForEntryGroups()
         }
     }
 

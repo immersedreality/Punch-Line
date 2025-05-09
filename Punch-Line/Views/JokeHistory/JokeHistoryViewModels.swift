@@ -94,16 +94,23 @@ class JokeHistoryYearsViewModel {
 
 }
 
-class JokeHistoryMonthsViewModel {
+class JokeHistoryMonthsViewModel: ObservableObject {
 
     let punchLineID: String
     let selectedYear: Int
     let entryGroups: [JokeHistoryEntryGroup]
+    @Published var entriesDictionary: [String: [JokeHistoryEntry]] = [:]
 
     init(punchLineID: String, selectedYear: Int, entryGroups: [JokeHistoryEntryGroup]) {
         self.punchLineID = punchLineID
         self.selectedYear = selectedYear
         self.entryGroups = entryGroups
+    }
+
+    func fetchEntriesForEntryGroups() {
+        Task {
+            self.entriesDictionary = await APIManager.getJokeHistoryEntries(for: entryGroups)
+        }
     }
 
     func getRowData() -> [JokeHistoryRowDataItem] {
@@ -122,27 +129,34 @@ class JokeHistoryMonthsViewModel {
 
     }
 
-    func getSelectedJokeHistoryEntryGroup(selectedMonth: Int) -> JokeHistoryEntryGroup? {
-        return entryGroups.first(where: { entryGroup in
+    func getSelectedJokeHistoryEntries(selectedMonth: Int) -> [JokeHistoryEntry] {
+        if let selectedEntryGroup = entryGroups.first(where: { entryGroup in
             entryGroup.year == selectedYear && entryGroup.month == selectedMonth
-        }) ?? nil
+        }) {
+            return entriesDictionary[selectedEntryGroup.id] ?? []
+        } else {
+            return []
+        }
     }
 
 }
 
 class JokeHistoryEntriesViewModel: ObservableObject {
 
-    @Published var jokeHistoryEntries: [JokeHistoryEntry] = []
-
-    init(jokeHistoryEntryGroup: JokeHistoryEntryGroup) {
-        Task {
-            self.jokeHistoryEntries = await getSelectedJokeHistoryEntries(for: jokeHistoryEntryGroup)
-        }
+    var jokeHistoryEntries: [JokeHistoryEntry] = []
+    init(jokeHistoryEntries: [JokeHistoryEntry]) {
+        self.jokeHistoryEntries = jokeHistoryEntries
     }
 
-    func getSelectedJokeHistoryEntries(for entryGroup: JokeHistoryEntryGroup) async -> [JokeHistoryEntry] {
-        let jokeHistoryEntries = await APIManager.getJokeHistoryEntries(for: entryGroup)
-        return jokeHistoryEntries
+    init(jokeHistoryEntryGroup: JokeHistoryEntryGroup) {
+        fetchJokeHistoryEntries(for: jokeHistoryEntryGroup)
+    }
+
+    private func fetchJokeHistoryEntries(for group: JokeHistoryEntryGroup) {
+        Task {
+            let entryDictionary = await APIManager.getJokeHistoryEntries(for: [group])
+            self.jokeHistoryEntries = entryDictionary[group.id] ?? []
+        }
     }
 
 }

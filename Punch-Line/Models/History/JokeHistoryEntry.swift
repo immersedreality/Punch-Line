@@ -8,11 +8,8 @@
 import Foundation
 
 struct JokeHistoryEntry: Codable, Identifiable {
-
     let id: String
     let entryGroupID: String
-
     let date: Date
     let jokes: [SurvivingJoke]
-    
 }

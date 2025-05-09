@@ -7,17 +7,31 @@
 
 import SwiftUI
 
-class JokeListViewModel {
+class JokeListViewModel: ObservableObject {
 
     let displayDate: String
-    let jokes: [SurvivingJoke]
+    var entryID: String? = nil
+    @Published var jokes: [SurvivingJoke] = []
     let mode: JokeListMode
     private var selectedJoke: SurvivingJoke?
+
+    init(displayDate: String, entryID: String, mode: JokeListMode) {
+        self.displayDate = displayDate
+        self.entryID = entryID
+        self.mode = mode
+    }
 
     init(displayDate: String, jokes: [SurvivingJoke], mode: JokeListMode) {
         self.displayDate = displayDate
         self.jokes = jokes
         self.mode = mode
+    }
+
+    func fetchJokes() {
+        guard let entryID else { return }
+        Task {
+            await self.jokes = APIManager.getSurvivingJokes(for: entryID)
+        }
     }
 
     // MARK: Setters/Getters

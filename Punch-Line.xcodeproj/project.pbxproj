@@ -18,7 +18,7 @@
 		B8EDF7D52D9238CD00326650 /* Exceptions for "Punch-Line" folder in "Punch-Line" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Info.plist,
+				Resources/Info.plist,
 			);
 			target = B89302DD2D8A45AA00F77256 /* Punch-Line */;
 		};
@@ -277,7 +277,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Punch-Line/Info.plist";
+				INFOPLIST_FILE = "Punch-Line/Resources/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Punch-Line";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -308,7 +308,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Punch-Line/Info.plist";
+				INFOPLIST_FILE = "Punch-Line/Resources/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Punch-Line";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

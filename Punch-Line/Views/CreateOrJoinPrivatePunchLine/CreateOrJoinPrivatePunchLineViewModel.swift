@@ -30,7 +30,7 @@ class CreateOrJoinPrivatePunchLineViewModel: ObservableObject {
         case .failedCreate:
             return "Could not create Punch-Line.  Please check your network connection and try again."
         case .failedJoin:
-            return "Could not join Punch-Line.  Please check that your code is correct and try again."
+            return "Could not join Punch-Line.  Please check your code and try again."
         case .alreadyInPunchLine:
             return "You are already in it that Punch-Line!"
         }

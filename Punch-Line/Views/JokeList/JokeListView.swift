@@ -9,7 +9,7 @@ import SwiftUI
 
 struct JokeListView: View {
     
-    let viewModel: JokeListViewModel
+    @ObservedObject var viewModel: JokeListViewModel
     let adViewModel = InterstitialAdViewModel()
     
     @State private var showingConfirmationDialog = false
@@ -67,6 +67,9 @@ struct JokeListView: View {
             }
             .navigationTitle(viewModel.getNavigationTitle())
             .onAppear {
+                if viewModel.jokes.isEmpty {
+                    viewModel.fetchJokes()
+                }
                 if AppSessionManager.shouldShowAd {
                     adViewModel.showAd()
                 }
