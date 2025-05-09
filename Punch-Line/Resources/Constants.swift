@@ -23,12 +23,10 @@ struct ActivityFeedMessages {
 }
 
 struct AlertConstants {
-    static let comingSoon = "Coming Soon!"
     static let coolIt = "Cool It!"
     static let failure = "Failure!"
     static let mustEnterUsername = "You must enter a username on the settings screen before you can create Punch-Lines, dude."
     static let okeydoke = "Okeydoke"
-    static let serviceNotYetAvailable = "This service is not yet available.  Be patient, you little freak!"
     static let tooFunnyReports = "You only get ten Too Funny reports a day! Stop being so easy to please, you dingus!"
     static let whoAreYou = "Who Are You?"
 }
@@ -135,7 +133,6 @@ struct SystemIcons {
 struct UserDefaultsKeys {
     static let punchLineUserID = "PunchLineUserID"
     static let punchLineUsername = "PunchLineUsername"
-    static let hasPunchLinePro = "HasPunchLinePro"
     static let lastActivityDate = "LastActivityDate"
     static let todaysTaskCounts = "TodaysTaskCounts"
     static let dailyTooFunnyReportsCount = "DailyTooFunnyReportsCount"

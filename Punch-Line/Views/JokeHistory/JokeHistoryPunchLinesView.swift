@@ -61,11 +61,7 @@ struct JokeHistoryPunchLinesView: View {
                         Image(systemName: SystemIcons.addPunchLineButton)
                             .foregroundStyle(.accent)
                             .onTapGesture {
-                                if AppSessionManager.userInfo?.hasPunchLinePro == true {
-                                    showingAddPunchLineDialog = true
-                                } else {
-                                    showingJoinSheet = true
-                                }
+                                showingAddPunchLineDialog = true
                             }
                             .confirmationDialog("", isPresented: $showingAddPunchLineDialog) {
                                 Button(ConfirmationDialogMessages.createNewPrivatePunchLine) {

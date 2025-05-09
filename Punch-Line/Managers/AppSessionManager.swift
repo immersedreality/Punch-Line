@@ -40,10 +40,7 @@ final class AppSessionManager {
     class func initializeAdTimer() {
         DispatchQueue.main.async {
             adTimer = Timer.scheduledTimer(withTimeInterval: adAppearanceFrequency, repeats: true) { _ in
-                let userHasPunchLinePro = userInfo?.hasPunchLinePro ?? false
-                if !userHasPunchLinePro {
-                    shouldShowAd = true
-                }
+                shouldShowAd = true
             }
         }
     }
@@ -53,7 +50,6 @@ final class AppSessionManager {
     private class func getUserInfo() -> UserInfo? {
         guard let punchLineUserID = UserDefaults.standard.value(forKey: UserDefaultsKeys.punchLineUserID) as? String else { return nil }
         let punchLineUsername = UserDefaults.standard.value(forKey: UserDefaultsKeys.punchLineUsername) as? String
-        let hasPunchLinePro = UserDefaults.standard.value(forKey: UserDefaultsKeys.hasPunchLinePro) as? Bool ?? true
         let lastActivityDate = UserDefaults.standard.value(forKey: UserDefaultsKeys.lastActivityDate) as? Date ?? Date()
         let todaysTaskCounts = UserDefaults.standard.value(forKey: UserDefaultsKeys.todaysTaskCounts) as? [String: Int] ?? [:]
         let dailyTooFunnyReportsCount = UserDefaults.standard.value(forKey: UserDefaultsKeys.dailyTooFunnyReportsCount) as? Int ?? 0
@@ -81,7 +77,6 @@ final class AppSessionManager {
         let userInfo = UserInfo(
             punchLineUserID: punchLineUserID,
             punchLineUsername: punchLineUsername,
-            hasPunchLinePro: hasPunchLinePro,
             lastActivityDate: lastActivityDate,
             todaysTaskCounts: todaysTaskCounts,
             dailyTooFunnyReportsCount: dailyTooFunnyReportsCount,
@@ -141,11 +136,6 @@ final class AppSessionManager {
         guard let userInfo = userInfo else { return }
         let newReportsCount = userInfo.dailyTooFunnyReportsCount + 1
         UserDefaults.standard.set(newReportsCount, forKey: UserDefaultsKeys.dailyTooFunnyReportsCount)
-    }
-
-    class func toggleHasPunchLinePro() {
-        guard let userInfo = userInfo else { return }
-        UserDefaults.standard.set(!userInfo.shouldSeeOffensiveContent, forKey: UserDefaultsKeys.hasPunchLinePro)
     }
 
     class func toggleShouldSeeOffensiveContent() {

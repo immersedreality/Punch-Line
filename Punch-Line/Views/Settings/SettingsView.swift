@@ -22,9 +22,7 @@ struct SettingsView: View {
                         .padding([.top], 24.0)
                         .padding([.horizontal], 16.0)
                     List {
-                        if AppSessionManager.userInfo?.hasPunchLinePro == true {
-                            UsernameRow()
-                        }
+                        UsernameRow()
                         if AppSessionManager.userInfo?.favoriteJokes.isEmpty == false {
                             FavoriteJokesRow()
                         }
@@ -36,9 +34,6 @@ struct SettingsView: View {
                         }
                         ShowOffensiveContentRow()
                         ImNotFunnyModeRow()
-                        if AppSessionManager.userInfo?.hasPunchLinePro == false {
-                            GetPunchLineProRow()
-                        }
                     }
                     .listRowSpacing(8.0)
                     .scrollContentBackground(.hidden)
@@ -193,27 +188,6 @@ struct UsernameRow: View {
         alertTitle = "Name Updated"
         alertMessage = "Your author name has been successfully updated!"
         showingAlert = true
-    }
-
-}
-
-struct GetPunchLineProRow: View {
-
-    @State private var showingAlert = false
-
-    var body: some View {
-        Text("Get PunchLine Pro!  Why?!\n1. Get Rid Of Ads!\n2. Authorship Over Your Fantastic Joke Contributions!! \n3. Create And Share Your Own Private Punch-Lines!!!")
-            .font(Font.system(size: 20.0, weight: .light))
-            .foregroundStyle(.accent)
-            .onTapGesture {
-                showingAlert = true
-            }
-            .alert(AlertConstants.comingSoon, isPresented: $showingAlert) {
-                Button(AlertConstants.okeydoke) {
-                }
-            } message: {
-                Text(AlertConstants.serviceNotYetAvailable)
-            }
     }
 
 }

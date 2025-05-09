@@ -323,7 +323,7 @@ class PunchLineActivityViewModel: ObservableObject {
             punchLineID: punchLine.id,
             text: enteredSetupText,
             authorID: userInfo.punchLineUserID,
-            authorUsername: userInfo.hasPunchLinePro ? userInfo.punchLineUsername : nil,
+            authorUsername: userInfo.punchLineUsername,
             dateCreated: Date(),
             isOffensive: false
         )
@@ -333,7 +333,7 @@ class PunchLineActivityViewModel: ObservableObject {
             punchLineID: punchLine.id,
             text: enteredSetupText,
             authorID: userInfo.punchLineUserID,
-            authorUsername: userInfo.hasPunchLinePro ? userInfo.punchLineUsername : nil
+            authorUsername: userInfo.punchLineUsername
         )
 
         Task {
@@ -363,7 +363,7 @@ class PunchLineActivityViewModel: ObservableObject {
             setupAuthorUsername: setup.authorUsername,
             punchline: enteredPunchlineText,
             punchlineAuthorID: userInfo.punchLineUserID,
-            punchlineAuthorUsername: userInfo.hasPunchLinePro ? userInfo.punchLineUsername : nil
+            punchlineAuthorUsername: userInfo.punchLineUsername
         )
         Task {
             await APIManager.post(joke: jokePostRequest)
