@@ -107,11 +107,12 @@ final class APIManager {
         }
     }
 
-    class func getSetups(for punchLineID: String) async -> [Setup] {
+    class func fetchSetups(for punchLineID: String) async -> [Setup] {
         if APIManager.networkEnvironment == .mock {
             return MockDataManager.getMockSetupBatch()
         } else {
-            guard let setups: [Setup] = await handleURLRequest(for: .getSetups(punchLineID: punchLineID, includeOffensiveContent: AppSessionManager.userInfo?.shouldSeeOffensiveContent ?? false)) else { return [] }
+            let setupsFetchRequestObject = SetupFetchPostRequest(setupIDs: AppSessionManager.setupInteractionIDs(for: punchLineID))
+            guard let setups: [Setup] = await handleURLRequest(for: .postSetupsFetch(requestObject: setupsFetchRequestObject, punchLineID: punchLineID, includeOffensiveContent: AppSessionManager.userInfo?.shouldSeeOffensiveContent ?? false)) else { return [] }
             return setups
         }
     }
@@ -140,11 +141,12 @@ final class APIManager {
         }
     }
 
-    class func getJokes(for punchLineID: String) async -> [Joke] {
+    class func fetchJokes(for punchLineID: String) async -> [Joke] {
         if APIManager.networkEnvironment == .mock {
             return MockDataManager.getMockOrPreviewJokeBatch(numberOfJokes: 50)
         } else {
-            guard let jokes: [Joke] = await handleURLRequest(for: .getJokes(punchLineID: punchLineID, includeOffensiveContent: AppSessionManager.userInfo?.shouldSeeOffensiveContent ?? false)) else { return [] }
+            let jokeFetchRequestObject = JokeFetchPostRequest(jokeIDs: AppSessionManager.jokeInteractionIDs(for: punchLineID))
+            guard let jokes: [Joke] = await handleURLRequest(for: .postJokesFetch(requestObject: jokeFetchRequestObject, punchLineID: punchLineID, includeOffensiveContent: AppSessionManager.userInfo?.shouldSeeOffensiveContent ?? false)) else { return [] }
             return jokes
         }
     }
@@ -256,7 +258,13 @@ final class APIManager {
             case .postSetup(let requestObject):
                 guard let body = try? jsonEncoder.encode(requestObject) else { return nil }
                 request.httpBody = body
+            case .postSetupsFetch(let requestObject, _, _):
+                guard let body = try? jsonEncoder.encode(requestObject) else { return nil }
+                request.httpBody = body
             case .postJoke(let requestObject):
+                guard let body = try? jsonEncoder.encode(requestObject) else { return nil }
+                request.httpBody = body
+            case .postJokesFetch(let requestObject, _, _):
                 guard let body = try? jsonEncoder.encode(requestObject) else { return nil }
                 request.httpBody = body
             default:

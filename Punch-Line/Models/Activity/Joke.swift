@@ -39,6 +39,10 @@ struct JokePostRequest: Codable {
     let punchlineAuthorUsername: String?
 }
 
+struct JokeFetchPostRequest: Codable {
+    let jokeIDs: [String]
+}
+
 struct JokeVoteResponse: Codable {
     let wasSuccessful: Bool
 }

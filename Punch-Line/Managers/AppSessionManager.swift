@@ -52,7 +52,9 @@ final class AppSessionManager {
         let punchLineUsername = UserDefaults.standard.value(forKey: UserDefaultsKeys.punchLineUsername) as? String
         let lastActivityDate = UserDefaults.standard.value(forKey: UserDefaultsKeys.lastActivityDate) as? Date ?? Date()
         let todaysTaskCounts = UserDefaults.standard.value(forKey: UserDefaultsKeys.todaysTaskCounts) as? [String: Int] ?? [:]
-        let dailyTooFunnyReportsCount = UserDefaults.standard.value(forKey: UserDefaultsKeys.dailyTooFunnyReportsCount) as? Int ?? 0
+        let todaysSetupInteractionIDs = UserDefaults.standard.value(forKey: UserDefaultsKeys.todaysSetupInteractionIDs) as? [String: [String]] ?? [:]
+        let todaysJokeInteractionIDs = UserDefaults.standard.value(forKey: UserDefaultsKeys.todaysJokeInteractionIDs) as? [String: [String]] ?? [:]
+        let todaysTooFunnyReportsCount = UserDefaults.standard.value(forKey: UserDefaultsKeys.todaysTooFunnyReportsCount) as? Int ?? 0
         let shouldSeeOffensiveContent = UserDefaults.standard.value(forKey: UserDefaultsKeys.shouldSeeOffensiveContent) as? Bool ?? false
         let userIsNotFunny  = UserDefaults.standard.value(forKey: UserDefaultsKeys.userIsNotFunny) as? Bool ?? false
 
@@ -79,7 +81,9 @@ final class AppSessionManager {
             punchLineUsername: punchLineUsername,
             lastActivityDate: lastActivityDate,
             todaysTaskCounts: todaysTaskCounts,
-            dailyTooFunnyReportsCount: dailyTooFunnyReportsCount,
+            todaysSetupInteractionsIDs: todaysSetupInteractionIDs,
+            todaysJokeInteractionsIDs: todaysJokeInteractionIDs,
+            todaysTooFunnyReportsCount: todaysTooFunnyReportsCount,
             shouldSeeOffensiveContent: shouldSeeOffensiveContent,
             userIsNotFunny: userIsNotFunny,
             favoriteJokes: favoriteJokes ?? [],
@@ -98,6 +102,20 @@ final class AppSessionManager {
         return taskCount
     }
 
+    class func setupInteractionIDs(for punchLineID: String) -> [String] {
+        guard let setupIDs = userInfo?.todaysSetupInteractionsIDs[punchLineID] else {
+            return []
+        }
+        return setupIDs
+    }
+
+    class func jokeInteractionIDs(for punchLineID: String) -> [String] {
+        guard let jokeIDs = userInfo?.todaysJokeInteractionsIDs[punchLineID] else {
+            return []
+        }
+        return jokeIDs
+    }
+
     // MARK: Update Methods
 
     class func set(username: String) {
@@ -113,7 +131,7 @@ final class AppSessionManager {
 
     class func incrementTodaysTaskCount(for punchLineID: String) {
         guard let userInfo = userInfo else { return }
-        resetTaskCountsIfNecessary()
+        resetDailyPropertiesIfNecessary()
         var todaysTaskCounts = userInfo.todaysTaskCounts
         let newTaskCountForPunchLine = (todaysTaskCounts[punchLineID] ?? 0) + 1
         todaysTaskCounts[punchLineID] = newTaskCountForPunchLine
@@ -121,21 +139,41 @@ final class AppSessionManager {
         UserDefaults.standard.set(Date(), forKey: UserDefaultsKeys.lastActivityDate)
     }
 
-    class func resetTaskCountsIfNecessary() {
+    class func addSetup(interactionID: String, for punchLineID: String) {
+        guard let userInfo = userInfo else { return }
+        var todaysSetupInteractionIDs = userInfo.todaysSetupInteractionsIDs
+        guard var setupInteractionIDsForPunchLine = todaysSetupInteractionIDs[punchLineID] else { return }
+        setupInteractionIDsForPunchLine.append(interactionID)
+        todaysSetupInteractionIDs[punchLineID] = setupInteractionIDsForPunchLine
+        UserDefaults.standard.set(todaysSetupInteractionIDs, forKey: UserDefaultsKeys.todaysSetupInteractionIDs)
+    }
+
+    class func addJoke(interactionID: String, for punchLineID: String) {
+        guard let userInfo = userInfo else { return }
+        var todaysJokeInteractionIDs = userInfo.todaysJokeInteractionsIDs
+        guard var jokeInteractionIDsForPunchLine = todaysJokeInteractionIDs[punchLineID] else { return }
+        jokeInteractionIDsForPunchLine.append(interactionID)
+        todaysJokeInteractionIDs[punchLineID] = jokeInteractionIDsForPunchLine
+        UserDefaults.standard.set(todaysJokeInteractionIDs, forKey: UserDefaultsKeys.todaysJokeInteractionIDs)
+    }
+
+    class func incrementTodaysTooFunnyReportsCount() {
+        guard let userInfo = userInfo else { return }
+        let newReportsCount = userInfo.todaysTooFunnyReportsCount + 1
+        UserDefaults.standard.set(newReportsCount, forKey: UserDefaultsKeys.todaysTooFunnyReportsCount)
+    }
+
+    class func resetDailyPropertiesIfNecessary() {
         guard let lastActivityDate = userInfo?.lastActivityDate else { return }
         let lastActivityStartOfDay = Calendar.current.startOfDay(for: lastActivityDate)
         let todayStartOfDay = Calendar.current.startOfDay(for: Date())
 
         if lastActivityStartOfDay < todayStartOfDay {
             UserDefaults.standard.set([String: Int](), forKey: UserDefaultsKeys.todaysTaskCounts)
-            UserDefaults.standard.set(0, forKey: UserDefaultsKeys.dailyTooFunnyReportsCount)
+            UserDefaults.standard.set([String: [String]](), forKey: UserDefaultsKeys.todaysSetupInteractionIDs)
+            UserDefaults.standard.set([String: [String]](), forKey: UserDefaultsKeys.todaysJokeInteractionIDs)
+            UserDefaults.standard.set(0, forKey: UserDefaultsKeys.todaysTooFunnyReportsCount)
         }
-    }
-
-    class func incrementDailyTooFunnyReportsCount() {
-        guard let userInfo = userInfo else { return }
-        let newReportsCount = userInfo.dailyTooFunnyReportsCount + 1
-        UserDefaults.standard.set(newReportsCount, forKey: UserDefaultsKeys.dailyTooFunnyReportsCount)
     }
 
     class func toggleShouldSeeOffensiveContent() {

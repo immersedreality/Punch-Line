@@ -69,14 +69,14 @@ class PunchLineActivityViewModel: ObservableObject {
 
     func fetchSetupBatch() {
         Task {
-            let newSetups = await APIManager.getSetups(for: punchLine.id)
+            let newSetups = await APIManager.fetchSetups(for: punchLine.id)
             fetchedSetups.append(contentsOf: newSetups)
         }
     }
 
     func fetchJokeBatch() {
         Task {
-            let newJokes = await APIManager.getJokes(for: punchLine.id)
+            let newJokes = await APIManager.fetchJokes(for: punchLine.id)
             fetchedJokes.append(contentsOf: newJokes)
         }
     }
@@ -346,6 +346,7 @@ class PunchLineActivityViewModel: ObservableObject {
 
     func reportCurrentSetup(for reportReason: SetupReportReason) {
         guard let setup = currentSetup else { return }
+        AppSessionManager.addSetup(interactionID: setup.id, for: punchLine.id)
         Task {
             await APIManager.report(setup: setup, for: reportReason)
         }
@@ -354,6 +355,7 @@ class PunchLineActivityViewModel: ObservableObject {
     func createNewJoke() {
         guard let userInfo = AppSessionManager.userInfo else { return }
         guard let setup = currentSetup else { return }
+        AppSessionManager.addSetup(interactionID: setup.id, for: punchLine.id)
         let jokePostRequest = JokePostRequest(
             punchLineID: punchLine.id,
             punchLineDisplayName: punchLine.displayName,
@@ -374,19 +376,21 @@ class PunchLineActivityViewModel: ObservableObject {
 
     func voteOnCurrentJoke(vote: JokeVote) {
         guard let joke = currentJoke else { return }
+        AppSessionManager.addJoke(interactionID: joke.id, for: punchLine.id)
         Task {
             await APIManager.voteOn(joke: joke, with: vote)
         }
     }
 
     func getTooFunnyReportsCount() -> Int {
-        return AppSessionManager.userInfo?.dailyTooFunnyReportsCount ?? 0
+        return AppSessionManager.userInfo?.todaysTooFunnyReportsCount ?? 0
     }
 
     func reportCurrentJoke(for reportReason: JokeReportReason) {
         guard let joke = currentJoke else { return }
+        AppSessionManager.addJoke(interactionID: joke.id, for: punchLine.id)
         if reportReason == .tooFunny {
-            AppSessionManager.incrementDailyTooFunnyReportsCount()
+            AppSessionManager.incrementTodaysTooFunnyReportsCount()
         }
         Task {
             await APIManager.report(joke: joke, for: reportReason)

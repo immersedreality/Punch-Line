@@ -89,7 +89,7 @@ class PunchLineLaunchersViewModel {
             return .somethingWentWrong
         }
 
-        AppSessionManager.resetTaskCountsIfNecessary()
+        AppSessionManager.resetDailyPropertiesIfNecessary()
 
         let todaysTaskCount = AppSessionManager.taskCount(for: selectedPunchLineID)
         let userIsNotFunny = AppSessionManager.userInfo?.userIsNotFunny ?? false
@@ -172,13 +172,13 @@ class PunchLineLaunchersViewModel {
 
     func fetchSetupBatch() async -> [Setup] {
         guard let selectedPunchLineID else { return [] }
-        let setups = await APIManager.getSetups(for: selectedPunchLineID)
+        let setups = await APIManager.fetchSetups(for: selectedPunchLineID)
         return setups
     }
 
     func fetchJokeBatch() async -> [Joke ] {
         guard let selectedPunchLineID else { return [] }
-        let jokes = await APIManager.getJokes(for: selectedPunchLineID)
+        let jokes = await APIManager.fetchJokes(for: selectedPunchLineID)
         return jokes
     }
 

@@ -28,6 +28,10 @@ struct SetupPostRequest: Codable {
     let authorUsername: String?
 }
 
+struct SetupFetchPostRequest: Codable {
+    let setupIDs: [String]
+}
+
 struct SetupReportResponse: Codable {
     let wasSuccessful: Bool
 }

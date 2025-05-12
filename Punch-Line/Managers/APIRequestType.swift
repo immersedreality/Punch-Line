@@ -12,11 +12,11 @@ enum APIRequestType {
     case postPrivatePunchLine(requestObject: PrivatePunchLinePostRequest)
     case deletePrivatePunchLine(punchLineID: String)
     case postSetup(requestObject: SetupPostRequest)
-    case getSetups(punchLineID: String, includeOffensiveContent: Bool)
+    case postSetupsFetch(requestObject: SetupFetchPostRequest, punchLineID: String, includeOffensiveContent: Bool)
     case setupReportOffensive(setupID: String)
     case setupReportUnfunny(setupID: String)
     case postJoke(requestObject: JokePostRequest)
-    case getJokes(punchLineID: String, includeOffensiveContent: Bool)
+    case postJokesFetch(requestObject: JokeFetchPostRequest, punchLineID: String, includeOffensiveContent: Bool)
     case jokeVoteHa(jokeID: String)
     case jokeVoteMeh(jokeID: String)
     case jokeVoteUgh(jokeID: String)
@@ -54,16 +54,16 @@ enum APIRequestType {
             return domain + RequestComponents.privatepunchlines + RequestComponents.punchLineID + punchLineID
         case .postSetup:
             return domain + RequestComponents.setups
-        case .getSetups(let punchLineID, let includeOffensiveContent):
-            return domain + RequestComponents.setups + RequestComponents.punchLineID + punchLineID + RequestComponents.includeOffensiveContent + includeOffensiveContent.description
+        case .postSetupsFetch(_, let punchLineID, let includeOffensiveContent):
+            return domain + RequestComponents.setups + RequestComponents.fetch + RequestComponents.punchLineID + punchLineID + RequestComponents.includeOffensiveContent + includeOffensiveContent.description
         case .setupReportOffensive(let setupID):
             return domain + RequestComponents.setups + RequestComponents.offensive + RequestComponents.setupID + setupID
         case .setupReportUnfunny(let setupID):
             return domain + RequestComponents.setups + RequestComponents.unfunny + RequestComponents.setupID + setupID
         case .postJoke:
             return domain + RequestComponents.jokes
-        case .getJokes(let punchLineID, let includeOffensiveContent):
-            return domain + RequestComponents.jokes + RequestComponents.punchLineID + punchLineID + RequestComponents.includeOffensiveContent + includeOffensiveContent.description
+        case .postJokesFetch(_, let punchLineID, let includeOffensiveContent):
+            return domain + RequestComponents.jokes + RequestComponents.fetch + RequestComponents.punchLineID + punchLineID + RequestComponents.includeOffensiveContent + includeOffensiveContent.description
         case .jokeVoteHa(let jokeID):
             return domain + RequestComponents.jokes + RequestComponents.ha + RequestComponents.jokeID + jokeID
         case .jokeVoteMeh(let jokeID):
@@ -99,16 +99,16 @@ enum APIRequestType {
             return HTTPMethods.delete
         case .postSetup:
             return HTTPMethods.post
-        case .getSetups:
-            return HTTPMethods.get
+        case .postSetupsFetch:
+            return HTTPMethods.post
         case .setupReportOffensive:
             return HTTPMethods.patch
         case .setupReportUnfunny:
             return HTTPMethods.patch
         case .postJoke:
             return HTTPMethods.post
-        case .getJokes:
-            return HTTPMethods.get
+        case .postJokesFetch:
+            return HTTPMethods.post
         case .jokeVoteHa:
             return HTTPMethods.patch
         case .jokeVoteMeh:

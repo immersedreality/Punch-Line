@@ -94,6 +94,7 @@ struct RequestComponents {
 
     // MARK: Path Components
 
+    static let fetch = "/fetch"
     static let ha = "/ha"
     static let jokehistoryentries = "/jokehistoryentries"
     static let jokehistoryentrygroups = "/jokehistoryentrygroups"
@@ -135,7 +136,9 @@ struct UserDefaultsKeys {
     static let punchLineUsername = "PunchLineUsername"
     static let lastActivityDate = "LastActivityDate"
     static let todaysTaskCounts = "TodaysTaskCounts"
-    static let dailyTooFunnyReportsCount = "DailyTooFunnyReportsCount"
+    static let todaysSetupInteractionIDs = "TodaysSetupInteractionIDs"
+    static let todaysJokeInteractionIDs = "TodaysJokeInteractionsIDs"
+    static let todaysTooFunnyReportsCount = "TodaysTooFunnyReportsCount"
     static let shouldSeeOffensiveContent = "ShouldSeeOffensiveContent"
     static let userIsNotFunny = "UserIsNotFunny"
     static let favoriteJokes = "FavoriteJokes"
