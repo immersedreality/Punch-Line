@@ -145,7 +145,7 @@ final class APIManager {
         if APIManager.networkEnvironment == .mock {
             return MockDataManager.getMockOrPreviewJokeBatch(numberOfJokes: 50)
         } else {
-            let jokeFetchRequestObject = JokeFetchPostRequest(jokeIDs: AppSessionManager.jokeInteractionIDs(for: punchLineID))
+            let jokeFetchRequestObject = JokeFetchPostRequest(requestingUserID: AppSessionManager.userInfo?.punchLineUserID ?? "", jokeIDs: AppSessionManager.jokeInteractionIDs(for: punchLineID))
             guard let jokes: [Joke] = await handleURLRequest(for: .postJokesFetch(requestObject: jokeFetchRequestObject, punchLineID: punchLineID, includeOffensiveContent: AppSessionManager.userInfo?.shouldSeeOffensiveContent ?? false)) else { return [] }
             return jokes
         }

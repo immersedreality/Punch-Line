@@ -155,7 +155,7 @@ struct PunchLineLauncherView: View {
                     HStack {
                         Spacer()
                         Text(punchLineOwnerName)
-                            .font(Font.system(size: 12.0, weight: .light))
+                            .font(Font.system(size: 10.0, weight: .light))
                             .foregroundStyle(.accent)
                             .shadow(color: .black, radius: 0.1, x: 0.1, y: 0.1)
                     }

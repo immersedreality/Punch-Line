@@ -355,7 +355,9 @@ class PunchLineActivityViewModel: ObservableObject {
     func createNewJoke() {
         guard let userInfo = AppSessionManager.userInfo else { return }
         guard let setup = currentSetup else { return }
+
         AppSessionManager.addSetup(interactionID: setup.id, for: punchLine.id)
+
         let jokePostRequest = JokePostRequest(
             punchLineID: punchLine.id,
             punchLineDisplayName: punchLine.displayName,

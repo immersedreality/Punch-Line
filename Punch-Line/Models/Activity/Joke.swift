@@ -40,6 +40,7 @@ struct JokePostRequest: Codable {
 }
 
 struct JokeFetchPostRequest: Codable {
+    let requestingUserID: String
     let jokeIDs: [String]
 }
 

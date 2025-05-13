@@ -5,7 +5,7 @@
 //  Created by Jeffrey Eugene Hoch on 4/21/25.
 //
 
-import Foundation
+import SwiftUI
 
 class PrivatePunchLinesListViewModel: ObservableObject {
 
@@ -21,7 +21,7 @@ class PrivatePunchLinesListViewModel: ObservableObject {
     }
 
     @Published var privatePunchLines: [PrivatePunchLine] = []
-    private var selectedPrivatePunchLineID: String?
+    private var selectedPrivatePunchLine: PrivatePunchLine?
 
     @Published var shouldNavigateBackToSettings = false
 
@@ -39,16 +39,16 @@ class PrivatePunchLinesListViewModel: ObservableObject {
         }
     }
 
-    func set(selectedPrivatePunchLineID: String) {
-        self.selectedPrivatePunchLineID = selectedPrivatePunchLineID
+    func set(selectedPrivatePunchLine: PrivatePunchLine) {
+        self.selectedPrivatePunchLine = selectedPrivatePunchLine
     }
 
     func disbandSelectedPrivatePunchLine() {
-        guard let selectedPrivatePunchLineID else { return }
+        guard let selectedPrivatePunchLine else { return }
         Task {
-            let punchLineWasDeleted = await APIManager.deletePrivatePunchLine(with: selectedPrivatePunchLineID)
+            let punchLineWasDeleted = await APIManager.deletePrivatePunchLine(with: selectedPrivatePunchLine.id)
             if punchLineWasDeleted {
-                AppSessionManager.removeOwnedPrivatePunchLine(with: selectedPrivatePunchLineID)
+                AppSessionManager.removeOwnedPrivatePunchLine(with: selectedPrivatePunchLine.id)
                 GlobalNotificationManager.shared.shouldRefreshPunchLines = true
                 setPrivatePunchLines()
                 if privatePunchLines.isEmpty == true {
@@ -59,13 +59,18 @@ class PrivatePunchLinesListViewModel: ObservableObject {
     }
 
     func leaveSelectedPrivatePunchLine() {
-        guard let selectedPrivatePunchLineID else { return }
-        AppSessionManager.removeJoinedPrivatePunchLine(with: selectedPrivatePunchLineID)
+        guard let selectedPrivatePunchLine else { return }
+        AppSessionManager.removeJoinedPrivatePunchLine(with: selectedPrivatePunchLine.id)
         GlobalNotificationManager.shared.shouldRefreshPunchLines = true
         setPrivatePunchLines()
         if privatePunchLines.isEmpty == true {
             shouldNavigateBackToSettings = true
         }
+    }
+
+    func copyShareableJoinCode() {
+        guard let selectedPrivatePunchLine else { return }
+        UIPasteboard.general.string = selectedPrivatePunchLine.joinCode
     }
 
 }

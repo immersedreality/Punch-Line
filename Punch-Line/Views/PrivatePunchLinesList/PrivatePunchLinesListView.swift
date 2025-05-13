@@ -12,7 +12,8 @@ struct PrivatePunchLinesListView: View {
     @ObservedObject var viewModel: PrivatePunchLinesListViewModel
 
     @State private var showingConfirmationDialog = false
-
+    @State private var showingDisbandmentAlert = false
+    
     var body: some View {
         NavigationStack {
             ZStack {
@@ -21,7 +22,7 @@ struct PrivatePunchLinesListView: View {
                 List(viewModel.privatePunchLines) { privatePunchLine in
                     Button {
                         showingConfirmationDialog = true
-                        viewModel.set(selectedPrivatePunchLineID: privatePunchLine.id)
+                        viewModel.set(selectedPrivatePunchLine: privatePunchLine)
                     } label: {
                         PrivatePunchLineView(privatePunchLine: privatePunchLine)
                     }
@@ -29,13 +30,27 @@ struct PrivatePunchLinesListView: View {
                         switch viewModel.mode {
                         case .owned:
                             Button(ConfirmationDialogMessages.disbandPrivatePunchLine) {
-                                viewModel.disbandSelectedPrivatePunchLine()
+                                showingDisbandmentAlert = true
+                            }
+                            Button(ConfirmationDialogMessages.copyJoinCode) {
+                                viewModel.copyShareableJoinCode()
                             }
                         case .joined:
                             Button(ConfirmationDialogMessages.leavePrivatePunchLine) {
                                 viewModel.leaveSelectedPrivatePunchLine()
                             }
+                            Button(ConfirmationDialogMessages.copyJoinCode) {
+                                viewModel.copyShareableJoinCode()
+                            }
                         }
+                    }
+                    .alert(AlertConstants.youSure, isPresented: $showingDisbandmentAlert) {
+                        Button(AlertConstants.nah) { }
+                        Button(AlertConstants.yeah) {
+                            viewModel.disbandSelectedPrivatePunchLine()
+                        }
+                    } message: {
+                        Text(AlertConstants.disbandmentConfirmation)
                     }
                 }
                 .listRowSpacing(8.0)

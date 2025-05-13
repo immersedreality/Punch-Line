@@ -24,11 +24,15 @@ struct ActivityFeedMessages {
 
 struct AlertConstants {
     static let coolIt = "Cool It!"
+    static let disbandmentConfirmation = "This Punch-Line and all the jokes in it will be deleted.  This cannot be reversed."
     static let failure = "Failure!"
     static let mustEnterUsername = "You must enter a username on the settings screen before you can create Punch-Lines, dude."
+    static let nah = "Nah"
     static let okeydoke = "Okeydoke"
     static let tooFunnyReports = "You only get ten Too Funny reports a day! Stop being so easy to please, you dingus!"
     static let whoAreYou = "Who Are You?"
+    static let yeah = "Yeah"
+    static let youSure = "You Sure?"
 }
 
 struct AppConstants {
@@ -39,6 +43,7 @@ struct AppConstants {
 
 struct ConfirmationDialogMessages {
     static let addToFavorites = "Add to Favorites"
+    static let copyJoinCode = "Copy Join Code"
     static let copyJoke = "Copy Joke for Easy Sharing"
     static let createNewPrivatePunchLine = "Create New Private Punch-Line"
     static let disbandPrivatePunchLine = "Disband Private Punch-Line"
