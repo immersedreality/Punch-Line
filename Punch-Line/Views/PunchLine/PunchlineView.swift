@@ -87,8 +87,8 @@ struct PunchlineView: View {
     }
 
     private func navigateToNextActivity() {
-        viewModel.setNextActivity()
         isReadyForNextActivity = true
+        viewModel.setNextActivity()
     }
 
 }

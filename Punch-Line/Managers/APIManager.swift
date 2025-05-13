@@ -12,7 +12,6 @@ final class APIManager {
     // MARK: Network Environment
 
     static let networkEnvironment: NetworkEnvironment = .dev
-
     // MARK: Punch-Lines
 
     class func getPublicPunchLines() async -> [PublicPunchLine] {

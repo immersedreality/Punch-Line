@@ -57,8 +57,8 @@ class PunchLineLaunchersViewModel {
         if let relauncher = AppSessionManager.punchLineRelaunchers[activePunchLine.id] {
             punchLineActivityViewModel = PunchLineActivityViewModel(
                 punchLine: activePunchLine,
-                activity: getInitialPunchLineActivity(),
-                activityDisplayText: getInitialPunchLineActivityDisplayText(for: .relaunch),
+                activity: getInitialPunchLineActivity(punchLineHasSetups: !relauncher.previouslyFetchedSetups.isEmpty, punchLineHasJokes: !relauncher.previouslyFetchedJokes.isEmpty),
+                activityDisplayText: getInitialPunchLineActivityDisplayText(for: .relaunch, punchLineHasSetups: !relauncher.previouslyFetchedSetups.isEmpty, punchLineHasJokes: !relauncher.previouslyFetchedJokes.isEmpty),
                 relauncher: relauncher
             )
         } else {
@@ -66,8 +66,8 @@ class PunchLineLaunchersViewModel {
             let fetchedJokes = await fetchJokeBatch()
             punchLineActivityViewModel = PunchLineActivityViewModel(
                 punchLine: activePunchLine,
-                activity: getInitialPunchLineActivity(),
-                activityDisplayText: getInitialPunchLineActivityDisplayText(for: .initial),
+                activity: getInitialPunchLineActivity(punchLineHasSetups: !fetchedSetups.isEmpty, punchLineHasJokes: !fetchedJokes.isEmpty),
+                activityDisplayText: getInitialPunchLineActivityDisplayText(for: .initial, punchLineHasSetups: !fetchedSetups.isEmpty, punchLineHasJokes: !fetchedJokes.isEmpty),
                 initialSetupBatch: fetchedSetups,
                 initialJokeBatch: fetchedJokes
             )
@@ -75,7 +75,7 @@ class PunchLineLaunchersViewModel {
 
     }
 
-    func getInitialPunchLineActivity() -> PunchLineActivity {
+    func getInitialPunchLineActivity(punchLineHasSetups: Bool, punchLineHasJokes: Bool) -> PunchLineActivity {
 
         var selectedPunchLineID: String?
 
@@ -99,22 +99,36 @@ class PunchLineLaunchersViewModel {
             case 0, 1, 2:
                 return .setup
             default:
-                return .vote
+                if punchLineHasJokes {
+                    return .vote
+                } else {
+                    return .setup
+                }
             }
         } else {
             switch todaysTaskCount {
             case 0, 2, 4:
                 return .setup
             case 1, 3, 5, 6, 8, 11, 15, 20, 26, 33, 41, 50, 60:
-                return .punchline
+                if punchLineHasSetups {
+                    return .punchline
+                } else {
+                    return .setup
+                }
             default:
-                return .vote
+                if punchLineHasJokes {
+                    return .vote
+                } else if punchLineHasSetups {
+                    return .punchline
+                } else {
+                    return .setup
+                }
             }
         }
         
     }
 
-    func getInitialPunchLineActivityDisplayText(for mode: ActivityDisplayTextGenerationMode) -> String {
+    func getInitialPunchLineActivityDisplayText(for mode: ActivityDisplayTextGenerationMode, punchLineHasSetups: Bool, punchLineHasJokes: Bool) -> String {
 
         var selectedPunchLineID: String?
 
@@ -140,7 +154,11 @@ class PunchLineLaunchersViewModel {
             case 2:
                 return ActivityFeedMessages.setupThird
             default:
-                return ActivityFeedMessages.vote
+                if punchLineHasJokes {
+                    return ActivityFeedMessages.vote
+                } else {
+                    return ActivityFeedMessages.setupExtra
+                }
             }
         } else {
             switch todaysTaskCount {
@@ -157,9 +175,19 @@ class PunchLineLaunchersViewModel {
             case 5:
                 return mode == .relaunch ? ActivityFeedMessages.ownPunchlineThird : ActivityFeedMessages.punchline
             case 6, 8, 11, 15, 20, 26, 33, 41, 50, 60:
-                return ActivityFeedMessages.punchline
+                if punchLineHasSetups {
+                    return ActivityFeedMessages.punchline
+                } else {
+                    return ActivityFeedMessages.setupExtra
+                }
             default:
-                return ActivityFeedMessages.vote
+                if punchLineHasJokes {
+                    return ActivityFeedMessages.vote
+                } else if punchLineHasSetups {
+                    return ActivityFeedMessages.punchline
+                } else {
+                    return ActivityFeedMessages.setupExtra
+                }
             }
         }
 

@@ -143,7 +143,9 @@ final class AppSessionManager {
         guard let userInfo = userInfo else { return }
         var todaysSetupInteractionIDs = userInfo.todaysSetupInteractionsIDs
         guard var setupInteractionIDsForPunchLine = todaysSetupInteractionIDs[punchLineID] else { return }
-        setupInteractionIDsForPunchLine.append(interactionID)
+        if !setupInteractionIDsForPunchLine.contains(interactionID) {
+            setupInteractionIDsForPunchLine.append(interactionID)
+        }
         todaysSetupInteractionIDs[punchLineID] = setupInteractionIDsForPunchLine
         UserDefaults.standard.set(todaysSetupInteractionIDs, forKey: UserDefaultsKeys.todaysSetupInteractionIDs)
     }
@@ -152,7 +154,9 @@ final class AppSessionManager {
         guard let userInfo = userInfo else { return }
         var todaysJokeInteractionIDs = userInfo.todaysJokeInteractionsIDs
         guard var jokeInteractionIDsForPunchLine = todaysJokeInteractionIDs[punchLineID] else { return }
-        jokeInteractionIDsForPunchLine.append(interactionID)
+        if !jokeInteractionIDsForPunchLine.contains(interactionID) {
+            jokeInteractionIDsForPunchLine.append(interactionID)
+        }
         todaysJokeInteractionIDs[punchLineID] = jokeInteractionIDsForPunchLine
         UserDefaults.standard.set(todaysJokeInteractionIDs, forKey: UserDefaultsKeys.todaysJokeInteractionIDs)
     }
