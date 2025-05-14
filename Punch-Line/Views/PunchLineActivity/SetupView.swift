@@ -1,5 +1,5 @@
 //
-//  PunchlineView.swift
+//  SetupView.swift
 //  Punch-Line
 //
 //  Created by Jeffrey Eugene Hoch on 4/9/25.
@@ -7,13 +7,12 @@
 
 import SwiftUI
 
-struct PunchlineView: View {
+struct SetupView: View {
 
     @ObservedObject var viewModel: PunchLineActivityViewModel
 
     @Binding var isReadyForNextActivity: Bool
     @FocusState private var textFieldIsFocused: Bool
-    @State private var showingConfirmationDialog = false
 
     var body: some View {
         VStack {
@@ -25,29 +24,22 @@ struct PunchlineView: View {
                     .padding([.top], 48.0)
                 Spacer()
             }
-            HStack {
-                Text(viewModel.currentSetup?.text ?? "What do you call big ass titties that never go up and never fall down?")
-                    .font(Font.system(size: 20.0, weight: .light))
-                    .padding([.top], 2.0)
-                Spacer()
-            }
-            TextField("", text: $viewModel.enteredPunchlineText, axis: .vertical)
+            TextField("", text: $viewModel.enteredSetupText, axis: .vertical)
                 .textFieldStyle(.roundedBorder)
-                .multilineTextAlignment(.trailing)
-                .font(Font.system(size: 20.0, weight: .semibold))
+                .font(Font.system(size: 20.0, weight: .light))
                 .focused($textFieldIsFocused)
                 .submitLabel(.done)
-                .onChange(of: viewModel.enteredPunchlineText) { _, newValue in
+                .onChange(of: viewModel.enteredSetupText) { _, newValue in
                     if newValue.contains("\n") {
-                        viewModel.enteredPunchlineText.replace("\n", with: "")
+                        viewModel.enteredSetupText.replace("\n", with: "")
                         if viewModel.textEntryIsValid() {
-                            viewModel.createNewJoke()
+                            viewModel.createNewSetup()
                             navigateToNextActivity()
                         }
                     }
                 }
             Button {
-                viewModel.createNewJoke()
+                viewModel.createNewSetup()
                 navigateToNextActivity()
             } label: {
                 HStack {
@@ -61,12 +53,12 @@ struct PunchlineView: View {
             .foregroundStyle(.white)
             .backgroundStyle(.accent)
             .disabled(!viewModel.textEntryIsValid())
-            Button {
-                showingConfirmationDialog = true
-            } label: {
-                Image(systemName: SystemIcons.reportButton)
+            HStack {
+                Text(ActivityFeedMessages.setupEnd)
+                    .font(Font.system(size: 16.0, weight: .light))
                     .foregroundStyle(.accent)
-                    .padding([.top], 8.0)
+                    .shadow(color: .black, radius: 0.1, x: 0.1, y: 0.1)
+                Spacer()
             }
             Spacer()
         }
@@ -74,23 +66,14 @@ struct PunchlineView: View {
         .onAppear {
             textFieldIsFocused = true
         }
-        .confirmationDialog("", isPresented: $showingConfirmationDialog) {
-            Button(ConfirmationDialogMessages.flagSetupAsOffensive) {
-                viewModel.reportCurrentSetup(for: .offensive)
-                navigateToNextActivity()
-            }
-            Button(ConfirmationDialogMessages.flagSetupAsUnfunny) {
-                viewModel.reportCurrentSetup(for: .unfunny)
-                navigateToNextActivity()
-            }
-        }
+        .overlay(ActivityTransitionView().opacity(isReadyForNextActivity ? 1 : 0))
     }
 
     private func navigateToNextActivity() {
         isReadyForNextActivity = true
         viewModel.setNextActivity()
     }
-
+    
 }
 
 #Preview {
@@ -98,11 +81,11 @@ struct PunchlineView: View {
         @State var isReadyForNextActivity = false
 
         var body: some View {
-            PunchlineView(
+            SetupView(
                 viewModel: PunchLineActivityViewModel(
                     punchLine: MockDataManager.getPreviewPublicPunchLines()[0],
-                    activity: .punchline,
-                    activityDisplayText: ActivityFeedMessages.punchline,
+                    activity: .setup,
+                    activityDisplayText: ActivityFeedMessages.setupFirst,
                     initialSetupBatch: MockDataManager.getMockSetupBatch(),
                     initialJokeBatch: MockDataManager.getMockOrPreviewJokeBatch(numberOfJokes: 50)
                 ),

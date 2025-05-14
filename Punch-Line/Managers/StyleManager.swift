@@ -15,6 +15,7 @@ final class StyleManager {
     static let jokeListBackgroundColor = generateRandomBackgroundColor()
     static let jokeLookupBackgroundColor = generateRandomBackgroundColor()
     static let privatePunchLineListBackgroundColor = generateRandomBackgroundColor()
+    static var currentActivityBackgroundColor = Color.white
 
     struct PunchLineColors {
         static let pink = Color(red: 217.0, green: 120.0, blue: 127.0)
@@ -24,7 +25,9 @@ final class StyleManager {
         let hue = Double(Int.random(in: 0...360)) / 360
         let saturation = Double(Int.random(in: 8...21)) / 100
         let brightness = Double(Int.random(in: 89...96)) / 100
-        return Color(hue: hue, saturation: saturation, brightness: brightness)
+        let generatedColor = Color(hue: hue, saturation: saturation, brightness: brightness)
+        currentActivityBackgroundColor = generatedColor
+        return generatedColor
     }
 
 }

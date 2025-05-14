@@ -55,10 +55,12 @@ class PunchLineLaunchersViewModel {
         guard let activePunchLine else { return }
 
         if let relauncher = AppSessionManager.punchLineRelaunchers[activePunchLine.id] {
+            let punchLineHasSetups = !relauncher.previouslyFetchedSetups.isEmpty || relauncher.currentSetup != nil
+            let punchLineHasJokes = !relauncher.previouslyFetchedJokes.isEmpty || relauncher.currentJoke != nil
             punchLineActivityViewModel = PunchLineActivityViewModel(
                 punchLine: activePunchLine,
-                activity: getInitialPunchLineActivity(punchLineHasSetups: !relauncher.previouslyFetchedSetups.isEmpty, punchLineHasJokes: !relauncher.previouslyFetchedJokes.isEmpty),
-                activityDisplayText: getInitialPunchLineActivityDisplayText(for: .relaunch, punchLineHasSetups: !relauncher.previouslyFetchedSetups.isEmpty, punchLineHasJokes: !relauncher.previouslyFetchedJokes.isEmpty),
+                activity: getInitialPunchLineActivity(punchLineHasSetups: punchLineHasSetups, punchLineHasJokes: punchLineHasJokes),
+                activityDisplayText: getInitialPunchLineActivityDisplayText(for: .relaunch, punchLineHasSetups: punchLineHasSetups, punchLineHasJokes: punchLineHasJokes),
                 relauncher: relauncher
             )
         } else {

@@ -109,6 +109,7 @@ struct VoteView: View {
         } message: {
             Text(AlertConstants.tooFunnyReports)
         }
+        .overlay(ActivityTransitionView().opacity(isReadyForNextActivity ? 1 : 0))
     }
 
     private func navigateToNextActivity() {
