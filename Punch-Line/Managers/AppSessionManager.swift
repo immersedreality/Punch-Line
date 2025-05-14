@@ -142,7 +142,7 @@ final class AppSessionManager {
     class func addSetup(interactionID: String, for punchLineID: String) {
         guard let userInfo = userInfo else { return }
         var todaysSetupInteractionIDs = userInfo.todaysSetupInteractionsIDs
-        guard var setupInteractionIDsForPunchLine = todaysSetupInteractionIDs[punchLineID] else { return }
+        var setupInteractionIDsForPunchLine = todaysSetupInteractionIDs[punchLineID] ?? []
         if !setupInteractionIDsForPunchLine.contains(interactionID) {
             setupInteractionIDsForPunchLine.append(interactionID)
         }
@@ -153,7 +153,7 @@ final class AppSessionManager {
     class func addJoke(interactionID: String, for punchLineID: String) {
         guard let userInfo = userInfo else { return }
         var todaysJokeInteractionIDs = userInfo.todaysJokeInteractionsIDs
-        guard var jokeInteractionIDsForPunchLine = todaysJokeInteractionIDs[punchLineID] else { return }
+        var jokeInteractionIDsForPunchLine = todaysJokeInteractionIDs[punchLineID] ?? []
         if !jokeInteractionIDsForPunchLine.contains(interactionID) {
             jokeInteractionIDsForPunchLine.append(interactionID)
         }
