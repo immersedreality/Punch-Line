@@ -178,7 +178,7 @@ class PunchLineLaunchersViewModel {
                 return mode == .relaunch ? ActivityFeedMessages.ownPunchlineThird : ActivityFeedMessages.punchline
             case 6, 8, 11, 15, 20, 26, 33, 41, 50, 60:
                 if punchLineHasSetups {
-                    return ActivityFeedMessages.punchline
+                    return ActivityFeedMessages.punchlineGeneric
                 } else {
                     return ActivityFeedMessages.setupExtra
                 }
@@ -186,7 +186,7 @@ class PunchLineLaunchersViewModel {
                 if punchLineHasJokes {
                     return ActivityFeedMessages.vote
                 } else if punchLineHasSetups {
-                    return ActivityFeedMessages.punchline
+                    return ActivityFeedMessages.punchlineGeneric
                 } else {
                     return ActivityFeedMessages.setupExtra
                 }

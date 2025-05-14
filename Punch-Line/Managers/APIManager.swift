@@ -110,7 +110,7 @@ final class APIManager {
         if APIManager.networkEnvironment == .mock {
             return MockDataManager.getMockSetupBatch()
         } else {
-            let setupsFetchRequestObject = SetupFetchPostRequest(setupIDs: AppSessionManager.setupInteractionIDs(for: punchLineID))
+            let setupsFetchRequestObject = SetupFetchPostRequest(requestingUserID:  AppSessionManager.userInfo?.punchLineUserID ?? "", setupIDs: AppSessionManager.setupInteractionIDs(for: punchLineID))
             guard let setups: [Setup] = await handleURLRequest(for: .postSetupsFetch(requestObject: setupsFetchRequestObject, punchLineID: punchLineID, includeOffensiveContent: AppSessionManager.userInfo?.shouldSeeOffensiveContent ?? false)) else { return [] }
             return setups
         }

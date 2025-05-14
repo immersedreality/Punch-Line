@@ -29,6 +29,7 @@ struct SetupPostRequest: Codable {
 }
 
 struct SetupFetchPostRequest: Codable {
+    let requestingUserID: String
     let setupIDs: [String]
 }
 

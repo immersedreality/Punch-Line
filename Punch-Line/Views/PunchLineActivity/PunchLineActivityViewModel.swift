@@ -36,11 +36,13 @@ class PunchLineActivityViewModel: ObservableObject {
             break
         case .punchline:
             currentSetup = initialSetupBatch.first
+            AppSessionManager.addSetup(interactionID: currentSetup?.id ?? "", for: punchLine.id)
             if !self.fetchedSetups.isEmpty {
                 self.fetchedSetups.removeFirst()
             }
         case .vote:
             currentJoke = initialJokeBatch.first
+            AppSessionManager.addJoke(interactionID: currentJoke?.id ?? "", for: punchLine.id)
             if !self.fetchedJokes.isEmpty {
                 self.fetchedJokes.removeFirst()
             }
@@ -63,11 +65,13 @@ class PunchLineActivityViewModel: ObservableObject {
             break
         case .punchline:
             currentSetup = relauncher.currentSetup ?? fetchedSetups.first
+            AppSessionManager.addSetup(interactionID: currentSetup?.id ?? "", for: punchLine.id)
             if !self.fetchedSetups.isEmpty {
                 self.fetchedSetups.removeFirst()
             }
         case .vote:
             currentJoke = relauncher.currentJoke ?? fetchedJokes.first
+            AppSessionManager.addJoke(interactionID: currentJoke?.id ?? "", for: punchLine.id)
             if !self.fetchedJokes.isEmpty {
                 self.fetchedJokes.removeFirst()
             }
@@ -202,8 +206,6 @@ class PunchLineActivityViewModel: ObservableObject {
         }
 
         enteredPunchlineText = ""
-
-        AppSessionManager.addSetup(interactionID: ownSetup.id, for: punchLine.id)
 
         switch taskCount {
         case .first:
