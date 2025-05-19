@@ -242,6 +242,7 @@ final class APIManager {
         var request = URLRequest(url: url)
         request.httpMethod = requestType.httpMethod
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue(ClientSecret.value, forHTTPHeaderField: ClientSecret.header)
 
         if requestType.httpMethod == HTTPMethods.post {
             let dateFormatter = DateFormatter()
