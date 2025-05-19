@@ -95,8 +95,8 @@ struct RequestComponents {
     // MARK: Domains
 
     static let devAPIDomain = "http://localhost:8080"
-    static let testAPIDomain = ""
-    static let prodAPIDomain = ""
+    static let testAPIDomain = "https://punch-line-api-test-3dda11447a7b.herokuapp.com"
+    static let prodAPIDomain = "https://punch-line-api-prod-dd9c3690479f.herokuapp.com"
 
     // MARK: Path Components
 
