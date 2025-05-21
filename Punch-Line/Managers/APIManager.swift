@@ -12,6 +12,7 @@ final class APIManager {
     // MARK: Network Environment
 
     static let networkEnvironment: NetworkEnvironment = .test
+
     // MARK: Punch-Lines
 
     class func getPublicPunchLines() async -> [PublicPunchLine] {
@@ -242,7 +243,12 @@ final class APIManager {
         var request = URLRequest(url: url)
         request.httpMethod = requestType.httpMethod
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.setValue(ClientSecret.value, forHTTPHeaderField: ClientSecret.header)
+
+        if networkEnvironment == .prod {
+            request.setValue(ClientSecret.prodValue, forHTTPHeaderField: ClientSecret.header)
+        } else if networkEnvironment == .test {
+            request.setValue(ClientSecret.testValue, forHTTPHeaderField: ClientSecret.header)
+        }
 
         if requestType.httpMethod == HTTPMethods.post {
             let dateFormatter = DateFormatter()
