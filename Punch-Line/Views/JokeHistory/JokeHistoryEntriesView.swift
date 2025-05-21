@@ -20,7 +20,7 @@ struct JokeHistoryEntriesView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                StyleManager.generateRandomBackgroundColor()
+                StyleManager.jokeHistoryEntriesBackgroundColor
                     .ignoresSafeArea(edges: [.top])
                 List(viewModel.jokeHistoryEntries) { entry in
                     NavigationLink {
@@ -37,6 +37,11 @@ struct JokeHistoryEntriesView: View {
                 }
                 .listRowSpacing(8.0)
                 .scrollContentBackground(.hidden)
+            }
+            .onAppear {
+                if viewModel.jokeHistoryEntries.isEmpty {
+                    viewModel.fetchJokeHistoryEntriesForGroup()
+                }
             }
             .toolbar {
                 ToolbarItem(placement: .principal) {

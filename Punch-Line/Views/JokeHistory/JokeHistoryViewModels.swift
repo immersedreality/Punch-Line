@@ -144,18 +144,21 @@ class JokeHistoryMonthsViewModel: ObservableObject {
 class JokeHistoryEntriesViewModel: ObservableObject {
 
     var jokeHistoryEntries: [JokeHistoryEntry] = []
+    var jokeHistoryEntryGroup: JokeHistoryEntryGroup?
+
     init(jokeHistoryEntries: [JokeHistoryEntry]) {
         self.jokeHistoryEntries = jokeHistoryEntries
     }
 
     init(jokeHistoryEntryGroup: JokeHistoryEntryGroup) {
-        fetchJokeHistoryEntries(for: jokeHistoryEntryGroup)
+        self.jokeHistoryEntryGroup = jokeHistoryEntryGroup
     }
 
-    private func fetchJokeHistoryEntries(for group: JokeHistoryEntryGroup) {
+    func fetchJokeHistoryEntriesForGroup() {
+        guard let entryGroup = self.jokeHistoryEntryGroup else { return }
         Task {
-            let entryDictionary = await APIManager.getJokeHistoryEntries(for: [group])
-            self.jokeHistoryEntries = entryDictionary[group.id] ?? []
+            let entryDictionary = await APIManager.getJokeHistoryEntries(for: [entryGroup])
+            self.jokeHistoryEntries = entryDictionary[entryGroup.id] ?? []
         }
     }
 

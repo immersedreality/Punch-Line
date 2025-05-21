@@ -20,7 +20,7 @@ struct JokeHistoryYearsView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                StyleManager.generateRandomBackgroundColor()
+                StyleManager.jokeHistoryYearsBackgroundColor
                     .ignoresSafeArea(edges: [.top])
                 List(viewModel.getRowData()) { rowData in
                     NavigationLink {
