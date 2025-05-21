@@ -12,6 +12,7 @@ final class StyleManager {
     static let createOrJoinBackgroundColor = generateRandomBackgroundColor()
     static let createOrJoinSuccessBackgroundColor = generateRandomBackgroundColor()
     static let favoriteJokeListBackgroundColor = generateRandomBackgroundColor()
+    static let jokeHistoryPunchLinesBackgroundColor = generateRandomBackgroundColor()
     static let jokeListBackgroundColor = generateRandomBackgroundColor()
     static let jokeLookupBackgroundColor = generateRandomBackgroundColor()
     static let privatePunchLineListBackgroundColor = generateRandomBackgroundColor()

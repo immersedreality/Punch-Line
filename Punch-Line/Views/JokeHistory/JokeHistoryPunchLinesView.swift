@@ -20,7 +20,7 @@ struct JokeHistoryPunchLinesView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                StyleManager.generateRandomBackgroundColor()
+                StyleManager.jokeHistoryPunchLinesBackgroundColor
                     .ignoresSafeArea(edges: [.top])
                 List() {
                     Section(
