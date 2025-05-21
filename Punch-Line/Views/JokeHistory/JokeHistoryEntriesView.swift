@@ -9,8 +9,8 @@ import SwiftUI
 
 struct JokeHistoryEntriesView: View {
 
-    let viewModel: JokeHistoryEntriesViewModel
-    
+    @ObservedObject var viewModel: JokeHistoryEntriesViewModel
+
     init(viewModel: JokeHistoryEntriesViewModel) {
         self.viewModel = viewModel
     }

@@ -9,9 +9,9 @@ import SwiftUI
 
 struct MainTabView: View {
 
-    @StateObject var viewModel = MainViewModel()
-    @ObservedObject var notificationManager = GlobalNotificationManager.shared
     @Environment(\.scenePhase) var scenePhase
+    @ObservedObject var notificationManager = GlobalNotificationManager.shared
+    @StateObject var viewModel = MainViewModel()
     @State private var selection = 1
 
     var body: some View {
@@ -43,6 +43,8 @@ struct MainTabView: View {
         .onChange(of: scenePhase) { _, newPhase in
             if newPhase == .active {
                 viewModel.fetchPunchLines()
+            } else if newPhase == .inactive {
+                selection = 1
             }
         }
         .onChange(of: notificationManager.shouldRefreshPunchLines) { _, newValue in

@@ -143,7 +143,7 @@ class JokeHistoryMonthsViewModel: ObservableObject {
 
 class JokeHistoryEntriesViewModel: ObservableObject {
 
-    var jokeHistoryEntries: [JokeHistoryEntry] = []
+    @Published var jokeHistoryEntries: [JokeHistoryEntry] = []
     var jokeHistoryEntryGroup: JokeHistoryEntryGroup?
 
     init(jokeHistoryEntries: [JokeHistoryEntry]) {
