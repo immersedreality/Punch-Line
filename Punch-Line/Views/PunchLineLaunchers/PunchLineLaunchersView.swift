@@ -56,6 +56,9 @@ struct PunchLineLaunchersView: View {
                     }
                 }
             }
+            .refreshable {
+                GlobalNotificationManager.shared.shouldRefreshPunchLines = true
+            }
             .sheet(isPresented: $showingPunchLineSheet) {
                 if let punchLineActivityViewModel = viewModel.punchLineActivityViewModel {
                     PunchLineActivityRootView(viewModel: punchLineActivityViewModel)

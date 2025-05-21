@@ -56,6 +56,9 @@ struct JokeHistoryPunchLinesView: View {
                         }
                     }
                 }
+                .refreshable {
+                    GlobalNotificationManager.shared.shouldRefreshPunchLines = true
+                }
                 .toolbar {
                     ToolbarItem(placement: .topBarLeading) {
                         Image(systemName: SystemIcons.addPunchLineButton)

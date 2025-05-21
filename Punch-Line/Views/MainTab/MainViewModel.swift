@@ -12,10 +12,6 @@ class MainViewModel: ObservableObject {
     @Published private(set) var fetchedPublicPunchLines: [PublicPunchLine] = []
     @Published private(set) var fetchedPrivatePunchLines: [PrivatePunchLine] = []
 
-    init() {
-        fetchPunchLines()
-    }
-
     func fetchPunchLines() {
         guard let userInfo = AppSessionManager.userInfo else { return }
 

@@ -11,7 +11,7 @@ struct MainTabView: View {
 
     @StateObject var viewModel = MainViewModel()
     @ObservedObject var notificationManager = GlobalNotificationManager.shared
-
+    @Environment(\.scenePhase) var scenePhase
     @State private var selection = 1
 
     var body: some View {
@@ -39,6 +39,11 @@ struct MainTabView: View {
                 JokeLookupView()
             }
 
+        }
+        .onChange(of: scenePhase) { _, newPhase in
+            if newPhase == .active {
+                viewModel.fetchPunchLines()
+            }
         }
         .onChange(of: notificationManager.shouldRefreshPunchLines) { _, newValue in
             if newValue == true {
