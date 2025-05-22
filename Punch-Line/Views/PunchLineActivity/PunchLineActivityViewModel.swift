@@ -136,6 +136,7 @@ class PunchLineActivityViewModel: ObservableObject {
                 configureViewForPunchline()
             } else {
                 configureViewForSetup(.extra)
+                fetchSetupBatch()
             }
         default:
             if lastOwnSetup != nil {
@@ -144,8 +145,10 @@ class PunchLineActivityViewModel: ObservableObject {
                 configureViewForJoke()
             } else if fetchedSetups.first != nil {
                 configureViewForPunchline()
+                fetchJokeBatch()
             } else {
                 configureViewForSetup(.extra)
+                fetchJokeBatch()
             }
         }
 
@@ -169,6 +172,7 @@ class PunchLineActivityViewModel: ObservableObject {
                 configureViewForJoke()
             } else {
                 configureViewForSetup(.extra)
+                fetchJokeBatch()
             }
         }
 
