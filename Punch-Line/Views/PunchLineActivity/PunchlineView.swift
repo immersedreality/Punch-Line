@@ -13,6 +13,7 @@ struct PunchlineView: View {
 
     @Binding var isReadyForNextActivity: Bool
     @FocusState private var textFieldIsFocused: Bool
+    @State private var showingConfirmationAlert = false
     @State private var showingConfirmationDialog = false
 
     var body: some View {
@@ -41,14 +42,22 @@ struct PunchlineView: View {
                     if newValue.contains("\n") {
                         viewModel.enteredPunchlineText.replace("\n", with: "")
                         if viewModel.textEntryIsValid() {
-                            viewModel.createNewJoke()
-                            navigateToNextActivity()
+                            if AppSessionManager.userInfo?.userHasFatFingers == true {
+                                showingConfirmationAlert = true
+                            } else {
+                                viewModel.createNewJoke()
+                                navigateToNextActivity()
+                            }
                         }
                     }
                 }
             Button {
-                viewModel.createNewJoke()
-                navigateToNextActivity()
+                if AppSessionManager.userInfo?.userHasFatFingers == true {
+                    showingConfirmationAlert = true
+                } else {
+                    viewModel.createNewJoke()
+                    navigateToNextActivity()
+                }
             } label: {
                 HStack {
                     Spacer()
@@ -85,6 +94,15 @@ struct PunchlineView: View {
             }
         }
         .overlay(ActivityTransitionView().opacity(isReadyForNextActivity ? 1 : 0))
+        .alert(AlertConstants.youSure, isPresented: $showingConfirmationAlert) {
+            Button(AlertConstants.nah) { }
+            Button(AlertConstants.yeah) {
+                viewModel.createNewJoke()
+                navigateToNextActivity()
+            }
+        } message: {
+            Text(AlertConstants.areYouHappyPunchline)
+        }
     }
 
     private func navigateToNextActivity() {

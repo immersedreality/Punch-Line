@@ -34,6 +34,7 @@ struct SettingsView: View {
                         }
                         ShowOffensiveContentRow()
                         ImNotFunnyModeRow()
+                        FatFingerModeRow()
                     }
                     .listRowSpacing(8.0)
                     .scrollContentBackground(.hidden)
@@ -135,6 +136,33 @@ struct ImNotFunnyModeRow: View {
 
 }
 
+struct FatFingerModeRow: View {
+
+    @State private var userHasFatFingers = AppSessionManager.userInfo?.userHasFatFingers ?? false
+
+    var body: some View {
+        VStack {
+            HStack {
+                Text("Fat Fingers Mode")
+                    .font(Font.system(size: 20.0, weight: .light))
+                    .foregroundStyle(.accent)
+                Spacer()
+                Toggle(isOn: $userHasFatFingers) { }
+                    .onChange(of: userHasFatFingers) { _, _ in
+                        AppSessionManager.toggleUserHasFatFingers()
+                    }
+            }
+            HStack {
+                Text("When 'Fat Fingers Mode' is enabled you will be prompted for confirmation every time you submit a setup or punchline.")
+                    .font(Font.system(size: 12.0, weight: .light))
+                    .foregroundStyle(.gray)
+                Spacer()
+            }
+        }
+    }
+
+}
+
 struct UsernameRow: View {
 
     @State private var enteredUsernameText: String = AppSessionManager.userInfo?.punchLineUsername ?? ""
@@ -160,18 +188,18 @@ struct UsernameRow: View {
     }
 
     private func validateTextEntry() {
-        guard enteredUsernameText.count >= 8 else {
+        guard enteredUsernameText.count >= 3 else {
             enteredUsernameText = AppSessionManager.userInfo?.punchLineUsername ?? ""
             alertTitle = "Invalid Name"
-            alertMessage = "Names must be a minimum of 8 characters."
+            alertMessage = "Names must be a minimum of 3 characters."
             showingAlert = true
             return
         }
 
-        guard enteredUsernameText.count <= 32 else {
+        guard enteredUsernameText.count <= 30 else {
             enteredUsernameText = AppSessionManager.userInfo?.punchLineUsername ?? ""
             alertTitle = "Invalid Name"
-            alertMessage = "Names must be 32 characters or less."
+            alertMessage = "Names must be 30 characters or less."
             showingAlert = true
             return
         }

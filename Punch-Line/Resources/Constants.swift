@@ -24,6 +24,8 @@ struct ActivityFeedMessages {
 }
 
 struct AlertConstants {
+    static let areYouHappyPunchline = "Are you happy with your punchline?"
+    static let areYouHappySetup = "Are you happy with your setup?"
     static let coolIt = "Cool It!"
     static let disbandmentConfirmation = "This Punch-Line and all the jokes in it will be deleted.  This cannot be reversed."
     static let failure = "Failure!"
@@ -147,6 +149,7 @@ struct UserDefaultsKeys {
     static let todaysTooFunnyReportsCount = "TodaysTooFunnyReportsCount"
     static let shouldSeeOffensiveContent = "ShouldSeeOffensiveContent"
     static let userIsNotFunny = "UserIsNotFunny"
+    static let userHasFatFingers = "UserHasFatFingers"
     static let favoriteJokes = "FavoriteJokes"
     static let ownedPrivatePunchLines = "OwnedPrivatePunchLines"
     static let joinedPrivatePunchLines = "JoinedPrivatePunchLines"

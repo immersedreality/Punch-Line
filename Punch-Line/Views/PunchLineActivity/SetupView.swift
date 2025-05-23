@@ -13,6 +13,7 @@ struct SetupView: View {
 
     @Binding var isReadyForNextActivity: Bool
     @FocusState private var textFieldIsFocused: Bool
+    @State private var showingConfirmationAlert = false
 
     var body: some View {
         VStack {
@@ -33,14 +34,22 @@ struct SetupView: View {
                     if newValue.contains("\n") {
                         viewModel.enteredSetupText.replace("\n", with: "")
                         if viewModel.textEntryIsValid() {
-                            viewModel.createNewSetup()
-                            navigateToNextActivity()
+                            if AppSessionManager.userInfo?.userHasFatFingers == true {
+                                showingConfirmationAlert = true
+                            } else {
+                                viewModel.createNewSetup()
+                                navigateToNextActivity()
+                            }
                         }
                     }
                 }
             Button {
-                viewModel.createNewSetup()
-                navigateToNextActivity()
+                if AppSessionManager.userInfo?.userHasFatFingers == true {
+                    showingConfirmationAlert = true
+                } else {
+                    viewModel.createNewSetup()
+                    navigateToNextActivity()
+                }
             } label: {
                 HStack {
                     Spacer()
@@ -67,6 +76,15 @@ struct SetupView: View {
             textFieldIsFocused = true
         }
         .overlay(ActivityTransitionView().opacity(isReadyForNextActivity ? 1 : 0))
+        .alert(AlertConstants.youSure, isPresented: $showingConfirmationAlert) {
+            Button(AlertConstants.nah) { }
+            Button(AlertConstants.yeah) {
+                viewModel.createNewSetup()
+                navigateToNextActivity()
+            }
+        } message: {
+            Text(AlertConstants.areYouHappySetup)
+        }
     }
 
     private func navigateToNextActivity() {

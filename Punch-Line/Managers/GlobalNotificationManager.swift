@@ -12,5 +12,10 @@ class GlobalNotificationManager: ObservableObject {
     static let shared = GlobalNotificationManager()
 
     @Published var shouldRefreshPunchLines = false
+    @Published var favoritesHaveBeenUpdated = false
 
+    func refreshView() {
+        objectWillChange.send()
+    }
+    
 }

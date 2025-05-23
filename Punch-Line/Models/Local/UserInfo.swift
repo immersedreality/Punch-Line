@@ -17,6 +17,7 @@ struct UserInfo {
     let todaysTooFunnyReportsCount: Int
     let shouldSeeOffensiveContent: Bool
     let userIsNotFunny: Bool
+    let userHasFatFingers: Bool
     let favoriteJokes: [FavoriteJoke]
     let ownedPrivatePunchLines: [PrivatePunchLine]
     let joinedPrivatePunchLines: [PrivatePunchLine]

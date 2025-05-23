@@ -67,6 +67,7 @@ class JokeListViewModel: ObservableObject {
             AppSessionManager.removeFavoriteJoke(with: favoriteJokeToRemove.id)
         }
 
+        self.selectedJoke = nil
     }
 
     // MARK: Validators

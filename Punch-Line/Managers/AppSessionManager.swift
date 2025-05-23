@@ -56,7 +56,8 @@ final class AppSessionManager {
         let todaysJokeInteractionIDs = UserDefaults.standard.value(forKey: UserDefaultsKeys.todaysJokeInteractionIDs) as? [String: [String]] ?? [:]
         let todaysTooFunnyReportsCount = UserDefaults.standard.value(forKey: UserDefaultsKeys.todaysTooFunnyReportsCount) as? Int ?? 0
         let shouldSeeOffensiveContent = UserDefaults.standard.value(forKey: UserDefaultsKeys.shouldSeeOffensiveContent) as? Bool ?? false
-        let userIsNotFunny  = UserDefaults.standard.value(forKey: UserDefaultsKeys.userIsNotFunny) as? Bool ?? false
+        let userIsNotFunny = UserDefaults.standard.value(forKey: UserDefaultsKeys.userIsNotFunny) as? Bool ?? false
+        let userHasFatFingers = UserDefaults.standard.value(forKey: UserDefaultsKeys.userHasFatFingers) as? Bool ?? false
 
         var favoriteJokes: [FavoriteJoke]?
         if let favoriteJokesData = UserDefaults.standard.object(forKey: UserDefaultsKeys.favoriteJokes) as? Data {
@@ -86,6 +87,7 @@ final class AppSessionManager {
             todaysTooFunnyReportsCount: todaysTooFunnyReportsCount,
             shouldSeeOffensiveContent: shouldSeeOffensiveContent,
             userIsNotFunny: userIsNotFunny,
+            userHasFatFingers: userHasFatFingers,
             favoriteJokes: favoriteJokes ?? [],
             ownedPrivatePunchLines: ownedPrivatePunchLines ?? [],
             joinedPrivatePunchLines: joinedPrivatePunchLines ?? []
@@ -190,6 +192,11 @@ final class AppSessionManager {
         UserDefaults.standard.set(!userInfo.userIsNotFunny, forKey: UserDefaultsKeys.userIsNotFunny)
     }
 
+    class func toggleUserHasFatFingers() {
+        guard let userInfo = userInfo else { return }
+        UserDefaults.standard.set(!userInfo.userHasFatFingers, forKey: UserDefaultsKeys.userHasFatFingers)
+    }
+
     class func addFavoriteJoke(from joke: SurvivingJoke) {
         guard let userInfo = userInfo else { return }
         var favoriteJokes = userInfo.favoriteJokes
@@ -210,6 +217,8 @@ final class AppSessionManager {
         if let favoriteJokesData = try? encoder.encode(favoriteJokes) {
             UserDefaults.standard.set(favoriteJokesData, forKey: UserDefaultsKeys.favoriteJokes)
         }
+
+        GlobalNotificationManager.shared.favoritesHaveBeenUpdated = true
     }
 
     class func removeFavoriteJoke(with id: String) {
@@ -220,6 +229,8 @@ final class AppSessionManager {
         if let favoriteJokesData = try? encoder.encode(favoriteJokes) {
             UserDefaults.standard.set(favoriteJokesData, forKey: UserDefaultsKeys.favoriteJokes)
         }
+
+        GlobalNotificationManager.shared.favoritesHaveBeenUpdated = true
     }
 
     class func add(privatePunchLine: PrivatePunchLine) {

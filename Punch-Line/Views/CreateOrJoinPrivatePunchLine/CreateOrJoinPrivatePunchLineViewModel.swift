@@ -5,7 +5,7 @@
 //  Created by Jeffrey Eugene Hoch on 4/21/25.
 //
 
-import Foundation
+import SwiftUI
 
 class CreateOrJoinPrivatePunchLineViewModel: ObservableObject {
 
@@ -41,7 +41,7 @@ class CreateOrJoinPrivatePunchLineViewModel: ObservableObject {
     var successMessage: String {
         switch mode {
         case .create:
-            return "\(punchLineDisplayName) Created!\n\nGive this code to anyone you'd like to join \(punchLineDisplayName): \(createdPunchLineJoinCode)"
+            return "\(punchLineDisplayName) Created!\n\nGive this code to anyone you'd like to join \(punchLineDisplayName): \(createdPunchLineJoinCode)\n\n(It's already copied to your clipboard, ready for pasting!)"
         case .join:
             return "\(punchLineDisplayName) Successfully Joined!"
         }
@@ -91,6 +91,7 @@ class CreateOrJoinPrivatePunchLineViewModel: ObservableObject {
                 createdPunchLineJoinCode = createdPrivatePunchLine.joinCode
                 punchLineDisplayName = createdPrivatePunchLine.displayName
                 AppSessionManager.add(privatePunchLine: createdPrivatePunchLine)
+                UIPasteboard.general.string = createdPunchLineJoinCode
                 shouldNavigateToSuccessScreen = true
             } else {
                 errorMode = .failedCreate
