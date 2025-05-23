@@ -15,6 +15,7 @@ struct UserInfo {
     let todaysSetupInteractionsIDs: [String: [String]]
     let todaysJokeInteractionsIDs: [String: [String]]
     let todaysTooFunnyReportsCount: Int
+    let userHasSeenExplainer: Bool
     let shouldSeeOffensiveContent: Bool
     let userIsNotFunny: Bool
     let userHasFatFingers: Bool

@@ -14,6 +14,8 @@ struct MainTabView: View {
     @StateObject var viewModel = MainViewModel()
     @State private var selection = 1
 
+    @State private var showingExplainerSheet = false
+    
     var body: some View {
         TabView(selection: $selection) {
 
@@ -40,6 +42,12 @@ struct MainTabView: View {
             }
 
         }
+        .onAppear {
+            if AppSessionManager.userInfo?.userHasSeenExplainer == false {
+                AppSessionManager.toggleUserHasSeenExplainer()
+                showingExplainerSheet = true
+            }
+        }
         .onChange(of: scenePhase) { _, newPhase in
             if newPhase == .active {
                 viewModel.fetchPunchLines()
@@ -52,6 +60,10 @@ struct MainTabView: View {
                 viewModel.fetchPunchLines()
                 notificationManager.shouldRefreshPunchLines = false
             }
+        }
+        .sheet(isPresented: $showingExplainerSheet) {
+            ExplainerView()
+                .presentationDragIndicator(.visible)
         }
     }
 

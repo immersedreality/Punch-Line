@@ -55,6 +55,7 @@ final class AppSessionManager {
         let todaysSetupInteractionIDs = UserDefaults.standard.value(forKey: UserDefaultsKeys.todaysSetupInteractionIDs) as? [String: [String]] ?? [:]
         let todaysJokeInteractionIDs = UserDefaults.standard.value(forKey: UserDefaultsKeys.todaysJokeInteractionIDs) as? [String: [String]] ?? [:]
         let todaysTooFunnyReportsCount = UserDefaults.standard.value(forKey: UserDefaultsKeys.todaysTooFunnyReportsCount) as? Int ?? 0
+        let userHasSeenExplainer = UserDefaults.standard.value(forKey: UserDefaultsKeys.userHasSeenExplainer) as? Bool ?? false
         let shouldSeeOffensiveContent = UserDefaults.standard.value(forKey: UserDefaultsKeys.shouldSeeOffensiveContent) as? Bool ?? false
         let userIsNotFunny = UserDefaults.standard.value(forKey: UserDefaultsKeys.userIsNotFunny) as? Bool ?? false
         let userHasFatFingers = UserDefaults.standard.value(forKey: UserDefaultsKeys.userHasFatFingers) as? Bool ?? false
@@ -85,6 +86,7 @@ final class AppSessionManager {
             todaysSetupInteractionsIDs: todaysSetupInteractionIDs,
             todaysJokeInteractionsIDs: todaysJokeInteractionIDs,
             todaysTooFunnyReportsCount: todaysTooFunnyReportsCount,
+            userHasSeenExplainer: userHasSeenExplainer,
             shouldSeeOffensiveContent: shouldSeeOffensiveContent,
             userIsNotFunny: userIsNotFunny,
             userHasFatFingers: userHasFatFingers,
@@ -180,6 +182,11 @@ final class AppSessionManager {
             UserDefaults.standard.set([String: [String]](), forKey: UserDefaultsKeys.todaysJokeInteractionIDs)
             UserDefaults.standard.set(0, forKey: UserDefaultsKeys.todaysTooFunnyReportsCount)
         }
+    }
+
+    class func toggleUserHasSeenExplainer() {
+        guard let userInfo = userInfo else { return }
+        UserDefaults.standard.set(!userInfo.userHasSeenExplainer, forKey: UserDefaultsKeys.userHasSeenExplainer)
     }
 
     class func toggleShouldSeeOffensiveContent() {

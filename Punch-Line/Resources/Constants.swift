@@ -135,6 +135,7 @@ struct SystemIcons {
     static let jokeHistoryTab = "clock.arrow.trianglehead.counterclockwise.rotate.90"
     static let jokeLookupTab = "magnifyingglass"
     static let punchLineLaunchersTab = "pencil.and.scribble"
+    static let questionMark = "questionmark.app"
     static let reportButton = "flag.fill"
     static let settingsButton = "gear"
 }
@@ -147,6 +148,7 @@ struct UserDefaultsKeys {
     static let todaysSetupInteractionIDs = "TodaysSetupInteractionIDs"
     static let todaysJokeInteractionIDs = "TodaysJokeInteractionsIDs"
     static let todaysTooFunnyReportsCount = "TodaysTooFunnyReportsCount"
+    static let userHasSeenExplainer = "UserHasSeenExplainer"
     static let shouldSeeOffensiveContent = "ShouldSeeOffensiveContent"
     static let userIsNotFunny = "UserIsNotFunny"
     static let userHasFatFingers = "UserHasFatFingers"

@@ -9,6 +9,8 @@ import SwiftUI
 
 struct SettingsView: View {
 
+    @State private var showingExplainerSheet = false
+
     var body: some View {
         NavigationStack {
             ZStack {
@@ -35,6 +37,19 @@ struct SettingsView: View {
                         ShowOffensiveContentRow()
                         ImNotFunnyModeRow()
                         FatFingerModeRow()
+                        HStack {
+                            Spacer()
+                            Button {
+                                showingExplainerSheet = true
+                            } label: {
+                                Image(systemName: SystemIcons.questionMark)
+                                    .resizable()
+                                    .frame(width: 20, height: 20)
+                                    .foregroundStyle(.accent)
+                            }
+                            Spacer()
+                        }
+                        .listRowBackground(Color.clear)
                     }
                     .listRowSpacing(8.0)
                     .scrollContentBackground(.hidden)
@@ -43,6 +58,10 @@ struct SettingsView: View {
             }
             .toolbarVisibility(.hidden)
             .navigationTitle("Settings")
+            .sheet(isPresented: $showingExplainerSheet) {
+                ExplainerView()
+                    .presentationDragIndicator(.visible)
+            }
         }
     }
 
