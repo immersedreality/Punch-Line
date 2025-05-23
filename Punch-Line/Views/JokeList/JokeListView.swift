@@ -87,72 +87,70 @@ struct JokeView: View {
     let mode: JokeListMode
 
     var body: some View {
-        ZStack {
-            HStack(spacing: 4.0) {
-                VStack {
-                    HStack(spacing: 4.0) {
-                        switch mode {
-                        case .history:
-                            Text("#" + joke.dayRanking.description)
-                                .font(Font.system(size: 32.0, weight: .bold))
+        HStack(spacing: 4.0) {
+            VStack {
+                HStack(spacing: 4.0) {
+                    switch mode {
+                    case .history:
+                        Text("#" + joke.dayRanking.description)
+                            .font(Font.system(size: 32.0, weight: .bold))
+                            .foregroundStyle(.accent)
+                            .padding([.bottom], 2.0)
+                        if jokeIsInFavorites() {
+                            Text("(🏄‍♂️)")
+                                .font(Font.system(size: 32.0, weight: .light))
+                                .foregroundStyle(.accent)
+                                .shadow(color: .black, radius: 0.1, x: 0.1, y: 0.1)
+                                .padding([.bottom], 2.0)
+                        }
+                    case .lookup:
+                        Text("#" + joke.dayRanking.description + " in " + joke.punchLineDisplayName + " on " + joke.dateCreated.displayDate)
+                            .font(Font.system(size: 12.0, weight: .bold))
+                            .foregroundStyle(.accent)
+                            .padding([.bottom], 2.0)
+                        if jokeIsInFavorites() {
+                            Text("(🏄‍♂️)")
+                                .font(Font.system(size: 12.0, weight: .light))
                                 .foregroundStyle(.accent)
                                 .padding([.bottom], 2.0)
-                            if jokeIsInFavorites() {
-                                Text("(🏄‍♂️)")
-                                    .font(Font.system(size: 32.0, weight: .light))
-                                    .foregroundStyle(.accent)
-                                    .shadow(color: .black, radius: 0.1, x: 0.1, y: 0.1)
-                                    .padding([.bottom], 2.0)
-                            }
-                        case .lookup:
-                            Text("#" + joke.dayRanking.description + " in " + joke.punchLineDisplayName + " on " + joke.dateCreated.displayDate)
-                                .font(Font.system(size: 12.0, weight: .bold))
-                                .foregroundStyle(.accent)
-                                .padding([.bottom], 2.0)
-                            if jokeIsInFavorites() {
-                                Text("(🏄‍♂️)")
-                                    .font(Font.system(size: 12.0, weight: .light))
-                                    .foregroundStyle(.accent)
-                                    .padding([.bottom], 2.0)
-                            }
                         }
                     }
-                    HStack {
-                        Text(joke.setup)
-                            .font(Font.system(size: 20.0, weight: .light))
+                }
+                HStack {
+                    Text(joke.setup)
+                        .font(Font.system(size: 20.0, weight: .light))
+                    Spacer(minLength: 16.0)
+                }
+                HStack {
+                    Spacer(minLength: 16.0)
+                    Text(joke.punchline)
+                        .font(Font.system(size: 20.0, weight: .semibold))
+                        .padding([.top], 2.0)
+                }
+                if let setupAuthor = joke.setupAuthorUsername {
+                    HStack(spacing: 0.0) {
+                        Text("Setup By -> ")
+                            .font(Font.system(size: 12.0, weight: .light))
+                            .foregroundStyle(.gray)
+                            .padding([.top], 8.0)
+                        Text(setupAuthor)
+                            .font(Font.system(size: 12.0, weight: .semibold))
+                            .foregroundStyle(.gray)
+                            .padding([.top], 8.0)
                         Spacer(minLength: 16.0)
                     }
-                    HStack {
+                }
+                if let punchlineAuthor = joke.punchlineAuthorUsername {
+                    HStack(spacing: 0.0) {
+                        Text("Punchline By -> ")
+                            .font(Font.system(size: 12.0, weight: .light))
+                            .foregroundStyle(.gray)
+                            .padding([.top], joke.setupAuthorUsername == nil ? 8.0 : 0.0)
+                        Text(punchlineAuthor)
+                            .font(Font.system(size: 12.0, weight: .semibold))
+                            .foregroundStyle(.gray)
+                            .padding([.top], joke.setupAuthorUsername == nil ? 8.0 : 0.0)
                         Spacer(minLength: 16.0)
-                        Text(joke.punchline)
-                            .font(Font.system(size: 20.0, weight: .semibold))
-                            .padding([.top], 2.0)
-                    }
-                    if let setupAuthor = joke.setupAuthorUsername {
-                        HStack(spacing: 0.0) {
-                            Text("Setup By -> ")
-                                .font(Font.system(size: 12.0, weight: .light))
-                                .foregroundStyle(.gray)
-                                .padding([.top], 8.0)
-                            Text(setupAuthor)
-                                .font(Font.system(size: 12.0, weight: .semibold))
-                                .foregroundStyle(.gray)
-                                .padding([.top], 8.0)
-                            Spacer(minLength: 16.0)
-                        }
-                    }
-                    if let punchlineAuthor = joke.punchlineAuthorUsername {
-                        HStack(spacing: 0.0) {
-                            Text("Punchline By -> ")
-                                .font(Font.system(size: 12.0, weight: .light))
-                                .foregroundStyle(.gray)
-                                .padding([.top], joke.setupAuthorUsername == nil ? 8.0 : 0.0)
-                            Text(punchlineAuthor)
-                                .font(Font.system(size: 12.0, weight: .semibold))
-                                .foregroundStyle(.gray)
-                                .padding([.top], joke.setupAuthorUsername == nil ? 8.0 : 0.0)
-                            Spacer(minLength: 16.0)
-                        }
                     }
                 }
             }
