@@ -24,8 +24,6 @@ class PunchLineLaunchersViewModel {
         }
     }
 
-    var punchLineActivityViewModel: PunchLineActivityViewModel?
-    
     init(fetchedPublicPunchLines: [PublicPunchLine], fetchedPrivatePunchLines: [PrivatePunchLine]) {
         self.fetchedPublicPunchLines = fetchedPublicPunchLines
         self.fetchedPrivatePunchLines = fetchedPrivatePunchLines
@@ -43,7 +41,7 @@ class PunchLineLaunchersViewModel {
 
     // MARK: PunchLine Launch Methods
 
-    func initializePunchLineActivityViewModel() async {
+    func initializePunchLineActivityViewModel() async -> PunchLineActivityViewModel? {
         var activePunchLine: (any ActivePunchLine)?
 
         if let punchLine = selectedPublicPunchLine {
@@ -52,12 +50,12 @@ class PunchLineLaunchersViewModel {
             activePunchLine = punchLine
         }
 
-        guard let activePunchLine else { return }
+        guard let activePunchLine else { return nil }
 
         if let relauncher = AppSessionManager.punchLineRelaunchers[activePunchLine.id] {
             let punchLineHasSetups = !relauncher.previouslyFetchedSetups.isEmpty || relauncher.currentSetup != nil
             let punchLineHasJokes = !relauncher.previouslyFetchedJokes.isEmpty || relauncher.currentJoke != nil
-            punchLineActivityViewModel = PunchLineActivityViewModel(
+            return PunchLineActivityViewModel(
                 punchLine: activePunchLine,
                 activity: getInitialPunchLineActivity(punchLineHasSetups: punchLineHasSetups, punchLineHasJokes: punchLineHasJokes),
                 activityDisplayText: getInitialPunchLineActivityDisplayText(for: .relaunch, punchLineHasSetups: punchLineHasSetups, punchLineHasJokes: punchLineHasJokes),
@@ -66,7 +64,7 @@ class PunchLineLaunchersViewModel {
         } else {
             let fetchedSetups = await fetchSetupBatch()
             let fetchedJokes = await fetchJokeBatch()
-            punchLineActivityViewModel = PunchLineActivityViewModel(
+            return PunchLineActivityViewModel(
                 punchLine: activePunchLine,
                 activity: getInitialPunchLineActivity(punchLineHasSetups: !fetchedSetups.isEmpty, punchLineHasJokes: !fetchedJokes.isEmpty),
                 activityDisplayText: getInitialPunchLineActivityDisplayText(for: .initial, punchLineHasSetups: !fetchedSetups.isEmpty, punchLineHasJokes: !fetchedJokes.isEmpty),

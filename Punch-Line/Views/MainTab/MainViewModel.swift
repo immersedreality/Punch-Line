@@ -19,9 +19,11 @@ class MainViewModel: ObservableObject {
         userInfo.ownedPrivatePunchLines.forEach { privatePunchLineIDs.append($0.id) }
         userInfo.joinedPrivatePunchLines.forEach { privatePunchLineIDs.append($0.id) }
 
-        Task {
-            await self.fetchedPublicPunchLines = APIManager.getPublicPunchLines()
-            await self.fetchedPrivatePunchLines = APIManager.getPrivatePunchLines(with: privatePunchLineIDs)
+        DispatchQueue.main.async {
+            Task {
+                await self.fetchedPublicPunchLines = APIManager.getPublicPunchLines()
+                await self.fetchedPrivatePunchLines = APIManager.getPrivatePunchLines(with: privatePunchLineIDs)
+            }
         }
     }
 

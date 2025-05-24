@@ -10,6 +10,7 @@ import SwiftUI
 struct PunchLineLaunchersView: View {
 
     let viewModel: PunchLineLaunchersViewModel
+    @State var activityViewModel: PunchLineActivityViewModel? = nil
 
     @State private var showingPunchLineSheet = false
     @State private var showingCreateSheet = false
@@ -60,8 +61,8 @@ struct PunchLineLaunchersView: View {
                 GlobalNotificationManager.shared.shouldRefreshPunchLines = true
             }
             .sheet(isPresented: $showingPunchLineSheet) {
-                if let punchLineActivityViewModel = viewModel.punchLineActivityViewModel {
-                    PunchLineActivityRootView(viewModel: punchLineActivityViewModel)
+                if let activityViewModel = self.activityViewModel {
+                    PunchLineActivityRootView(viewModel: activityViewModel)
                         .presentationDragIndicator(.visible)
                 }
             }
@@ -121,9 +122,11 @@ struct PunchLineLaunchersView: View {
     }
 
     private func launchPunchLine() {
-        Task {
-            await viewModel.initializePunchLineActivityViewModel()
-            showingPunchLineSheet = true
+        DispatchQueue.main.async {
+            Task {
+                self.activityViewModel = await viewModel.initializePunchLineActivityViewModel()
+            }
+            self.showingPunchLineSheet = true
         }
     }
 
