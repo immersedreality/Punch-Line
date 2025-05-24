@@ -51,8 +51,6 @@ struct MainTabView: View {
         .onChange(of: scenePhase) { _, newPhase in
             if newPhase == .active {
                 viewModel.fetchPunchLines()
-            } else if newPhase == .inactive {
-                selection = 1
             }
         }
         .onChange(of: notificationManager.shouldRefreshPunchLines) { _, newValue in

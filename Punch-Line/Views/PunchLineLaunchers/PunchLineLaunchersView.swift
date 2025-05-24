@@ -11,7 +11,6 @@ struct PunchLineLaunchersView: View {
 
     let viewModel: PunchLineLaunchersViewModel
 
-    @Environment(\.scenePhase) var scenePhase
     @State private var showingPunchLineSheet = false
     @State private var showingCreateSheet = false
     @State private var showingUsernameAlert = false
@@ -59,11 +58,6 @@ struct PunchLineLaunchersView: View {
             }
             .refreshable {
                 GlobalNotificationManager.shared.shouldRefreshPunchLines = true
-            }
-            .onChange(of: scenePhase) { _, newPhase in
-                if newPhase == .inactive {
-                    showingPunchLineSheet = false
-                }
             }
             .sheet(isPresented: $showingPunchLineSheet) {
                 if let punchLineActivityViewModel = viewModel.punchLineActivityViewModel {

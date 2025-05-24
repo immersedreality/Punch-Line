@@ -9,11 +9,7 @@ import SwiftUI
 
 struct JokeHistoryEntriesView: View {
 
-    @ObservedObject var viewModel: JokeHistoryEntriesViewModel
-
-    init(viewModel: JokeHistoryEntriesViewModel) {
-        self.viewModel = viewModel
-    }
+    @StateObject var viewModel: JokeHistoryEntriesViewModel
 
     @State private var showingModalSheet = false
 
