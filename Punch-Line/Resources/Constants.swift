@@ -19,7 +19,7 @@ struct ActivityFeedMessages {
     static let setupThird = "One more setup.  Make it the funniest yet!"
     static let setupEnd = "Setups must end with either a question mark (?) or an ellipsis (…)"
     static let setupExtra = "Keep the setups coming!"
-    static let setupGeneric = "Another setup please!"
+    static let setupGeneric = "Another setup, please!"
     static let vote = "Quick Question: Is This Funny?"
     static let weDoneGoofed = "We done goofed!  You're not supposed to see this!"
 }
