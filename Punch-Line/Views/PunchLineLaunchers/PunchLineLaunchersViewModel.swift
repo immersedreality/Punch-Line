@@ -165,15 +165,39 @@ class PunchLineLaunchersViewModel {
             case 0:
                 return ActivityFeedMessages.setupFirst
             case 1:
-                return mode == .relaunch ? ActivityFeedMessages.ownPunchlineFirst : ActivityFeedMessages.punchline
+                if mode == .relaunch {
+                    return ActivityFeedMessages.ownPunchlineFirst
+                } else {
+                    if punchLineHasSetups {
+                        return ActivityFeedMessages.punchline
+                    } else {
+                        return ActivityFeedMessages.setupGeneric
+                    }
+                }
             case 2:
                 return ActivityFeedMessages.setupSecond
             case 3:
-                return mode == .relaunch ? ActivityFeedMessages.ownPunchlineSecond : ActivityFeedMessages.punchline
+                if mode == .relaunch {
+                    return ActivityFeedMessages.ownPunchlineSecond
+                } else {
+                    if punchLineHasSetups {
+                        return ActivityFeedMessages.punchline
+                    } else {
+                        return ActivityFeedMessages.setupGeneric
+                    }
+                }
             case 4:
                 return ActivityFeedMessages.setupThird
             case 5:
-                return mode == .relaunch ? ActivityFeedMessages.ownPunchlineThird : ActivityFeedMessages.punchline
+                if mode == .relaunch {
+                    return ActivityFeedMessages.ownPunchlineThird
+                } else {
+                    if punchLineHasSetups {
+                        return ActivityFeedMessages.punchline
+                    } else {
+                        return ActivityFeedMessages.setupGeneric
+                    }
+                }
             case 6, 8, 11, 15, 20, 26, 33, 41, 50, 60:
                 if punchLineHasSetups {
                     return ActivityFeedMessages.punchlineGeneric
