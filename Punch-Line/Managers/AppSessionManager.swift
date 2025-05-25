@@ -37,9 +37,9 @@ final class AppSessionManager {
         UserDefaults.standard.set(false, forKey: UserDefaultsKeys.shouldSeeOffensiveContent)
     }
 
-    class func initializeAdTimer() {
+    class func setAdTimer() {
         DispatchQueue.main.async {
-            adTimer = Timer.scheduledTimer(withTimeInterval: adAppearanceFrequency, repeats: true) { _ in
+            adTimer = Timer.scheduledTimer(withTimeInterval: adAppearanceFrequency, repeats: false) { _ in
                 shouldShowAd = true
             }
         }

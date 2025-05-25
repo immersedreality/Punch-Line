@@ -17,7 +17,7 @@ struct PunchLineApp: App {
 
     init() {
         viewModel.validateUserInfo()
-        AppSessionManager.initializeAdTimer()
+        AppSessionManager.setAdTimer()
     }
 
     var body: some Scene {

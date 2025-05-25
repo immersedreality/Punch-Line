@@ -39,6 +39,7 @@ class InterstitialAdViewModel: NSObject, FullScreenContentDelegate {
     func adDidDismissFullScreenContent(_ ad: FullScreenPresentingAd) {
         interstitialAd = nil
         AppSessionManager.shouldShowAd = false
+        AppSessionManager.setAdTimer()
         Task {
             await loadAd()
         }
