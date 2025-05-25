@@ -60,7 +60,7 @@ struct MainTabView: View {
             }
         }
         .sheet(isPresented: $showingExplainerSheet) {
-            ExplainerView()
+            ExplainerView(mode: .explain)
                 .presentationDragIndicator(.visible)
         }
     }

@@ -59,7 +59,7 @@ struct SettingsView: View {
             .toolbarVisibility(.hidden)
             .navigationTitle("Settings")
             .sheet(isPresented: $showingExplainerSheet) {
-                ExplainerView()
+                ExplainerView(mode: .reexplain)
                     .presentationDragIndicator(.visible)
             }
         }
@@ -114,15 +114,23 @@ struct ShowOffensiveContentRow: View {
     @State private var shouldSeeOffensiveContent = AppSessionManager.userInfo?.shouldSeeOffensiveContent ?? false
 
     var body: some View {
-        HStack {
-            Text("Show Offensive Content?")
-                .font(Font.system(size: 20.0, weight: .light))
-                .foregroundStyle(.accent)
-            Spacer()
-            Toggle(isOn: $shouldSeeOffensiveContent) { }
-                .onChange(of: shouldSeeOffensiveContent) { _, _ in
-                    AppSessionManager.toggleShouldSeeOffensiveContent()
-                }
+        VStack {
+            HStack {
+                Text("Show All Content?")
+                    .font(Font.system(size: 20.0, weight: .light))
+                    .foregroundStyle(.accent)
+                Spacer()
+                Toggle(isOn: $shouldSeeOffensiveContent) { }
+                    .onChange(of: shouldSeeOffensiveContent) { _, _ in
+                        AppSessionManager.toggleShouldSeeOffensiveContent()
+                    }
+            }
+            HStack {
+                Text("When 'Show All Content' is enabled you will see new, unvetted user content and also content flagged by the community as offensive.")
+                    .font(Font.system(size: 12.0, weight: .light))
+                    .foregroundStyle(.gray)
+                Spacer()
+            }
         }
     }
 
