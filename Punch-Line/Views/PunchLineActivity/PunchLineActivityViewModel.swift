@@ -79,7 +79,9 @@ class PunchLineActivityViewModel: ObservableObject {
 
     // MARK: Data Fetchers
 
-    func fetchSetupBatch() {
+    func fetchSetupBatchIfNeeded() {
+        guard fetchedSetups.count < 5 else { return }
+
         Task {
             let newSetups = await APIManager.fetchSetups(for: punchLine.id)
             let fetchedSetupIDs = fetchedSetups.map { $0.id }
@@ -91,7 +93,9 @@ class PunchLineActivityViewModel: ObservableObject {
         }
     }
 
-    func fetchJokeBatch() {
+    func fetchJokeBatchIfNeeded() {
+        guard fetchedJokes.count < 5 else { return }
+
         Task {
             let newJokes = await APIManager.fetchJokes(for: punchLine.id)
             let fetchedJokeIDs = fetchedJokes.map { $0.id }
@@ -132,23 +136,25 @@ class PunchLineActivityViewModel: ObservableObject {
         case 6, 8, 11, 15, 20, 26, 33, 41, 50, 60:
             if lastOwnSetup != nil {
                 configureViewForOwnPunchline(.extra)
+                fetchSetupBatchIfNeeded()
             } else if fetchedSetups.first != nil {
                 configureViewForPunchline()
             } else {
                 configureViewForSetup(.extra)
-                fetchSetupBatch()
+                fetchSetupBatchIfNeeded()
             }
         default:
             if lastOwnSetup != nil {
                 configureViewForOwnPunchline(.extra)
+                fetchJokeBatchIfNeeded()
             } else if fetchedJokes.first != nil {
                 configureViewForJoke()
             } else if fetchedSetups.first != nil {
                 configureViewForPunchline()
-                fetchJokeBatch()
+                fetchJokeBatchIfNeeded()
             } else {
                 configureViewForSetup(.extra)
-                fetchJokeBatch()
+                fetchJokeBatchIfNeeded()
             }
         }
 
@@ -172,7 +178,7 @@ class PunchLineActivityViewModel: ObservableObject {
                 configureViewForJoke()
             } else {
                 configureViewForSetup(.extra)
-                fetchJokeBatch()
+                fetchJokeBatchIfNeeded()
             }
         }
 
@@ -368,9 +374,7 @@ class PunchLineActivityViewModel: ObservableObject {
         if !fetchedSetups.isEmpty {
             fetchedSetups.removeFirst()
         }
-        if fetchedSetups.count < 5 {
-            fetchSetupBatch()
-        }
+        fetchSetupBatchIfNeeded()
 
         Task {
             await APIManager.report(setup: setup, for: reportReason)
@@ -387,9 +391,7 @@ class PunchLineActivityViewModel: ObservableObject {
         if !fetchedSetups.isEmpty {
             fetchedSetups.removeFirst()
         }
-        if fetchedSetups.count < 5 {
-            fetchSetupBatch()
-        }
+        fetchSetupBatchIfNeeded()
 
         let jokePostRequest = JokePostRequest(
             punchLineID: punchLine.id,
@@ -419,9 +421,7 @@ class PunchLineActivityViewModel: ObservableObject {
         if !fetchedJokes.isEmpty {
             fetchedJokes.removeFirst()
         }
-        if fetchedJokes.count < 5 {
-            fetchJokeBatch()
-        }
+        fetchJokeBatchIfNeeded()
 
         Task {
             await APIManager.voteOn(joke: joke, with: vote)
@@ -441,14 +441,12 @@ class PunchLineActivityViewModel: ObservableObject {
         if !fetchedJokes.isEmpty {
             fetchedJokes.removeFirst()
         }
-        if fetchedJokes.count < 5 {
-            fetchJokeBatch()
-        }
-        
+        fetchJokeBatchIfNeeded()
+
         if reportReason == .tooFunny {
             AppSessionManager.incrementTodaysTooFunnyReportsCount()
         }
-        
+
         Task {
             await APIManager.report(joke: joke, for: reportReason)
         }
