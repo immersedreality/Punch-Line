@@ -217,7 +217,19 @@ final class APIManager {
         if APIManager.networkEnvironment == .mock {
             return MockDataManager.getMockSearchResults(for: searchQuery)
         } else {
-            guard let searchResults: [SurvivingJoke] = await handleURLRequest(for: .jokeLookupSearchQuery(searchQuery: searchQuery, includeOffensiveContent: AppSessionManager.userInfo?.shouldSeeOffensiveContent ?? false)) else { return [] }
+            var privatePunchLineIDsToSearch: [String] = []
+
+            let ownedPrivatePunchLines = AppSessionManager.userInfo?.ownedPrivatePunchLines ?? []
+            let joinedPrivatePunchLines = AppSessionManager.userInfo?.joinedPrivatePunchLines ?? []
+            privatePunchLineIDsToSearch.append(contentsOf: ownedPrivatePunchLines.map { $0.id })
+            privatePunchLineIDsToSearch.append(contentsOf: joinedPrivatePunchLines.map { $0.id })
+
+            guard let searchResults: [SurvivingJoke] = await handleURLRequest(
+                for: .jokeLookupSearchQuery(punchLineIDs: privatePunchLineIDsToSearch, searchQuery: searchQuery, includeOffensiveContent: AppSessionManager.userInfo?.shouldSeeOffensiveContent ?? false)
+            ) else {
+                return []
+            }
+
             return searchResults
         }
     }
