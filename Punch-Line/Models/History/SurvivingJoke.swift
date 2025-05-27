@@ -11,7 +11,9 @@ struct SurvivingJoke: Codable, Identifiable {
 
     let id: String
     let entryID: String
+    let punchLineID: String
     let punchLineDisplayName: String
+    let punchLineType: PunchLineType
 
     let setup: String
     let setupAuthorID: String
@@ -25,4 +27,8 @@ struct SurvivingJoke: Codable, Identifiable {
     let dayRanking: Int
     let isOffensive: Bool
 
+}
+
+enum PunchLineType: String, Codable {
+    case publicPunchLine, privatePunchLine
 }

@@ -155,7 +155,9 @@ final class MockDataManager {
             let fakeSearchResult = SurvivingJoke(
                 id: UUID().uuidString,
                 entryID: UUID().uuidString,
+                punchLineID: UUID().uuidString,
                 punchLineDisplayName: randomPunchLineDisplayName,
+                punchLineType: .publicPunchLine,
                 setup: "A setup that might have '\(searchString)' in it.",
                 setupAuthorID: UUID().uuidString,
                 setupAuthorUsername: getRandomName(),
@@ -270,7 +272,9 @@ final class MockDataManager {
             let randomJoke = SurvivingJoke(
                 id: UUID().uuidString,
                 entryID: UUID().uuidString,
+                punchLineID: UUID().uuidString,
                 punchLineDisplayName: punchLineDisplayName,
+                punchLineType: .publicPunchLine,
                 setup: randomSetup,
                 setupAuthorID: UUID().uuidString,
                 setupAuthorUsername: getRandomName(),
