@@ -126,7 +126,7 @@ struct RequestComponents {
     static let jokeID = "?jokeID="
     static let punchLineID = "?punchLineID="
     static let punchLineIDs = "?punchLineIDs="
-    static let searchQuery = "?searchQuery="
+    static let searchQuery = "&searchQuery="
     static let setupID = "?setupID="
     
 }
