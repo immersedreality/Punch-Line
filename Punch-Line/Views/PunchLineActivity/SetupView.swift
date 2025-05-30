@@ -17,59 +17,66 @@ struct SetupView: View {
 
     var body: some View {
         VStack {
+            Text(viewModel.punchLine.displayName.lowercased())
+                .font(Font.system(size: 16.0, weight: .ultraLight))
+                .shadow(color: .black, radius: 0.1, x: 0.1, y: 0.1)
+                .foregroundStyle(.accent)
+                .padding([.top], 16.0)
             HStack {
                 Text(viewModel.activityDisplayText)
                     .font(Font.system(size: 32.0, weight: .semibold))
                     .foregroundStyle(.accent)
                     .shadow(color: .black, radius: 0.1, x: 0.1, y: 0.1)
-                    .padding([.top], 48.0)
+                    .padding([.top], 8.0)
                 Spacer()
             }
-            TextField("", text: $viewModel.enteredSetupText, axis: .vertical)
-                .textFieldStyle(.roundedBorder)
-                .font(Font.system(size: 20.0, weight: .light))
-                .focused($textFieldIsFocused)
-                .submitLabel(.done)
-                .onChange(of: viewModel.enteredSetupText) { _, newValue in
-                    if newValue.contains("\n") {
-                        viewModel.enteredSetupText.replace("\n", with: "")
-                        if viewModel.textEntryIsValid() {
-                            if AppSessionManager.userInfo?.userHasFatFingers == true {
-                                showingConfirmationAlert = true
-                            } else {
-                                viewModel.createNewSetup()
-                                navigateToNextActivity()
+            ScrollView(.vertical) {
+                TextField("", text: $viewModel.enteredSetupText, axis: .vertical)
+                    .textFieldStyle(.roundedBorder)
+                    .font(Font.system(size: 20.0, weight: .light))
+                    .focused($textFieldIsFocused)
+                    .submitLabel(.done)
+                    .onChange(of: viewModel.enteredSetupText) { _, newValue in
+                        if newValue.contains("\n") {
+                            viewModel.enteredSetupText.replace("\n", with: "")
+                            if viewModel.textEntryIsValid() {
+                                if AppSessionManager.userInfo?.userHasFatFingers == true {
+                                    showingConfirmationAlert = true
+                                } else {
+                                    viewModel.createNewSetup()
+                                    navigateToNextActivity()
+                                }
                             }
                         }
                     }
+                Button {
+                    if AppSessionManager.userInfo?.userHasFatFingers == true {
+                        showingConfirmationAlert = true
+                    } else {
+                        viewModel.createNewSetup()
+                        navigateToNextActivity()
+                    }
+                } label: {
+                    HStack {
+                        Spacer()
+                        Text("Done")
+                            .padding([.vertical], 8.0)
+                        Spacer()
+                    }
                 }
-            Button {
-                if AppSessionManager.userInfo?.userHasFatFingers == true {
-                    showingConfirmationAlert = true
-                } else {
-                    viewModel.createNewSetup()
-                    navigateToNextActivity()
-                }
-            } label: {
+                .buttonStyle(.borderedProminent)
+                .foregroundStyle(.white)
+                .backgroundStyle(.accent)
+                .disabled(!viewModel.textEntryIsValid())
                 HStack {
-                    Spacer()
-                    Text("Done")
-                        .padding([.vertical], 8.0)
+                    Text(ActivityFeedMessages.setupEnd)
+                        .font(Font.system(size: 16.0, weight: .light))
+                        .foregroundStyle(.accent)
+                        .shadow(color: .black, radius: 0.1, x: 0.1, y: 0.1)
                     Spacer()
                 }
-            }
-            .buttonStyle(.borderedProminent)
-            .foregroundStyle(.white)
-            .backgroundStyle(.accent)
-            .disabled(!viewModel.textEntryIsValid())
-            HStack {
-                Text(ActivityFeedMessages.setupEnd)
-                    .font(Font.system(size: 16.0, weight: .light))
-                    .foregroundStyle(.accent)
-                    .shadow(color: .black, radius: 0.1, x: 0.1, y: 0.1)
                 Spacer()
             }
-            Spacer()
         }
         .padding([.horizontal], 16.0)
         .onAppear {
