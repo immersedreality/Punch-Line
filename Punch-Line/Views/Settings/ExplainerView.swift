@@ -28,7 +28,7 @@ struct ExplainerView: View {
                     .shadow(color: .black, radius: 0.1, x: 0.1, y: 0.1)
                     .padding([.top], 12.0)
                     .padding([.horizontal], 16.0)
-                Text("A Punch-Line is a joke writing group.")
+                Text("A Punch-Line is a joke writing group that automatically assigns unique tasks to each member.")
                     .font(Font.system(size: 16.0, weight: .regular))
                     .foregroundStyle(.accent)
                     .shadow(color: .black, radius: 0.1, x: 0.1, y: 0.1)
