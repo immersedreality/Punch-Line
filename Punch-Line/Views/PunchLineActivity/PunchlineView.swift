@@ -26,58 +26,60 @@ struct PunchlineView: View {
                     .padding([.top], 48.0)
                 Spacer()
             }
-            HStack {
-                Text(viewModel.currentSetup?.text ?? "What do you call big ass titties that never go up and never fall down?")
-                    .font(Font.system(size: 20.0, weight: .light))
-                    .padding([.top], 2.0)
-                Spacer()
-            }
-            TextField("", text: $viewModel.enteredPunchlineText, axis: .vertical)
-                .textFieldStyle(.roundedBorder)
-                .multilineTextAlignment(.trailing)
-                .font(Font.system(size: 20.0, weight: .semibold))
-                .focused($textFieldIsFocused)
-                .submitLabel(.done)
-                .onChange(of: viewModel.enteredPunchlineText) { _, newValue in
-                    if newValue.contains("\n") {
-                        viewModel.enteredPunchlineText.replace("\n", with: "")
-                        if viewModel.textEntryIsValid() {
-                            if AppSessionManager.userInfo?.userHasFatFingers == true {
-                                showingConfirmationAlert = true
-                            } else {
-                                viewModel.createNewJoke()
-                                navigateToNextActivity()
+            ScrollView(.vertical) {
+                HStack {
+                    Text(viewModel.currentSetup?.text ?? "What do you call big ass titties that never go up and never fall down?")
+                        .font(Font.system(size: 20.0, weight: .light))
+                        .padding([.top], 2.0)
+                    Spacer()
+                }
+                TextField("", text: $viewModel.enteredPunchlineText, axis: .vertical)
+                    .textFieldStyle(.roundedBorder)
+                    .multilineTextAlignment(.trailing)
+                    .font(Font.system(size: 20.0, weight: .semibold))
+                    .focused($textFieldIsFocused)
+                    .submitLabel(.done)
+                    .onChange(of: viewModel.enteredPunchlineText) { _, newValue in
+                        if newValue.contains("\n") {
+                            viewModel.enteredPunchlineText.replace("\n", with: "")
+                            if viewModel.textEntryIsValid() {
+                                if AppSessionManager.userInfo?.userHasFatFingers == true {
+                                    showingConfirmationAlert = true
+                                } else {
+                                    viewModel.createNewJoke()
+                                    navigateToNextActivity()
+                                }
                             }
                         }
                     }
+                Button {
+                    if AppSessionManager.userInfo?.userHasFatFingers == true {
+                        showingConfirmationAlert = true
+                    } else {
+                        viewModel.createNewJoke()
+                        navigateToNextActivity()
+                    }
+                } label: {
+                    HStack {
+                        Spacer()
+                        Text("Done")
+                            .padding([.vertical], 8.0)
+                        Spacer()
+                    }
                 }
-            Button {
-                if AppSessionManager.userInfo?.userHasFatFingers == true {
-                    showingConfirmationAlert = true
-                } else {
-                    viewModel.createNewJoke()
-                    navigateToNextActivity()
+                .buttonStyle(.borderedProminent)
+                .foregroundStyle(.white)
+                .backgroundStyle(.accent)
+                .disabled(!viewModel.textEntryIsValid())
+                Button {
+                    showingConfirmationDialog = true
+                } label: {
+                    Image(systemName: SystemIcons.reportButton)
+                        .foregroundStyle(.accent)
+                        .padding([.top], 8.0)
                 }
-            } label: {
-                HStack {
-                    Spacer()
-                    Text("Done")
-                        .padding([.vertical], 8.0)
-                    Spacer()
-                }
+                Spacer()
             }
-            .buttonStyle(.borderedProminent)
-            .foregroundStyle(.white)
-            .backgroundStyle(.accent)
-            .disabled(!viewModel.textEntryIsValid())
-            Button {
-                showingConfirmationDialog = true
-            } label: {
-                Image(systemName: SystemIcons.reportButton)
-                    .foregroundStyle(.accent)
-                    .padding([.top], 8.0)
-            }
-            Spacer()
         }
         .padding([.horizontal], 16.0)
         .onAppear {
