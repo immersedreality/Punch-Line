@@ -152,6 +152,7 @@ struct UserDefaultsKeys {
     static let userHasSeenExplainer = "UserHasSeenExplainer"
     static let shouldSeeOffensiveContent = "ShouldSeeOffensiveContent"
     static let userIsNotFunny = "UserIsNotFunny"
+    static let usersNameIsJerry = "UsersNameIsJerry"
     static let userHasFatFingers = "UserHasFatFingers"
     static let favoriteJokes = "FavoriteJokes"
     static let ownedPrivatePunchLines = "OwnedPrivatePunchLines"

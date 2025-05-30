@@ -58,6 +58,7 @@ final class AppSessionManager {
         let userHasSeenExplainer = UserDefaults.standard.value(forKey: UserDefaultsKeys.userHasSeenExplainer) as? Bool ?? false
         let shouldSeeOffensiveContent = UserDefaults.standard.value(forKey: UserDefaultsKeys.shouldSeeOffensiveContent) as? Bool ?? false
         let userIsNotFunny = UserDefaults.standard.value(forKey: UserDefaultsKeys.userIsNotFunny) as? Bool ?? false
+        let usersNameIsJerry = UserDefaults.standard.value(forKey: UserDefaultsKeys.usersNameIsJerry) as? Bool ?? false
         let userHasFatFingers = UserDefaults.standard.value(forKey: UserDefaultsKeys.userHasFatFingers) as? Bool ?? false
 
         var favoriteJokes: [FavoriteJoke]?
@@ -89,6 +90,7 @@ final class AppSessionManager {
             userHasSeenExplainer: userHasSeenExplainer,
             shouldSeeOffensiveContent: shouldSeeOffensiveContent,
             userIsNotFunny: userIsNotFunny,
+            usersNameIsJerry: usersNameIsJerry,
             userHasFatFingers: userHasFatFingers,
             favoriteJokes: favoriteJokes ?? [],
             ownedPrivatePunchLines: ownedPrivatePunchLines ?? [],
@@ -194,9 +196,24 @@ final class AppSessionManager {
         UserDefaults.standard.set(!userInfo.shouldSeeOffensiveContent, forKey: UserDefaultsKeys.shouldSeeOffensiveContent)
     }
 
-    class func toggleUserIsNotFunny() {
+    class func setUserIsNotFunny(to newValue: Bool) {
         guard let userInfo = userInfo else { return }
-        UserDefaults.standard.set(!userInfo.userIsNotFunny, forKey: UserDefaultsKeys.userIsNotFunny)
+        guard newValue != userInfo.userIsNotFunny else { return }
+        UserDefaults.standard.set(newValue, forKey: UserDefaultsKeys.userIsNotFunny)
+        if newValue == true && userInfo.usersNameIsJerry {
+            UserDefaults.standard.set(false, forKey: UserDefaultsKeys.usersNameIsJerry)
+            GlobalNotificationManager.shared.appModesHaveChanged = true
+        }
+    }
+
+    class func setUsersNameIsJerry(to newValue: Bool) {
+        guard let userInfo = userInfo else { return }
+        guard newValue != userInfo.usersNameIsJerry else { return }
+        UserDefaults.standard.set(newValue, forKey: UserDefaultsKeys.usersNameIsJerry)
+        if newValue == true && userInfo.userIsNotFunny {
+            UserDefaults.standard.set(false, forKey: UserDefaultsKeys.userIsNotFunny)
+            GlobalNotificationManager.shared.appModesHaveChanged = true
+        }
     }
 
     class func toggleUserHasFatFingers() {

@@ -18,6 +18,7 @@ struct UserInfo {
     let userHasSeenExplainer: Bool
     let shouldSeeOffensiveContent: Bool
     let userIsNotFunny: Bool
+    let usersNameIsJerry: Bool
     let userHasFatFingers: Bool
     let favoriteJokes: [FavoriteJoke]
     let ownedPrivatePunchLines: [PrivatePunchLine]

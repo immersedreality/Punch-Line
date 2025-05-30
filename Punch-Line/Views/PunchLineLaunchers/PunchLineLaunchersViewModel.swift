@@ -93,6 +93,7 @@ class PunchLineLaunchersViewModel {
 
         let todaysTaskCount = AppSessionManager.taskCount(for: selectedPunchLineID)
         let userIsNotFunny = AppSessionManager.userInfo?.userIsNotFunny ?? false
+        let usersNameIsJerry = AppSessionManager.userInfo?.usersNameIsJerry ?? false
 
         if userIsNotFunny {
             switch todaysTaskCount {
@@ -101,6 +102,25 @@ class PunchLineLaunchersViewModel {
             default:
                 if punchLineHasJokes {
                     return .vote
+                } else {
+                    return .setup
+                }
+            }
+        } else if usersNameIsJerry {
+            switch todaysTaskCount {
+            case 1, 3, 5, 6, 8, 11, 15, 20, 26, 33, 41, 50, 60:
+                if punchLineHasSetups {
+                    return .punchline
+                } else if punchLineHasJokes {
+                    return .vote
+                } else {
+                    return .setup
+                }
+            default:
+                if punchLineHasJokes {
+                    return .vote
+                } else if punchLineHasSetups {
+                    return .punchline
                 } else {
                     return .setup
                 }
@@ -125,7 +145,7 @@ class PunchLineLaunchersViewModel {
                 }
             }
         }
-        
+
     }
 
     func getInitialPunchLineActivityDisplayText(for mode: ActivityDisplayTextGenerationMode, punchLineHasSetups: Bool, punchLineHasJokes: Bool) -> String {
@@ -144,6 +164,7 @@ class PunchLineLaunchersViewModel {
 
         let todaysTaskCount = AppSessionManager.taskCount(for: selectedPunchLineID)
         let userIsNotFunny = AppSessionManager.userInfo?.userIsNotFunny ?? false
+        let usersNameIsJerry = AppSessionManager.userInfo?.usersNameIsJerry ?? false
 
         if userIsNotFunny {
             switch todaysTaskCount {
@@ -158,6 +179,25 @@ class PunchLineLaunchersViewModel {
                     return ActivityFeedMessages.vote
                 } else {
                     return ActivityFeedMessages.setupExtra
+                }
+            }
+        } else if usersNameIsJerry {
+            switch todaysTaskCount {
+            case 1, 3, 5, 6, 8, 11, 15, 20, 26, 33, 41, 50, 60:
+                if punchLineHasSetups {
+                    return ActivityFeedMessages.punchlineGeneric
+                } else if punchLineHasJokes {
+                    return ActivityFeedMessages.vote
+                } else {
+                    return ActivityFeedMessages.setupGeneric
+                }
+            default:
+                if punchLineHasJokes {
+                    return ActivityFeedMessages.vote
+                } else if punchLineHasSetups {
+                    return ActivityFeedMessages.punchlineGeneric
+                } else {
+                    return ActivityFeedMessages.setupGeneric
                 }
             }
         } else {

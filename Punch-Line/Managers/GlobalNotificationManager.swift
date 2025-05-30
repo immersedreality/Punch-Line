@@ -13,6 +13,7 @@ class GlobalNotificationManager: ObservableObject {
 
     @Published var shouldRefreshPunchLines = false
     @Published var favoritesHaveBeenUpdated = false
+    @Published var appModesHaveChanged = false
 
     func refreshView() {
         objectWillChange.send()

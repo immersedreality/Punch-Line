@@ -36,6 +36,7 @@ struct SettingsView: View {
                         }
                         ShowOffensiveContentRow()
                         ImNotFunnyModeRow()
+                        JerryModeRow()
                         FatFingerModeRow()
                         HStack {
                             Spacer()
@@ -126,7 +127,7 @@ struct ShowOffensiveContentRow: View {
                     }
             }
             HStack {
-                Text("When 'Show All Content' is enabled you will see new, unvetted user content and also content flagged by the community as offensive.")
+                Text("When 'Show All Content' is enabled you will see unvetted content and content flagged as offensive.")
                     .font(Font.system(size: 12.0, weight: .light))
                     .foregroundStyle(.gray)
                 Spacer()
@@ -138,6 +139,7 @@ struct ShowOffensiveContentRow: View {
 
 struct ImNotFunnyModeRow: View {
 
+    @ObservedObject var notificationManager = GlobalNotificationManager.shared
     @State private var userIsNotFunny = AppSessionManager.userInfo?.userIsNotFunny ?? false
 
     var body: some View {
@@ -148,15 +150,55 @@ struct ImNotFunnyModeRow: View {
                     .foregroundStyle(.accent)
                 Spacer()
                 Toggle(isOn: $userIsNotFunny) { }
-                    .onChange(of: userIsNotFunny) { _, _ in
-                        AppSessionManager.toggleUserIsNotFunny()
+                    .onChange(of: userIsNotFunny) { _, newValue in
+                        AppSessionManager.setUserIsNotFunny(to: newValue)
                     }
             }
             HStack {
-                Text("When 'I'm Not Funny Mode' is enabled you will only be asked for setups and votes, never punchlines.")
+                Text("When 'I'm Not Funny Mode' is enabled you will only be tasked with setups and votes, never punchlines.")
                     .font(Font.system(size: 12.0, weight: .light))
                     .foregroundStyle(.gray)
                 Spacer()
+            }
+        }
+        .onChange(of: notificationManager.appModesHaveChanged) { _, newValue in
+            if newValue == true {
+                notificationManager.appModesHaveChanged = false
+                userIsNotFunny = AppSessionManager.userInfo?.userIsNotFunny ?? false
+            }
+        }
+    }
+
+}
+
+struct JerryModeRow: View {
+
+    @ObservedObject var notificationManager = GlobalNotificationManager.shared
+    @State private var usersNameIsJerry = AppSessionManager.userInfo?.usersNameIsJerry ?? false
+
+    var body: some View {
+        VStack {
+            HStack {
+                Text("Jerry Mode")
+                    .font(Font.system(size: 20.0, weight: .light))
+                    .foregroundStyle(.accent)
+                Spacer()
+                Toggle(isOn: $usersNameIsJerry) { }
+                    .onChange(of: usersNameIsJerry) { _, newValue in
+                        AppSessionManager.setUsersNameIsJerry(to: newValue)
+                    }
+            }
+            HStack {
+                Text("When 'Jerry Mode' is enabled you will primarily be tasked with punchlines and votes, rarely setups.")
+                    .font(Font.system(size: 12.0, weight: .light))
+                    .foregroundStyle(.gray)
+                Spacer()
+            }
+        }
+        .onChange(of: notificationManager.appModesHaveChanged) { _, newValue in
+            if newValue == true {
+                notificationManager.appModesHaveChanged = false
+                usersNameIsJerry = AppSessionManager.userInfo?.usersNameIsJerry ?? false
             }
         }
     }
@@ -180,7 +222,7 @@ struct FatFingerModeRow: View {
                     }
             }
             HStack {
-                Text("When 'Fat Fingers Mode' is enabled you will be prompted for confirmation every time you submit a setup or punchline.")
+                Text("When 'Fat Fingers Mode' is enabled you will be prompted to confirm your submissions.")
                     .font(Font.system(size: 12.0, weight: .light))
                     .foregroundStyle(.gray)
                 Spacer()

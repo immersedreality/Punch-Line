@@ -118,6 +118,11 @@ class PunchLineActivityViewModel: ObservableObject {
             return
         }
 
+        guard AppSessionManager.userInfo?.usersNameIsJerry != true else {
+            setNextActivityForJerry()
+            return
+        }
+
         let todaysTaskCount = AppSessionManager.taskCount(for: punchLine.id)
 
         switch todaysTaskCount {
@@ -176,6 +181,42 @@ class PunchLineActivityViewModel: ObservableObject {
         default:
             if fetchedJokes.first != nil {
                 configureViewForJoke()
+            } else {
+                configureViewForSetup(.extra)
+                fetchJokeBatchIfNeeded()
+            }
+        }
+
+        updatePunchLineRelauncher()
+
+    }
+
+    private func setNextActivityForJerry() {
+
+        let todaysTaskCount = AppSessionManager.taskCount(for: punchLine.id)
+
+        switch todaysTaskCount {
+        case 1, 3, 5, 8, 11, 15, 20, 26, 33, 41, 50, 60:
+            if lastOwnSetup != nil {
+                configureViewForOwnPunchline(.extra)
+                fetchSetupBatchIfNeeded()
+            } else if fetchedSetups.first != nil {
+                configureViewForPunchline()
+            } else if fetchedJokes.first != nil {
+                configureViewForJoke()
+            } else {
+                configureViewForSetup(.extra)
+                fetchSetupBatchIfNeeded()
+            }
+        default:
+            if lastOwnSetup != nil {
+                configureViewForOwnPunchline(.extra)
+                fetchJokeBatchIfNeeded()
+            } else if fetchedJokes.first != nil {
+                configureViewForJoke()
+            } else if fetchedSetups.first != nil {
+                configureViewForPunchline()
+                fetchJokeBatchIfNeeded()
             } else {
                 configureViewForSetup(.extra)
                 fetchJokeBatchIfNeeded()
@@ -295,7 +336,7 @@ class PunchLineActivityViewModel: ObservableObject {
                 return false
             }
 
-            var trimmedSetupText = enteredSetupText.trimTrailingWhiteSpace()
+            let trimmedSetupText = enteredSetupText.trimTrailingWhiteSpace()
 
             guard trimmedSetupText.last == "?" || trimmedSetupText.last == "…" else {
                 return false
