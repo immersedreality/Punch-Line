@@ -295,7 +295,9 @@ class PunchLineActivityViewModel: ObservableObject {
                 return false
             }
 
-            guard enteredSetupText.last == "?" || enteredSetupText.last == "…" else {
+            var trimmedSetupText = enteredSetupText.trimTrailingWhiteSpace()
+
+            guard trimmedSetupText.last == "?" || trimmedSetupText.last == "…" else {
                 return false
             }
 
@@ -343,7 +345,7 @@ class PunchLineActivityViewModel: ObservableObject {
         let ownSetup = Setup(
             id: "",
             punchLineID: punchLine.id,
-            text: enteredSetupText,
+            text: enteredSetupText.trimTrailingWhiteSpace(),
             authorID: userInfo.punchLineUserID,
             authorUsername: userInfo.punchLineUsername,
             dateCreated: Date(),
@@ -400,7 +402,7 @@ class PunchLineActivityViewModel: ObservableObject {
             setupID: setup.id,
             setupAuthorID: setup.authorID,
             setupAuthorUsername: setup.authorUsername,
-            punchline: enteredPunchlineText,
+            punchline: enteredPunchlineText.trimTrailingWhiteSpace(),
             punchlineAuthorID: userInfo.punchLineUserID,
             punchlineAuthorUsername: userInfo.punchLineUsername
         )
