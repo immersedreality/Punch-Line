@@ -152,6 +152,13 @@ class PunchLineActivityViewModel: ObservableObject {
             if lastOwnSetup != nil {
                 configureViewForOwnPunchline(.extra)
                 fetchJokeBatchIfNeeded()
+            } else if fetchedJokes.first != nil && fetchedSetups.first != nil {
+                let randomNumber = Int.random(in: 1...4)
+                if randomNumber == 1 {
+                    configureViewForPunchline()
+                } else {
+                    configureViewForJoke()
+                }
             } else if fetchedJokes.first != nil {
                 configureViewForJoke()
             } else if fetchedSetups.first != nil {
@@ -212,6 +219,13 @@ class PunchLineActivityViewModel: ObservableObject {
             if lastOwnSetup != nil {
                 configureViewForOwnPunchline(.extra)
                 fetchJokeBatchIfNeeded()
+            } else if fetchedJokes.first != nil && fetchedSetups.first != nil {
+                let randomNumber = Int.random(in: 1...4)
+                if randomNumber == 1 {
+                    configureViewForPunchline()
+                } else {
+                    configureViewForJoke()
+                }
             } else if fetchedJokes.first != nil {
                 configureViewForJoke()
             } else if fetchedSetups.first != nil {
