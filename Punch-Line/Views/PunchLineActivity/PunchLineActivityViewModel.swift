@@ -111,6 +111,13 @@ class PunchLineActivityViewModel: ObservableObject {
 
     func setNextActivity() {
 
+        if AppSessionManager.dailyPropertiesWillBeReset() {
+            fetchedSetups = []
+            fetchedJokes = []
+            fetchSetupBatchIfNeeded()
+            fetchJokeBatchIfNeeded()
+        }
+
         AppSessionManager.incrementTodaysTaskCount(for: punchLine.id)
 
         guard AppSessionManager.userInfo?.userIsNotFunny != true else {

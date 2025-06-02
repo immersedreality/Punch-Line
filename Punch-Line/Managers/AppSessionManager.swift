@@ -173,6 +173,13 @@ final class AppSessionManager {
         UserDefaults.standard.set(newReportsCount, forKey: UserDefaultsKeys.todaysTooFunnyReportsCount)
     }
 
+    class func dailyPropertiesWillBeReset() -> Bool {
+        guard let lastActivityDate = userInfo?.lastActivityDate else { return false }
+        let lastActivityStartOfDay = Calendar.current.startOfDay(for: lastActivityDate)
+        let todayStartOfDay = Calendar.current.startOfDay(for: Date())
+        return lastActivityStartOfDay < todayStartOfDay
+    }
+
     class func resetDailyPropertiesIfNecessary() {
         guard let lastActivityDate = userInfo?.lastActivityDate else { return }
         let lastActivityStartOfDay = Calendar.current.startOfDay(for: lastActivityDate)
@@ -183,6 +190,7 @@ final class AppSessionManager {
             UserDefaults.standard.set([String: [String]](), forKey: UserDefaultsKeys.todaysSetupInteractionIDs)
             UserDefaults.standard.set([String: [String]](), forKey: UserDefaultsKeys.todaysJokeInteractionIDs)
             UserDefaults.standard.set(0, forKey: UserDefaultsKeys.todaysTooFunnyReportsCount)
+            punchLineRelaunchers = [:]
         }
     }
 

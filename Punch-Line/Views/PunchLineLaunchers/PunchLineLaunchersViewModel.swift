@@ -52,6 +52,8 @@ class PunchLineLaunchersViewModel {
 
         guard let activePunchLine else { return nil }
 
+        AppSessionManager.resetDailyPropertiesIfNecessary()
+
         if let relauncher = AppSessionManager.punchLineRelaunchers[activePunchLine.id] {
             let punchLineHasSetups = !relauncher.previouslyFetchedSetups.isEmpty || relauncher.currentSetup != nil
             let punchLineHasJokes = !relauncher.previouslyFetchedJokes.isEmpty || relauncher.currentJoke != nil
@@ -88,8 +90,6 @@ class PunchLineLaunchersViewModel {
         guard let selectedPunchLineID else {
             return .somethingWentWrong
         }
-
-        AppSessionManager.resetDailyPropertiesIfNecessary()
 
         let todaysTaskCount = AppSessionManager.taskCount(for: selectedPunchLineID)
         let userIsNotFunny = AppSessionManager.userInfo?.userIsNotFunny ?? false
@@ -255,11 +255,6 @@ class PunchLineLaunchersViewModel {
             }
         }
 
-    }
-
-    func getPunchLineRelauncher() -> PunchLineRelauncher? {
-        guard let selectedPunchLineID else { return nil }
-        return AppSessionManager.punchLineRelaunchers[selectedPunchLineID]
     }
 
     func fetchSetupBatch() async -> [Setup] {
