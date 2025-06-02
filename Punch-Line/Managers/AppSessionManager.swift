@@ -175,15 +175,15 @@ final class AppSessionManager {
 
     class func dailyPropertiesWillBeReset() -> Bool {
         guard let lastActivityDate = userInfo?.lastActivityDate else { return false }
-        let lastActivityStartOfDay = Calendar.current.startOfDay(for: lastActivityDate)
-        let todayStartOfDay = Calendar.current.startOfDay(for: Date())
+        let lastActivityStartOfDay = Date.startOfDayInServerTime(from: lastActivityDate)
+        let todayStartOfDay = Date.startOfDayInServerTime(from: Date())
         return lastActivityStartOfDay < todayStartOfDay
     }
 
     class func resetDailyPropertiesIfNecessary() {
         guard let lastActivityDate = userInfo?.lastActivityDate else { return }
-        let lastActivityStartOfDay = Calendar.current.startOfDay(for: lastActivityDate)
-        let todayStartOfDay = Calendar.current.startOfDay(for: Date())
+        let lastActivityStartOfDay = Date.startOfDayInServerTime(from: lastActivityDate)
+        let todayStartOfDay = Date.startOfDayInServerTime(from: Date())
 
         if lastActivityStartOfDay < todayStartOfDay {
             UserDefaults.standard.set([String: Int](), forKey: UserDefaultsKeys.todaysTaskCounts)
