@@ -19,9 +19,9 @@ final class AppSessionManager {
 
     // MARK: Ads
 
-    static var shouldShowAd: Bool = false
-    static var adAppearanceFrequency: TimeInterval = 180
-    static var adTimer = Timer()
+//    static var shouldShowAd: Bool = false
+//    static var adAppearanceFrequency: TimeInterval = 180
+//    static var adTimer = Timer()
 
     // MARK: Initialization
 
@@ -37,13 +37,13 @@ final class AppSessionManager {
         UserDefaults.standard.set(false, forKey: UserDefaultsKeys.shouldSeeOffensiveContent)
     }
 
-    class func setAdTimer() {
-        DispatchQueue.main.async {
-            adTimer = Timer.scheduledTimer(withTimeInterval: adAppearanceFrequency, repeats: false) { _ in
-                shouldShowAd = true
-            }
-        }
-    }
+//    class func setAdTimer() {
+//        DispatchQueue.main.async {
+//            adTimer = Timer.scheduledTimer(withTimeInterval: adAppearanceFrequency, repeats: false) { _ in
+//                shouldShowAd = true
+//            }
+//        }
+//    }
 
     // MARK: Getters
 

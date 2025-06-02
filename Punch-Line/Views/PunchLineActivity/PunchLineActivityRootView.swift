@@ -31,7 +31,7 @@ struct PunchLineActivityRootView: View {
             }
             .navigationBarBackButtonHidden()
             .navigationDestination(isPresented: $isReadyForNextActivity) {
-                PunchLineActivityView(viewModel: self.viewModel, adViewModel: InterstitialAdViewModel())
+                PunchLineActivityView(viewModel: self.viewModel)
             }
         }
     }

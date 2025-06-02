@@ -10,7 +10,7 @@ import SwiftUI
 struct JokeLookupView: View {
 
     @StateObject var viewModel = JokeLookupViewModel()
-    let adViewModel = InterstitialAdViewModel()
+//    let adViewModel = InterstitialAdViewModel()
     
     @State private var showingModalSheet = false
     @FocusState private var searchFieldIsFocused: Bool
@@ -62,9 +62,9 @@ struct JokeLookupView: View {
         }
         .onChange(of: viewModel.debouncedSearchText) { _, _ in
             viewModel.fetchSearchResults()
-            if AppSessionManager.shouldShowAd {
-                adViewModel.showAd()
-            }
+//            if AppSessionManager.shouldShowAd {
+//                adViewModel.showAd()
+//            }
         }
     }
 

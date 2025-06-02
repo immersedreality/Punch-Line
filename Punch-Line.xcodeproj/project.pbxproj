@@ -6,10 +6,6 @@
 	objectVersion = 77;
 	objects = {
 
-/* Begin PBXBuildFile section */
-		B81EF1BE2DB44902001DFE2E /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = B81EF1BD2DB44902001DFE2E /* GoogleMobileAds */; };
-/* End PBXBuildFile section */
-
 /* Begin PBXFileReference section */
 		B89302DE2D8A45AA00F77256 /* Punch-Line.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Punch-Line.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -40,7 +36,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B81EF1BE2DB44902001DFE2E /* GoogleMobileAds in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,7 +78,6 @@
 			);
 			name = "Punch-Line";
 			packageProductDependencies = (
-				B81EF1BD2DB44902001DFE2E /* GoogleMobileAds */,
 			);
 			productName = "Punch-Line";
 			productReference = B89302DE2D8A45AA00F77256 /* Punch-Line.app */;
@@ -114,7 +108,6 @@
 			mainGroup = B89302D52D8A45AA00F77256;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				B81EF1BC2DB44902001DFE2E /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = B89302DF2D8A45AA00F77256 /* Products */;
@@ -281,7 +274,6 @@
 				INFOPLIST_FILE = "Punch-Line/Resources/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Punch-Line";
 				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
-				INFOPLIST_KEY_NSUserTrackingUsageDescription = "This app uses identifiers to deliver personalized ads to you.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -315,7 +307,6 @@
 				INFOPLIST_FILE = "Punch-Line/Resources/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Punch-Line";
 				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
-				INFOPLIST_KEY_NSUserTrackingUsageDescription = "This app uses identifiers to deliver personalized ads to you.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -358,25 +349,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		B81EF1BC2DB44902001DFE2E /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/googleads/swift-package-manager-google-mobile-ads.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 12.3.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		B81EF1BD2DB44902001DFE2E /* GoogleMobileAds */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = B81EF1BC2DB44902001DFE2E /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */;
-			productName = GoogleMobileAds;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = B89302D62D8A45AA00F77256 /* Project object */;
 }
