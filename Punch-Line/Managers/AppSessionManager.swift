@@ -15,6 +15,15 @@ final class AppSessionManager {
         return getUserInfo()
     }
 
+    static var userIsInTraining = false
+    static var trainingTaskCount = 0 {
+        didSet {
+            if trainingTaskCount == 10 {
+                userIsInTraining = false
+            }
+        }
+    }
+
     static var punchLineRelaunchers: [String: PunchLineRelauncher] = [:]
 
     // MARK: Ads
@@ -34,7 +43,7 @@ final class AppSessionManager {
     private class func initializeUserInfo() {
         UserDefaults.standard.set(UUID().uuidString, forKey: UserDefaultsKeys.punchLineUserID)
         UserDefaults.standard.set(Date(), forKey: UserDefaultsKeys.lastActivityDate)
-        UserDefaults.standard.set(false, forKey: UserDefaultsKeys.shouldSeeOffensiveContent)
+        UserDefaults.standard.set(true, forKey: UserDefaultsKeys.shouldSeeOffensiveContent)
     }
 
 //    class func setAdTimer() {

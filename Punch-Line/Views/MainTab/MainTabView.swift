@@ -62,6 +62,7 @@ struct MainTabView: View {
         .sheet(isPresented: $showingExplainerSheet) {
             ExplainerView(mode: .explain)
                 .presentationDragIndicator(.visible)
+                .interactiveDismissDisabled(true)
         }
     }
 

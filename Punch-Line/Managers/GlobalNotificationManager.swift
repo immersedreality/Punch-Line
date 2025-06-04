@@ -11,6 +11,7 @@ class GlobalNotificationManager: ObservableObject {
 
     static let shared = GlobalNotificationManager()
 
+    @Published var shouldLaunchTrainingMode = false
     @Published var shouldRefreshPunchLines = false
     @Published var favoritesHaveBeenUpdated = false
     @Published var appModesHaveChanged = false

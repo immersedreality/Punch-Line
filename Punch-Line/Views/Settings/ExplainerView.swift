@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ExplainerView: View {
 
+    @Environment(\.dismiss) var dismiss
+
     let mode: ExplainerViewMode
 
     var body: some View {
@@ -22,13 +24,13 @@ struct ExplainerView: View {
                     .shadow(color: .black, radius: 0.1, x: 0.1, y: 0.1)
                     .padding([.top], 20.0)
                     .padding([.horizontal], 16.0)
-                Text("1. What is a Punch-Line anyway?")
+                Text("1. How do you use a Punch-Line?")
                     .font(Font.system(size: 20.0, weight: .semibold))
                     .foregroundStyle(.accent)
                     .shadow(color: .black, radius: 0.1, x: 0.1, y: 0.1)
-                    .padding([.top], 12.0)
+                    .padding([.top], 8.0)
                     .padding([.horizontal], 16.0)
-                Text("A Punch-Line is a joke writing group that automatically assigns tasks to each member.")
+                Text("You get in one and do what it says!")
                     .font(Font.system(size: 16.0, weight: .regular))
                     .foregroundStyle(.accent)
                     .shadow(color: .black, radius: 0.1, x: 0.1, y: 0.1)
@@ -40,25 +42,32 @@ struct ExplainerView: View {
                 .scrollDisabled(true)
                 .contentMargins([.vertical], 8.0)
                 .scrollContentBackground(.hidden)
-                .frame(maxHeight: 104)
-                Text("2. Who can join a Punch-Line?")
+                .frame(maxHeight: 88)
+                Text("2. What will it ask me to do?")
                     .font(Font.system(size: 20.0, weight: .semibold))
                     .foregroundStyle(.accent)
                     .shadow(color: .black, radius: 0.1, x: 0.1, y: 0.1)
-                    .padding([.top], 12.0)
+                    .padding([.top], 8.0)
                     .padding([.horizontal], 16.0)
-                Text("Public Punch-Lines are for everyone. You can also create Private Punch-Lines for just your friends!")
+                Text("Submit setups, punchlines, and vote on jokes!")
                     .font(Font.system(size: 16.0, weight: .regular))
                     .foregroundStyle(.accent)
                     .shadow(color: .black, radius: 0.1, x: 0.1, y: 0.1)
                     .padding([.top], 4.0)
                     .padding([.horizontal], 16.0)
+                List {
+                    DummyJokeView()
+                }
+                .scrollDisabled(true)
+                .contentMargins([.vertical], 8.0)
+                .scrollContentBackground(.hidden)
+                .frame(maxHeight: 80)
                 if mode == .explain {
-                    Text("3. I want writing credit and more (potentially offensive) content!")
-                        .font(Font.system(size: 20.0, weight: .semibold))
+                    Text("Tweak your options before getting started!")
+                        .font(Font.system(size: 16.0, weight: .regular))
                         .foregroundStyle(.accent)
                         .shadow(color: .black, radius: 0.1, x: 0.1, y: 0.1)
-                        .padding([.top], 12.0)
+                        .padding([.top], 4.0)
                         .padding([.horizontal], 16.0)
                     List {
                         UsernameRow()
@@ -69,37 +78,43 @@ struct ExplainerView: View {
                     .listRowSpacing(8.0)
                     .scrollContentBackground(.hidden)
                     .frame(maxHeight: 108)
-                    Text("There are more options on the settings page!")
+                    Text("There are more on the settings page!")
                         .font(Font.system(size: 16.0, weight: .regular))
                         .foregroundStyle(.accent)
                         .shadow(color: .black, radius: 0.1, x: 0.1, y: 0.1)
                         .padding([.top], 4.0)
                         .padding([.horizontal], 16.0)
-                    Text("4. Where do our jokes go?")
-                        .font(Font.system(size: 20.0, weight: .semibold))
-                        .foregroundStyle(.accent)
-                        .shadow(color: .black, radius: 0.1, x: 0.1, y: 0.1)
-                        .padding([.top], 12.0)
-                        .padding([.horizontal], 16.0)
-                    Text("At midnight (America/New_York) every night, the top-rated jokes are sorted into a ranked list and saved.  All other jokes are deleted forever.  Sorry!")
-                        .font(Font.system(size: 16.0, weight: .regular))
-                        .foregroundStyle(.accent)
-                        .shadow(color: .black, radius: 0.1, x: 0.1, y: 0.1)
-                        .padding([.top], 4.0)
-                        .padding([.horizontal], 16.0)
-                } else {
-                    Text("3. Where do our jokes go?")
-                        .font(Font.system(size: 20.0, weight: .semibold))
-                        .foregroundStyle(.accent)
-                        .shadow(color: .black, radius: 0.1, x: 0.1, y: 0.1)
-                        .padding([.top], 12.0)
-                        .padding([.horizontal], 16.0)
-                    Text("At midnight (America/New_York) every night, the top-rated jokes are sorted into a ranked list and saved.  All other jokes are deleted forever.  Sorry!")
-                        .font(Font.system(size: 16.0, weight: .regular))
-                        .foregroundStyle(.accent)
-                        .shadow(color: .black, radius: 0.1, x: 0.1, y: 0.1)
-                        .padding([.top], 4.0)
-                        .padding([.horizontal], 16.0)
+                }
+                Text("3. I did a bunch of stuff.  Now what?")
+                    .font(Font.system(size: 20.0, weight: .semibold))
+                    .foregroundStyle(.accent)
+                    .shadow(color: .black, radius: 0.1, x: 0.1, y: 0.1)
+                    .padding([.top], 8.0)
+                    .padding([.horizontal], 16.0)
+                Text("Check back the next day and see the rankings!")
+                    .font(Font.system(size: 16.0, weight: .regular))
+                    .foregroundStyle(.accent)
+                    .shadow(color: .black, radius: 0.1, x: 0.1, y: 0.1)
+                    .padding([.top], 4.0)
+                    .padding([.horizontal], 16.0)
+                if mode == .explain {
+                    Button {
+                        AppSessionManager.userIsInTraining = true
+                        GlobalNotificationManager.shared.shouldLaunchTrainingMode = true
+                        dismiss()
+                    } label: {
+                        HStack {
+                            Spacer()
+                            Text("Get In The Punch-Line --->")
+                                .padding([.vertical], 8.0)
+                            Spacer()
+                        }
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .foregroundStyle(.white)
+                    .backgroundStyle(.accent)
+                    .padding([.top], 8.0)
+                    .padding([.horizontal], 16.0)
                 }
                 Spacer()
             }
@@ -119,14 +134,35 @@ struct DummyPunchLineLauncherView: View {
                     .font(Font.system(size: 24.0, weight: .bold))
                     .foregroundStyle(.accent)
                     .shadow(color: .black, radius: 0.1, x: 0.1, y: 0.1)
-                    .padding([.top], 8.0)
+                    .padding([.top], 0.0)
                 Text("Get In One, Bro! --->")
                     .font(Font.system(size: 24.0, weight: .light))
                     .foregroundStyle(.accent)
                     .shadow(color: .black, radius: 0.1, x: 0.1, y: 0.1)
-                    .padding([.bottom], 8.0)
+                    .padding([.bottom], 0.0)
             }
             Spacer()
+        }
+    }
+
+}
+
+struct DummyJokeView: View {
+
+    var body: some View {
+        HStack(spacing: 4.0) {
+            VStack {
+                HStack {
+                    Text("Setups start off jokes...")
+                        .font(Font.system(size: 20.0, weight: .light))
+                    Spacer(minLength: 16.0)
+                }
+                HStack {
+                    Spacer(minLength: 16.0)
+                    Text("...and punchlines finish them!")
+                        .font(Font.system(size: 20.0, weight: .semibold))
+                }
+            }
         }
     }
 
@@ -139,7 +175,7 @@ struct ShowOffensiveContentView: View {
     var body: some View {
         VStack {
             HStack {
-                Text("Show All Content?")
+                Text("Dirty Content Okay?")
                     .font(Font.system(size: 20.0, weight: .light))
                     .foregroundStyle(.accent)
                 Spacer()

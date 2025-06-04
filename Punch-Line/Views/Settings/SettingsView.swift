@@ -240,7 +240,7 @@ struct UsernameRow: View {
     @State var alertMessage = ""
 
     var body: some View {
-        TextField("Enter Your Name Here", text: $enteredUsernameText)
+        TextField("Enter A Username If You'd Like", text: $enteredUsernameText)
             .textFieldStyle(.plain)
             .font(Font.system(size: 20.0, weight: .semibold))
             .foregroundStyle(.accent)

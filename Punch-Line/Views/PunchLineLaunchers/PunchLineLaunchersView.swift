@@ -12,6 +12,8 @@ struct PunchLineLaunchersView: View {
     let viewModel: PunchLineLaunchersViewModel
     @State var activityViewModel: PunchLineActivityViewModel? = nil
 
+    @ObservedObject var notificationManager = GlobalNotificationManager.shared
+
     @State private var showingPunchLineSheet = false
     @State private var showingCreateSheet = false
     @State private var showingUsernameAlert = false
@@ -59,6 +61,13 @@ struct PunchLineLaunchersView: View {
             }
             .refreshable {
                 GlobalNotificationManager.shared.shouldRefreshPunchLines = true
+            }
+            .onChange(of: notificationManager.shouldLaunchTrainingMode) { _, newValue in
+                if newValue == true {
+                    guard let punchLine = viewModel.fetchedPublicPunchLines.first else { return }
+                    viewModel.setSelected(publicPunchLine: punchLine)
+                    launchPunchLine()
+                }
             }
             .sheet(isPresented: $showingPunchLineSheet) {
                 if let activityViewModel = self.activityViewModel {

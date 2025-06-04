@@ -91,6 +91,10 @@ class PunchLineLaunchersViewModel {
             return .somethingWentWrong
         }
 
+        guard !AppSessionManager.userIsInTraining else {
+            return .vote
+        }
+
         let todaysTaskCount = AppSessionManager.taskCount(for: selectedPunchLineID)
         let userIsNotFunny = AppSessionManager.userInfo?.userIsNotFunny ?? false
         let usersNameIsJerry = AppSessionManager.userInfo?.usersNameIsJerry ?? false
@@ -160,6 +164,10 @@ class PunchLineLaunchersViewModel {
 
         guard let selectedPunchLineID else {
             return ActivityFeedMessages.weDoneGoofed
+        }
+
+        guard !AppSessionManager.userIsInTraining else {
+            return ActivityFeedMessages.vote
         }
 
         let todaysTaskCount = AppSessionManager.taskCount(for: selectedPunchLineID)

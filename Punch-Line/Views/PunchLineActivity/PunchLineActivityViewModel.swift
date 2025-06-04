@@ -111,6 +111,11 @@ class PunchLineActivityViewModel: ObservableObject {
 
     func setNextActivity() {
 
+        guard !AppSessionManager.userIsInTraining else {
+            setNextActivityForTrainingMode()
+            return
+        }
+
         if AppSessionManager.dailyPropertiesWillBeReset() {
             fetchedSetups = []
             fetchedJokes = []
@@ -151,9 +156,13 @@ class PunchLineActivityViewModel: ObservableObject {
                 fetchSetupBatchIfNeeded()
             } else if fetchedSetups.first != nil {
                 configureViewForPunchline()
+            } else if fetchedJokes.first != nil {
+                configureViewForJoke()
+                fetchSetupBatchIfNeeded()
             } else {
                 configureViewForSetup(.extra)
                 fetchSetupBatchIfNeeded()
+                fetchJokeBatchIfNeeded()
             }
         default:
             if lastOwnSetup != nil {
@@ -171,6 +180,38 @@ class PunchLineActivityViewModel: ObservableObject {
             } else if fetchedSetups.first != nil {
                 configureViewForPunchline()
                 fetchJokeBatchIfNeeded()
+            } else {
+                configureViewForSetup(.extra)
+                fetchSetupBatchIfNeeded()
+                fetchJokeBatchIfNeeded()
+            }
+        }
+
+        updatePunchLineRelauncher()
+
+    }
+
+    private func setNextActivityForTrainingMode() {
+
+        AppSessionManager.trainingTaskCount += 1
+        let todaysTaskCount = AppSessionManager.trainingTaskCount
+
+        switch todaysTaskCount {
+        case 4, 9:
+            if fetchedSetups.first != nil {
+                configureViewForPunchline()
+            } else if fetchedJokes.first != nil {
+                configureViewForJoke()
+            } else {
+                configureViewForSetup(.extra)
+                fetchSetupBatchIfNeeded()
+                fetchJokeBatchIfNeeded()
+            }
+        case 10:
+            configureViewForSetup(.first)
+        default:
+            if fetchedJokes.first != nil {
+                configureViewForJoke()
             } else {
                 configureViewForSetup(.extra)
                 fetchJokeBatchIfNeeded()
@@ -218,9 +259,11 @@ class PunchLineActivityViewModel: ObservableObject {
                 configureViewForPunchline()
             } else if fetchedJokes.first != nil {
                 configureViewForJoke()
+                fetchSetupBatchIfNeeded()
             } else {
                 configureViewForSetup(.extra)
                 fetchSetupBatchIfNeeded()
+                fetchJokeBatchIfNeeded()
             }
         default:
             if lastOwnSetup != nil {
@@ -240,6 +283,7 @@ class PunchLineActivityViewModel: ObservableObject {
                 fetchJokeBatchIfNeeded()
             } else {
                 configureViewForSetup(.extra)
+                fetchSetupBatchIfNeeded()
                 fetchJokeBatchIfNeeded()
             }
         }
