@@ -55,14 +55,30 @@ class PunchLineLaunchersViewModel {
         AppSessionManager.resetDailyPropertiesIfNecessary()
 
         if let relauncher = AppSessionManager.punchLineRelaunchers[activePunchLine.id] {
-            let punchLineHasSetups = !relauncher.previouslyFetchedSetups.isEmpty || relauncher.currentSetup != nil
-            let punchLineHasJokes = !relauncher.previouslyFetchedJokes.isEmpty || relauncher.currentJoke != nil
-            return PunchLineActivityViewModel(
-                punchLine: activePunchLine,
-                activity: getInitialPunchLineActivity(punchLineHasSetups: punchLineHasSetups, punchLineHasJokes: punchLineHasJokes),
-                activityDisplayText: getInitialPunchLineActivityDisplayText(for: .relaunch, punchLineHasSetups: punchLineHasSetups, punchLineHasJokes: punchLineHasJokes),
-                relauncher: relauncher
-            )
+            if relauncher.currentSetup != nil {
+                return PunchLineActivityViewModel(
+                    punchLine: activePunchLine,
+                    activity: .punchline,
+                    activityDisplayText: getInitialPunchLineActivityDisplayText(for: .relaunch, punchLineHasSetups: true, punchLineHasJokes: false),
+                    relauncher: relauncher
+                )
+            } else if relauncher.currentJoke != nil {
+                return PunchLineActivityViewModel(
+                    punchLine: activePunchLine,
+                    activity: .vote,
+                    activityDisplayText: getInitialPunchLineActivityDisplayText(for: .relaunch, punchLineHasSetups: false, punchLineHasJokes: true),
+                    relauncher: relauncher
+                )
+            } else {
+                let punchLineHasSetups = !relauncher.previouslyFetchedSetups.isEmpty
+                let punchLineHasJokes = !relauncher.previouslyFetchedJokes.isEmpty
+                return PunchLineActivityViewModel(
+                    punchLine: activePunchLine,
+                    activity: getInitialPunchLineActivity(punchLineHasSetups: punchLineHasSetups, punchLineHasJokes: punchLineHasJokes),
+                    activityDisplayText: getInitialPunchLineActivityDisplayText(for: .relaunch, punchLineHasSetups: punchLineHasSetups, punchLineHasJokes: punchLineHasJokes),
+                    relauncher: relauncher
+                )
+            }
         } else {
             let fetchedSetups = await fetchSetupBatch()
             let fetchedJokes = await fetchJokeBatch()
@@ -92,7 +108,7 @@ class PunchLineLaunchersViewModel {
         }
 
         guard !AppSessionManager.userIsInTraining else {
-            return .vote
+            return generateTrainingActivity(punchLineHasSetups: punchLineHasSetups, punchLineHasJokes: punchLineHasJokes)
         }
 
         let todaysTaskCount = AppSessionManager.taskCount(for: selectedPunchLineID)
@@ -101,7 +117,7 @@ class PunchLineLaunchersViewModel {
 
         if userIsNotFunny {
             switch todaysTaskCount {
-            case 0, 1, 2:
+            case 0, 6, 12:
                 return .setup
             default:
                 if punchLineHasJokes {
@@ -111,15 +127,17 @@ class PunchLineLaunchersViewModel {
                 }
             }
         } else if usersNameIsJerry {
+            if punchLineHasJokes {
+                return .vote
+            } else if punchLineHasSetups {
+                return .punchline
+            } else {
+                return .setup
+            }
+        } else {
             switch todaysTaskCount {
-            case 1, 3, 5, 6, 8, 11, 15, 20, 26, 33, 41, 50, 60:
-                if punchLineHasSetups {
-                    return .punchline
-                } else if punchLineHasJokes {
-                    return .vote
-                } else {
-                    return .setup
-                }
+            case 0, 6, 12:
+                return .setup
             default:
                 if punchLineHasJokes {
                     return .vote
@@ -129,24 +147,31 @@ class PunchLineLaunchersViewModel {
                     return .setup
                 }
             }
-        } else {
-            switch todaysTaskCount {
-            case 0, 2, 4:
+        }
+
+    }
+
+    private func generateTrainingActivity(punchLineHasSetups: Bool, punchLineHasJokes: Bool) -> PunchLineActivity {
+        let todaysTaskCount = AppSessionManager.trainingTaskCount
+
+        switch todaysTaskCount {
+        case 4, 9:
+            if punchLineHasSetups {
+                return .punchline
+            } else if punchLineHasJokes {
+                return .vote
+            } else {
                 return .setup
-            case 1, 3, 5, 6, 8, 11, 15, 20, 26, 33, 41, 50, 60:
-                if punchLineHasSetups {
-                    return .punchline
-                } else {
-                    return .setup
-                }
-            default:
-                if punchLineHasJokes {
-                    return .vote
-                } else if punchLineHasSetups {
-                    return .punchline
-                } else {
-                    return .setup
-                }
+            }
+        case 10:
+            return .setup
+        default:
+            if punchLineHasJokes {
+                return .vote
+            } else if punchLineHasSetups {
+                return .punchline
+            } else {
+                return .setup
             }
         }
 
@@ -167,7 +192,7 @@ class PunchLineLaunchersViewModel {
         }
 
         guard !AppSessionManager.userIsInTraining else {
-            return ActivityFeedMessages.vote
+            return generateTrainingActivityDisplayText(punchLineHasSetups: punchLineHasSetups, punchLineHasJokes: punchLineHasJokes)
         }
 
         let todaysTaskCount = AppSessionManager.taskCount(for: selectedPunchLineID)
@@ -178,9 +203,9 @@ class PunchLineLaunchersViewModel {
             switch todaysTaskCount {
             case 0:
                 return ActivityFeedMessages.setupFirst
-            case 1:
+            case 6:
                 return ActivityFeedMessages.setupSecond
-            case 2:
+            case 12:
                 return ActivityFeedMessages.setupThird
             default:
                 if punchLineHasJokes {
@@ -190,23 +215,12 @@ class PunchLineLaunchersViewModel {
                 }
             }
         } else if usersNameIsJerry {
-            switch todaysTaskCount {
-            case 1, 3, 5, 6, 8, 11, 15, 20, 26, 33, 41, 50, 60:
-                if punchLineHasSetups {
-                    return ActivityFeedMessages.punchlineGeneric
-                } else if punchLineHasJokes {
-                    return ActivityFeedMessages.vote
-                } else {
-                    return ActivityFeedMessages.setupGeneric
-                }
-            default:
-                if punchLineHasJokes {
-                    return ActivityFeedMessages.vote
-                } else if punchLineHasSetups {
-                    return ActivityFeedMessages.punchlineGeneric
-                } else {
-                    return ActivityFeedMessages.setupGeneric
-                }
+            if punchLineHasJokes {
+                return ActivityFeedMessages.vote
+            } else if punchLineHasSetups {
+                return ActivityFeedMessages.punchlineGeneric
+            } else {
+                return ActivityFeedMessages.setupGeneric
             }
         } else {
             switch todaysTaskCount {
@@ -222,9 +236,9 @@ class PunchLineLaunchersViewModel {
                         return ActivityFeedMessages.setupGeneric
                     }
                 }
-            case 2:
+            case 6:
                 return ActivityFeedMessages.setupSecond
-            case 3:
+            case 7:
                 if mode == .relaunch {
                     return ActivityFeedMessages.ownPunchlineSecond
                 } else {
@@ -234,9 +248,9 @@ class PunchLineLaunchersViewModel {
                         return ActivityFeedMessages.setupGeneric
                     }
                 }
-            case 4:
+            case 12:
                 return ActivityFeedMessages.setupThird
-            case 5:
+            case 13:
                 if mode == .relaunch {
                     return ActivityFeedMessages.ownPunchlineThird
                 } else {
@@ -246,20 +260,40 @@ class PunchLineLaunchersViewModel {
                         return ActivityFeedMessages.setupGeneric
                     }
                 }
-            case 6, 8, 11, 15, 20, 26, 33, 41, 50, 60:
-                if punchLineHasSetups {
-                    return ActivityFeedMessages.punchlineGeneric
-                } else {
-                    return ActivityFeedMessages.setupExtra
-                }
             default:
                 if punchLineHasJokes {
                     return ActivityFeedMessages.vote
                 } else if punchLineHasSetups {
                     return ActivityFeedMessages.punchlineGeneric
                 } else {
-                    return ActivityFeedMessages.setupExtra
+                    return ActivityFeedMessages.setupGeneric
                 }
+            }
+        }
+
+    }
+
+    private func generateTrainingActivityDisplayText(punchLineHasSetups: Bool, punchLineHasJokes: Bool) -> String {
+        let todaysTaskCount = AppSessionManager.trainingTaskCount
+
+        switch todaysTaskCount {
+        case 4, 9:
+            if punchLineHasSetups {
+                return ActivityFeedMessages.punchline
+            } else if punchLineHasJokes {
+                return ActivityFeedMessages.vote
+            } else {
+                return ActivityFeedMessages.setupTraining
+            }
+        case 10:
+            return ActivityFeedMessages.setupFirst
+        default:
+            if punchLineHasJokes {
+                return ActivityFeedMessages.vote
+            } else if punchLineHasSetups {
+                return ActivityFeedMessages.punchline
+            } else {
+                return ActivityFeedMessages.setupTraining
             }
         }
 

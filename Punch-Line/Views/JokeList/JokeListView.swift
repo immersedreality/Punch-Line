@@ -92,24 +92,35 @@ struct JokeView: View {
                 HStack(spacing: 4.0) {
                     switch mode {
                     case .history:
+                        if youHaveContributedToJoke() {
+                            Text("🏄‍♂️")
+                                .font(Font.system(size: 32.0, weight: .light))
+                                .foregroundStyle(.accent)
+                                .padding([.bottom], 2.0)
+                        }
                         Text("#" + joke.dayRanking.description)
                             .font(Font.system(size: 32.0, weight: .bold))
                             .foregroundStyle(.accent)
                             .padding([.bottom], 2.0)
                         if jokeIsInFavorites() {
-                            Text("(🏄‍♂️)")
+                            Text("🩷")
                                 .font(Font.system(size: 32.0, weight: .light))
                                 .foregroundStyle(.accent)
-                                .shadow(color: .black, radius: 0.1, x: 0.1, y: 0.1)
                                 .padding([.bottom], 2.0)
                         }
                     case .lookup:
+                        if youHaveContributedToJoke() {
+                            Text("🏄‍♂️")
+                                .font(Font.system(size: 12.0, weight: .light))
+                                .foregroundStyle(.accent)
+                                .padding([.bottom], 2.0)
+                        }
                         Text("#" + joke.dayRanking.description + " in " + joke.punchLineDisplayName + " on " + joke.dateCreated.displayDate)
                             .font(Font.system(size: 12.0, weight: .bold))
                             .foregroundStyle(.accent)
                             .padding([.bottom], 2.0)
                         if jokeIsInFavorites() {
-                            Text("(🏄‍♂️)")
+                            Text("🩷")
                                 .font(Font.system(size: 12.0, weight: .light))
                                 .foregroundStyle(.accent)
                                 .padding([.bottom], 2.0)
@@ -160,6 +171,15 @@ struct JokeView: View {
                 notificationManager.favoritesHaveBeenUpdated = false
                 notificationManager.refreshView()
             }
+        }
+    }
+
+    private func youHaveContributedToJoke() -> Bool {
+        guard let currentUserID = AppSessionManager.userInfo?.punchLineUserID else { return false }
+        if joke.setupAuthorID == currentUserID || joke.punchlineAuthorID == currentUserID {
+            return true
+        } else {
+            return false
         }
     }
 

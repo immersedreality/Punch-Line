@@ -34,6 +34,9 @@ struct JokeHistoryEntriesView: View {
                 .listRowSpacing(8.0)
                 .scrollContentBackground(.hidden)
             }
+            .refreshable {
+                viewModel.fetchJokeHistoryEntriesForGroup()
+            }
             .onAppear {
                 if viewModel.jokeHistoryEntries.isEmpty {
                     viewModel.fetchJokeHistoryEntriesForGroup()

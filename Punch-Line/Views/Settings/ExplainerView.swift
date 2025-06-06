@@ -175,7 +175,7 @@ struct ShowOffensiveContentView: View {
     var body: some View {
         VStack {
             HStack {
-                Text("Dirty Content Okay?")
+                Text("Edgy Content Okay?")
                     .font(Font.system(size: 20.0, weight: .light))
                     .foregroundStyle(.accent)
                 Spacer()

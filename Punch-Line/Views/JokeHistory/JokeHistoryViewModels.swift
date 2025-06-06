@@ -108,8 +108,10 @@ class JokeHistoryMonthsViewModel: ObservableObject {
     }
 
     func fetchEntriesForEntryGroups() {
-        Task {
-            self.entriesDictionary = await APIManager.getJokeHistoryEntries(for: entryGroups)
+        DispatchQueue.main.async {
+            Task {
+                self.entriesDictionary = await APIManager.getJokeHistoryEntries(for: self.entryGroups)
+            }
         }
     }
 

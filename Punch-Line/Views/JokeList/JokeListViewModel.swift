@@ -29,8 +29,10 @@ class JokeListViewModel: ObservableObject {
 
     func fetchJokes() {
         guard let entryID else { return }
-        Task {
-            await self.jokes = APIManager.getSurvivingJokes(for: entryID)
+        DispatchQueue.main.async {
+            Task {
+                await self.jokes = APIManager.getSurvivingJokes(for: entryID)
+            }
         }
     }
 

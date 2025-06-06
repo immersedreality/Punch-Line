@@ -142,34 +142,21 @@ class PunchLineActivityViewModel: ObservableObject {
             configureViewForSetup(.first)
         case 1:
             configureViewForOwnPunchline(.first)
-        case 2:
+        case 6:
             configureViewForSetup(.second)
-        case 3:
+        case 7:
             configureViewForOwnPunchline(.second)
-        case 4:
+        case 12:
             configureViewForSetup(.third)
-        case 5:
+        case 13:
             configureViewForOwnPunchline(.third)
-        case 6, 8, 11, 15, 20, 26, 33, 41, 50, 60:
-            if lastOwnSetup != nil {
-                configureViewForOwnPunchline(.extra)
-                fetchSetupBatchIfNeeded()
-            } else if fetchedSetups.first != nil {
-                configureViewForPunchline()
-            } else if fetchedJokes.first != nil {
-                configureViewForJoke()
-                fetchSetupBatchIfNeeded()
-            } else {
-                configureViewForSetup(.extra)
-                fetchSetupBatchIfNeeded()
-                fetchJokeBatchIfNeeded()
-            }
         default:
             if lastOwnSetup != nil {
                 configureViewForOwnPunchline(.extra)
+                fetchSetupBatchIfNeeded()
                 fetchJokeBatchIfNeeded()
             } else if fetchedJokes.first != nil && fetchedSetups.first != nil {
-                let randomNumber = Int.random(in: 1...4)
+                let randomNumber = Int.random(in: 1...5)
                 if randomNumber == 1 {
                     configureViewForPunchline()
                 } else {
@@ -177,6 +164,7 @@ class PunchLineActivityViewModel: ObservableObject {
                 }
             } else if fetchedJokes.first != nil {
                 configureViewForJoke()
+                fetchSetupBatchIfNeeded()
             } else if fetchedSetups.first != nil {
                 configureViewForPunchline()
                 fetchJokeBatchIfNeeded()
@@ -202,8 +190,9 @@ class PunchLineActivityViewModel: ObservableObject {
                 configureViewForPunchline()
             } else if fetchedJokes.first != nil {
                 configureViewForJoke()
+                fetchSetupBatchIfNeeded()
             } else {
-                configureViewForSetup(.extra)
+                configureViewForSetup(.training)
                 fetchSetupBatchIfNeeded()
                 fetchJokeBatchIfNeeded()
             }
@@ -212,8 +201,12 @@ class PunchLineActivityViewModel: ObservableObject {
         default:
             if fetchedJokes.first != nil {
                 configureViewForJoke()
+            } else if fetchedSetups.first != nil {
+                configureViewForPunchline()
+                fetchJokeBatchIfNeeded()
             } else {
-                configureViewForSetup(.extra)
+                configureViewForSetup(.training)
+                fetchSetupBatchIfNeeded()
                 fetchJokeBatchIfNeeded()
             }
         }
@@ -229,9 +222,9 @@ class PunchLineActivityViewModel: ObservableObject {
         switch todaysTaskCount {
         case 0:
             configureViewForSetup(.first)
-        case 1:
+        case 6:
             configureViewForSetup(.second)
-        case 2:
+        case 12:
             configureViewForSetup(.third)
         default:
             if fetchedJokes.first != nil {
@@ -248,55 +241,37 @@ class PunchLineActivityViewModel: ObservableObject {
 
     private func setNextActivityForJerry() {
 
-        let todaysTaskCount = AppSessionManager.taskCount(for: punchLine.id)
-
-        switch todaysTaskCount {
-        case 1, 3, 5, 8, 11, 15, 20, 26, 33, 41, 50, 60:
-            if lastOwnSetup != nil {
-                configureViewForOwnPunchline(.extra)
-                fetchSetupBatchIfNeeded()
-            } else if fetchedSetups.first != nil {
+        if lastOwnSetup != nil {
+            configureViewForOwnPunchline(.extra)
+            fetchJokeBatchIfNeeded()
+        } else if fetchedJokes.first != nil && fetchedSetups.first != nil {
+            let randomNumber = Int.random(in: 1...5)
+            if randomNumber == 1 {
                 configureViewForPunchline()
-            } else if fetchedJokes.first != nil {
-                configureViewForJoke()
-                fetchSetupBatchIfNeeded()
             } else {
-                configureViewForSetup(.extra)
-                fetchSetupBatchIfNeeded()
-                fetchJokeBatchIfNeeded()
-            }
-        default:
-            if lastOwnSetup != nil {
-                configureViewForOwnPunchline(.extra)
-                fetchJokeBatchIfNeeded()
-            } else if fetchedJokes.first != nil && fetchedSetups.first != nil {
-                let randomNumber = Int.random(in: 1...4)
-                if randomNumber == 1 {
-                    configureViewForPunchline()
-                } else {
-                    configureViewForJoke()
-                }
-            } else if fetchedJokes.first != nil {
                 configureViewForJoke()
-            } else if fetchedSetups.first != nil {
-                configureViewForPunchline()
-                fetchJokeBatchIfNeeded()
-            } else {
-                configureViewForSetup(.extra)
-                fetchSetupBatchIfNeeded()
-                fetchJokeBatchIfNeeded()
             }
+        } else if fetchedSetups.first != nil {
+            configureViewForPunchline()
+            fetchJokeBatchIfNeeded()
+        } else if fetchedJokes.first != nil {
+            configureViewForJoke()
+            fetchSetupBatchIfNeeded()
+        } else {
+            configureViewForSetup(.extra)
+            fetchSetupBatchIfNeeded()
+            fetchJokeBatchIfNeeded()
         }
 
         updatePunchLineRelauncher()
 
     }
 
-    private func configureViewForSetup(_ taskCount: TaskCounter) {
-        
+    private func configureViewForSetup(_ taskType: TaskType) {
+
         enteredSetupText = ""
 
-        switch taskCount {
+        switch taskType {
         case .first:
             activity = .setup
             activityDisplayText = ActivityFeedMessages.setupFirst
@@ -317,11 +292,16 @@ class PunchLineActivityViewModel: ObservableObject {
             activityDisplayText = ActivityFeedMessages.setupExtra
             currentSetup = nil
             currentJoke = nil
+        case .training:
+            activity = .setup
+            activityDisplayText = ActivityFeedMessages.setupTraining
+            currentSetup = nil
+            currentJoke = nil
         }
 
     }
 
-    private func configureViewForOwnPunchline(_ taskCount: TaskCounter) {
+    private func configureViewForOwnPunchline(_ taskType: TaskType) {
         guard let ownSetup = lastOwnSetup else {
             configureViewForError()
             return
@@ -329,7 +309,7 @@ class PunchLineActivityViewModel: ObservableObject {
 
         enteredPunchlineText = ""
 
-        switch taskCount {
+        switch taskType {
         case .first:
             activity = .punchline
             activityDisplayText = ActivityFeedMessages.ownPunchlineFirst
@@ -349,6 +329,12 @@ class PunchLineActivityViewModel: ObservableObject {
             currentJoke = nil
             lastOwnSetup = nil
         case .extra:
+            activity = .punchline
+            activityDisplayText = ActivityFeedMessages.ownPunchlineExtra
+            currentSetup = ownSetup
+            currentJoke = nil
+            lastOwnSetup = nil
+        case .training:
             activity = .punchline
             activityDisplayText = ActivityFeedMessages.ownPunchlineExtra
             currentSetup = ownSetup
@@ -567,6 +553,6 @@ enum PunchLineActivity {
     case setup, punchline, vote, somethingWentWrong
 }
 
-enum TaskCounter {
-    case first, second, third, extra
+enum TaskType {
+    case first, second, third, extra, training
 }
