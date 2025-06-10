@@ -105,7 +105,7 @@ struct ExplainerView: View {
                     } label: {
                         HStack {
                             Spacer()
-                            Text("Get In The Punch-Line --->")
+                            Text("Get In A Punch-Line --->")
                                 .padding([.vertical], 8.0)
                             Spacer()
                         }
@@ -135,7 +135,7 @@ struct DummyPunchLineLauncherView: View {
                     .foregroundStyle(.accent)
                     .shadow(color: .black, radius: 0.1, x: 0.1, y: 0.1)
                     .padding([.top], 0.0)
-                Text("Get In One, Bro! --->")
+                Text("Get In One! --->")
                     .font(Font.system(size: 24.0, weight: .light))
                     .foregroundStyle(.accent)
                     .shadow(color: .black, radius: 0.1, x: 0.1, y: 0.1)
