@@ -24,13 +24,13 @@ struct ExplainerView: View {
                     .shadow(color: .black, radius: 0.1, x: 0.1, y: 0.1)
                     .padding([.top], 20.0)
                     .padding([.horizontal], 16.0)
-                Text("1. How do you use a Punch-Line?")
+                Text("1. What is a Punch-Line?")
                     .font(Font.system(size: 20.0, weight: .semibold))
                     .foregroundStyle(.accent)
                     .shadow(color: .black, radius: 0.1, x: 0.1, y: 0.1)
                     .padding([.top], 8.0)
                     .padding([.horizontal], 16.0)
-                Text("You get in one and do what it says!")
+                Text("A joke-writing group that everyone contributes to!")
                     .font(Font.system(size: 16.0, weight: .regular))
                     .foregroundStyle(.accent)
                     .shadow(color: .black, radius: 0.1, x: 0.1, y: 0.1)
@@ -91,7 +91,7 @@ struct ExplainerView: View {
                     .shadow(color: .black, radius: 0.1, x: 0.1, y: 0.1)
                     .padding([.top], 8.0)
                     .padding([.horizontal], 16.0)
-                Text("Check back the next day and see the rankings!")
+                Text("Check back the next day for the joke rankings!")
                     .font(Font.system(size: 16.0, weight: .regular))
                     .foregroundStyle(.accent)
                     .shadow(color: .black, radius: 0.1, x: 0.1, y: 0.1)
@@ -105,7 +105,7 @@ struct ExplainerView: View {
                     } label: {
                         HStack {
                             Spacer()
-                            Text("Get In A Punch-Line --->")
+                            Text("Get In A Punch-Line! --->")
                                 .padding([.vertical], 8.0)
                             Spacer()
                         }
