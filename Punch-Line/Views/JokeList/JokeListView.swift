@@ -46,7 +46,7 @@ struct JokeListView: View {
                     }
                     if AppSessionManager.appIsInJeffMode {
                         Button(ConfirmationDialogMessages.deleteJoke) {
-                            viewModel.copyShareableJokeString()
+                            viewModel.deleteSurvivingJoke()
                         }
                     }
                 }

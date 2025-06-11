@@ -72,7 +72,7 @@ class JokeListViewModel: ObservableObject {
         self.selectedJoke = nil
     }
 
-    func deleteJoke() {
+    func deleteSurvivingJoke() {
         guard let selectedJoke else { return }
         DispatchQueue.main.async {
             Task {
