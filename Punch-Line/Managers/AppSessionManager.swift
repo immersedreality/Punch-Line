@@ -28,7 +28,7 @@ final class AppSessionManager {
 
     // MARK: Jeff Mode
 
-    static let appIsInJeffMode = false
+    static let appIsInJeffMode = true
 
     // MARK: Ads
 

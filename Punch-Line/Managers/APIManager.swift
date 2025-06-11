@@ -215,7 +215,7 @@ final class APIManager {
         if APIManager.networkEnvironment == .mock {
             return true
         } else {
-            guard let response: SurvivingJokeDeleteResponse = await handleURLRequest(for: .deletePrivatePunchLine(punchLineID: id)) else { return false }
+            guard let response: SurvivingJokeDeleteResponse = await handleURLRequest(for: .deleteSurvivingJoke(jokeID: id)) else { return false }
             return response.wasSuccessful
         }
     }
