@@ -32,3 +32,7 @@ struct SurvivingJoke: Codable, Identifiable {
 enum PunchLineType: String, Codable {
     case publicPunchLine, privatePunchLine
 }
+
+struct SurvivingJokeDeleteResponse: Codable {
+    let wasSuccessful: Bool
+}

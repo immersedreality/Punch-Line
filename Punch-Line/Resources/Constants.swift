@@ -51,6 +51,7 @@ struct ConfirmationDialogMessages {
     static let copyJoinCode = "Copy Join Code"
     static let copyJoke = "Copy Joke for Easy Sharing"
     static let createNewPrivatePunchLine = "Create New Private Punch-Line"
+    static let deleteJoke = "Delete This Shit, Jeff"
     static let disbandPrivatePunchLine = "Disband Private Punch-Line"
     static let flagJokeAsOffensive = "Flag joke as offensive"
     static let flagJokeAsTooFunny = "Flag joke as too funny"

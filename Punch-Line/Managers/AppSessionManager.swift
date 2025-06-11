@@ -26,6 +26,10 @@ final class AppSessionManager {
 
     static var punchLineRelaunchers: [String: PunchLineRelauncher] = [:]
 
+    // MARK: Jeff Mode
+
+    static let appIsInJeffMode = false
+
     // MARK: Ads
 
 //    static var shouldShowAd: Bool = false

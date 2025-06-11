@@ -211,6 +211,15 @@ final class APIManager {
         }
     }
 
+    class func deleteSurvivingJoke(with id: String) async -> Bool {
+        if APIManager.networkEnvironment == .mock {
+            return true
+        } else {
+            guard let response: SurvivingJokeDeleteResponse = await handleURLRequest(for: .deletePrivatePunchLine(punchLineID: id)) else { return false }
+            return response.wasSuccessful
+        }
+    }
+
     // MARK: Joke Lookup
 
     class func getSearchResults(for searchQuery: String) async -> [SurvivingJoke] {

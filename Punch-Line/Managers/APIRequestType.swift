@@ -24,6 +24,7 @@ enum APIRequestType {
     case jokeReportTooFunny(jokeID: String)
     case getJokeHistoryEntries(entryGroupIDs: [String])
     case getSurvivingJokes(entryID: String, includeOffensiveContent: Bool)
+    case deleteSurvivingJoke(jokeID: String)
     case jokeLookupSearchQuery(punchLineIDs: [String], searchQuery: String, includeOffensiveContent: Bool)
 
     var path: String {
@@ -78,6 +79,8 @@ enum APIRequestType {
             return domain + RequestComponents.jokehistoryentries + RequestComponents.entryGroupIDs + entryGroupIDs.joined(separator: ",")
         case .getSurvivingJokes(let entryID, let includeOffensiveContent):
             return domain + RequestComponents.survivingjokes + RequestComponents.entryID + entryID + RequestComponents.includeOffensiveContent + includeOffensiveContent.description
+        case .deleteSurvivingJoke(let jokeID):
+            return domain + RequestComponents.survivingjokes + RequestComponents.jokeID + jokeID
         case .jokeLookupSearchQuery(let punchLineIDs, let searchQuery, let includeOffensiveContent):
             return domain + RequestComponents.survivingjokes + RequestComponents.punchLineIDs + punchLineIDs.joined(separator: ",") + RequestComponents.searchQuery + searchQuery + RequestComponents.includeOffensiveContent + includeOffensiveContent.description
         }
@@ -123,6 +126,8 @@ enum APIRequestType {
             return HTTPMethods.get
         case .getSurvivingJokes:
             return HTTPMethods.get
+        case .deleteSurvivingJoke:
+            return HTTPMethods.delete
         case .jokeLookupSearchQuery:
             return HTTPMethods.get
         }

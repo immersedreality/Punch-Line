@@ -72,6 +72,17 @@ class JokeListViewModel: ObservableObject {
         self.selectedJoke = nil
     }
 
+    func deleteJoke() {
+        guard let selectedJoke else { return }
+        DispatchQueue.main.async {
+            Task {
+                if await APIManager.deleteSurvivingJoke(with: selectedJoke.id) {
+                    self.jokes.removeAll { $0.id == selectedJoke.id }
+                }
+            }
+        }
+    }
+
     // MARK: Validators
 
     func selectedJokeIsAlreadyFavorited() -> Bool {
