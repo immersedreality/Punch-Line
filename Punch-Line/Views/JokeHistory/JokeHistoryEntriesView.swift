@@ -68,7 +68,8 @@ struct JokeHistoryEntriesView: View {
 #Preview {
     JokeHistoryEntriesView(
         viewModel: JokeHistoryEntriesViewModel(
-            jokeHistoryEntries: MockDataManager.getPreviewJokeHistoryEntries()
+            jokeHistoryEntries: MockDataManager.getPreviewJokeHistoryEntries(),
+            entryGroup: MockDataManager.getPreviewJokeHistoryEntryGroups()[0]
         )
     )
 }

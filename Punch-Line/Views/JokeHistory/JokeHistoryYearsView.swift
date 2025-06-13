@@ -27,12 +27,12 @@ struct JokeHistoryYearsView: View {
                         JokeHistoryMonthsView(
                             viewModel: JokeHistoryMonthsViewModel(
                                 punchLineID: viewModel.punchLineID,
-                                selectedYear: rowData.rowValue,
+                                selectedYear: rowData.entryGroup.year,
                                 entryGroups: viewModel.entryGroups
                             )
                         )
                     } label: {
-                        JokeHistoryRowView(rowTitle: rowData.rowTitle)
+                        JokeHistoryRowView(rowTitle: rowData.entryGroup.year.description)
                     }
                 }
                 .listRowSpacing(8.0)

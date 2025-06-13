@@ -82,9 +82,9 @@ class JokeHistoryYearsViewModel {
 
         for entryGroup in entryGroups {
             if !rowData.contains(where: { dataItem in
-                dataItem.rowTitle == entryGroup.year.description
+                dataItem.entryGroup.year.description == entryGroup.year.description
             }) {
-                rowData.append(JokeHistoryRowDataItem(id: UUID().uuidString, rowTitle: entryGroup.year.description, rowValue: entryGroup.year))
+                rowData.append(JokeHistoryRowDataItem(id: UUID().uuidString, entryGroup: entryGroup))
             }
         }
 
@@ -121,9 +121,9 @@ class JokeHistoryMonthsViewModel: ObservableObject {
 
         for entryGroup in entryGroups where entryGroup.year == selectedYear {
             if !rowData.contains(where: { dataItem in
-                dataItem.rowTitle == entryGroup.displayMonth
+                dataItem.entryGroup.displayMonth == entryGroup.displayMonth
             }) {
-                rowData.append(JokeHistoryRowDataItem(id: UUID().uuidString, rowTitle: entryGroup.displayMonth, rowValue: entryGroup.month))
+                rowData.append(JokeHistoryRowDataItem(id: UUID().uuidString, entryGroup: entryGroup))
             }
         }
 
@@ -146,18 +146,18 @@ class JokeHistoryMonthsViewModel: ObservableObject {
 class JokeHistoryEntriesViewModel: ObservableObject {
 
     @Published var jokeHistoryEntries: [JokeHistoryEntry] = []
-    var jokeHistoryEntryGroup: JokeHistoryEntryGroup?
+    var entryGroup: JokeHistoryEntryGroup
 
-    init(jokeHistoryEntries: [JokeHistoryEntry]) {
+    init(jokeHistoryEntries: [JokeHistoryEntry], entryGroup: JokeHistoryEntryGroup) {
         self.jokeHistoryEntries = jokeHistoryEntries
+        self.entryGroup = entryGroup
     }
 
     init(jokeHistoryEntryGroup: JokeHistoryEntryGroup) {
-        self.jokeHistoryEntryGroup = jokeHistoryEntryGroup
+        self.entryGroup = jokeHistoryEntryGroup
     }
 
     func fetchJokeHistoryEntriesForGroup() {
-        guard let entryGroup = self.jokeHistoryEntryGroup else { return }
         Task {
             let entryDictionary = await APIManager.getJokeHistoryEntries(for: [entryGroup])
             self.jokeHistoryEntries = entryDictionary[entryGroup.id] ?? []
@@ -168,6 +168,5 @@ class JokeHistoryEntriesViewModel: ObservableObject {
 
 struct JokeHistoryRowDataItem: Identifiable {
     let id: String
-    let rowTitle: String
-    let rowValue: Int
+    let entryGroup: JokeHistoryEntryGroup
 }

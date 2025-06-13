@@ -24,14 +24,15 @@ struct JokeHistoryMonthsView: View {
                     .ignoresSafeArea(edges: [.top])
                 List(viewModel.getRowData()) { rowData in
                     NavigationLink {
-                        let selectedEntries = viewModel.getSelectedJokeHistoryEntries(selectedMonth: rowData.rowValue)
+                        let selectedEntries = viewModel.getSelectedJokeHistoryEntries(selectedMonth: rowData.entryGroup.month)
                         JokeHistoryEntriesView(
                             viewModel: JokeHistoryEntriesViewModel(
-                                jokeHistoryEntries: selectedEntries
+                                jokeHistoryEntries: selectedEntries,
+                                entryGroup: rowData.entryGroup
                             )
                         )
                     } label: {
-                        JokeHistoryRowView(rowTitle: rowData.rowTitle)
+                        JokeHistoryRowView(rowTitle: rowData.entryGroup.displayMonth)
                     }
                     .disabled(viewModel.entriesDictionary.isEmpty)
                 }
